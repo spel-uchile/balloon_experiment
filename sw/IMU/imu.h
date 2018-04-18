@@ -146,7 +146,7 @@ void IMU::init(void)
     // join I2C bus (I2Cdev library doesn't do this automatically)
     #if I2CDEV_IMPLEMENTATION == I2CDEV_ARDUINO_WIRE
         Wire.begin();
-        Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
+        // Wire.setClock(400000); // 400kHz I2C clock. Comment this line if having compilation difficulties
     #elif I2CDEV_IMPLEMENTATION == I2CDEV_BUILTIN_FASTWIRE
         Fastwire::setup(400, true);
     #endif
@@ -176,7 +176,7 @@ void IMU::init(void)
         DEBUG2_PRINTLN(F("Enabling DMP..."));
         mpu.setDMPEnabled(true);
 
-        // enable Arduino interrupt detection
+        // // enable Arduino interrupt detection
         DEBUG2_PRINTLN(F("Enabling interrupt detection (Arduino external interrupt 0)..."));
         attachInterrupt(digitalPinToInterrupt(interrupt_pin_), dmpDataReady, RISING);
         mpuIntStatus = mpu.getIntStatus();
@@ -196,12 +196,17 @@ void IMU::init(void)
         DEBUG2_PRINTLN(devStatus);
         DEBUG2_PRINTLN(F(")"));
     }
+    DEBUG2_PRINT(F("packetSize:"));DEBUG2_PRINTLN(packetSize);
+    DEBUG2_PRINT(F("fifoCount:"));DEBUG2_PRINTLN(fifoCount);
 }
 
 void IMU::updateData(void)
 {
     if (!mpuInterrupt && fifoCount < packetSize)
+    // if (!mpuInterrupt)
+    // if (fifoCount < packetSize)
     {
+        DEBUG2_PRINTLN(F("fifoCount < packetSize"));
         return;
     }
     else
@@ -215,6 +220,7 @@ void IMU::updateData(void)
 
         // check for overflow (this should never happen unless our code is too inefficient)
         if ((mpuIntStatus & 0x10) || fifoCount == 1024)
+        // if ((mpuIntStatus & 0x10))
         {
             // reset so we can continue cleanly
             mpu.resetFIFO();
@@ -224,6 +230,7 @@ void IMU::updateData(void)
         }
         else if (mpuIntStatus & 0x02)
         {
+            DEBUG2_PRINTLN(F("reading"));
             // wait for correct available data length, should be a VERY short wait
             while (fifoCount < packetSize) fifoCount = mpu.getFIFOCount();
 
@@ -262,6 +269,9 @@ void IMU::updateData(void)
                 mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
                 mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
             #endif
+        }
+        else{
+            DEBUG2_PRINTLN(F("mpuIntStatus"));
         }
     }
 }

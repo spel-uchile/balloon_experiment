@@ -8,13 +8,10 @@
 
 
 /*Pin definitions*/
-#define INTERRUPT_PIN 3
+#define INTERRUPT_PIN 31
 
 /*Object Definitions*/
 IMU imu(INTERRUPT_PIN, &Serial);
-
-/*Data store variables*/
-
 
 // ================================================================
 // ===                      INITIAL SETUP                       ===
@@ -37,7 +34,8 @@ void loop()
 {
     imu.updateData();
     DEBUG2_PRINT("ypr:\t");
-    DEBUG2_PRINT(imu.ypr[0]);DEBUG2_PRINT("\t");
-    DEBUG2_PRINT(imu.ypr[1]);DEBUG2_PRINT("\t");
-    DEBUG2_PRINTLN(imu.ypr[2]);
+    DEBUG2_PRINT(imu.ypr[0]*57.29);DEBUG2_PRINT("\t");
+    DEBUG2_PRINT(imu.ypr[1]*57.29);DEBUG2_PRINT("\t");
+    DEBUG2_PRINTLN(imu.ypr[2]*57.29);
+    // delay(1000); //for testing worst case
 }

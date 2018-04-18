@@ -9,7 +9,7 @@
 /*Pin definitions*/
 #define CLIENT_ADDRESS 1
 #define SERVER_ADDRESS 2
-#define INTERRUPT_PIN 3
+#define INTERRUPT_PIN 31
 
 static const int SDN = 10;
 double bmp180;
@@ -35,8 +35,6 @@ RHReliableDatagram rf22(driver, CLIENT_ADDRESS);
 void setup() {
     // Wire.begin();        // Join i2c bus  
     Serial.begin(115200);
-    // initialize IMU
-    imu.init();
     pinMode(SDN, OUTPUT);
     digitalWrite(SDN, LOW);
     delay(1500);
@@ -53,7 +51,9 @@ void setup() {
     }
     rf22.setRetries(3);
     Serial.println(F("Set Tx Power = RH_RF22_TXPOW_20DB"));
-    Serial.println(F("Set configuration = FSK_Rb2Fd5"));  
+    Serial.println(F("Set configuration = FSK_Rb2Fd5")); 
+    // initialize IMU
+    imu.init();
     // BMP180
     pressure.begin();
 }
@@ -63,6 +63,17 @@ void loop() {
     imu.updateData();
     encodePacket();
     sendPacket(packet, sizeof(packet));
+
+    DEBUG2_PRINT("T-P-a-tempC-humidity:\t");
+    DEBUG2_PRINT(T);DEBUG2_PRINT("\t");
+    DEBUG2_PRINT(P);DEBUG2_PRINT("\t");
+    DEBUG2_PRINT(a);DEBUG2_PRINT("\t");
+    DEBUG2_PRINT(tempC);DEBUG2_PRINT("\t");
+    DEBUG2_PRINTLN(humidity);
+    DEBUG2_PRINT("ypr:\t");
+    DEBUG2_PRINT(imu.ypr[0]*57.29);DEBUG2_PRINT("\t");
+    DEBUG2_PRINT(imu.ypr[1]*57.29);DEBUG2_PRINT("\t");
+    DEBUG2_PRINTLN(imu.ypr[2]*57.29);
 }
 
 /**
@@ -96,6 +107,7 @@ void updateTemperature() {
     delay(400); 
     humidity = sensor.getRH();
     tempC = sensor.getTemp();
+    // delay(400);
 }
 
 void encodePacket() {

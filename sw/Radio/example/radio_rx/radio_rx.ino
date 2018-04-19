@@ -5,8 +5,13 @@
 /*Author: Gustavo Diaz*/
 
 #include "radio.h"
-#include "pines_radio.h"
 
+/*Radio transiver*/
+#define RADIO_SLAVESELECTPIN 2
+#define RADIO_INTERRUPT 3
+#define SDN 4
+
+/*Data store*/
 double dataD[3];
 float dataF[5];
 
@@ -30,15 +35,21 @@ void setup() {
 
 void loop()
 {
-    // test data
-    dataD[0] = 123.45;
-    dataD[1] = 956.76;
-    dataD[2] = 75.01;
-    dataF[0] = 98.3;
-    dataF[1] = 21.7;
-    dataF[2] = 87.80;
-    dataF[3] = 101.71;
-    dataF[4] = 43.87;
-    // send data as predefined Frame
-    radio.send_data(dataD, dataF);
+    radio.read_data(dataD, dataF);
+    displayData(dataD, dataF);
+    
+}
+
+void displayData(double dataD[], float dataF[])
+{
+    DEBUG2_PRINT("Data:\t");
+    for (int j = 0; j < sizeof(dataD); j++)
+    {
+        DEBUG2_PRINT(dataD[j]);DEBUG2_PRINT("\t");
+    }
+    for (int j = 0; j < sizeof(dataF); j++)
+    {
+        DEBUG2_PRINT(dataF[j]);DEBUG2_PRINT("\t");
+    }
+    DEBUG2_PRINTLN("\t");
 }

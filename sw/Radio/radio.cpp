@@ -59,6 +59,13 @@ void Radio::encode2byte(float number, uint8_t encode_bytes[])
 	encode_bytes[1] = LB;
 }
 
+float Radio::decode2byte(uint8_t byte1, uint8_t byte2)
+{
+    int aux = byte1;
+    aux = (aux << 8) + byte2;
+    return aux/100.0;
+}
+
 void Radio::encode2byteD(double number, uint8_t encode_bytes[])
 {
 	int aux = (int) (number*100);
@@ -67,6 +74,13 @@ void Radio::encode2byteD(double number, uint8_t encode_bytes[])
 
 	encode_bytes[0] = HB;
 	encode_bytes[1] = LB;
+}
+
+double Radio::decode2byteD(uint8_t byte1, uint8_t byte2)
+{
+    int aux = byte1;
+    aux = (aux << 8) + byte2;
+    return aux/100.0;
 }
 
 void Radio::encode3byte(double number, uint8_t encode_bytes[])
@@ -81,7 +95,15 @@ void Radio::encode3byte(double number, uint8_t encode_bytes[])
 	encode_bytes[2] = LB;
 }
 
-void Radio::encodeFrame(double dataD[], float dataF[], uint8_t frame[])
+double Radio::decode3byte(uint8_t byte1, uint8_t byte2, uint8_t byte3)
+{
+    int aux = byte1;
+    aux = (aux << 8) + byte2;
+    aux = (aux << 8) + byte3;
+    return aux/100.0;
+}
+
+void Radio::encode(double dataD[], float dataF[], uint8_t frame[])
 {
 	// Double data
 	uint8_t num1_bytes[2];
@@ -133,9 +155,37 @@ void Radio::encodeFrame(double dataD[], float dataF[], uint8_t frame[])
     frame[17] = num8_bytes[1];
 }
 
+void Radio::decode(uint8_t frame[], double dataD[], float dataF[])
+{
+    // Double data
+    dataD[0] = decode2byteD(frame[0], frame[1]);
+    dataD[1] = decode3byte(frame[2], frame[3], frame[4]);
+    dataD[2] = decode3byte(frame[5], frame[6], frame[7]);
+    // Float data
+    dataF[0] = decode2byte(frame[8], frame[9]);
+    dataF[1] = decode2byte(frame[10], frame[11]);
+    dataF[2] = decode2byte(frame[12], frame[13]);
+    dataF[3] = decode2byte(frame[14], frame[15]);
+    dataF[4] = decode2byte(frame[16], frame[17]);
+}
+
 void Radio::send_data(double dataD[], float dataF[])
 {
 	uint8_t frame[18];
-	encodeFrame(dataD, dataF, frame);
+	encode(dataD, dataF, frame);
 	sendFrame(frame, sizeof(frame));
+}
+
+void Radio::read_data(double dataD[], float dataF[])
+{
+    uint8_t frame[18];
+    if (rf22.available())
+    {
+        uint8_t len = sizeof(frame);
+        uint8_t from;
+        if (rf22.recvfromAck(frame, &len, &from))
+        {
+            decode(frame, dataD, dataF);
+        }
+    }
 }

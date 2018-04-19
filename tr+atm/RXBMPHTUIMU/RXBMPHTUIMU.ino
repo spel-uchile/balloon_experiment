@@ -7,7 +7,7 @@
 
 static const int SDN = 4;
 double Tb, P, a, Th, H, yaw, pitch, roll;
-uint8_t packet[12];
+uint8_t packet[18];
 uint8_t from;
 uint8_t len;
 int tmp;

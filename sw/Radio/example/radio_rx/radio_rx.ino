@@ -11,12 +11,15 @@
 #define RADIO_INTERRUPT 3
 #define SDN 4
 
+#define CLIENT_ADDRESS 1
+#define SERVER_ADDRESS 2
+
 /*Data store*/
 double dataD[3];
 float dataF[5];
 
 /*Object Definitions*/
-Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, SDN);
+Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, SDN, SERVER_ADDRESS, CLIENT_ADDRESS);
 
 // ================================================================
 // ===                      INITIAL SETUP                       ===
@@ -37,17 +40,16 @@ void loop()
 {
     radio.read_data(dataD, dataF);
     displayData(dataD, dataF);
-    
 }
 
 void displayData(double dataD[], float dataF[])
 {
     DEBUG2_PRINT("Data:\t");
-    for (int j = 0; j < sizeof(dataD); j++)
+    for (int j = 0; j < 3; j++)
     {
         DEBUG2_PRINT(dataD[j]);DEBUG2_PRINT("\t");
     }
-    for (int j = 0; j < sizeof(dataF); j++)
+    for (int j = 0; j < 5; j++)
     {
         DEBUG2_PRINT(dataF[j]);DEBUG2_PRINT("\t");
     }

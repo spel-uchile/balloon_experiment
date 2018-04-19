@@ -11,12 +11,15 @@
 #define RADIO_INTERRUPT 2
 #define SDN 10
 
+#define CLIENT_ADDRESS 1
+#define SERVER_ADDRESS 2
+
 /*Data store*/
 double dataD[3];
 float dataF[5];
 
 /*Object Definitions*/
-Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, SDN);
+Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, SDN, CLIENT_ADDRESS, SERVER_ADDRESS);
 
 // ================================================================
 // ===                      INITIAL SETUP                       ===

@@ -11,10 +11,6 @@
 #include <RH_RF22.h>
 #include "logger.h"
 
-/*Constants*/
-#define CLIENT_ADDRESS 1
-#define SERVER_ADDRESS 2
-
 /**
  * @class Radio
  * @brief Class for manage Radio data
@@ -33,6 +29,10 @@ class Radio
     // Shutdown pin
     uint8_t sdn_pin_;
 
+    // addr
+    uint8_t addr_;
+    uint8_t addr2_;
+
     // Debug
     // HardwareSerial *debug_port_;
 
@@ -43,9 +43,11 @@ public:
     // Radio() {}
 
     // constructror parametrizado
-    Radio(uint8_t radio_slaveselectpin, uint8_t radio_interrupt, uint8_t sdn):
+    Radio(uint8_t radio_slaveselectpin, uint8_t radio_interrupt, uint8_t sdn, uint8_t addr, uint8_t addr2):
         driver(radio_slaveselectpin, radio_interrupt),
-        rf22(driver, CLIENT_ADDRESS),
+        addr_(addr),
+        addr2_(addr2),
+        rf22(driver, addr),
         sdn_pin_(sdn)
         // debug_port_(debug_port)
     {

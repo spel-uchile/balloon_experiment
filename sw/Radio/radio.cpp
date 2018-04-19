@@ -38,7 +38,7 @@ void Radio::init(void)
  */
 void Radio::sendFrame(uint8_t frame[], int frame_size)
 {
-    if (!rf22.sendtoWait(frame, frame_size, SERVER_ADDRESS))
+    if (!rf22.sendtoWait(frame, frame_size, addr2_))
         Serial.println(F("sendtoWait failed"));
 }
 

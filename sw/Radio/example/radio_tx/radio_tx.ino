@@ -41,7 +41,7 @@ void loop()
     // test data
     dataD[0] = 123.45;
     dataD[1] = 956.76;
-    dataD[2] = 75.01;
+    dataD[2] = -75.01;
     dataF[0] = 98.3;
     dataF[1] = 21.7;
     dataF[2] = 87.80;

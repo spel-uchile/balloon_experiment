@@ -4,4 +4,4 @@
 #define RADIO_SDN 10
 
 /*IMU*/
-#define IMU_INTERRUPT 3
+#define IMU_INTERRUPT 31

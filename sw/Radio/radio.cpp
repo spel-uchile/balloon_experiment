@@ -127,7 +127,7 @@ double Radio::decode4byteD(uint8_t byte1, uint8_t byte2, uint8_t byte3, uint8_t 
 void Radio::encode(double dataD[], float dataF[], uint8_t frame[])
 {
 	// Double data
-	uint8_t num1_bytes[2];
+	  uint8_t num1_bytes[2];
     uint8_t num2_bytes[3];
     uint8_t num3_bytes[3];
     // Float data

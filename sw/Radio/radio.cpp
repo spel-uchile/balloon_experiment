@@ -103,6 +103,27 @@ double Radio::decode3byte(uint8_t byte1, uint8_t byte2, uint8_t byte3)
     return aux/100.0;
 }
 
+void Radio::encode4byteD(double number, uint8_t encode_bytes[]) {
+    int aux = (int) (number*1000000);
+    uint8_t HB = aux >> 24;
+    uint8_t M1B = aux >> 16;
+    uint8_t M2B = aux >> 8;
+    uint8_t LB = aux;
+
+    encode_bytes[0] = HB;
+    encode_bytes[1] = M1B;
+    encode_bytes[2] = M2B;
+    encode_bytes[3] = LB;
+}
+
+double Radio::decode4byteD(uint8_t byte1, uint8_t byte2, uint8_t byte3, uint8_t byte4) {
+    int aux = byte1;
+    aux = (aux << 8) + byte2;
+    aux = (aux << 8) + byte3;
+    aux = (aux << 8) + byte4;
+    return aux/1000000.0;
+}
+
 void Radio::encode(double dataD[], float dataF[], uint8_t frame[])
 {
 	// Double data
@@ -145,13 +166,13 @@ void Radio::encode(double dataD[], float dataF[], uint8_t frame[])
     frame[10] = num5_bytes[0];
     frame[11] = num5_bytes[1];
 
-	frame[12] = num6_bytes[0];
+	  frame[12] = num6_bytes[0];
     frame[13] = num6_bytes[1];
 
-	frame[14] = num7_bytes[0];
+	  frame[14] = num7_bytes[0];
     frame[15] = num7_bytes[1];
 
-	frame[16] = num8_bytes[0];
+	  frame[16] = num8_bytes[0];
     frame[17] = num8_bytes[1];
 }
 

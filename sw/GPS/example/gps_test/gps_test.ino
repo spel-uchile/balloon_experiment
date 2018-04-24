@@ -1,4 +1,3 @@
-#include "pines_balloon.h"
 #include "gps.h"
 
 /*GPS baudrate*/
@@ -7,20 +6,19 @@
 //Create an instance of the objects
 GPS gps;
 
-void setup()
-{
-    // Wire.begin();        // Join i2c bus  
+void setup() {
     Serial.begin(115200);
     // initialize
     gps.init();
+    delay(500);
 }
 
-void loop() {}
+void loop() {
     gps.updateData();
-    Serial.print("Latitude: ");
-    Serial.print(gps.lat);
-    Serial.print("    Longitude: ");
-    Serial.print(gps.lng);
+    Serial.print("Latitude,Longitude: ");
+    Serial.print(gps.lat, 6);
+    Serial.print(",");
+    Serial.print(gps.lng, 6);
     Serial.print("      Altitude (m): ");
     Serial.print(gps.alt);
     Serial.print("      Course: ");
@@ -35,4 +33,5 @@ void loop() {}
     Serial.print(gps.second);
     Serial.print("      Satellites: ");
     Serial.println(gps.sat);
+    delay(500);
 }

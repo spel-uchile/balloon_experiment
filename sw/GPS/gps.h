@@ -25,7 +25,7 @@
         uint8_t hour, minute, second, sat;
         
         // Default constructor
-        GPS();
+        GPS(void);
         
         // Overload constructor
         GPS(int);

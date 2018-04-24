@@ -43,20 +43,20 @@ void Radio::sendFrame(uint8_t frame[], int frame_size)
 }
 
 /**
- * The packet is encoded transforming data type from double or uint32_t to
+ * The packet is encoded transforming data type from double or float to
  * uint8_t for compatibility with the transceiver. In order to not loose
- * infromation, the decimal numbers are multiplied with a factor and separated
- * in 2 different octets.
+ * information, the decimal numbers are multiplied with a factor and separated
+ * in 2, 3 or 4 different octets.
  */
 
 void Radio::encode2byte(float number, uint8_t encode_bytes[])
 {
-	  int aux = (int) (number*100);
-	  uint8_t HB = aux >> 8;			//Number High Byte
-	  uint8_t LB = aux;				//Number Low Byte
+    int aux = (int) (number*100);
+    uint8_t HB = aux >> 8;			//Number High Byte
+    uint8_t LB = aux;				//Number Low Byte
 
-	  encode_bytes[0] = HB;
-	  encode_bytes[1] = LB;
+    encode_bytes[0] = HB;
+    encode_bytes[1] = LB;
 }
 
 float Radio::decode2byte(uint8_t byte1, uint8_t byte2)
@@ -68,12 +68,12 @@ float Radio::decode2byte(uint8_t byte1, uint8_t byte2)
 
 void Radio::encode2byteD(double number, uint8_t encode_bytes[])
 {
-	  int aux = (int) (number*100);
-	  uint8_t HB = aux >> 8;			//Number High Byte
-	  uint8_t LB = aux;				//Number Low Byte
+    int aux = (int) (number*100);
+    uint8_t HB = aux >> 8;			//Number High Byte
+    uint8_t LB = aux;				//Number Low Byte
 
-	  encode_bytes[0] = HB;
-	  encode_bytes[1] = LB;
+    encode_bytes[0] = HB;
+    encode_bytes[1] = LB;
 }
 
 double Radio::decode2byteD(uint8_t byte1, uint8_t byte2)
@@ -85,14 +85,14 @@ double Radio::decode2byteD(uint8_t byte1, uint8_t byte2)
 
 void Radio::encode3byte(double number, uint8_t encode_bytes[])
 {
-	  int aux = (int) (number*100);
-	  uint8_t HB = aux >> 16;
-	  uint8_t MB = aux >> 8;
-	  uint8_t LB = aux;
+    int aux = (int) (number*100);
+    uint8_t HB = aux >> 16;
+    uint8_t MB = aux >> 8;
+    uint8_t LB = aux;
 
-	  encode_bytes[0] = HB;
-	  encode_bytes[1] = MB;
-	  encode_bytes[2] = LB;
+    encode_bytes[0] = HB;
+    encode_bytes[1] = MB;
+    encode_bytes[2] = LB;
 }
 
 double Radio::decode3byte(uint8_t byte1, uint8_t byte2, uint8_t byte3)
@@ -126,8 +126,8 @@ double Radio::decode4byteD(uint8_t byte1, uint8_t byte2, uint8_t byte3, uint8_t 
 
 void Radio::encode(double dataD[], float dataF[], uint8_t dataU[], uint8_t frame[])
 {
-	  // Double data
-	  uint8_t num1_bytes[2];
+    // Double data
+    uint8_t num1_bytes[2];
     uint8_t num2_bytes[3];
     uint8_t num3_bytes[3];
     uint8_t num4_bytes[4];
@@ -175,12 +175,12 @@ void Radio::encode(double dataD[], float dataF[], uint8_t dataU[], uint8_t frame
     frame[10] = num4_bytes[2];
     frame[11] = num4_bytes[3];
 
-	  frame[12] = num5_bytes[0];
+    frame[12] = num5_bytes[0];
     frame[13] = num5_bytes[1];
-	  frame[14] = num5_bytes[2];
+    frame[14] = num5_bytes[2];
     frame[15] = num5_bytes[3];
 
-	  frame[16] = num6_bytes[0];
+    frame[16] = num6_bytes[0];
     frame[17] = num6_bytes[1];
 
     frame[18] = num7_bytes[0];
@@ -231,9 +231,9 @@ void Radio::decode(uint8_t frame[], double dataD[], float dataF[])
 
 void Radio::send_data(double dataD[], float dataF[], uint8_t dataU[])
 {
-	  uint8_t frame[35];
-	  encode(dataD, dataF, dataU, frame);
-	  sendFrame(frame, sizeof(frame));
+    uint8_t frame[35];
+    encode(dataD, dataF, dataU, frame);
+    sendFrame(frame, sizeof(frame));
 }
 
 void Radio::read_data(double dataD[], float dataF[], uint8_t dataU[])

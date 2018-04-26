@@ -250,7 +250,7 @@ void Radio::read_data(double dataD[], float dataF[], uint8_t dataU[])
         uint8_t from;
         if (rf22.recvfromAck(frame, &len, &from))
         {
-            decode(frame, dataD, dataF);
+            decode(frame, dataD, dataF, dataU);
             displayData(dataD, dataF, dataU);
         }
     }

@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP ADXL345
+D Accelerometer, ADXL345
+K ADXL345,I2C, SPI
+F https://www.sparkfun.com/datasheets/Sensors/Accelerometer/ADXL345.pdf
+$ENDCMP
+#
+#End Doc Library

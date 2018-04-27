@@ -25,7 +25,7 @@ void Radio::init(void)
     if (!driver.setModemConfig(driver.FSK_Rb2Fd5)) {
         Serial.println(F("Configuration error"));    
     }
-    rf22.setRetries(3);
+    rf22.setRetries(255);
     Serial.println(F("Set Tx Power = RH_RF22_TXPOW_20DB"));
     Serial.println(F("Set configuration = FSK_Rb2Fd5"));  
 }

@@ -210,7 +210,7 @@ void Radio::encode(double dataD[], float dataF[], uint8_t dataU[], uint8_t frame
     frame[35] = dataU[3];
 }
 
-void Radio::decode(uint8_t frame[], double dataD[], float dataF[])
+void Radio::decode(uint8_t frame[], double dataD[], float dataF[], uint8_t dataU[])
 {
     // Double data
     dataD[0] = decode2byteD(frame[0], frame[1]);
@@ -227,6 +227,11 @@ void Radio::decode(uint8_t frame[], double dataD[], float dataF[])
     dataF[2] = decode2byte(frame[26], frame[27]);
     dataF[3] = decode2byte(frame[28], frame[29]);
     dataF[4] = decode2byte(frame[30], frame[31]);
+    // Uint8_t data
+    dataU[0] = frame[32];
+    dataU[1] = frame[33];
+    dataU[2] = frame[34];
+    dataU[3] = frame[35];
 }
 
 void Radio::send_data(double dataD[], float dataF[], uint8_t dataU[])
@@ -245,7 +250,7 @@ void Radio::read_data(double dataD[], float dataF[], uint8_t dataU[])
         uint8_t from;
         if (rf22.recvfromAck(frame, &len, &from))
         {
-            decode(frame, dataD, dataF);
+            decode(frame, dataD, dataF, dataU);
             displayData(dataD, dataF, dataU);
         }
     }
@@ -278,7 +283,7 @@ void Radio::displayData(double dataD[], float dataF[], uint8_t dataU[]) {
     Serial.print(dataU[2]);
     Serial.print("    Sat: ");
     Serial.print(dataU[3]);
-    Serial.print("    Lat,lng: ");
+    Serial.print("    Location: ");
     Serial.print(dataD[3], 6);
     Serial.print(",");
     Serial.print(dataD[4], 6);

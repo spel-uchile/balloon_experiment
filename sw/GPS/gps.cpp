@@ -43,11 +43,11 @@ void GPS::updateData() {
 
 void GPS::checkValidity(void) {
     validity = 0;
-    validity = gps.location.isValid()*(b1000000);
-    validity += gps.altitude.isValid()*(b0100000);
-    validity += gps.course.isValid()*(b00100000);
-    validity += gps.speed.isValid()*(b00010000);
-    validity += gps.time.isValid()*(b00001000);
-    validity += gps.satellites.isValid()*(b00000100);
+    validity = gps.location.isValid()*(B1000000);
+    validity += gps.altitude.isValid()*(B0100000);
+    validity += gps.course.isValid()*(B00100000);
+    validity += gps.speed.isValid()*(B00010000);
+    validity += gps.time.isValid()*(B00001000);
+    validity += gps.satellites.isValid()*(B00000100);
 }
 

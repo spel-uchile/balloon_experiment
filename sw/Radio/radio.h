@@ -32,6 +32,7 @@ class Radio
     // addr
     uint8_t addr_;
     uint8_t addr2_;
+    
 
     // Debug
     // HardwareSerial *debug_port_;

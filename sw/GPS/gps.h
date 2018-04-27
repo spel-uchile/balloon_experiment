@@ -22,7 +22,7 @@
     public:
         /*Public Members*/
         double lat, lng, alt, crse, mps;
-        uint8_t hour, minute, second, sat;
+        uint8_t hour, minute, second, sat, validity;
         
         // Default constructor
         GPS(void);
@@ -32,11 +32,10 @@
 
         // Mutator functions
         void init(void);
-
         void updateData(void);
+        void checkValidity(void);
 
     private:
         int gps_baudrate;
-    
  };
 

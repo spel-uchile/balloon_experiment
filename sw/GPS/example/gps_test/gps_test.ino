@@ -32,6 +32,8 @@ void loop() {
     Serial.print(":");
     Serial.print(gps.second);
     Serial.print("      Satellites: ");
-    Serial.println(gps.sat);
+    Serial.print(gps.sat);
+    Serial.print("      Validity: ");
+    Serial.println(gps.validity, BIN);
     delay(500);
 }

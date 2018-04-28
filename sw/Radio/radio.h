@@ -11,6 +11,10 @@
 #include <RH_RF22.h>
 #include "logger.h"
 
+#define GET_PICTURE 1
+#define GET_BEACON 2
+#define RELEASE_BALLOON 3
+
 /**
  * @class Radio
  * @brief Class for manage Radio data
@@ -60,6 +64,8 @@ public:
     void init(void);
     void send_data(double dataD[], float dataF[], uint8_t dataU[]);
     void read_data(double dataD[], float dataF[], uint8_t dataU[]);
+    boolean send_command(uint8_t cmd);
+    uint8_t read_command(void);
 
 private:
     // methods

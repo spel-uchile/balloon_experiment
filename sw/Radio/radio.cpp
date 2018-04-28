@@ -25,7 +25,7 @@ void Radio::init(void)
     if (!driver.setModemConfig(driver.FSK_Rb2Fd5)) {
         Serial.println(F("Configuration error"));    
     }
-    rf22.setRetries(3);
+    rf22.setRetries(255);
     Serial.println(F("Set Tx Power = RH_RF22_TXPOW_20DB"));
     Serial.println(F("Set configuration = FSK_Rb2Fd5"));  
 }
@@ -253,6 +253,23 @@ void Radio::read_data(double dataD[], float dataF[], uint8_t dataU[])
             decode(frame, dataD, dataF, dataU);
             displayData(dataD, dataF, dataU);
         }
+    }
+}
+
+boolean Radio::send_data(uint8_t cmd)
+{
+    return rf22.sendtoWait(cmd, 1, addr2_);
+}
+
+uint8_t Radio::read_command(void)
+{
+    uint8_t cmd;
+    if (rf22.available())
+    {
+        uint8_t len;
+        uint8_t from;
+        rf22.recvfromAck(cmd, &len, &from)
+        return cmd;
     }
 }
 

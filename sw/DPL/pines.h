@@ -5,5 +5,5 @@
 #define  REST2 36 // Activate R2
 #define  SERVO1 37 // Activate S1
 #define  SERVO2 38 // Activate S2
-#define  SIG_S1 39 // Control signal SERVO 1
-#define  SIG_S2 40 // Control signal SERVO 2
+#define  SIG_S1 44 // Control signal SERVO 1
+#define  SIG_S2 45 // Control signal SERVO 2

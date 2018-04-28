@@ -9,10 +9,10 @@
 
 #define DEBUG_LEVEL 1
 /*Constants*/
-#define  start_m1 0 // Inicio 
-#define  start_m2 0 // Inicio 
-#define  end_m1 180 // Inicio 
-#define  end_m2 180 // Inicio 
+#define  start_s1 0 // Begin 
+#define  start_s2 0 // Begin
+#define  end_s1 180 // Begin 
+#define  end_s2 180 // Begin
 
 
 
@@ -21,7 +21,7 @@
  * @brief Class for manage Atmospheric sensors
  */
 
-class DESPL
+class DPL
 {
     /*Private Members*/
 
@@ -42,15 +42,15 @@ public:
     //double T, P, a;
     //float tempC, humidity;
 
-    /*constructor de base (null)*/
-    DESPL() {}
+    /*Base contructor (null)*/
+    DPL() {}
 
     // methods
     void init(void);
-    void Rdesp1_start(void);
-    void Rdesp2_start(void);
-    void Rdesp1_end(void);
-    void Rdesp2_end(void);
+    void Rdpl1_start(void);
+    void Rdpl2_start(void);
+    void Rdpl1_end(void);
+    void Rdpl2_end(void);
     void Act_m1(void);
     void Act_m2(void);
     void dem1(void);

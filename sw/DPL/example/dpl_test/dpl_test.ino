@@ -1,7 +1,7 @@
-#include "despl.h"
+#include "dpl.h"
 #include "pines.h"
 
-DESPL despl;
+DPL dpl;
 
 // ================================================================
 // ===                      INITIAL SETUP                       ===
@@ -10,7 +10,7 @@ DESPL despl;
 
 void setup() {
         Serial.begin(9600);     // opens serial port, sets data rate to 9600 bps
-        despl.init();
+        dpl.init();
         funciones();
 }
 
@@ -42,40 +42,40 @@ void loop() {
                 }
                 else if (incomingByte == '1')
                 {
-                  despl.Rdesp1_start();
+                  dpl.Rdpl1_start();
                 }
                 else if (incomingByte == '2')
                 {
-                  despl.Rdesp2_start();
+                  dpl.Rdpl2_start();
                 }
                 else if (incomingByte == '3')
                 {
-                  despl.Rdesp1_end();
+                  dpl.Rdpl1_end();
                 }
                 else if (incomingByte == '4')
                 {
-                  despl.Rdesp2_end();
+                  dpl.Rdpl2_end();
                 }
                 else if (incomingByte == '5')
                 {
-                  despl.Act_m1();
+                  dpl.Act_s1();
                 }
                 else if (incomingByte == '6')
                 {
-                  despl.Act_m2();                  
+                  dpl.Act_s2();                  
                 }
                 
                 else if (incomingByte == '7')
                 {
-                  despl.dem1();
+                  dpl.dem1();
                 }
                 else if (incomingByte == '8')
                 {
-                  despl.dem2();
+                  dpl.dem2();
                 }  
                 else if (incomingByte == '9')
                 {
-                  despl.restart();
+                  dpl.restart();
                 }                                                
 
         }

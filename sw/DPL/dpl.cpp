@@ -4,7 +4,7 @@
  
 /*Author: Cristobal Garrido*/
 
-#include "despl.h"
+#include "dpl.h"
 #include "pines.h"
 #include "arduino.h" 
 
@@ -12,103 +12,102 @@
 
 //-------------------------- Public Methods --------------------------
 
-void DESPL::init(void)
+void DPL::init(void)
 {
   pinMode(enable1, OUTPUT);
   pinMode(enable2, OUTPUT);
   pinMode(rest1, OUTPUT);
   pinMode(rest2, OUTPUT);
-  pinMode(motor1, OUTPUT);
-  pinMode(motor2, OUTPUT);
-  myservo1_.attach(sigM1);
-  myservo2_.attach(sigM2);
+  pinMode(servo1, OUTPUT);
+  pinMode(servo2, OUTPUT);
+  myservo1_.attach(sigS1);
+  myservo2_.attach(sigS2);
   digitalWrite(enable1, LOW);
   digitalWrite(enable2, LOW);
   digitalWrite(rest1, LOW);
   digitalWrite(rest2, LOW);
-  digitalWrite(motor1, LOW);
-  digitalWrite(motor2, LOW);
-  myservo1_.write(start_m1);
-  myservo2_.write(start_m2);
+  digitalWrite(servo1, LOW);
+  digitalWrite(servo2, LOW);
+  myservo1_.write(start_s1);
+  myservo2_.write(start_s2);
 }
 
-void DESPL::Rdesp1_start(void)
+void DPL::Rdpl1_start(void)
 {
   digitalWrite(enable1, HIGH);
   digitalWrite(rest1, HIGH);
 }
 
-void DESPL::Rdesp1_end(void)
+void DPL::Rdpl1_end(void)
 {
   digitalWrite(enable1, LOW);
   digitalWrite(rest1, LOW);
 }
 
-void DESPL::Rdesp2_start(void)
+void DPL::Rdpl2_start(void)
 {
   digitalWrite(enable2, HIGH);
   digitalWrite(rest2, HIGH);
 }
 
-void DESPL::Rdesp2_end(void)
+void DPL::Rdpl2_end(void)
 {
   digitalWrite(enable2, LOW);
   digitalWrite(rest2, LOW);
 }
 
-void DESPL::Act_m1(void)
+void DPL::Act_s1(void)
 {
   digitalWrite(enable1, HIGH);
-  digitalWrite(motor1, HIGH);
+  digitalWrite(servo1, HIGH);
   myservo1_.write(end_m1);
   delay(10000);
   digitalWrite(enable1, LOW);
-  digitalWrite(motor1, LOW);
-  
+  digitalWrite(servo1, LOW);
 }
 
-void DESPL::Act_m2(void)
+void DPL::Act_s2(void)
 {
   digitalWrite(enable2, HIGH);
-  digitalWrite(motor2, HIGH);
+  digitalWrite(servo2, HIGH);
   myservo2_.write(end_m2);
   delay(10000);
   digitalWrite(enable2, LOW);
-  digitalWrite(motor2, LOW);
+  digitalWrite(servo2, LOW);
 }
 
-void DESPL::dem1(void)
+void DPL::dem1(void)
 {
-  Rdesp1_start();
+  Rdpl1_start();
   delay(80000);
-  Rdesp1_end();
+  Rdpl1_end();
   delay(60000);
-  Rdesp1_start();
+  Rdpl1_start();
   delay(80000);
-  Rdesp1_end();
-  Act_m1();
+  Rdpl1_end();
+  Act_s1();
 }
 
-void DESPL::dem2(void)
+void DPL::dem2(void)
 {
-  Rdesp2_start();
+  Rdpl2_start();
   delay(80000);
-  Rdesp2_end();
+  Rdpl2_end();
   delay(60000);
-  Rdesp2_start();
+  Rdpl2_start();
   delay(80000);
-  Rdesp2_end();
-  Act_m2();
+  Rdpl2_end();
+  Act_s2();
 }
 
-void DESPL::restart(void)
+void DPL::restart(void)
 {
   digitalWrite(enable1, LOW);
   digitalWrite(enable2, LOW);
   digitalWrite(rest1, LOW);
   digitalWrite(rest2, LOW);
-  digitalWrite(motor1, LOW);
-  digitalWrite(motor2, LOW);
-  myservo1_.write(start_m1);
-  myservo2_.write(start_m2);
+  digitalWrite(servo1, LOW);
+  digitalWrite(servo2, LOW);
+  myservo1_.write(start_s1);
+  myservo2_.write(start_s2);
 }

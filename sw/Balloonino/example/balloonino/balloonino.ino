@@ -12,6 +12,10 @@
 /*GPS baudrate*/
 #define GPS_BAUDRATE 9600
 
+/*Rpy commands*/
+#define RPY_GET_DATA 10
+#define RPY_SEND_DATA 11
+
 double dataD[8];
 float dataF[5];
 uint8_t dataU8[4];
@@ -22,12 +26,12 @@ Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, RADIO_SDN, CLIENT_ADDRESS, SE
 ATMS atms;
 IMU imu(IMU_INTERRUPT, &Serial);
 GPS gps;
-RPYCOM rpy(&Serial3);
+RPYCOM rpy(&Serial1);
 
 void setup()
 {
     Serial.begin(115200);
-    Serial3.begin(115200);
+    Serial1.begin(115200);
     // initialize
     radio.init();
     atms.init();
@@ -49,15 +53,27 @@ void loop() {
     dataD[7] = gps.mps;
     dataF[0] = atms.tempC;
     dataF[1] = atms.humidity;
-    dataF[2] = imu.ypr[0]*57.29;
-    dataF[3] = imu.ypr[1]*57.29;
-    dataF[4] = imu.ypr[2]*57.29;
+    dataF[2] = imu.gyroRate.x;
+    dataF[3] = imu.gyroRate.y;
+    dataF[4] = imu.gyroRate.z;
     dataU8[0] = gps.hour;
     dataU8[1] = gps.minute;
     dataU8[2] = gps.second;
     dataU8[3] = gps.validity;
     dataU32 = gps.sat;
     radio.send_data(dataD, dataF, dataU8);
-    rpy.BeacomTest();
-    rpy.sendData();
+    // rpy.BeacomTest();
+    rpy.updateBeacom(dataD, dataF, dataU8, dataU32);
+    // rpy.sendData();
+    rpy.getData();
+    Serial.print("node");Serial.println(rpy.cmd_.node);
+    Serial.print("port");Serial.println(rpy.cmd_.port);
+    if (rpy.cmd_.port == RPY_GET_DATA)
+    {
+        rpy.sendData();
+    }
+    else if (rpy.cmd_.port == RPY_SEND_DATA)
+    {
+        radio.send_data(dataD, dataF, dataU8);
+    }
 }

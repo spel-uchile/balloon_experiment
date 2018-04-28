@@ -6,6 +6,10 @@
 
 /*Requiered Libraries*/
 #include <Arduino.h>
+#define PACKET_SZ 255
+#define CMD_SZ 2
+#define STRUCT_SZ 60
+#define DATA_SZ PACKET_SZ - CMD_SZ - STRUCT_SZ
 
 /**
  * @class OBC
@@ -33,18 +37,27 @@ typedef struct {
     uint32_t GPS_Sat;
 } frame;
 
+typedef struct {
+    uint8_t node;
+    uint8_t port;
+} command;
+
 class RPYCOM
 {
     /*Private Members*/
     uint8_t node_ = 1;
     uint8_t port_ = 10;
-    frame beacon_;
-    uint8_t beacon_size_ = sizeof(beacon_);
+    frame beacon_tx_;
+    frame beacon_rx_;
+    uint8_t beacon_tx_size_ = sizeof(beacon_tx_);
+    uint8_t cmd_size_ = sizeof(cmd_);
+    uint8_t data_[DATA_SZ];
+
     HardwareSerial *hw_port_;
 
     public:
         /*Public Members*/
-        // ...
+        command cmd_;
 
         /*constructor de base (null)*/
         RPYCOM(HardwareSerial *hw_port):

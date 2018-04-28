@@ -15,3 +15,6 @@
 #define  servo2 38 // Activate S2
 #define  sigS1 39 // Control signal servo 1
 #define  sigS2 40 // Control signal servo 2
+
+/* Dedicated temperature sensor */
+#define PIN_DALLAS 42

@@ -6,9 +6,9 @@
 
 #include "atms.h"
 
-#define pin 5
+#define PIN_DALLAS 42
 /*Object Definitions*/
-ATMS atms(pin);
+ATMS atms(PIN_DALLAS);
 
 // ================================================================
 // ===                      INITIAL SETUP                       ===

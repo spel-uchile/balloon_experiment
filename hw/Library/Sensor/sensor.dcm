@@ -1,0 +1,15 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP HMC1002
+D Two Axis Magnetometer HMC1002
+K HMC1002, magnetometer
+F https://aerocontent.honeywell.com/aero/common/documents/myaerospacecatalog-documents/Missiles-Munitions/HMC_1001-1002-1021-1022_Data_Sheet.pdf
+$ENDCMP
+#
+$CMP ITG-3701
+D ITG-3701 is a single-chip, digital output, 3 Axis MEMS gyroscope IC which features a 512-byte FIFO.
+K ITG-3701, Gyroscope, 4000 deg/sec, 16-bit
+F https://store.invensense.com/datasheets/invensense/PS-ITG-3701.pdf
+$ENDCMP
+#
+#End Doc Library

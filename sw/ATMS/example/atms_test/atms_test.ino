@@ -6,8 +6,9 @@
 
 #include "atms.h"
 
+#define pin 5
 /*Object Definitions*/
-ATMS atms;
+ATMS atms(pin);
 
 // ================================================================
 // ===                      INITIAL SETUP                       ===
@@ -33,4 +34,5 @@ void loop()
     DEBUG2_PRINT(atms.a);DEBUG2_PRINT("\t");
     DEBUG2_PRINT(atms.tempC);DEBUG2_PRINT("\t");
     DEBUG2_PRINTLN(atms.humidity)
+    DEBUG2_PRINTLN(atms.temperature_dallas)
 }

@@ -256,6 +256,23 @@ void Radio::read_data(double dataD[], float dataF[], uint8_t dataU[])
     }
 }
 
+boolean Radio::send_data(uint8_t cmd)
+{
+    return rf22.sendtoWait(cmd, 1, addr2_);
+}
+
+uint8_t Radio::read_command(void)
+{
+    uint8_t cmd;
+    if (rf22.available())
+    {
+        uint8_t len;
+        uint8_t from;
+        rf22.recvfromAck(cmd, &len, &from)
+        return cmd;
+    }
+}
+
 void Radio::displayData(double dataD[], float dataF[], uint8_t dataU[]) {
     Serial.print("Temp: ");
     Serial.print(dataD[0]);

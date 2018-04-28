@@ -60,6 +60,8 @@ public:
     void init(void);
     void send_data(double dataD[], float dataF[], uint8_t dataU[]);
     void read_data(double dataD[], float dataF[], uint8_t dataU[]);
+    boolean send_command(uint8_t cmd);
+    uint8_t read_command(void);
 
 private:
     // methods

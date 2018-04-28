@@ -32,6 +32,7 @@ class Radio
     // addr
     uint8_t addr_;
     uint8_t addr2_;
+    
 
     // Debug
     // HardwareSerial *debug_port_;
@@ -57,8 +58,8 @@ public:
 
     // methods
     void init(void);
-    void send_data(double dataD[], float dataF[]);
-    void read_data(double dataD[], float dataF[]);
+    void send_data(double dataD[], float dataF[], uint8_t dataU[]);
+    void read_data(double dataD[], float dataF[], uint8_t dataU[]);
 
 private:
     // methods
@@ -67,10 +68,11 @@ private:
     void encode2byteD(double number, uint8_t encode_bytes[]);
     void encode3byte(double number, uint8_t encode_bytes[]);
     void encode4byteD(double number, uint8_t encode_bytes[]);
-    void encode(double dataD[], float dataF[], uint8_t frame[]);
+    void encode(double dataD[], float dataF[], uint8_t dataU[], uint8_t frame[]);
     float decode2byte(uint8_t byte1, uint8_t byte2);
     double decode2byteD(uint8_t byte1, uint8_t byte2);
     double decode3byte(uint8_t byte1, uint8_t byte2, uint8_t byte3);
     double decode4byteD(uint8_t byte1, uint8_t byte2, uint8_t byte3, uint8_t byte4);
-    void decode(uint8_t frame[], double dataD[], float dataF[]);
+    void decode(uint8_t frame[], double dataD[], float dataF[], uint8_t dataU[]);
+    void displayData(double dataD[], float dataF[], uint8_t dataU[]);
 };

@@ -1,14 +1,26 @@
 /**
- * @brief Simple IMU Example
+ * @brief Simple Earth Station Example
  */
  
-/*Author: Gustavo Diaz*/
+/*Author: Matías Vidal*/
 
-#include "atms.h"
+#include "radio.h"
 
-#define PIN_DALLAS 42
+/*Radio transiver*/
+#define RADIO_SLAVESELECTPIN 2
+#define RADIO_INTERRUPT 3
+#define SDN 4
+
+#define CLIENT_ADDRESS 1
+#define SERVER_ADDRESS 2
+
+/*Data store*/
+double dataD[8];
+float dataF[5];
+uint8_t dataU[4];
+
 /*Object Definitions*/
-ATMS atms(PIN_DALLAS);
+Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, SDN, SERVER_ADDRESS, CLIENT_ADDRESS);
 
 // ================================================================
 // ===                      INITIAL SETUP                       ===
@@ -17,22 +29,14 @@ ATMS atms(PIN_DALLAS);
 void setup() {
     // initialize serial communication
     Serial.begin(115200);
-    // init atms
-    atms.init();
+    // init radio
+    radio.init();
 }
 
 // ================================================================
 // ===                    MAIN PROGRAM LOOP                     ===
 // ================================================================
 
-void loop()
-{
-    atms.updateData();
-    DEBUG2_PRINT("T-P-a-tempC-humidity:\t");
-    DEBUG2_PRINT(atms.T);DEBUG2_PRINT("\t");
-    DEBUG2_PRINT(atms.P);DEBUG2_PRINT("\t");
-    DEBUG2_PRINT(atms.a);DEBUG2_PRINT("\t");
-    DEBUG2_PRINT(atms.tempC);DEBUG2_PRINT("\t");
-    DEBUG2_PRINTLN(atms.humidity)
-    DEBUG2_PRINTLN(atms.temperature_dallas)
+void loop() {
+    radio.read_data(dataD, dataF, dataU);
 }

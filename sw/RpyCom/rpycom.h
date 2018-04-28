@@ -29,6 +29,7 @@ typedef struct {
     uint8_t GPS_HH;
     uint8_t GPS_MM;
     uint8_t GPS_SS;
+    uint8_t GPS_validity;
     uint32_t GPS_Sat;
 } frame;
 

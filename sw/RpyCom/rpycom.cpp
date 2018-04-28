@@ -25,6 +25,7 @@ void RPYCOM::updateBeacom(double dataD[], float dataF[], uint8_t dataU8[], uint3
     beacon_.GPS_HH = dataU8[0];
     beacon_.GPS_MM = dataU8[1];
     beacon_.GPS_SS = dataU8[2];
+    beacon_.GPS_validity = dataU8[3];
     beacon_.GPS_Sat = dataU32;
 }
 
@@ -46,6 +47,7 @@ void RPYCOM::BeacomTest()
     beacon_.GPS_HH = 241;
     beacon_.GPS_MM = 32;
     beacon_.GPS_SS = 85;
+    beacon_.GPS_validity = 255;
     beacon_.GPS_Sat = 4294967295;
 }
 

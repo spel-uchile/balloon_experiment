@@ -14,66 +14,66 @@
 
 void DPL::init(void)
 {
-  pinMode(enable1, OUTPUT);
-  pinMode(enable2, OUTPUT);
-  pinMode(rest1, OUTPUT);
-  pinMode(rest2, OUTPUT);
-  pinMode(servo1, OUTPUT);
-  pinMode(servo2, OUTPUT);
-  myservo1_.attach(sigS1);
-  myservo2_.attach(sigS2);
-  digitalWrite(enable1, LOW);
-  digitalWrite(enable2, LOW);
-  digitalWrite(rest1, LOW);
-  digitalWrite(rest2, LOW);
-  digitalWrite(servo1, LOW);
-  digitalWrite(servo2, LOW);
+  pinMode(ENABLE1, OUTPUT);
+  pinMode(ENABLE2, OUTPUT);
+  pinMode(REST1, OUTPUT);
+  pinMode(REST2, OUTPUT);
+  pinMode(SERVO1, OUTPUT);
+  pinMode(SERVO2, OUTPUT);
+  myservo1_.attach(SIG_S1);
+  myservo2_.attach(SIG_S2);
+  digitalWrite(ENABLE1, LOW);
+  digitalWrite(ENABLE2, LOW);
+  digitalWrite(REST1, LOW);
+  digitalWrite(REST2, LOW);
+  digitalWrite(SERVO1, LOW);
+  digitalWrite(SERVO2, LOW);
   myservo1_.write(start_s1);
   myservo2_.write(start_s2);
 }
 
 void DPL::Rdpl1_start(void)
 {
-  digitalWrite(enable1, HIGH);
-  digitalWrite(rest1, HIGH);
+  digitalWrite(ENABLE1, HIGH);
+  digitalWrite(REST1, HIGH);
 }
 
 void DPL::Rdpl1_end(void)
 {
-  digitalWrite(enable1, LOW);
-  digitalWrite(rest1, LOW);
+  digitalWrite(ENABLE1, LOW);
+  digitalWrite(REST1, LOW);
 }
 
 void DPL::Rdpl2_start(void)
 {
-  digitalWrite(enable2, HIGH);
-  digitalWrite(rest2, HIGH);
+  digitalWrite(ENABLE2, HIGH);
+  digitalWrite(REST2, HIGH);
 }
 
 void DPL::Rdpl2_end(void)
 {
-  digitalWrite(enable2, LOW);
-  digitalWrite(rest2, LOW);
+  digitalWrite(ENABLE2, LOW);
+  digitalWrite(REST2, LOW);
 }
 
 void DPL::Act_s1(void)
 {
-  digitalWrite(enable1, HIGH);
-  digitalWrite(servo1, HIGH);
-  myservo1_.write(end_m1);
+  digitalWrite(ENABLE1, HIGH);
+  digitalWrite(SERVO1, HIGH);
+  myservop1_.write(end_m1);
   delay(10000);
-  digitalWrite(enable1, LOW);
-  digitalWrite(servo1, LOW);
+  digitalWrite(ENABLE1, LOW);
+  digitalWrite(SERVO1, LOW);
 }
 
 void DPL::Act_s2(void)
 {
-  digitalWrite(enable2, HIGH);
-  digitalWrite(servo2, HIGH);
+  digitalWrite(ENABLE2, HIGH);
+  digitalWrite(SERVO2, HIGH);
   myservo2_.write(end_m2);
   delay(10000);
-  digitalWrite(enable2, LOW);
-  digitalWrite(servo2, LOW);
+  digitalWrite(ENABLE2, LOW);
+  digitalWrite(SERVO2, LOW);
 }
 
 void DPL::dem1(void)
@@ -102,12 +102,12 @@ void DPL::dem2(void)
 
 void DPL::restart(void)
 {
-  digitalWrite(enable1, LOW);
-  digitalWrite(enable2, LOW);
-  digitalWrite(rest1, LOW);
-  digitalWrite(rest2, LOW);
-  digitalWrite(servo1, LOW);
-  digitalWrite(servo2, LOW);
+  digitalWrite(ENABLE1, LOW);
+  digitalWrite(ENABLE2, LOW);
+  digitalWrite(REST1, LOW);
+  digitalWrite(REST2, LOW);
+  digitalWrite(SERVO1, LOW);
+  digitalWrite(SERVO2, LOW);
   myservo1_.write(start_s1);
   myservo2_.write(start_s2);
 }

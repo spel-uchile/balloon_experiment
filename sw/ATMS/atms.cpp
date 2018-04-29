@@ -27,4 +27,6 @@ void ATMS::updateData(void)
     delay(400);
     humidity = sensor_.getRH();
     tempC = sensor_.getTemp();
+    sensorT_.requestTemperatures();
+    temperature_dallas = sensorT_.getTempCByIndex(0);
 }

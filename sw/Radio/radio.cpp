@@ -236,7 +236,7 @@ void Radio::decode(uint8_t frame[], double dataD[], float dataF[], uint8_t dataU
 
 void Radio::send_data(double dataD[], float dataF[], uint8_t dataU[])
 {
-    uint8_t frame[35];
+    uint8_t frame[36];
     encode(dataD, dataF, dataU, frame);
     sendFrame(frame, sizeof(frame));
 }
@@ -254,6 +254,7 @@ void Radio::read_data(double dataD[], float dataF[], uint8_t dataU[])
             displayData(dataD, dataF, dataU);
         }
     }
+    // Serial.println("read_data");
 }
 
 bool Radio::send_command(uint8_t cmd)

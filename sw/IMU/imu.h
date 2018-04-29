@@ -272,7 +272,7 @@ void IMU::updateData(void)
             #endif
         }
         else{
-            DEBUG2_PRINTLN(F("mpuIntStatus"));
+            // DEBUG2_PRINTLN(F("mpuIntStatus"));
         }
         mpu.dmpGetGyro(&gyroRate, fifoBuffer);
     }

@@ -53,14 +53,50 @@ void RPYCOM::BeacomTest()
 
 void RPYCOM::getData()
 {
-	hw_port_->readBytes((char*)&cmd_, cmd_size_);
-    hw_port_->readBytes((char*)&beacon_rx_, beacon_tx_size_);
-    hw_port_->readBytes((char*)&data_, DATA_SZ);
+	uint8_t frame[PACKET_SZ];
+	uint8_t readed_bytes = hw_port_->readBytes((char*)&frame, PACKET_SZ);
+	if (readed_bytes == PACKET_SZ)
+	{
+	    cmd_.node = frame[0];
+	    cmd_.port = frame[1];
+	    Serial.print("node:");Serial.println(cmd_.node);
+	    Serial.print("port:");Serial.println(cmd_.port);
+	}
+	else
+	{
+		cmd_.node = 0;
+	    cmd_.port = 0;
+	}
+}
+
+void RPYCOM::resetStrutures()
+{
+	cmd_.node = 0;
+	cmd_.port = 0;
+	beacon_rx_.Temp1 = 0;
+    beacon_rx_.Pressure = 0;
+    beacon_rx_.Alt = 0;
+    beacon_rx_.Temp2 = 0;
+    beacon_rx_.Humidity = 0;
+    beacon_rx_.IMU1 = 0;
+    beacon_rx_.IMU2 = 0;
+    beacon_rx_.IMU3 = 0;
+    beacon_rx_.GPS_Lat = 0;
+    beacon_rx_.GPS_Lng = 0;
+    beacon_rx_.GPS_Alt = 0;
+    beacon_rx_.GPS_Crse = 0;
+    beacon_rx_.GPS_Speed = 0;
+    beacon_rx_.GPS_HH = 0;
+    beacon_rx_.GPS_MM = 0;
+    beacon_rx_.GPS_SS = 0;
+    beacon_rx_.GPS_validity = 0;
+    beacon_rx_.GPS_Sat = 0;
+	memset(data_, 0, DATA_SZ);
 }
 
 void RPYCOM::sendData()
 {
-	uint8_t padd_sz = 253-beacon_tx_size_;
+	uint8_t padd_sz = PACKET_SZ-CMD_SZ-beacon_tx_size_;
 	uint8_t padding[padd_sz];
 	memset(padding, 0, padd_sz);
 

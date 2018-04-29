@@ -7,7 +7,7 @@
 #include "rpycom.h"
 
 /*Object Definitions*/
-RPYCOM rpy(&Serial3);
+RPYCOM rpy(&Serial1);
 
 // ================================================================
 // ===                      INITIAL SETUP                       ===
@@ -15,7 +15,7 @@ RPYCOM rpy(&Serial3);
 
 void setup() {
     // initialize serial communication
-    Serial3.begin(115200);
+    Serial1.begin(115200);
     Serial.begin(115200);
 }
 

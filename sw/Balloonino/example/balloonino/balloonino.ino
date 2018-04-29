@@ -43,37 +43,40 @@ void loop() {
     atms.updateData();
     imu.updateData();
     gps.updateData();
-    dataD[0] = atms.T;
-    dataD[1] = atms.P;
-    dataD[2] = atms.a;
-    dataD[3] = gps.lat;
-    dataD[4] = gps.lng;
-    dataD[5] = gps.alt;
-    dataD[6] = gps.crse;
-    dataD[7] = gps.mps;
-    dataF[0] = atms.tempC;
-    dataF[1] = atms.humidity;
-    dataF[2] = imu.gyroRate.x;
-    dataF[3] = imu.gyroRate.y;
-    dataF[4] = imu.gyroRate.z;
-    dataU8[0] = gps.hour;
-    dataU8[1] = gps.minute;
-    dataU8[2] = gps.second;
-    dataU8[3] = gps.validity;
-    dataU32 = gps.sat;
-    radio.send_data(dataD, dataF, dataU8);
-    // rpy.BeacomTest();
-    rpy.updateBeacom(dataD, dataF, dataU8, dataU32);
-    // rpy.sendData();
+
     rpy.getData();
-    Serial.print("node");Serial.println(rpy.cmd_.node);
-    Serial.print("port");Serial.println(rpy.cmd_.port);
     if (rpy.cmd_.port == RPY_GET_DATA)
     {
+        dataD[0] = atms.T;
+        dataD[1] = atms.P;
+        dataD[2] = atms.a;
+        dataD[3] = gps.lat;
+        dataD[4] = gps.lng;
+        dataD[5] = gps.alt;
+        dataD[6] = gps.crse;
+        dataD[7] = gps.mps;
+        dataF[0] = atms.tempC;
+        dataF[1] = atms.humidity;
+        dataF[2] = imu.gyroRate.x;
+        dataF[3] = imu.gyroRate.y;
+        dataF[4] = imu.gyroRate.z;
+        dataU8[0] = gps.hour;
+        dataU8[1] = gps.minute;
+        dataU8[2] = gps.second;
+        dataU8[3] = gps.validity;
+        dataU32 = gps.sat;
+
+        rpy.updateBeacom(dataD, dataF, dataU8, dataU32);
         rpy.sendData();
+        rpy.resetStrutures();
     }
     else if (rpy.cmd_.port == RPY_SEND_DATA)
     {
         radio.send_data(dataD, dataF, dataU8);
     }
+    // int8_t foo = Serial1.read();
+    // if (foo!=-1)
+    // {
+    //     Serial.println(foo);
+    // }
 }

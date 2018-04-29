@@ -17,7 +17,7 @@
 #define RPY_SEND_DATA 11
 
 double dataD[8];
-float dataF[5];
+float dataF[6];
 uint8_t dataU8[4];
 uint32_t dataU32;
 
@@ -53,6 +53,7 @@ void loop() {
     dataD[7] = gps.mps;
     dataF[0] = atms.tempC;
     dataF[1] = atms.humidity;
+    dataF[2] = atms.temperature_dallas;
     dataF[2] = imu.gyroRate.x;
     dataF[3] = imu.gyroRate.y;
     dataF[4] = imu.gyroRate.z;

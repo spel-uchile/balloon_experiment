@@ -54,9 +54,9 @@ void loop() {
     dataF[0] = atms.tempC;
     dataF[1] = atms.humidity;
     dataF[2] = atms.temperature_dallas;
-    dataF[2] = imu.gyroRate.x;
-    dataF[3] = imu.gyroRate.y;
-    dataF[4] = imu.gyroRate.z;
+    dataF[3] = imu.gyroRate.x;
+    dataF[4] = imu.gyroRate.y;
+    dataF[5] = imu.gyroRate.z;
     dataU8[0] = gps.hour;
     dataU8[1] = gps.minute;
     dataU8[2] = gps.second;

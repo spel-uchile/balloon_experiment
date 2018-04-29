@@ -256,9 +256,9 @@ void Radio::read_data(double dataD[], float dataF[], uint8_t dataU[])
     }
 }
 
-boolean Radio::send_data(uint8_t cmd)
+bool Radio::send_command(uint8_t cmd)
 {
-    return rf22.sendtoWait(cmd, 1, addr2_);
+    return rf22.sendtoWait((uint8_t *)&cmd, 1, addr2_);
 }
 
 uint8_t Radio::read_command(void)
@@ -268,7 +268,7 @@ uint8_t Radio::read_command(void)
     {
         uint8_t len;
         uint8_t from;
-        rf22.recvfromAck(cmd, &len, &from)
+        rf22.recvfromAck((uint8_t *)&cmd, &len, &from);
         return cmd;
     }
 }

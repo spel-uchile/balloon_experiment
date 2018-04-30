@@ -66,10 +66,10 @@ public:
     void read_data(double dataD[], float dataF[], uint8_t dataU[]);
     bool send_command(uint8_t cmd);
     uint8_t read_command(void);
+    void sendFrame(uint8_t frame[], int frame_size);
 
 private:
     // methods
-    void sendFrame(uint8_t frame[], int frame_size);
     void encode2byte(float number, uint8_t encode_bytes[]);
     void encode2byteD(double number, uint8_t encode_bytes[]);
     void encode3byte(double number, uint8_t encode_bytes[]);

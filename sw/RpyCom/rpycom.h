@@ -6,7 +6,7 @@
 
 /*Requiered Libraries*/
 #include <Arduino.h>
-#define PACKET_SZ 64
+#define PACKET_SZ 100
 #define CMD_SZ 2
 #define STRUCT_SZ 60
 #define DATA_SZ PACKET_SZ - CMD_SZ - STRUCT_SZ

@@ -17,6 +17,7 @@
 /*Data store*/
 double dataD[3];
 float dataF[5];
+uint8_t dataU8[4];
 
 /*Object Definitions*/
 Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, SDN, CLIENT_ADDRESS, SERVER_ADDRESS);
@@ -47,6 +48,10 @@ void loop()
     dataF[2] = 87.80;
     dataF[3] = 101.71;
     dataF[4] = 43.87;
+    dataU8[0] = 25;
+    dataU8[1] = 8;
+    dataU8[2] = 25;
+    dataU8[3] = 87;
     // send data as predefined Frame
-    radio.send_data(dataD, dataF);
+    radio.send_data(dataD, dataF, dataU8);
 }

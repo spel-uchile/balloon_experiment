@@ -13,17 +13,21 @@
 #define GPS_BAUDRATE 9600
 
 /*Rpy commands*/
-#define RPY_GET_DATA 10
-#define RPY_SEND_DATA 11
+#define CMD_RPY2RPY 10
+#define CMD_BASE2RPY 11
+#define CMD_RPY2BASE_DATA 20
+#define CMD_RPY2BASE_PHOTO 21
 
 double dataD[8];
 float dataF[6];
 uint8_t dataU8[4];
 uint32_t dataU32;
 
+uint8_t frame_rpy2base[PACKET_SZ];
+
 //Create an instance of the objects
 Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, RADIO_SDN, CLIENT_ADDRESS, SERVER_ADDRESS);
-ATMS atms;
+ATMS atms(PIN_DALLAS);
 IMU imu(IMU_INTERRUPT, &Serial);
 GPS gps;
 RPYCOM rpy(&Serial1);
@@ -43,8 +47,11 @@ void loop() {
     atms.updateData();
     imu.updateData();
     gps.updateData();
+    // memset(frame_rpy2base, 0, PACKET_SZ);
+    // rpy.getData(frame_rpy2base);
     rpy.getData();
-    if (rpy.cmd_.port == RPY_GET_DATA)
+    // uint8_t base_cmd = radio.read_command();
+    if (rpy.cmd_.port == CMD_RPY2RPY)
     {
         dataD[0] = atms.T;
         dataD[1] = atms.P;
@@ -70,13 +77,18 @@ void loop() {
         rpy.sendData();
         rpy.resetStrutures();
     }
-    else if (rpy.cmd_.port == RPY_SEND_DATA)
+    else if (rpy.cmd_.port == CMD_RPY2BASE_DATA || rpy.cmd_.port == CMD_RPY2BASE_PHOTO)
     {
-        radio.send_data(dataD, dataF, dataU8);
+        // radio.send_data(dataD, dataF, dataU8);
+        radio.sendFrame(frame_rpy2base, PACKET_SZ);
     }
-    // int8_t foo = Serial1.read();
-    // if (foo!=-1)
+    else
+    {
+        // to do
+    }
+    // if (base_cmd == GET_BEACON)
     // {
-    //     Serial.println(foo);
+    //     rpy.updateBeacom(dataD, dataF, dataU8, dataU32);
+    //     rpy.sendData();
     // }
 }

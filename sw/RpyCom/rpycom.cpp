@@ -15,7 +15,7 @@ void RPYCOM::updateBeacom(double dataD[], float dataF[], uint8_t dataU8[], uint3
     beacon_tx_.Temp2 = dataF[0];
     beacon_tx_.Humidity = dataF[1];
     beacon_tx_.Temp3 = dataF[2];
-    beacon_tx_.IMU1 = dataF[3;
+    beacon_tx_.IMU1 = dataF[3];
     beacon_tx_.IMU2 = dataF[4];
     beacon_tx_.IMU3 = dataF[5];
     beacon_tx_.GPS_Lat = (float) dataD[3];
@@ -55,6 +55,7 @@ void RPYCOM::BeacomTest()
 void RPYCOM::getData()
 {
 	uint8_t frame[PACKET_SZ];
+	memset(frame, 0, PACKET_SZ);
 	uint8_t readed_bytes = hw_port_->readBytes((char*)&frame, PACKET_SZ);
 	if (readed_bytes == PACKET_SZ)
 	{
@@ -68,6 +69,19 @@ void RPYCOM::getData()
 		cmd_.node = 0;
 	    cmd_.port = 0;
 	}
+	if (readed_bytes==PACKET_SZ)
+	{
+		for (int i = 0; i < PACKET_SZ-1; i++)
+		{
+			Serial.print(frame[i]);Serial.print(",");
+		}
+		Serial.println("end");
+	}
+	else
+	{
+		Serial.print("readed_bytes:");Serial.println(readed_bytes);
+	}
+
 }
 
 void RPYCOM::resetStrutures()
@@ -105,6 +119,4 @@ void RPYCOM::sendData()
 	hw_port_->write(port_);
 	hw_port_->write((uint8_t *)&beacon_tx_, beacon_tx_size_);
 	hw_port_->write(padding, padd_sz);
-	Serial.println(sizeof(beacon_tx_));
-	Serial.println(sizeof(padding));
 }

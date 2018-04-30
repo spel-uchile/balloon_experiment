@@ -17,6 +17,7 @@
 #define CMD_BASE2RPY 11
 #define CMD_RPY2BASE_DATA 20
 #define CMD_RPY2BASE_PHOTO 21
+#define CMD_DEPLOY 12
 
 double dataD[8];
 float dataF[6];
@@ -47,49 +48,57 @@ void loop() {
     atms.updateData();
     imu.updateData();
     gps.updateData();
+    updateAlldata();
     // memset(frame_rpy2base, 0, PACKET_SZ);
     // rpy.getData(frame_rpy2base);
     rpy.getData();
     // uint8_t base_cmd = radio.read_command();
     if (rpy.cmd_.port == CMD_RPY2RPY)
     {
-        dataD[0] = atms.T;
-        dataD[1] = atms.P;
-        dataD[2] = atms.a;
-        dataD[3] = gps.lat;
-        dataD[4] = gps.lng;
-        dataD[5] = gps.alt;
-        dataD[6] = gps.crse;
-        dataD[7] = gps.mps;
-        dataF[0] = atms.tempC;
-        dataF[1] = atms.humidity;
-        dataF[2] = atms.temperature_dallas;
-        dataF[3] = imu.gyroRate.x;
-        dataF[4] = imu.gyroRate.y;
-        dataF[5] = imu.gyroRate.z;
-        dataU8[0] = gps.hour;
-        dataU8[1] = gps.minute;
-        dataU8[2] = gps.second;
-        dataU8[3] = gps.validity;
-        dataU32 = gps.sat;
-
         rpy.updateBeacon(dataD, dataF, dataU8, dataU32);
         rpy.sendData();
         rpy.resetStrutures();
     }
     else if (rpy.cmd_.port == CMD_RPY2BASE_DATA || rpy.cmd_.port == CMD_RPY2BASE_PHOTO)
     {
-        // radio.send_data(dataD, dataF, dataU8);
-        radio.sendFrame(frame_rpy2base, PACKET_SZ);
+        Serial.println("sendingtoradio");
+        for (int i = 0; i < PACKET_SZ-1; i++)
+        {
+            Serial.print(rpy.frame_rpy2base_[i]);Serial.print(",");
+        }
+        Serial.println("end");
+        radio.sendFrame(rpy.frame_rpy2base_, PACKET_SZ);
     }
-    else
+    else if (rpy.cmd_.port == CMD_DEPLOY)
     {
-        // to do
-        radio.send_data(dataD, dataF, dataU8, dataU32);
+        
     }
     // if (base_cmd == GET_BEACON)
     // {
     //     rpy.updateBeacom(dataD, dataF, dataU8, dataU32);
     //     rpy.sendData();
     // }
+}
+
+void updateAlldata()
+{
+    dataD[0] = atms.T;
+    dataD[1] = atms.P;
+    dataD[2] = atms.a;
+    dataD[3] = gps.lat;
+    dataD[4] = gps.lng;
+    dataD[5] = gps.alt;
+    dataD[6] = gps.crse;
+    dataD[7] = gps.mps;
+    dataF[0] = atms.tempC;
+    dataF[1] = atms.humidity;
+    dataF[2] = atms.temperature_dallas;
+    dataF[3] = imu.gyroRate.x;
+    dataF[4] = imu.gyroRate.y;
+    dataF[5] = imu.gyroRate.z;
+    dataU8[0] = gps.hour;
+    dataU8[1] = gps.minute;
+    dataU8[2] = gps.second;
+    dataU8[3] = gps.validity;
+    dataU32 = gps.sat;
 }

@@ -54,13 +54,13 @@ void RPYCOM::BeaconTest()
 
 void RPYCOM::getData()
 {
-	uint8_t frame[PACKET_SZ];
-	memset(frame, 0, PACKET_SZ);
-	uint8_t readed_bytes = hw_port_->readBytes((char*)&frame, PACKET_SZ);
+	// uint8_t frame[PACKET_SZ];
+	memset(frame_rpy2base_, 0, PACKET_SZ);
+	uint8_t readed_bytes = hw_port_->readBytes((char*)&frame_rpy2base_, PACKET_SZ);
 	if (readed_bytes == PACKET_SZ)
 	{
-	    cmd_.node = frame[0];
-	    cmd_.port = frame[1];
+	    cmd_.node = frame_rpy2base_[0];
+	    cmd_.port = frame_rpy2base_[1];
 	    Serial.print("node:");Serial.println(cmd_.node);
 	    Serial.print("port:");Serial.println(cmd_.port);
 	}
@@ -73,7 +73,7 @@ void RPYCOM::getData()
 	{
 		for (int i = 0; i < PACKET_SZ-1; i++)
 		{
-			Serial.print(frame[i]);Serial.print(",");
+			Serial.print(frame_rpy2base_[i]);Serial.print(",");
 		}
 		Serial.println("end");
 	}

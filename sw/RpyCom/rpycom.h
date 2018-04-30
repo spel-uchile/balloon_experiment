@@ -58,11 +58,13 @@ class RPYCOM
     public:
         /*Public Members*/
         command cmd_;
+        uint8_t frame_rpy2base_[PACKET_SZ];
 
         /*constructor de base (null)*/
         RPYCOM(HardwareSerial *hw_port):
         hw_port_(hw_port)
         {
+            cmd_.node = 0;
             cmd_.port = 0;
         }
 

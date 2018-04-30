@@ -5,7 +5,9 @@
 /*Author: Gustavo Diaz*/
 
 /*Requiered Libraries*/
+#include <Arduino.h>
 #include  <Servo.h>
+#include "pines_balloon.h"
 
 #define DEBUG_LEVEL 1
 /*Constants*/
@@ -51,8 +53,8 @@ public:
     void Rdpl2_start(void);
     void Rdpl1_end(void);
     void Rdpl2_end(void);
-    void Act_m1(void);
-    void Act_m2(void);
+    void Act_s1(void);
+    void Act_s2(void);
     void dem1(void);
     void dem2(void);
     void restart(void);

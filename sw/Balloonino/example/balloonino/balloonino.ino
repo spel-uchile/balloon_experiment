@@ -73,7 +73,7 @@ void loop() {
         dataU8[3] = gps.validity;
         dataU32 = gps.sat;
 
-        rpy.updateBeacom(dataD, dataF, dataU8, dataU32);
+        rpy.updateBeacon(dataD, dataF, dataU8, dataU32);
         rpy.sendData();
         rpy.resetStrutures();
     }
@@ -85,6 +85,7 @@ void loop() {
     else
     {
         // to do
+        radio.send_data(dataD, dataF, dataU8, dataU32);
     }
     // if (base_cmd == GET_BEACON)
     // {

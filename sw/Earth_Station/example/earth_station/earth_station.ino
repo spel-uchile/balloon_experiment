@@ -16,8 +16,9 @@
 
 /*Data store*/
 double dataD[8];
-float dataF[5];
-uint8_t dataU[4];
+float dataF[6];
+uint8_t dataU8[4];
+uint32_t dataU32;
 
 /*Object Definitions*/
 Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, SDN, SERVER_ADDRESS, CLIENT_ADDRESS);
@@ -38,5 +39,5 @@ void setup() {
 // ================================================================
 
 void loop() {
-    radio.read_data(dataD, dataF, dataU);
+    radio.read_data(dataD, dataF, dataU8, dataU32);
 }

@@ -103,6 +103,7 @@ public:
     /*Public Members*/
     // orientation/motion vars
     Quaternion q;           // [w, x, y, z]         quaternion container
+    VectorInt16 ws;         // [x, y, z]            gyro angular rates
     VectorInt16 aa;         // [x, y, z]            accel sensor measurements
     VectorInt16 aaReal;     // [x, y, z]            gravity-free accel sensor measurements
     VectorInt16 aaWorld;    // [x, y, z]            world-frame accel sensor measurements
@@ -270,6 +271,7 @@ void IMU::updateData(void)
                 mpu.dmpGetLinearAccel(&aaReal, &aa, &gravity);
                 mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
             #endif
+            mpu.dmpGetGyro(&ws, fifoBuffer);
         }
         else{
             // DEBUG2_PRINTLN(F("mpuIntStatus"));

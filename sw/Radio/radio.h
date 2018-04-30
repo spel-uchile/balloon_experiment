@@ -92,11 +92,12 @@ public:
     void read_data(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
     bool send_command(uint8_t cmd);
     uint8_t read_command(void);
+    void sendFrame(uint8_t frame[], int frame_size);
+    void displayData(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
     void read_frame(void);
 
 private:
     // methods
-    void sendFrame(uint8_t frame[], int frame_size);
     void encode2byte(float number, uint8_t encode_bytes[]);
     void encode2byteD(double number, uint8_t encode_bytes[]);
     void encode3byte(double number, uint8_t encode_bytes[]);
@@ -107,6 +108,6 @@ private:
     double decode3byte(uint8_t byte1, uint8_t byte2, uint8_t byte3);
     double decode4byteD(uint8_t byte1, uint8_t byte2, uint8_t byte3, uint8_t byte4);
     void decode(uint8_t frame[], double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
-    void displayData(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
+    void decodeFrame(void);
     void displayFrame(void);
 };

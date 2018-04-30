@@ -79,10 +79,11 @@ void DPL::dem1(void)
   Rdpl1_start();
   delay(80000);
   Rdpl1_end();
-  delay(60000);
+  delay(30000);
   Rdpl1_start();
   delay(80000);
   Rdpl1_end();
+  delay(90000);
   Act_s1();
 }
 
@@ -91,10 +92,11 @@ void DPL::dem2(void)
   Rdpl2_start();
   delay(80000);
   Rdpl2_end();
-  delay(60000);
+  delay(30000);
   Rdpl2_start();
   delay(80000);
   Rdpl2_end();
+  delay(90000);
   Act_s2();
 }
 

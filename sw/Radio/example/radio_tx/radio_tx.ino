@@ -54,13 +54,11 @@ void loop()
     dataF[2] = 87.80;
     dataF[3] = 101.71;
     dataF[4] = 43.87;
-    dataF[5] = 43.87;
-    dataU8[0] = 65;
-    dataU8[1] = 65;
-    dataU8[2] = 65;
-    dataU8[3] = 65;
+    dataU8[0] = 25;
+    dataU8[1] = 8;
+    dataU8[2] = 25;
+    dataU8[3] = 87;
     dataU32 = 589489;
     // send data as predefined Frame
     radio.send_data(dataD, dataF, dataU8, dataU32);
-    Serial.println("asdas");
 }

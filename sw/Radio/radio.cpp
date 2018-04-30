@@ -270,6 +270,102 @@ void Radio::read_data(double dataD[], float dataF[], uint8_t dataU8[], uint32_t 
     // Serial.println("read_data");
 }
 
+void Radio::read_frame() {
+    uint8_t frame[100];
+    if (rf22.available()) {
+        uint8_t len = sizeof(frame);
+        uint8_t from;
+        if (rf22.recvfromAck(frame, &len, &from)) {
+            memcpy(&beacon, frame+2, sizeof(beacon));
+            for (int i = 0; i < 100; i++) {
+                Serial.print(frame[i]);
+                Serial.print(",");
+            }
+            Serial.print("\n");
+            displayFrame();
+            
+            
+            
+        }
+    }
+}
+/*
+void Radio::decodeFrame() {
+    frame.RTC_HH;
+    frame.RTC_MM;
+    frame.RTC_SS;
+    frame.Temp1 = (float) dataD[0];
+    frame.Pressure = (float) dataD[1];
+    frame.Alt = (float) dataD[2];
+    frame.Temp2 = dataF[0];
+    frame.Humidity = dataF[1];
+    frame.Temp3 = dataF[2];
+    frame.IMU1 = dataF[3];
+    frame.IMU2 = dataF[4];
+    frame.IMU3 = dataF[5];
+    frame.GPS_Lat = (float) dataD[3];
+    frame.GPS_Lng = (float) dataD[4];
+    frame.GPS_Alt = (float) dataD[5];
+    frame.GPS_Crse = (float) dataD[6];
+    frame.GPS_Speed = (float) dataD[7];
+    frame.GPS_HH = dataU8[0];
+    frame.GPS_MM = dataU8[1];
+    frame.GPS_SS = dataU8[2];
+    frame.GPS_validity = dataU8[3];
+    frame.GPS_Sat = dataU32;
+}
+*/
+void Radio::displayFrame() {
+    /*
+    Serial.print("RTC HH:MM:SS: ");
+    Serial.print(beacon.RTC_HH);
+    Serial.print(":");
+    Serial.print(beacon.RTC_MM);
+    Serial.print(":");
+    Serial.print(beacon.RTC_SS);
+    */
+    Serial.print("    Temp1: ");
+    Serial.print(beacon.Temp1);
+    Serial.print("    Pressure: ");
+    Serial.print(beacon.Pressure);
+    Serial.print("    Altitude: ");
+    Serial.print(beacon.Alt);
+    
+    Serial.print("    Temp2: ");
+    Serial.print(beacon.Temp2);
+    Serial.print("    Humidity: ");
+    Serial.print(beacon.Humidity);
+    Serial.print("    Temp3: ");
+    Serial.print(beacon.Temp3);
+    Serial.print("    IMU1: ");
+    Serial.print(beacon.IMU1);
+    Serial.print("    IMU2: ");
+    Serial.print(beacon.IMU2);
+    Serial.print("    IMU3: ");
+    Serial.println(beacon.IMU3);
+
+    Serial.print("HH:MM:SS: ");
+    Serial.print(beacon.GPS_HH);
+    Serial.print(":");
+    Serial.print(beacon.GPS_MM);
+    Serial.print(":");
+    Serial.print(beacon.GPS_SS);
+    Serial.print("    Validity: ");
+    Serial.print(beacon.GPS_validity, BIN);
+    Serial.print("    Sat: ");
+    Serial.print(beacon.GPS_Sat);
+    Serial.print("    Location: ");
+    Serial.print(beacon.GPS_Lat, 6);
+    Serial.print(",");
+    Serial.print(beacon.GPS_Lng, 6);
+    Serial.print("    Altitude (GPS): ");
+    Serial.print(beacon.GPS_Alt);
+    Serial.print("    Course: ");
+    Serial.print(beacon.GPS_Crse);
+    Serial.print("    Speed: ");
+    Serial.println(beacon.GPS_Speed);
+}
+
 bool Radio::send_command(uint8_t cmd)
 {
     return rf22.sendtoWait((uint8_t *)&cmd, 1, addr2_);
@@ -301,11 +397,11 @@ void Radio::displayData(double dataD[], float dataF[], uint8_t dataU8[], uint32_
     Serial.print(dataF[1]);
     Serial.print("    Temp3: ");
     Serial.print(dataF[2]);
-    Serial.print("    IMU0: ");
-    Serial.print(dataF[3]);
     Serial.print("    IMU1: ");
-    Serial.print(dataF[4]);
+    Serial.print(dataF[3]);
     Serial.print("    IMU2: ");
+    Serial.print(dataF[4]);
+    Serial.print("    IMU3: ");
     Serial.println(dataF[5]);
 
     Serial.print("HH:MM:SS: ");

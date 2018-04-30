@@ -277,44 +277,16 @@ void Radio::read_frame() {
         uint8_t from;
         if (rf22.recvfromAck(frame, &len, &from)) {
             memcpy(&beacon, frame+2, sizeof(beacon));
-            for (int i = 0; i < 100; i++) {
-                Serial.print(frame[i]);
-                Serial.print(",");
-            }
+            //for (int i = 0; i < 100; i++) {
+            //    Serial.print(frame[i]);
+            //    Serial.print(",");
+            //}
             Serial.print("\n");
             displayFrame();
-            
-            
-            
         }
     }
 }
-/*
-void Radio::decodeFrame() {
-    frame.RTC_HH;
-    frame.RTC_MM;
-    frame.RTC_SS;
-    frame.Temp1 = (float) dataD[0];
-    frame.Pressure = (float) dataD[1];
-    frame.Alt = (float) dataD[2];
-    frame.Temp2 = dataF[0];
-    frame.Humidity = dataF[1];
-    frame.Temp3 = dataF[2];
-    frame.IMU1 = dataF[3];
-    frame.IMU2 = dataF[4];
-    frame.IMU3 = dataF[5];
-    frame.GPS_Lat = (float) dataD[3];
-    frame.GPS_Lng = (float) dataD[4];
-    frame.GPS_Alt = (float) dataD[5];
-    frame.GPS_Crse = (float) dataD[6];
-    frame.GPS_Speed = (float) dataD[7];
-    frame.GPS_HH = dataU8[0];
-    frame.GPS_MM = dataU8[1];
-    frame.GPS_SS = dataU8[2];
-    frame.GPS_validity = dataU8[3];
-    frame.GPS_Sat = dataU32;
-}
-*/
+
 void Radio::displayFrame() {
     /*
     Serial.print("RTC HH:MM:SS: ");

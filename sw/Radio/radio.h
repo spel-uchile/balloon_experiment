@@ -108,6 +108,5 @@ private:
     double decode4byteD(uint8_t byte1, uint8_t byte2, uint8_t byte3, uint8_t byte4);
     void decode(uint8_t frame[], double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
     void displayData(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
-    void decodeFrame(void);
     void displayFrame(void);
 };

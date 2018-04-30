@@ -3,6 +3,8 @@
 #include "atms.h"
 #include "pines_balloon.h"
 #include "gps.h"
+#include "rpycom.h"
+#include "dpl.h"
 
 /*Radio transiver*/
 #define CLIENT_ADDRESS 1
@@ -11,20 +13,34 @@
 /*GPS baudrate*/
 #define GPS_BAUDRATE 9600
 
+/*Rpy commands*/
+#define CMD_RPY2RPY 10
+#define CMD_BASE2RPY 11
+#define CMD_RPY2BASE_DATA 20
+#define CMD_RPY2BASE_PHOTO 21
+#define CMD_DEPLOY1 12
+#define CMD_DEPLOY2 13
+
 double dataD[8];
-float dataF[5];
-uint8_t dataU[4];
+float dataF[6];
+uint8_t dataU8[4];
+uint32_t dataU32;
+
+uint8_t frame_rpy2base[PACKET_SZ];
 
 //Create an instance of the objects
 Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, RADIO_SDN, CLIENT_ADDRESS, SERVER_ADDRESS);
-ATMS atms;
+ATMS atms(PIN_DALLAS);
 IMU imu(IMU_INTERRUPT, &Serial);
 GPS gps;
+RPYCOM rpy(&Serial1);
+DPL dpl;
 
 void setup()
 {
-    // Wire.begin();        // Join i2c bus  
+    dpl.init();
     Serial.begin(115200);
+    Serial1.begin(115200);
     // initialize
     radio.init();
     atms.init();
@@ -33,9 +49,50 @@ void setup()
 }
 
 void loop() {
+    // unsigned long time = millis();
     atms.updateData();
     imu.updateData();
     gps.updateData();
+    updateAlldata();
+    rpy.getData();
+    // uint8_t base_cmd = radio.read_command();
+    if (rpy.cmd_.port == CMD_RPY2RPY)
+    {
+        rpy.updateBeacon(dataD, dataF, dataU8, dataU32);
+        rpy.sendData();
+        rpy.resetStrutures();
+    }
+    else if (rpy.cmd_.port == CMD_RPY2BASE_DATA || rpy.cmd_.port == CMD_RPY2BASE_PHOTO)
+    {
+        Serial.println("sendingtoradio");
+        for (int i = 0; i < PACKET_SZ-1; i++)
+        {
+            Serial.print(rpy.frame_rpy2base_[i]);Serial.print(",");
+        }
+        Serial.println("end");
+        radio.sendFrame(rpy.frame_rpy2base_, PACKET_SZ);
+    }
+    else if (rpy.cmd_.port == CMD_DEPLOY1)
+    {
+        Serial.println(F("Demostración despliegue 1"));
+        dpl.dem1();
+    }
+    else if (rpy.cmd_.port == CMD_DEPLOY2)
+    {
+        Serial.println(F("Demostración despliegue 2"));
+        dpl.dem2();
+    }
+    // if (base_cmd == GET_BEACON)
+    // {
+    //     rpy.updateBeacom(dataD, dataF, dataU8, dataU32);
+    //     rpy.sendData();
+    // }
+    // time = millis()-time;
+    // Serial.print("time:");Serial.println(time);
+}
+
+void updateAlldata()
+{
     dataD[0] = atms.T;
     dataD[1] = atms.P;
     dataD[2] = atms.a;
@@ -46,12 +103,13 @@ void loop() {
     dataD[7] = gps.mps;
     dataF[0] = atms.tempC;
     dataF[1] = atms.humidity;
-    dataF[2] = imu.ypr[0]*57.29;
-    dataF[3] = imu.ypr[1]*57.29;
-    dataF[4] = imu.ypr[2]*57.29;
-    dataU[0] = gps.hour;
-    dataU[1] = gps.minute;
-    dataU[2] = gps.second;
-    dataU[3] = gps.sat;
-    radio.send_data(dataD, dataF, dataU);
+    dataF[2] = atms.temperature_dallas;
+    dataF[3] = imu.gyroRate.x;
+    dataF[4] = imu.gyroRate.y;
+    dataF[5] = imu.gyroRate.z;
+    dataU8[0] = gps.hour;
+    dataU8[1] = gps.minute;
+    dataU8[2] = gps.second;
+    dataU8[3] = gps.validity;
+    dataU32 = gps.sat;
 }

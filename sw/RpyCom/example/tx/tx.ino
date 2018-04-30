@@ -1,27 +1,13 @@
 /**
- * @brief Simple Earth Station Example
+ * @brief Simple IMU Example
  */
  
-/*Author: Matías Vidal*/
+/*Author: Gustavo Diaz*/
 
-#include "radio.h"
-
-/*Radio transiver*/
-#define RADIO_SLAVESELECTPIN 2
-#define RADIO_INTERRUPT 3
-#define SDN 4
-
-#define CLIENT_ADDRESS 1
-#define SERVER_ADDRESS 2
-
-/*Data store*/
-double dataD[8];
-float dataF[6];
-uint8_t dataU8[4];
-uint32_t dataU32;
+#include "rpycom.h"
 
 /*Object Definitions*/
-Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, SDN, SERVER_ADDRESS, CLIENT_ADDRESS);
+RPYCOM rpy(&Serial1);
 
 // ================================================================
 // ===                      INITIAL SETUP                       ===
@@ -29,16 +15,18 @@ Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, SDN, SERVER_ADDRESS, CLIENT_A
 
 void setup() {
     // initialize serial communication
+    Serial1.begin(115200);
     Serial.begin(115200);
-    // init radio
-    radio.init();
 }
 
 // ================================================================
 // ===                    MAIN PROGRAM LOOP                     ===
 // ================================================================
 
-void loop() {
-    //radio.read_data(dataD, dataF, dataU8, dataU32);
-    radio.read_frame();
+void loop()
+{
+    // test data
+    rpy.BeacomTest();
+    rpy.sendData();
+    delay(1000);
 }

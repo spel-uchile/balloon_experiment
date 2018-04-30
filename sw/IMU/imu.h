@@ -108,6 +108,7 @@ public:
     VectorInt16 aaReal;     // [x, y, z]            gravity-free accel sensor measurements
     VectorInt16 aaWorld;    // [x, y, z]            world-frame accel sensor measurements
     VectorFloat gravity;    // [x, y, z]            gravity vector
+    VectorInt16 gyroRate;   // [x, y, z]            gyro rate
     float euler[3];         // [psi, theta, phi]    Euler angle container
     float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
 
@@ -273,7 +274,8 @@ void IMU::updateData(void)
             mpu.dmpGetGyro(&ws, fifoBuffer);
         }
         else{
-            DEBUG2_PRINTLN(F("mpuIntStatus"));
+            // DEBUG2_PRINTLN(F("mpuIntStatus"));
         }
+        mpu.dmpGetGyro(&gyroRate, fifoBuffer);
     }
 }

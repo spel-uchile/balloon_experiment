@@ -5,8 +5,6 @@
 /*Author: Cristobal Garrido*/
 
 #include "dpl.h"
-#include "pines.h"
-#include "arduino.h" 
 
 #define DEBUG_LEVEL 1
 
@@ -60,7 +58,7 @@ void DPL::Act_s1(void)
 {
   digitalWrite(ENABLE1, HIGH);
   digitalWrite(SERVO1, HIGH);
-  myservop1_.write(end_m1);
+  myservo1_.write(end_s1);
   delay(10000);
   digitalWrite(ENABLE1, LOW);
   digitalWrite(SERVO1, LOW);
@@ -70,7 +68,7 @@ void DPL::Act_s2(void)
 {
   digitalWrite(ENABLE2, HIGH);
   digitalWrite(SERVO2, HIGH);
-  myservo2_.write(end_m2);
+  myservo2_.write(end_s2);
   delay(10000);
   digitalWrite(ENABLE2, LOW);
   digitalWrite(SERVO2, LOW);

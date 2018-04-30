@@ -15,8 +15,10 @@
 #define SERVER_ADDRESS 2
 
 /*Data store*/
-double dataD[3];
-float dataF[5];
+double dataD[8];
+float dataF[6];
+uint8_t dataU8[4];
+uint32_t dataU32;
 
 /*Object Definitions*/
 Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, SDN, SERVER_ADDRESS, CLIENT_ADDRESS);
@@ -38,10 +40,10 @@ void setup() {
 
 void loop()
 {
-    radio.read_data(dataD, dataF);
-    displayData(dataD, dataF);
+    radio.read_data(dataD, dataF, dataU8, dataU32);
+    radio.displayData(dataD, dataF, dataU8, dataU32);
 }
-
+/*
 void displayData(double dataD[], float dataF[])
 {
     DEBUG2_PRINT("Data:\t");
@@ -55,3 +57,4 @@ void displayData(double dataD[], float dataF[])
     }
     DEBUG2_PRINTLN("\t");
 }
+*/

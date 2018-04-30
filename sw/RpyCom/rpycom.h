@@ -22,6 +22,7 @@ typedef struct {
     float Alt;
     float Temp2;
     float Humidity;
+    float Temp3;
     float IMU1;
     float IMU2;
     float IMU3;

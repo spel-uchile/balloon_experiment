@@ -20,9 +20,35 @@
  * @brief Class for manage Radio data
  */
 
+typedef struct {
+    //uint8_t RTC_HH;
+    //uint8_t RTC_MM;
+    //uint8_t RTC_SS;
+    float Temp1;
+    float Pressure;
+    float Alt;
+    float Temp2;
+    float Humidity;
+    float Temp3;
+    float IMU1;
+    float IMU2;
+    float IMU3;
+    float GPS_Lat;
+    float GPS_Lng;
+    float GPS_Alt;
+    float GPS_Crse;
+    float GPS_Speed;
+    uint8_t GPS_HH;
+    uint8_t GPS_MM;
+    uint8_t GPS_SS;
+    uint8_t GPS_validity;
+    uint32_t GPS_Sat;
+} frame_t;
+
 class Radio
 {
     /*Private Members*/
+    frame_t beacon;
 
     // Radio Object
     RH_RF22 driver;
@@ -66,6 +92,7 @@ public:
     void read_data(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
     bool send_command(uint8_t cmd);
     uint8_t read_command(void);
+    void read_frame(void);
 
 private:
     // methods
@@ -81,4 +108,6 @@ private:
     double decode4byteD(uint8_t byte1, uint8_t byte2, uint8_t byte3, uint8_t byte4);
     void decode(uint8_t frame[], double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
     void displayData(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
+    void decodeFrame(void);
+    void displayFrame(void);
 };

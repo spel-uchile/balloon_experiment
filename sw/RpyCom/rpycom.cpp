@@ -7,7 +7,7 @@
 /*Requiered Libraries*/
 #include "rpycom.h"
 
-void RPYCOM::updateBeacom(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32)
+void RPYCOM::updateBeacon(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32)
 {   
     beacon_tx_.Temp1 = (float) dataD[0];
     beacon_tx_.Pressure = (float) dataD[1];
@@ -30,7 +30,7 @@ void RPYCOM::updateBeacom(double dataD[], float dataF[], uint8_t dataU8[], uint3
     beacon_tx_.GPS_Sat = dataU32;
 }
 
-void RPYCOM::BeacomTest()
+void RPYCOM::BeaconTest()
 {   
     beacon_tx_.Temp1 = 123.45;
     beacon_tx_.Pressure = 956.76;

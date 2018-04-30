@@ -67,8 +67,8 @@ class RPYCOM
         }
 
         /*Methods*/
-        void updateBeacom(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
-        void BeacomTest();
+        void updateBeacon(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
+        void BeaconTest();
         void getData();
         void sendData();
         void resetStrutures();

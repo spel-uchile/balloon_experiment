@@ -15,7 +15,7 @@ void RPYCOM::updateBeacon(double dataD[], float dataF[], uint8_t dataU8[], uint3
     beacon_tx_.Temp2 = dataF[0];
     beacon_tx_.Humidity = dataF[1];
     beacon_tx_.Temp3 = dataF[2];
-    beacon_tx_.IMU1 = dataF[3;
+    beacon_tx_.IMU1 = dataF[3];
     beacon_tx_.IMU2 = dataF[4];
     beacon_tx_.IMU3 = dataF[5];
     beacon_tx_.GPS_Lat = (float) dataD[3];

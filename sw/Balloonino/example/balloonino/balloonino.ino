@@ -4,6 +4,7 @@
 #include "pines_balloon.h"
 #include "gps.h"
 #include "rpycom.h"
+#include "dpl.h"
 
 /*Radio transiver*/
 #define CLIENT_ADDRESS 1
@@ -17,7 +18,8 @@
 #define CMD_BASE2RPY 11
 #define CMD_RPY2BASE_DATA 20
 #define CMD_RPY2BASE_PHOTO 21
-#define CMD_DEPLOY 12
+#define CMD_DEPLOY1 12
+#define CMD_DEPLOY2 13
 
 double dataD[8];
 float dataF[6];
@@ -32,9 +34,11 @@ ATMS atms(PIN_DALLAS);
 IMU imu(IMU_INTERRUPT, &Serial);
 GPS gps;
 RPYCOM rpy(&Serial1);
+DPL dpl;
 
 void setup()
 {
+    dpl.init();
     Serial.begin(115200);
     Serial1.begin(115200);
     // initialize
@@ -45,12 +49,11 @@ void setup()
 }
 
 void loop() {
+    // unsigned long time = millis();
     atms.updateData();
     imu.updateData();
     gps.updateData();
     updateAlldata();
-    // memset(frame_rpy2base, 0, PACKET_SZ);
-    // rpy.getData(frame_rpy2base);
     rpy.getData();
     // uint8_t base_cmd = radio.read_command();
     if (rpy.cmd_.port == CMD_RPY2RPY)
@@ -69,15 +72,23 @@ void loop() {
         Serial.println("end");
         radio.sendFrame(rpy.frame_rpy2base_, PACKET_SZ);
     }
-    else if (rpy.cmd_.port == CMD_DEPLOY)
+    else if (rpy.cmd_.port == CMD_DEPLOY1)
     {
-        
+        Serial.println(F("Demostración despliegue 1"));
+        dpl.dem1();
+    }
+    else if (rpy.cmd_.port == CMD_DEPLOY2)
+    {
+        Serial.println(F("Demostración despliegue 2"));
+        dpl.dem2();
     }
     // if (base_cmd == GET_BEACON)
     // {
     //     rpy.updateBeacom(dataD, dataF, dataU8, dataU32);
     //     rpy.sendData();
     // }
+    // time = millis()-time;
+    // Serial.print("time:");Serial.println(time);
 }
 
 void updateAlldata()

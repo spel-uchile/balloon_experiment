@@ -23,7 +23,7 @@ uint32_t dataU32;
 
 //Create an instance of the objects
 Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, RADIO_SDN, CLIENT_ADDRESS, SERVER_ADDRESS);
-ATMS atms;
+ATMS atms(PIN_DALLAS);
 IMU imu(IMU_INTERRUPT, &Serial);
 GPS gps;
 RPYCOM rpy(&Serial1);
@@ -72,7 +72,7 @@ void loop() {
     }
     else if (rpy.cmd_.port == RPY_SEND_DATA)
     {
-        radio.send_data(dataD, dataF, dataU8);
+        radio.send_data(dataD, dataF, dataU8, dataU32);
     }
     // int8_t foo = Serial1.read();
     // if (foo!=-1)

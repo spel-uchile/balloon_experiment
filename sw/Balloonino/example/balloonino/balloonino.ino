@@ -55,6 +55,11 @@ void loop() {
     gps.updateData();
     updateAlldata();
     rpy.getData();
+    // Serial.print("gps.GPS_HH:");Serial.println(gps.hour);
+    // Serial.print("gps.GPS_MM:");Serial.println(gps.minute);
+    // Serial.print("gps.GPS_SS:");Serial.println(gps.second);
+    // Serial.print("gps.GPS_VAL:");Serial.println(gps.validity);
+    // Serial.print("gps.GPS_SAT:");Serial.println(gps.sat);
     // uint8_t base_cmd = radio.read_command();
     if (rpy.cmd_.port == CMD_RPY2RPY)
     {
@@ -65,12 +70,12 @@ void loop() {
     else if (rpy.cmd_.port == CMD_RPY2BASE_DATA || rpy.cmd_.port == CMD_RPY2BASE_PHOTO)
     {
         Serial.println("sendingtoradio");
+        radio.sendFrame(rpy.frame_rpy2base_, PACKET_SZ);
         for (int i = 0; i < PACKET_SZ-1; i++)
         {
             Serial.print(rpy.frame_rpy2base_[i]);Serial.print(",");
         }
         Serial.println("end");
-        radio.sendFrame(rpy.frame_rpy2base_, PACKET_SZ);
     }
     else if (rpy.cmd_.port == CMD_DEPLOY1)
     {

@@ -37,6 +37,7 @@ void RPYCOM::BeaconTest()
     beacon_tx_.Alt = -75.01;
     beacon_tx_.Temp2 = 123.45;
     beacon_tx_.Humidity = 956.76;
+    beacon_tx_.Temp3 = 956.76;
     beacon_tx_.IMU1 = -75.01;
     beacon_tx_.IMU2 = -75.01;
     beacon_tx_.IMU3 = -75.01;
@@ -88,24 +89,25 @@ void RPYCOM::resetStrutures()
 {
 	cmd_.node = 0;
 	cmd_.port = 0;
-	beacon_rx_.Temp1 = 0;
-    beacon_rx_.Pressure = 0;
-    beacon_rx_.Alt = 0;
-    beacon_rx_.Temp2 = 0;
-    beacon_rx_.Humidity = 0;
-    beacon_rx_.IMU1 = 0;
-    beacon_rx_.IMU2 = 0;
-    beacon_rx_.IMU3 = 0;
-    beacon_rx_.GPS_Lat = 0;
-    beacon_rx_.GPS_Lng = 0;
-    beacon_rx_.GPS_Alt = 0;
-    beacon_rx_.GPS_Crse = 0;
-    beacon_rx_.GPS_Speed = 0;
-    beacon_rx_.GPS_HH = 0;
-    beacon_rx_.GPS_MM = 0;
-    beacon_rx_.GPS_SS = 0;
-    beacon_rx_.GPS_validity = 0;
-    beacon_rx_.GPS_Sat = 0;
+	beacon_tx_.Temp1 = 0;
+    beacon_tx_.Pressure = 0;
+    beacon_tx_.Alt = 0;
+    beacon_tx_.Temp2 = 0;
+    beacon_tx_.Humidity = 0;
+    beacon_tx_.Temp3 = 0;
+    beacon_tx_.IMU1 = 0;
+    beacon_tx_.IMU2 = 0;
+    beacon_tx_.IMU3 = 0;
+    beacon_tx_.GPS_Lat = 0;
+    beacon_tx_.GPS_Lng = 0;
+    beacon_tx_.GPS_Alt = 0;
+    beacon_tx_.GPS_Crse = 0;
+    beacon_tx_.GPS_Speed = 0;
+    beacon_tx_.GPS_HH = 0;
+    beacon_tx_.GPS_MM = 0;
+    beacon_tx_.GPS_SS = 0;
+    beacon_tx_.GPS_validity = 0;
+    beacon_tx_.GPS_Sat = 0;
 	memset(data_, 0, DATA_SZ);
 }
 

@@ -14,6 +14,23 @@
 #define GET_PICTURE 1
 #define GET_BEACON 2
 #define RELEASE_BALLOON 3
+#define PING 4
+#define BASE_CMD_5
+#define BASE_CMD_6
+#define BASE_CMD_7
+#define BASE_CMD_8
+#define BASE_CMD_9
+#define BASE_CMD_10
+#define BASE_CMD_11
+#define BASE_CMD_12
+#define BASE_CMD_13
+#define BASE_CMD_14
+#define BASE_CMD_15
+#define BASE_CMD_16
+#define BASE_CMD_17
+#define BASE_CMD_18
+#define BASE_CMD_19
+#define BASE_CMD_20
 
 /**
  * @class Radio

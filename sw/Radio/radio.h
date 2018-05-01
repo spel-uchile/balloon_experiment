@@ -11,11 +11,14 @@
 #include <RH_RF22.h>
 #include "logger.h"
 
+#define HELP 0
 #define GET_PICTURE 1
 #define GET_BEACON 2
 #define RELEASE_BALLOON 3
 #define PING 4
-#define HELP 5
+#define RESET_RPY 5
+#define RESET_MISSION 6
+#define REBOOT_RPY 7
 
 /**
  * @class Radio

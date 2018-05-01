@@ -17,7 +17,6 @@ void Radio::init(void)
    if (!rf22.init()) {
         Serial.println(F("Initialization failed"));
     }
-    Serial.println(F("Unidirectional test (TX)"));
     driver.setCRCPolynomial(driver.CRC_CCITT);
     driver.setHeaderFlags(0x7E); 
     driver.setFrequency(437.225, 0.05); 

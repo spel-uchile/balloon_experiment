@@ -122,3 +122,16 @@ void RPYCOM::sendData()
 	hw_port_->write((uint8_t *)&beacon_tx_, beacon_tx_size_);
 	hw_port_->write(padding, padd_sz);
 }
+
+void RPYCOM::send_msg(char *msg)
+{   
+	// char *msg = "reset";
+    uint8_t padd_sz = PACKET_SZ-CMD_SZ-strlen(msg);
+	uint8_t padding[padd_sz];
+	memset(padding, 0, padd_sz);
+
+	hw_port_->write(1);
+	hw_port_->write(11);
+	hw_port_->write(msg, strlen(msg));
+	hw_port_->write(padding, padd_sz);
+}

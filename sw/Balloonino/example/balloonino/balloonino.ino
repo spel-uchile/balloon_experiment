@@ -60,7 +60,7 @@ void loop() {
     // Serial.print("gps.GPS_SS:");Serial.println(gps.second);
     // Serial.print("gps.GPS_VAL:");Serial.println(gps.validity);
     // Serial.print("gps.GPS_SAT:");Serial.println(gps.sat);
-    // uint8_t base_cmd = radio.read_command();
+    uint8_t base_cmd = radio.read_command();
     if (rpy.cmd_.port == CMD_RPY2RPY)
     {
         rpy.updateBeacon(dataD, dataF, dataU8, dataU32);
@@ -87,13 +87,21 @@ void loop() {
         Serial.println(F("Demostración despliegue 2"));
         dpl.dem2();
     }
-    // if (base_cmd == GET_BEACON)
-    // {
-    //     rpy.updateBeacom(dataD, dataF, dataU8, dataU32);
-    //     rpy.sendData();
-    // }
-    // time = millis()-time;
-    // Serial.print("time:");Serial.println(time);
+    if (base_cmd == HELP)
+    {
+        Serial.println(F("sending msg base2rpy"));
+        rpy.send_msg("help");
+    }
+    else if (base_cmd == RESET_RPY)
+    {
+        Serial.println(F("sending msg base2rpy"));
+        rpy.send_msg("reset");
+    }
+    else if (base_cmd == RESET_MISSION_RPY)
+    {
+        Serial.println(F("sending msg base2rpy"));
+        rpy.send_msg("reset_mission");
+    }
 }
 
 void updateAlldata()

@@ -14,6 +14,8 @@
 #define GET_PICTURE 1
 #define GET_BEACON 2
 #define RELEASE_BALLOON 3
+#define PING 4
+#define HELP 5
 
 /**
  * @class Radio

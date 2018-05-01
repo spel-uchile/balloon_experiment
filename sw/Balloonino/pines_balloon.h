@@ -18,3 +18,6 @@
 
 /* Dedicated temperature sensor */
 #define PIN_DALLAS 42
+
+/*Status LED*/
+#define BALLOON_LED 52

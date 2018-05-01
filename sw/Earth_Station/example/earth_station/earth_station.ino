@@ -33,6 +33,7 @@ void setup() {
     Serial.begin(115200);
     // init radio
     radio.init();
+    displayCommands();
 }
 
 // ================================================================
@@ -88,7 +89,31 @@ void loop() {
             Serial.println("Sending command Cut Balloon");
             radio.send_command(CUT_BALLOON);
         }
+        else if (station_cmd == 'c') {
+            Serial.println("Sending command Balloon Get Data");
+            radio.send_command(BALLOON_GET_DATA);
+        }
+        else if (station_cmd == 'm') {
+            displayCommands();
+        }
         else
             Serial.println("Invalid command");
     }
 }
+
+void displayCommands() {
+    Serial.println("GET_PICTURE       1");
+    Serial.println("GET_BEACON        2");
+    Serial.println("RELEASE_BALLOON   3");
+    Serial.println("PING              4");
+    Serial.println("RESET_RPY         5");
+    Serial.println("RESET_MISSION_RPY 6");
+    Serial.println("REBOOT_RPY        7");
+    Serial.println("HELP              8");
+    Serial.println("SEND_IRIDIUM      9");
+    Serial.println("GET_WEATHER       a");
+    Serial.println("CUT_BALLOON       b");
+    Serial.println("BALLOON_GET_DATA  c");
+    Serial.println("Display Commands  m");
+}
+

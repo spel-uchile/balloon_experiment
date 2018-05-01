@@ -277,12 +277,7 @@ void Radio::read_frame() {
         uint8_t from;
         if (rf22.recvfromAck(frame, &len, &from)) {
             memcpy(&beacon, frame+2, sizeof(beacon));
-            for (int i = 0; i < 100; i++) {
-                Serial.print(frame[i]);
-                Serial.print(",");
-            }
-            Serial.print("\n");
-            displayFrame(); 
+            displayFrame();
         }
     }
 }

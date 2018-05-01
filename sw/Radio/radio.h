@@ -16,9 +16,8 @@
 #define GET_BEACON 2
 #define RELEASE_BALLOON 3
 #define PING 4
-#define RESET_RPY 5
-#define RESET_MISSION_RPY 6
-#define REBOOT_RPY 7
+#define RESET_MISSION_RPY 5
+#define REBOOT_RPY 6
 
 /**
  * @class Radio

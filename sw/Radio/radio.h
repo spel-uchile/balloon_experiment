@@ -17,7 +17,7 @@
 #define RELEASE_BALLOON 3
 #define PING 4
 #define RESET_RPY 5
-#define RESET_MISSION 6
+#define RESET_MISSION_RPY 6
 #define REBOOT_RPY 7
 
 /**

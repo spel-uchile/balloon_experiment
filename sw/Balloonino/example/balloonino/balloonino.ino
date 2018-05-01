@@ -92,15 +92,15 @@ void loop() {
         Serial.println(F("sending msg base2rpy"));
         rpy.send_msg("help");
     }
-    else if (base_cmd == RESET_RPY)
-    {
-        Serial.println(F("sending msg base2rpy"));
-        rpy.send_msg("reset");
-    }
     else if (base_cmd == RESET_MISSION_RPY)
     {
         Serial.println(F("sending msg base2rpy"));
         rpy.send_msg("reset_mission");
+    }
+    else if (base_cmd == REBOOT_RPY)
+    {
+        Serial.println(F("sending msg base2rpy"));
+        rpy.send_msg("reboot");
     }
 }
 

@@ -102,6 +102,22 @@ void loop() {
         Serial.println(F("sending msg base2rpy"));
         rpy.send_msg("reboot");
     }
+    else if (base_cmd == SEND_IRIDIUM)
+    {
+        Serial.println(F("sending msg base2rpy"));
+        rpy.send_msg("send_iridium");
+    }
+    else if (base_cmd == SEND_IRIDIUM)
+    {
+        Serial.println(F("sending msg base2rpy"));
+        rpy.send_msg("get_weather");
+    }
+    else if (base_cmd == CUT_BALLOON)
+    {
+        Serial.println(F("sending msg base2rpy"));
+        rpy.send_msg("cut_balloon");
+    }
+    base_cmd = 0;
 }
 
 void updateAlldata()

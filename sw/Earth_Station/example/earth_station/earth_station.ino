@@ -81,17 +81,18 @@ void loop() {
             Serial.println("Sending command Send Iridium");
             radio.send_command(SEND_IRIDIUM);
         }
-        else if (station_cmd == 'a') {
+        else if (station_cmd == 'w') {
             Serial.println("Sending command Get Weather");
             radio.send_command(GET_WEATHER);
         }
-        else if (station_cmd == 'b') {
+        else if (station_cmd == 'c') {
             Serial.println("Sending command Cut Balloon");
             radio.send_command(CUT_BALLOON);
         }
-        else if (station_cmd == 'c') {
+        else if (station_cmd == 'd') {
             Serial.println("Sending command Balloon Get Data");
             radio.send_command(BALLOON_GET_DATA);
+            radio.read_data(dataD, dataF, dataU8, dataU32);
         }
         else if (station_cmd == 'm') {
             displayCommands();
@@ -111,9 +112,9 @@ void displayCommands() {
     Serial.println("REBOOT_RPY        7");
     Serial.println("HELP              8");
     Serial.println("SEND_IRIDIUM      9");
-    Serial.println("GET_WEATHER       a");
-    Serial.println("CUT_BALLOON       b");
-    Serial.println("BALLOON_GET_DATA  c");
+    Serial.println("GET_WEATHER       w");
+    Serial.println("CUT_BALLOON       c");
+    Serial.println("BALLOON_GET_DATA  d");
     Serial.println("Display Commands  m");
 }
 

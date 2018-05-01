@@ -20,8 +20,9 @@
 #define REBOOT_RPY 7
 #define HELP 8
 #define SEND_IRIDIUM 9
-#define SEND_IRIDIUM 10
+#define GET_WEATHER 10
 #define CUT_BALLOON 11
+#define BALLOON_GET_DATA 13
 
 /**
  * @class Radio

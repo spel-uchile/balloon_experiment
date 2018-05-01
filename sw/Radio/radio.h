@@ -19,6 +19,9 @@
 #define RESET_MISSION_RPY 6
 #define REBOOT_RPY 7
 #define HELP 8
+#define SEND_IRIDIUM 9
+#define SEND_IRIDIUM 10
+#define CUT_BALLOON 11
 
 /**
  * @class Radio

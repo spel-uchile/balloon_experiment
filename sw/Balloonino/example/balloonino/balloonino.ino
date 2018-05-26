@@ -53,21 +53,15 @@ void setup()
 }
 
 void loop() {
-    // unsigned long time = millis();
     atms.updateData();
     imu.updateData();
     gps.updateData();
-    // updateAlldata();
     rpy.getData();
-    // Serial.print("gps.GPS_HH:");Serial.println(gps.hour);
-    // Serial.print("gps.GPS_MM:");Serial.println(gps.minute);
-    // Serial.print("gps.GPS_SS:");Serial.println(gps.second);
-    // Serial.print("gps.GPS_VAL:");Serial.println(gps.validity);
-    // Serial.print("gps.GPS_SAT:");Serial.println(gps.sat);
+
     uint8_t base_cmd = radio.read_command();
     if (rpy.cmd_.port == CMD_RPY2RPY)
     {
-        rpy.updateBeacon(&atms.atmsData, &gps.gpsData);
+        rpy.updateBeacon(&atms.atmsData, &gps.gpsData, &imu.gyroRate);
         rpy.sendData();
         rpy.resetStrutures();
     }
@@ -139,25 +133,9 @@ void loop() {
     base_cmd = 0;
 }
 
-// void updateAlldata()
-// {
-//     dataD[0] = atms.T;
-//     dataD[1] = atms.P;
-//     dataD[2] = atms.a;
-//     dataD[3] = gps.lat;
-//     dataD[4] = gps.lng;
-//     dataD[5] = gps.alt;
-//     dataD[6] = gps.crse;
-//     dataD[7] = gps.mps;
-//     dataF[0] = atms.tempC;
-//     dataF[1] = atms.humidity;
-//     dataF[2] = atms.temperature_dallas;
-//     dataF[3] = imu.gyroRate.x;
-//     dataF[4] = imu.gyroRate.y;
-//     dataF[5] = imu.gyroRate.z;
-//     dataU8[0] = gps.hour;
-//     dataU8[1] = gps.minute;
-//     dataU8[2] = gps.second;
-//     dataU8[3] = gps.validity;
-//     dataU32 = gps.sat;
-// }
+// Debug Prints: TO DO
+// Serial.print("gps.GPS_HH:");Serial.println(gps.hour);
+// Serial.print("gps.GPS_MM:");Serial.println(gps.minute);
+// Serial.print("gps.GPS_SS:");Serial.println(gps.second);
+// Serial.print("gps.GPS_VAL:");Serial.println(gps.validity);
+// Serial.print("gps.GPS_SAT:");Serial.println(gps.sat);

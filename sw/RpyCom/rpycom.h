@@ -8,6 +8,7 @@
 #include <Arduino.h>
 #include "atms_data.h"
 #include "gps_data.h"
+#include "helper_3dmath.h"
 
 #define PACKET_SZ 100
 #define CMD_SZ 2
@@ -72,7 +73,7 @@ class RPYCOM
         }
 
         /*Methods*/
-        void updateBeacon(AtmsData *atmsData, GpsData *gpsData);
+        void updateBeacon(AtmsData *atmsData, GpsData *gpsData, VectorInt16 *gyroData);
         void BeaconTest();
         void send_msg(char *msg);
         void getData();

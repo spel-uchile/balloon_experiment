@@ -7,6 +7,7 @@
 /*Requiered Libraries*/
 #include <Arduino.h>
 #include <TinyGPS++.h>
+#include "gps_data.h"
 
 /**
  * @class GPS
@@ -21,8 +22,7 @@
 
     public:
         /*Public Members*/
-        double lat, lng, alt, crse, mps;
-        uint8_t hour, minute, second, sat, validity;
+        GpsData gpsData;
         
         // Default constructor
         GPS(void);

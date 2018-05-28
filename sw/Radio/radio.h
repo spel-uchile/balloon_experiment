@@ -10,6 +10,9 @@
 #include <SPI.h>
 #include <RH_RF22.h>
 #include "logger.h"
+#include "atms_data.h"
+#include "gps_data.h"
+#include "helper_3dmath.h"
 
 #define GET_PICTURE 1
 #define GET_BEACON 2
@@ -30,9 +33,6 @@
  */
 
 typedef struct {
-    //uint8_t RTC_HH;
-    //uint8_t RTC_MM;
-    //uint8_t RTC_SS;
     float Temp1;
     float Pressure;
     float Alt;
@@ -58,6 +58,9 @@ class Radio
 {
     /*Private Members*/
     frame_t beacon;
+    frame_t beacon_tx_;
+
+    uint8_t beacon_tx_size_ = sizeof(beacon_tx_);
 
     // Radio Object
     RH_RF22 driver;
@@ -97,7 +100,8 @@ public:
 
     // methods
     void init(void);
-    void send_data(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
+    void updateBeacon(AtmsData *atmsData, GpsData *gpsData, VectorInt16 *gyroData);
+    void send_data();
     void read_data(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
     bool send_command(uint8_t cmd);
     uint8_t read_command(void);

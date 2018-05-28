@@ -125,7 +125,8 @@ void loop() {
     else if (base_cmd == BALLOON_GET_DATA)
     {
         Serial.println(F("request data"));
-        radio.send_data(dataD, dataF, dataU8, dataU32);
+        radio.updateBeacon(&atms.atmsData, &gps.gpsData, &imu.gyroRate);
+        radio.send_data();
     }
     else{
 

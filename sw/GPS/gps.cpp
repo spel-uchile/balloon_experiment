@@ -9,20 +9,22 @@
 #define DEBUG_LEVEL 1
 
 GPS::GPS(void) {
-    gps_baudrate = 9600;
+    gps_baudrate_ = 9600;
+    serial_port_ = &Serial;
 }
 
-GPS::GPS(int baudrate) {
-    gps_baudrate = baudrate;
+GPS::GPS(HardwareSerial *serial_port, int baudrate) {
+    serial_port_ = serial_port;
+    gps_baudrate_ = baudrate;
 }
 
 void GPS::init() {
-    Serial2.begin(gps_baudrate);
+    serial_port_->begin(gps_baudrate_);
 }
 
 void GPS::updateData() {
-    while (Serial2.available() > 0) {
-        if (gps.encode(Serial2.read())) {
+    while (serial_port_->available() > 0) {
+        if (gps.encode(serial_port_->read())) {
             checkValidity();
             
             gpsData.latitude = gps.location.lat();

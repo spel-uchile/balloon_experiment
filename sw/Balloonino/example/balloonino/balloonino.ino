@@ -22,11 +22,6 @@
 #define CMD_DEPLOY1 12
 #define CMD_DEPLOY2 13
 
-double dataD[8];
-float dataF[6];
-uint8_t dataU8[4];
-uint32_t dataU32;
-
 uint8_t frame_rpy2base[PACKET_SZ];
 
 bool ballon_led_status = 0;
@@ -35,15 +30,15 @@ bool ballon_led_status = 0;
 Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, RADIO_SDN, CLIENT_ADDRESS, SERVER_ADDRESS);
 ATMS atms(PIN_DALLAS);
 IMU imu(IMU_INTERRUPT, &Serial);
-GPS gps;
-RPYCOM rpy(&Serial1);
+GPS gps(&Serial, GPS_BAUDRATE);
+// RPYCOM rpy(&Serial1);
 DPL dpl;
 
 void setup()
 {
     dpl.init();
-    Serial.begin(115200);
-    Serial1.begin(115200);
+    // Serial.begin(115200);
+    // Serial1.begin(115200);
     // initialize
     radio.init();
     atms.init();
@@ -56,10 +51,10 @@ void loop() {
     atms.updateData();
     imu.updateData();
     gps.updateData();
-    rpy.getData();
+    // rpy.getData();
 
     uint8_t base_cmd = radio.read_command();
-    if (rpy.cmd_.port == CMD_RPY2RPY)
+    /*if (rpy.cmd_.port == CMD_RPY2RPY)
     {
         rpy.updateBeacon(&atms.atmsData, &gps.gpsData, &imu.gyroRate);
         rpy.sendData();
@@ -86,41 +81,41 @@ void loop() {
     {
         Serial.println(F("Demostración despliegue 2"));
         dpl.dem2();
-    }
+    }*/
     if (base_cmd == HELP)
     {
         Serial.println(F("sending msg help"));
-        rpy.send_msg("help");
+        // rpy.send_msg("help");
     }
     else if (base_cmd == RESET_RPY)
     {
         Serial.println(F("sending msg reset"));
-        rpy.send_msg("reset");
+        // rpy.send_msg("reset");
     }
     else if (base_cmd == RESET_MISSION_RPY)
     {
         Serial.println(F("sending msg reset_mission"));
-        rpy.send_msg("reset_mission");
+        // rpy.send_msg("reset_mission");
     }
     else if (base_cmd == REBOOT_RPY)
     {
         Serial.println(F("sending msg reboot"));
-        rpy.send_msg("reboot");
+        // rpy.send_msg("reboot");
     }
     else if (base_cmd == SEND_IRIDIUM)
     {
         Serial.println(F("sending msg send_iridium"));
-        rpy.send_msg("send_iridium 1");
+        // rpy.send_msg("send_iridium 1");
     }
     else if (base_cmd == GET_WEATHER)
     {
         Serial.println(F("sending msg send_weather_data"));
-        rpy.send_msg("send_weather_data");
+        // rpy.send_msg("send_weather_data");
     }
     else if (base_cmd == CUT_BALLOON)
     {
         Serial.println(F("sending msg cut_balloon"));
-        rpy.send_msg("cut_balloon 13");
+        // rpy.send_msg("cut_balloon 13");
     }
     else if (base_cmd == BALLOON_GET_DATA)
     {

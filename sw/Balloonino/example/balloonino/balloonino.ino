@@ -6,7 +6,6 @@
 #include "rpycom.h"
 #include "dpl.h"
 
-
 /*Radio transiver*/
 #define CLIENT_ADDRESS 1
 #define SERVER_ADDRESS 2
@@ -22,6 +21,9 @@
 #define CMD_DEPLOY1 12
 #define CMD_DEPLOY2 13
 
+/*Debug print levels*/
+#define LOGGER_MIN_SEVERITY LOGGER_SEVERITY_NONE
+
 uint8_t frame_rpy2base[PACKET_SZ];
 
 bool ballon_led_status = 0;
@@ -33,6 +35,7 @@ IMU imu(IMU_INTERRUPT, &Serial);
 GPS gps(&Serial, GPS_BAUDRATE);
 // RPYCOM rpy(&Serial1);
 DPL dpl;
+uint8_t base_cmd;
 
 void setup()
 {
@@ -48,90 +51,57 @@ void setup()
 }
 
 void loop() {
+	/*Update sensor data*/
     atms.updateData();
     imu.updateData();
     gps.updateData();
-    // rpy.getData();
 
-    uint8_t base_cmd = radio.read_command();
-    /*if (rpy.cmd_.port == CMD_RPY2RPY)
-    {
-        rpy.updateBeacon(&atms.atmsData, &gps.gpsData, &imu.gyroRate);
-        rpy.sendData();
-        rpy.resetStrutures();
-    }
-    else if (rpy.cmd_.port == CMD_RPY2BASE_DATA || rpy.cmd_.port == CMD_RPY2BASE_PHOTO)
-    {
-        Serial.println("sendingtoradio");
-        radio.sendFrame(rpy.frame_rpy2base_, PACKET_SZ);
-        for (int i = 0; i < PACKET_SZ-1; i++)
-        {
-            Serial.print(rpy.frame_rpy2base_[i]);Serial.print(",");
-        }
-        Serial.println("end");
-        digitalWrite(BALLOON_LED, ballon_led_status);
-        ballon_led_status=!ballon_led_status;
-    }
-    else if (rpy.cmd_.port == CMD_DEPLOY1)
-    {
-        Serial.println(F("Demostración despliegue 1"));
-        dpl.dem1();
-    }
-    else if (rpy.cmd_.port == CMD_DEPLOY2)
-    {
-        Serial.println(F("Demostración despliegue 2"));
-        dpl.dem2();
-    }*/
+    /*Update commands*/
+    radio.readCommand(&base_cmd);
+
     if (base_cmd == HELP)
     {
-        Serial.println(F("sending msg help"));
+        INFO_PRINTLN_RAW(F("sending msg help"));
         // rpy.send_msg("help");
     }
     else if (base_cmd == RESET_RPY)
     {
-        Serial.println(F("sending msg reset"));
+        INFO_PRINTLN_RAW(F("sending msg reset"));
         // rpy.send_msg("reset");
     }
     else if (base_cmd == RESET_MISSION_RPY)
     {
-        Serial.println(F("sending msg reset_mission"));
+        INFO_PRINTLN_RAW(F("sending msg reset_mission"));
         // rpy.send_msg("reset_mission");
     }
     else if (base_cmd == REBOOT_RPY)
     {
-        Serial.println(F("sending msg reboot"));
+        INFO_PRINTLN_RAW(F("sending msg reboot"));
         // rpy.send_msg("reboot");
     }
     else if (base_cmd == SEND_IRIDIUM)
     {
-        Serial.println(F("sending msg send_iridium"));
+        INFO_PRINTLN_RAW(F("sending msg send_iridium"));
         // rpy.send_msg("send_iridium 1");
     }
     else if (base_cmd == GET_WEATHER)
     {
-        Serial.println(F("sending msg send_weather_data"));
+        INFO_PRINTLN_RAW(F("sending msg send_weather_data"));
         // rpy.send_msg("send_weather_data");
     }
     else if (base_cmd == CUT_BALLOON)
     {
-        Serial.println(F("sending msg cut_balloon"));
+        INFO_PRINTLN_RAW(F("sending msg cut_balloon"));
         // rpy.send_msg("cut_balloon 13");
     }
     else if (base_cmd == BALLOON_GET_DATA)
     {
-        Serial.println(F("request data"));
+        INFO_PRINTLN_RAW(F("request data"));
         radio.updateBeacon(&atms.atmsData, &gps.gpsData, &imu.gyroRate);
-        radio.send_data();
+        radio.sendData();
     }
     else{
-
+    	INFO_PRINTLN_RAW(F("Unknown command"));
     }
     base_cmd = 0;
 }
-
-// Debug Prints: TO DO
-// Serial.print("gps.GPS_HH:");Serial.println(gps.hour);
-// Serial.print("gps.GPS_MM:");Serial.println(gps.minute);
-// Serial.print("gps.GPS_SS:");Serial.println(gps.second);
-// Serial.print("gps.GPS_VAL:");Serial.println(gps.validity);
-// Serial.print("gps.GPS_SAT:");Serial.println(gps.sat);

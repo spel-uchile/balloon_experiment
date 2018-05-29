@@ -4,7 +4,11 @@
  
 /*Author: Gustavo Diaz*/
 
+/*Requiered Libraries*/
 #include "atms.h"
+
+/*Debug print levels*/
+#define LOGGER_MIN_SEVERITY LOGGER_SEVERITY_INFO
 
 #define PIN_DALLAS 42
 /*Object Definitions*/
@@ -28,11 +32,11 @@ void setup() {
 void loop()
 {
     atms.updateData();
-    DEBUG2_PRINT("T-P-a-tempC-humidity:\t");
-    DEBUG2_PRINT(atms.T);DEBUG2_PRINT("\t");
-    DEBUG2_PRINT(atms.P);DEBUG2_PRINT("\t");
-    DEBUG2_PRINT(atms.a);DEBUG2_PRINT("\t");
-    DEBUG2_PRINT(atms.tempC);DEBUG2_PRINT("\t");
-    DEBUG2_PRINTLN(atms.humidity)
-    DEBUG2_PRINTLN(atms.temperature_dallas)
+    INFO_PRINTLN_RAW("temp1\tpressure\taltitude\ttemp2\thumidity\ttemperatureDallas");
+    INFO_PRINT_RAW(atms.atmsData.temperature1);INFO_PRINT_RAW("\t");
+    INFO_PRINT_RAW(atms.atmsData.pressure);INFO_PRINT_RAW("\t");
+    INFO_PRINT_RAW(atms.atmsData.altitude);INFO_PRINT_RAW("\t");
+    INFO_PRINT_RAW(atms.atmsData.temperature2);INFO_PRINT_RAW("\t");
+    INFO_PRINT_RAW(atms.atmsData.humidity);INFO_PRINT_RAW("\t");
+    INFO_PRINTLN_RAW(atms.atmsData.temperatureDallas);
 }

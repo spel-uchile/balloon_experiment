@@ -9,7 +9,6 @@
 #include  <Servo.h>
 #include "pines_balloon.h"
 
-#define DEBUG_LEVEL 1
 /*Constants*/
 #define  start_s1 0 // Begin 
 #define  start_s2 180 // Begin

@@ -8,6 +8,7 @@
 #include <Arduino.h>
 #include <TinyGPS++.h>
 #include "gps_data.h"
+#include "logger.h"
 
 /**
  * @class GPS
@@ -40,4 +41,3 @@
     private:
         int gps_baudrate_;
  };
-

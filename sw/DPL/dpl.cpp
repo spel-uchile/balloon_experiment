@@ -6,8 +6,6 @@
 
 #include "dpl.h"
 
-#define DEBUG_LEVEL 1
-
 //-------------------------- Public Methods --------------------------
 
 void DPL::init(void)

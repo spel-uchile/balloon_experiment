@@ -5,6 +5,9 @@
 /*Author: Gustavo Diaz*/
 
 #include "radio.h"
+#include "atms_data.h"
+#include "gps_data.h"
+#include "helper_3dmath.h"
 
 /*Radio transiver*/
 #define RADIO_SLAVESELECTPIN 4
@@ -14,11 +17,13 @@
 #define CLIENT_ADDRESS 1
 #define SERVER_ADDRESS 2
 
-/*Data store*/
-double dataD[8];
-float dataF[6];
-uint8_t dataU8[4];
-uint32_t dataU32;
+/*Debug print levels*/
+#define LOGGER_MIN_SEVERITY LOGGER_SEVERITY_INFO
+
+/*Test Data*/
+AtmsData atmsData;
+GpsData gpsData;
+VectorInt16 gyroRate;
 
 /*Object Definitions*/
 Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, SDN, CLIENT_ADDRESS, SERVER_ADDRESS);
@@ -32,6 +37,8 @@ void setup() {
     Serial.begin(115200);
     // init radio
     radio.init();
+    // Test Data
+    testData();
 }
 
 // ================================================================
@@ -40,25 +47,31 @@ void setup() {
 
 void loop()
 {
-    // test data
-    dataD[0] = 123.45;
-    dataD[1] = 956.76;
-    dataD[2] = -75.01;
-    dataD[3] = 789.15;
-    dataD[4] = 789.15;
-    dataD[5] = 789.15;
-    dataD[6] = 789.15;
-    dataD[7] = 789.15;
-    dataF[0] = 98.3;
-    dataF[1] = 21.7;
-    dataF[2] = 87.80;
-    dataF[3] = 101.71;
-    dataF[4] = 43.87;
-    dataU8[0] = 25;
-    dataU8[1] = 8;
-    dataU8[2] = 25;
-    dataU8[3] = 87;
-    dataU32 = 589489;
-    // send data as predefined Frame
-    radio.send_data(dataD, dataF, dataU8, dataU32);
+    radio.updateBeacon(&atmsData, &gpsData, &gyroRate);
+    radio.sendData();
+}
+
+void testData(void)
+{
+    atmsData.temperature1 = 12.5;
+    atmsData.pressure = 78.6;
+    atmsData.altitude = 187.7;
+    atmsData.temperature2 = 13.9;
+    atmsData.temperatureDallas = 27.2;
+    atmsData.humidity = 3.45;
+
+    gpsData.latitude = 25.1;
+    gpsData.longitude = 32.7;
+    gpsData.altitude = 25.1;
+    gpsData.crse = 25.1;
+    gpsData.mps = 25.1;
+    gpsData.hour = 25.1;
+    gpsData.minute = 25.1;
+    gpsData.second = 25.1;
+    gpsData.satellites = 25.1;
+    gpsData.validity = 87;
+
+    gyroRate.x = 35;
+    gyroRate.y = 21;
+    gyroRate.z = 12;
 }

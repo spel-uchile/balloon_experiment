@@ -48,6 +48,7 @@ class ATMS
     // methods
     void init(void);
     void updateData(void);
+    void infoPrint(void);
 
     // private:
     // ...methods

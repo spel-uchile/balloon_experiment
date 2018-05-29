@@ -6,8 +6,6 @@
 
 #include "gps.h"
 
-#define DEBUG_LEVEL 1
-
 GPS::GPS(void) {
     gps_baudrate_ = 9600;
     serial_port_ = &Serial;
@@ -39,7 +37,7 @@ void GPS::updateData() {
         }
     }
     if (millis() > 5000 && gps.charsProcessed() < 10) {
-        Serial.println(F("No GPS detected: check wiring."));
+        ERROR_PRINTLN_RAW(F("No GPS detected: check wiring."));
     }
 }
 

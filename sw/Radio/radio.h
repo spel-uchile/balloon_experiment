@@ -12,6 +12,7 @@
 #include "logger.h"
 #include "atms_data.h"
 #include "gps_data.h"
+#include "imu_data.h"
 #include "helper_3dmath.h"
 
 #define GET_PICTURE 1
@@ -39,9 +40,9 @@ typedef struct {
     float Temp2;
     float Humidity;
     float Temp3;
-    float IMU1;
-    float IMU2;
-    float IMU3;
+    int IMU1;
+    int IMU2;
+    int IMU3;
     float GPS_Lat;
     float GPS_Lng;
     float GPS_Alt;
@@ -99,7 +100,7 @@ public:
     void sendFrame(uint8_t frame[], int frame_size);
     void sendData();
     void readData(void);
-    void updateBeacon(AtmsData *atmsData, GpsData *gpsData, VectorInt16 *gyroData);
+    void updateBeacon(AtmsData *atmsData, GpsData *gpsData, ImuData *imuData);
     bool sendCommand(uint8_t cmd);
     uint8_t readCommand(uint8_t *cmd);
     void infoPrint(void);

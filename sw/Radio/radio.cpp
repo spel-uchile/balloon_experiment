@@ -56,7 +56,7 @@ void Radio::readData() {
     }
 }
 
-void Radio::updateBeacon(AtmsData *atmsData, GpsData *gpsData, VectorInt16 *gyroData)
+void Radio::updateBeacon(AtmsData *atmsData, GpsData *gpsData, ImuData *imuData)
 {   
     beacon_tx_.Temp1 = (float) atmsData->temperature1;
     beacon_tx_.Pressure = (float) atmsData->pressure;
@@ -64,9 +64,9 @@ void Radio::updateBeacon(AtmsData *atmsData, GpsData *gpsData, VectorInt16 *gyro
     beacon_tx_.Temp2 = atmsData->temperature2;
     beacon_tx_.Humidity = atmsData->humidity;
     beacon_tx_.Temp3 = atmsData->temperatureDallas;
-    beacon_tx_.IMU1 = gyroData->x;
-    beacon_tx_.IMU2 = gyroData->y;
-    beacon_tx_.IMU3 = gyroData->z;
+    beacon_tx_.IMU1 = imuData->gx;
+    beacon_tx_.IMU2 = imuData->gy;
+    beacon_tx_.IMU3 = imuData->gz;
     beacon_tx_.GPS_Lat = (float) gpsData->latitude;
     beacon_tx_.GPS_Lng = (float) gpsData->longitude;
     beacon_tx_.GPS_Alt = (float) gpsData->altitude;

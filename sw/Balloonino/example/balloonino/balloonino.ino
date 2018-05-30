@@ -31,7 +31,7 @@ bool ballon_led_status = 0;
 //Create an instance of the objects
 Radio radio(RADIO_SLAVESELECTPIN, RADIO_INTERRUPT, RADIO_SDN, CLIENT_ADDRESS, SERVER_ADDRESS);
 ATMS atms(PIN_DALLAS);
-IMU imu(IMU_INTERRUPT, &Serial);
+IMU9250 imu;
 GPS gps(&Serial, GPS_BAUDRATE);
 // RPYCOM rpy(&Serial1);
 DPL dpl;
@@ -97,7 +97,7 @@ void loop() {
     else if (base_cmd == BALLOON_GET_DATA)
     {
         INFO_PRINTLN_RAW(F("request data"));
-        radio.updateBeacon(&atms.atmsData, &gps.gpsData, &imu.gyroRate);
+        radio.updateBeacon(&atms.atmsData, &gps.gpsData, &imu.imuData);
         radio.sendData();
     }
     else{

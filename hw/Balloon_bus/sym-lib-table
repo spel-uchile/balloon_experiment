@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name Balloon_bus-eagle-import)(type Legacy)(uri ${KIPRJMOD}/Balloon_bus-eagle-import.lib)(options "")(descr ""))
+)

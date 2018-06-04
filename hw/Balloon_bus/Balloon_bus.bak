@@ -345,4 +345,103 @@ Wire Wire Line
 	13000 6700 12600 6700
 Text Label 12600 6700 0    70   ~ 0
 GPIO21
+Wire Wire Line
+	15200 6700 15650 6700
+Wire Wire Line
+	13000 6900 12600 6900
+Wire Wire Line
+	15650 6900 15200 6900
+Text Label 15650 6700 2    70   ~ 0
+GPIO22
+Text Label 12600 6900 0    70   ~ 0
+GPIO23
+Text Label 15650 6900 2    70   ~ 0
+GPIO24
+$Comp
+L sensor:MPU-9250-BREAKOUT-R U2
+U 1 1 5B15ED95
+P 5900 7200
+F 0 "U2" H 5900 7500 50  0000 L CNN
+F 1 "MPU-9250-BREAKOUT-R" H 5450 6900 50  0000 L CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm" H 5750 7100 50  0001 C CNN
+F 3 "" H 5750 7100 50  0001 C CNN
+	1    5900 7200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5550 7050 5450 7050
+Wire Wire Line
+	5450 7150 5550 7150
+Wire Wire Line
+	5550 7250 5450 7250
+Wire Wire Line
+	5450 7350 5550 7350
+Text Label 5450 7050 0    50   ~ 0
+SCL
+Text Label 5450 7150 0    50   ~ 0
+SDA
+Text Label 5450 7250 0    50   ~ 0
+3V3
+Text Label 5450 7350 0    50   ~ 0
+GND
+$Comp
+L sensor:XA1110 U1
+U 1 1 5B1678AE
+P 4650 7250
+F 0 "U1" H 4650 7600 60  0000 C CNN
+F 1 "XA1110" H 4650 6900 60  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x04_Pitch2.54mm" H 4350 7200 60  0001 C CNN
+F 3 "" H 4350 7200 60  0001 C CNN
+	1    4650 7250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4150 7350 4000 7350
+Wire Wire Line
+	4000 7450 4150 7450
+Wire Wire Line
+	4150 7250 4000 7250
+Wire Wire Line
+	4000 7150 4150 7150
+Text Label 4000 7450 0    50   ~ 0
+SCL
+Text Label 4000 7350 0    50   ~ 0
+SDA
+Text Label 4000 7250 0    50   ~ 0
+3V3
+Text Label 4000 7150 0    50   ~ 0
+GND
+NoConn ~ 4150 7050
+NoConn ~ 5150 7050
+NoConn ~ 5150 7150
+NoConn ~ 5150 7250
+NoConn ~ 5150 7350
+NoConn ~ 5150 7450
+$Comp
+L sensor:BMP180-V2 U?
+U 1 1 5B161F7C
+P 7050 7200
+F 0 "U?" H 7227 7246 50  0000 L CNN
+F 1 "BMP180-V2" H 7227 7155 50  0000 L CNN
+F 2 "" H 7000 7200 50  0001 C CNN
+F 3 "" H 7000 7200 50  0001 C CNN
+	1    7050 7200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6700 7050 6550 7050
+Wire Wire Line
+	6550 7150 6700 7150
+Wire Wire Line
+	6700 7250 6550 7250
+Wire Wire Line
+	6550 7350 6700 7350
+Text Label 6550 7050 0    50   ~ 0
+3V3
+Text Label 6550 7350 0    50   ~ 0
+SDA
+Text Label 6550 7150 0    50   ~ 0
+GND
+Text Label 6550 7250 0    50   ~ 0
+SCL
 $EndSCHEMATC

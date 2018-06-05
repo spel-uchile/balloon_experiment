@@ -212,12 +212,6 @@ Wire Wire Line
 	4800 1900 4800 2200
 Text Label 4200 1900 1    70   ~ 0
 GPIO12
-Text Label 4600 1900 1    70   ~ 0
-GPIO16
-Text Label 4800 1900 1    70   ~ 0
-GPIO20
-Text Label 5000 1900 1    70   ~ 0
-GPIO21
 Wire Wire Line
 	4000 3300 4000 3500
 Wire Wire Line
@@ -519,7 +513,7 @@ MAG_INT2
 Text Label 8550 6900 0    50   ~ 0
 MAG_INT3
 Text Label 5650 7100 0    50   ~ 0
-SRVO_PWM
+SRVO_PWR
 Text Label 5650 7400 0    50   ~ 0
 SOLE_PWR
 Text Label 7250 7400 2    50   ~ 0
@@ -568,4 +562,18 @@ Text Label 7250 7500 2    50   ~ 0
 LN_SGNL1
 Text Label 7250 7000 2    50   ~ 0
 LN_SGNL2
+Text Label 4800 1900 1    70   ~ 0
+EN_LINEAR
+Text Label 4600 1900 1    70   ~ 0
+LN_SGNL1
+Wire Wire Line
+	3600 2200 3600 1900
+Text Label 3600 1900 1    70   ~ 0
+LN_SGNL2
+Wire Wire Line
+	2200 2200 2200 1900
+Text Label 2200 1900 1    70   ~ 0
+SRVO_PWM
+Text Label 5000 1900 1    70   ~ 0
+SOLE_SGNL
 $EndSCHEMATC

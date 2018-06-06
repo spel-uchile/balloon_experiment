@@ -80,14 +80,6 @@ Wire Wire Line
 Wire Wire Line
 	8250 1950 7750 1950
 Wire Wire Line
-	12850 2950 12450 2950
-Text Label 12450 2950 0    70   ~ 0
-5V0
-Wire Wire Line
-	15050 2950 15350 2950
-Text Label 15250 2950 0    70   ~ 0
-5V0
-Wire Wire Line
 	8250 4550 7850 4550
 Text Label 7850 4550 0    70   ~ 0
 SDA
@@ -288,9 +280,9 @@ GND
 Text Label 5650 7300 0    50   ~ 0
 GND
 Text Label 5650 7600 0    50   ~ 0
-3V3
+5V0
 Text Label 7250 6900 2    50   ~ 0
-3V3
+5V0
 Text Label 7250 7200 2    50   ~ 0
 GND
 Text Label 7250 7300 2    50   ~ 0
@@ -320,15 +312,9 @@ LINEAR2
 Wire Wire Line
 	8550 6300 8900 6300
 Wire Wire Line
-	8550 6700 8900 6700
-Wire Wire Line
 	8550 6400 8900 6400
 Wire Wire Line
-	8550 6800 8900 6800
-Wire Wire Line
 	8550 6500 8900 6500
-Wire Wire Line
-	8550 6900 8900 6900
 Wire Wire Line
 	8550 7100 8900 7100
 Wire Wire Line
@@ -555,4 +541,75 @@ Wire Wire Line
 	1400 3300 1400 3850
 Wire Wire Line
 	1600 3300 1600 3850
+$Comp
+L Device:R R1
+U 1 1 5B184DEB
+P 7850 6700
+F 0 "R1" V 7850 6700 50  0000 C CNN
+F 1 "R" V 7750 6700 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 7780 6700 50  0001 C CNN
+F 3 "~" H 7850 6700 50  0001 C CNN
+	1    7850 6700
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 5B184E7E
+P 8100 6800
+F 0 "R2" V 8100 6800 50  0000 C CNN
+F 1 "R" V 8000 6800 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 8030 6800 50  0001 C CNN
+F 3 "~" H 8100 6800 50  0001 C CNN
+	1    8100 6800
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:R R3
+U 1 1 5B184EA8
+P 8350 6900
+F 0 "R3" V 8350 6900 50  0000 C CNN
+F 1 "R" V 8250 6900 50  0000 C CNN
+F 2 "Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal" V 8280 6900 50  0001 C CNN
+F 3 "~" H 8350 6900 50  0001 C CNN
+	1    8350 6900
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8500 6900 8900 6900
+Wire Wire Line
+	8250 6800 8900 6800
+Wire Wire Line
+	8000 6700 8900 6700
+Wire Wire Line
+	8200 6900 7950 6900
+Wire Wire Line
+	7700 6900 7700 6700
+Wire Wire Line
+	7950 6800 7950 6900
+Connection ~ 7950 6900
+Wire Wire Line
+	7950 6900 7700 6900
+Wire Wire Line
+	7950 6900 7950 7000
+Text Label 7950 7000 0    50   ~ 0
+GND
+$Comp
+L power:GND #PWR0101
+U 1 1 5B1A2335
+P 7950 7000
+F 0 "#PWR0101" H 7950 6750 50  0001 C CNN
+F 1 "GND" H 7955 6827 50  0000 C CNN
+F 2 "" H 7950 7000 50  0001 C CNN
+F 3 "" H 7950 7000 50  0001 C CNN
+	1    7950 7000
+	1    0    0    -1  
+$EndComp
+Text Label 1200 1900 1    70   ~ 0
+5V0
+Wire Wire Line
+	1200 1900 1200 2200
+Wire Wire Line
+	1400 2200 1400 1900
+Text Label 1400 1900 1    70   ~ 0
+5V0
 $EndSCHEMATC

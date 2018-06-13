@@ -111,6 +111,8 @@ public:
     VectorInt16 gyroRate;   // [x, y, z]            gyro rate
     float euler[3];         // [psi, theta, phi]    Euler angle container
     float ypr[3];           // [yaw, pitch, roll]   yaw/pitch/roll container and gravity vector
+    int16_t ax_raw, ay_raw, az_raw;
+    int16_t gx_raw, gy_raw, gz_raw;
 
     /*constructor de base (null)*/
     IMU() {}
@@ -272,6 +274,7 @@ void IMU::updateData(void)
                 mpu.dmpGetLinearAccelInWorld(&aaWorld, &aaReal, &q);
             #endif
             mpu.dmpGetGyro(&ws, fifoBuffer);
+            mpu.getMotion6(&ax_raw, &ay_raw, &az_raw, &gx_raw, &gy_raw, &gz_raw);
         }
         else{
             // DEBUG2_PRINTLN(F("mpuIntStatus"));

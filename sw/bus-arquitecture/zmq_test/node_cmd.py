@@ -23,6 +23,8 @@ import time
 from threading import Thread
 from time import sleep
 
+from node_list import NODE_CMD, PORT_CMD
+
 #list of commands
 CMD1 = 1
 CMD2 = 2
@@ -40,15 +42,11 @@ class CmdInterface:
         print(str(CMD3) + ": Breve descripcion cmd3")
         print(str(CMD4) + ": Breve descripcion cmd4")
 
-    def console(self, port="8001", ip="localhost", origin=10):
+    def console(self, port=PORT_CMD, ip="*", node=NODE_CMD):
         """ Send messages to node """
         ctx = zmq.Context()
         sock = ctx.socket(zmq.PUB)
-        # sock.connect('tcp://{}:{}'.format(ip, port))
-        # sock.connect ('tcp://localhost:8001')
-        sock.bind("tcp://*:8001")
-        node = '1'
-        port = 10
+        sock.bind("tcp://{}:{}".format(ip, port))
         print "sending cmd to node:"+str(node)
 
         while True:
@@ -67,7 +65,7 @@ if __name__ == '__main__':
     tasks = []
 
     # Create a console socket
-    console_th = Thread(target=node_cmd.console)
+    console_th = Thread(target=node_cmd.console, args=(PORT_CMD, "*", NODE_CMD))
     console_th.daemon = True
     tasks.append(console_th)
     console_th.start()

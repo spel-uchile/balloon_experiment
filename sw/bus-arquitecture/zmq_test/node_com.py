@@ -25,6 +25,8 @@ import time
 from threading import Thread
 from time import sleep
 
+from node_list import NODE_CMD,PORT_CMD, NODE_DATA, PORT_DATA
+
 class NodeComInterface:
     def __init__(self):
         # com parameters
@@ -33,16 +35,12 @@ class NodeComInterface:
     def test_method(self, cmd):
         print "rcv from node: "+cmd
 
-    def commands(self, port="8001", ip="localhost", node='4'):
+    def commands(self, port=PORT_CMD, ip="localhost", node=NODE_CMD):
         """ Read messages from node(s) """
-        # if node != b'':
-        #     node = chr(int(node)).encode("ascii", "replace")
-        node = '1'
         ctx = zmq.Context()
         sock = ctx.socket(zmq.SUB)
         sock.setsockopt(zmq.SUBSCRIBE, node)
-        # sock.connect('tcp://{}:{}'.format(ip, port))
-        sock.connect ('tcp://localhost:8001')
+        sock.connect('tcp://{}:{}'.format(ip, port))
         print "listen commands from node:"+str(node)
 
         while True:
@@ -50,14 +48,11 @@ class NodeComInterface:
             cmd = sock.recv()
             self.test_method(cmd[2])
 
-    def console(self, port="8002", ip="localhost", origin=10):
+    def console(self, port=PORT_DATA, ip="localhost", node=NODE_DATA):
         """ Send messages to node """
         ctx = zmq.Context(1)
         sock = ctx.socket(zmq.PUB)
-        # sock.connect('tcp://{}:{}'.format(ip, port))
-        sock.connect('tcp://localhost:8002')
-        node = '2'
-        port = 10
+        sock.connect('tcp://{}:{}'.format(ip, port))
         print "sending data to node:"+str(node)
 
         while True:
@@ -74,13 +69,13 @@ if __name__ == '__main__':
     tasks = []
 
     # Start commands thread
-    cmds_th = Thread(target=node.commands)
+    cmds_th = Thread(target=node.commands, args=(PORT_CMD, "localhost", NODE_CMD))
     # cmds_th.daemon = True
     tasks.append(cmds_th)
     cmds_th.start()
 
     # Create a console socket
-    console_th = Thread(target=node.console)
+    console_th = Thread(target=node.console, args=(PORT_DATA, "localhost", NODE_DATA))
     # console_th.daemon = True
     tasks.append(console_th)
     console_th.start()

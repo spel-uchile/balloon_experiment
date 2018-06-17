@@ -1,0 +1,13 @@
+#install gpsd
+sudo apt-get install gpsd gpsd-clients python-gps
+
+#edit /boot/cmdline.txt
+#remove console=ttyAMA0,115200 and if there, kgdboc=ttyAMA0,115200
+#Note you might see console=serial0,115200 or console=ttyS0,115200 and should remove those parts of the line if present
+
+#edit the /boot/config.txt
+#add this at the bottom:
+#enable_uart=1
+
+#install zmq
+sudo pip install pyzmq-static

@@ -47,7 +47,7 @@ class CmdInterface:
         ctx = zmq.Context()
         sock = ctx.socket(zmq.PUB)
         sock.bind("tcp://{}:{}".format(ip, port))
-        print "sending cmd to node:"+str(node)
+        print "sending cmds to node:"+str(node)
 
         while True:
             try:

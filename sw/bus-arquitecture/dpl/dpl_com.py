@@ -26,6 +26,10 @@ from threading import Thread
 from gpiozero import *
 from time import sleep
 
+sys.path.append('../')
+
+from node_list.nodes.node_list import NODE_CMD_DPL,PORT_CMD_DPL, NODE_DATA_DPL, PORT_DATA_DPL
+
 #define commands
 OPEN_LA = 1
 CLOSE_LA = 2
@@ -111,7 +115,7 @@ class DplComInterface:
             print("Comando no existe. Ver lista de comandos.")
             val = False
 
-    def commands(self, port="8001", ip="localhost", node='1'):
+    def commands(self, port=PORT_CMD_DPL, ip="localhost", node=NODE_CMD_DPL):
         """ Read messages from node(s) """
         # if node != b'':
         #     node = chr(int(node)).encode("ascii", "replace")
@@ -119,8 +123,7 @@ class DplComInterface:
         ctx = zmq.Context()
         sock = ctx.socket(zmq.SUB)
         sock.setsockopt(zmq.SUBSCRIBE, node)
-        # sock.connect('tcp://{}:{}'.format(ip, port))
-        sock.connect ('tcp://localhost:8001')
+        sock.connect('tcp://{}:{}'.format(ip, port))
         print "listen commands from node:"+str(node)
 
         while True:
@@ -129,14 +132,11 @@ class DplComInterface:
             print "command rcv: " + cmd[2]
             self.execute(cmd)
 
-    def console(self, port="8002", ip="localhost", origin=10):
+    def console(self, port=PORT_DATA_DPL, ip="localhost", node=NODE_DATA_DPL):
         """ Send messages to node """
         ctx = zmq.Context(1)
         sock = ctx.socket(zmq.PUB)
-        # sock.connect('tcp://{}:{}'.format(ip, port))
-        sock.connect('tcp://localhost:8002')
-        node = 2
-        port = 10
+        sock.connect('tcp://{}:{}'.format(ip, port))
 
         while True:
             print("Actuador lineal " + str(int(self.lineal_state)))
@@ -153,13 +153,13 @@ if __name__ == '__main__':
     tasks = []
 
     # Start monitor thread
-    commands_th = Thread(target=dpl_com.commands)
+    commands_th = Thread(target=dpl_com.commands, args=(PORT_CMD_DPL, "localhost", NODE_CMD_DPL))
     # commands_th.daemon = True
     tasks.append(commands_th)
     commands_th.start()
 
     # Create a console socket
-    console_th = Thread(target=dpl_com.console)
+    console_th = Thread(target=dpl_com.console, args=(PORT_DATA_DPL, "localhost", NODE_DATA_DPL))
     # console_th.daemon = True
     tasks.append(console_th)
     console_th.start()

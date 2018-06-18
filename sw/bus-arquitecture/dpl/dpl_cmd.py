@@ -24,10 +24,11 @@ from threading import Thread
 from time import sleep
 
 #list of commands
-OPEN_LA = 1
-CLOSE_LA = 2
-OPEN_SA = 3
-CLOSE_SA = 4
+from dpl_com import OPEN_LA, CLOSE_LA, OPEN_SA, CLOSE_SA
+
+sys.path.append('../')
+
+from node_list.nodes.node_list import NODE_CMD_DPL,PORT_CMD_DPL
 
 class DplCmdInterface:
     def __init__(self):
@@ -40,15 +41,11 @@ class DplCmdInterface:
         print(str(OPEN_SA) + ": Servo en 0")
         print(str(CLOSE_SA) + ": Servo en 180")
 
-    def console(self, port="8001", ip="localhost", origin=10):
+    def console(self, port=PORT_CMD_DPL, ip="*", node=NODE_CMD_DPL):
         """ Send messages to node """
         ctx = zmq.Context()
         sock = ctx.socket(zmq.PUB)
-        # sock.connect('tcp://{}:{}'.format(ip, port))
-        # sock.connect ('tcp://localhost:8001')
-        sock.bind("tcp://*:8001")
-        node = '4'
-        port = 10
+        sock.bind('tcp://{}:{}'.format(ip, port))
 
         while True:
             try:
@@ -66,7 +63,7 @@ if __name__ == '__main__':
     tasks = []
 
     # Create a console socket
-    console_th = Thread(target=dpl_cmd.console)
+    console_th = Thread(target=dpl_cmd.console, args=(PORT_CMD_DPL, "*", NODE_CMD_DPL))
     console_th.daemon = True
     tasks.append(console_th)
     console_th.start()

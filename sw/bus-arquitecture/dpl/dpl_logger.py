@@ -23,6 +23,10 @@ import time
 from threading import Thread
 from time import sleep
 
+sys.path.append('../')
+
+from node_list.nodes.node_list import NODE_DATA_DPL, PORT_DATA_DPL
+
 class GpsLoggInterface:
     def __init__(self):
         # com parameters
@@ -31,7 +35,7 @@ class GpsLoggInterface:
     def test_method(self, cmd):
         print "rcv from node: "+cmd
 
-    def data(self, port="8002", ip="localhost", node='2'):
+    def data(self, port=PORT_DATA_DPL, ip="localhost", node=NODE_DATA_DPL):
         """ Read messages from node(s) """
         # if node != b'':
         #     node = chr(int(node)).encode("ascii", "replace")
@@ -39,8 +43,7 @@ class GpsLoggInterface:
         ctx = zmq.Context()
         sock = ctx.socket(zmq.SUB)
         sock.setsockopt(zmq.SUBSCRIBE, node)
-        # sock.connect('tcp://{}:{}'.format(ip, port))
-        sock.connect ('tcp://localhost:8002')
+        sock.connect('tcp://{}:{}'.format(ip, port))
         print "listen data from node:"+str(node)
 
         while True:
@@ -54,7 +57,7 @@ if __name__ == '__main__':
     tasks = []
 
     # Start data thread
-    cmds_th = Thread(target=gps_logg.data)
+    cmds_th = Thread(target=gps_logg.data, args=(PORT_DATA_DPL, "localhost", NODE_DATA_DPL))
     # cmds_th.daemon = True
     tasks.append(cmds_th)
     cmds_th.start()

@@ -24,6 +24,10 @@ from threading import Thread
 from time import sleep
 from gps import *
 
+sys.path.append('../')
+
+from node_list.nodes.node_list import NODE_DATA_GPS, PORT_DATA_GPS
+
 class GpsComInterface:
     def __init__(self):
         # gps arguments
@@ -32,14 +36,11 @@ class GpsComInterface:
     def test_method(self, cmd):
         print "rcv from node: "+cmd
 
-    def console(self, port="8003", ip="localhost", origin=10):
+    def console(self, port=PORT_DATA_GPS, ip="localhost", node=NODE_DATA_GPS):
         """ Send messages to node """
         ctx = zmq.Context(1)
         sock = ctx.socket(zmq.PUB)
-        # sock.connect('tcp://{}:{}'.format(ip, port))
-        sock.connect('tcp://localhost:8003')
-        node = '3'
-        port = 10
+        sock.connect('tcp://{}:{}'.format(ip, port))
         print "sending data to node:"+str(node)
 
         while True:
@@ -59,7 +60,7 @@ if __name__ == '__main__':
     tasks = []
 
     # Create a console socket
-    console_th = Thread(target=gps.console)
+    console_th = Thread(target=gps.console, args=(PORT_DATA_GPS, "localhost", NODE_DATA_GPS))
     # console_th.daemon = True
     tasks.append(console_th)
     console_th.start()

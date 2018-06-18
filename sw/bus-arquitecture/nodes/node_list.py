@@ -1,0 +1,10 @@
+#list of nodes
+
+NODE_CMD_DPL = '1'
+PORT_CMD_DPL = "8001"
+
+NODE_DATA_DPL = '2'
+PORT_DATA_DPL = "8002"
+
+NODE_DATA_GPS = '3'
+PORT_DATA_GPS = '8003'

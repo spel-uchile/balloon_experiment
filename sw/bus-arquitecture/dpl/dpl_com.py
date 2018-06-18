@@ -28,7 +28,7 @@ from time import sleep
 
 sys.path.append('../')
 
-from node_list.nodes.node_list import NODE_CMD_DPL,PORT_CMD_DPL, NODE_DATA_DPL, PORT_DATA_DPL
+from nodes.node_list import NODE_CMD_DPL,PORT_CMD_DPL, NODE_DATA_DPL, PORT_DATA_DPL
 
 #define commands
 OPEN_LA = 1
@@ -57,12 +57,12 @@ class DplComInterface:
         self.servo_state = 0    #0:meaning1, 1:meaning2
 
     def start(self):
-        enable_lineal.off()
-        ln_sgnl1.off()
-        ln_sgnl2.off()
+        self.enable_lineal.off()
+        self.ln_sgnl1.off()
+        self.ln_sgnl2.off()
 
-        en_sr_so.off()
-        srvo_sgnl.off()
+        self.en_sr_so.off()
+        self.srvo_sgnl.off()
         return True
 
     def state(self):
@@ -99,6 +99,7 @@ class DplComInterface:
 
     def execute(self, cmd):
         strt = self.start()
+        accion = int(cmd)
         if accion == OPEN_LA:
             print("Ex: open_lineal")
             val = self.open_lineal()
@@ -130,7 +131,7 @@ class DplComInterface:
             # cmd = sock.recv_multipart()[0]
             cmd = sock.recv()
             print "command rcv: " + cmd[2]
-            self.execute(cmd)
+            self.execute(cmd[2])
 
     def console(self, port=PORT_DATA_DPL, ip="localhost", node=NODE_DATA_DPL):
         """ Send messages to node """

@@ -28,7 +28,7 @@ from dpl_com import OPEN_LA, CLOSE_LA, OPEN_SA, CLOSE_SA
 
 sys.path.append('../')
 
-from node_list.nodes.node_list import NODE_CMD_DPL,PORT_CMD_DPL
+from nodes.node_list import NODE_CMD_DPL,PORT_CMD_DPL
 
 class DplCmdInterface:
     def __init__(self):

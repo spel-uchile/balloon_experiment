@@ -26,7 +26,7 @@ from gps import *
 
 sys.path.append('../')
 
-from node_list.nodes.node_list import NODE_DATA_GPS, PORT_DATA_GPS
+from nodes.node_list import NODE_DATA_GPS, PORT_DATA_GPS
 
 class GpsComInterface:
     def __init__(self):

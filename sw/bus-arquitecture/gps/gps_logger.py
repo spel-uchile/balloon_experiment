@@ -25,7 +25,7 @@ from time import sleep
 
 sys.path.append('../')
 
-from node_list.nodes.node_list import NODE_DATA_GPS, PORT_DATA_GPS
+from nodes.node_list import NODE_DATA_GPS, PORT_DATA_GPS
 
 class GpsLoggInterface:
     def __init__(self):

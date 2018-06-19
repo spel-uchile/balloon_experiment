@@ -11,7 +11,8 @@ sudo apt-get install gpsd gpsd-clients python-gps
 
 #start gpsd (model 3)
 sudo killall gpsd
-sudo gpsd /dev/ttyAMA0 -F /var/run/gpsd.sock
+sudo gpsd /dev/ttyS0 -F /var/run/gpsd.sock
+#si es necesario, reiniciar
 sudo systemctl restart gpsd.socket
 
 #install zmq

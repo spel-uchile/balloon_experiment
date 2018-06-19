@@ -115,6 +115,7 @@ class DplComInterface:
         else:
             print("Comando no existe. Ver lista de comandos.")
             val = False
+        strt = self.start()
 
     def commands(self, port=PORT_CMD_DPL, ip="localhost", node=NODE_CMD_DPL):
         """ Read messages from node(s) """
@@ -137,13 +138,14 @@ class DplComInterface:
         """ Send messages to node """
         ctx = zmq.Context(1)
         sock = ctx.socket(zmq.PUB)
-        sock.connect('tcp://{}:{}'.format(ip, port))
+        sock.bind('tcp://{}:{}'.format(ip, port))
 
         while True:
+            self.state()
             print("Actuador lineal " + str(int(self.lineal_state)))
             print("Servo " + str(int(self.servo_state)))
             try:
-                sock.send("%d %d %d" % (node, self.lineal_state, self.servo_state))
+                sock.send("%s %d %d" % (node, self.lineal_state, self.servo_state))
             except Exception as e:
                 pass
             time.sleep(0.25)
@@ -160,7 +162,7 @@ if __name__ == '__main__':
     commands_th.start()
 
     # Create a console socket
-    console_th = Thread(target=dpl_com.console, args=(PORT_DATA_DPL, "localhost", NODE_DATA_DPL))
+    console_th = Thread(target=dpl_com.console, args=(PORT_DATA_DPL, "*", NODE_DATA_DPL))
     # console_th.daemon = True
     tasks.append(console_th)
     console_th.start()

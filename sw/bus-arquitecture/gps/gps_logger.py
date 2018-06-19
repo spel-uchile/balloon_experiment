@@ -28,10 +28,8 @@ sys.path.append('../')
 from nodes.node_list import NODE_DATA_GPS, PORT_DATA_GPS
 
 class GpsLoggInterface:
-    def __init__(self):
+    #def __init__(self):
         # com parameters
-        self.data = 0
-
     def test_method(self, cmd):
         print "rcv from node: "+cmd
 
@@ -39,7 +37,7 @@ class GpsLoggInterface:
         """ Read messages from node(s) """
         # if node != b'':
         #     node = chr(int(node)).encode("ascii", "replace")
-        ctx = zmq.Context()
+        ctx = zmq.Context(1)
         sock = ctx.socket(zmq.SUB)
         sock.setsockopt(zmq.SUBSCRIBE, node)
         sock.connect('tcp://{}:{}'.format(ip, port))
@@ -49,6 +47,7 @@ class GpsLoggInterface:
             # cmd = sock.recv_multipart()[0]
             cmd = sock.recv()
             self.test_method(cmd[2:])
+            print cmd
 
 if __name__ == '__main__':
     gps_logg = GpsLoggInterface()
@@ -57,7 +56,7 @@ if __name__ == '__main__':
 
     # Start data thread
     cmds_th = Thread(target=gps_logg.data, args=(PORT_DATA_GPS, "localhost", NODE_DATA_GPS))
-    # cmds_th.daemon = True
+    #cmds_th.daemon = True
     tasks.append(cmds_th)
     cmds_th.start()
 

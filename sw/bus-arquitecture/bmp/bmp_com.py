@@ -2,17 +2,17 @@
 
 __author__ = 'gdiaz'
 
-# GPS ZMQ COM INTERFACE
+# BMP180 ZMQ COM INTERFACE
 
 """Provides a high level interface over ZMQ for data exchange.
 """
 
 """Description
-    GPS comunication: node1
+    BMP comunication: node1
 
     console:  send data to node1
 
-    data[gps]-->console[PUB]-> node1
+    data[bmp]-->console[PUB]-> node1
 
 """
 
@@ -22,21 +22,22 @@ import time
 
 from threading import Thread
 from time import sleep
-from gps import *
+
+import Adafruit_BMP.BMP085 as BMP085
 
 sys.path.append('../')
 
-from nodes.node_list import NODE_DATA_GPS, PORT_DATA_GPS
+from nodes.node_list import NODE_DATA_BMP, PORT_DATA_BMP
 
-class GpsComInterface:
+class BmpComInterface:
     def __init__(self):
-        # gps arguments
-        self.gps_handler = gps(mode=WATCH_ENABLE) #starting the stream of info
+        # arguments stuff
+        self.sensor_bmp = BMP085.BMP085()
 
     def test_method(self, cmd):
         print "rcv from node: "+cmd
 
-    def console(self, port=PORT_DATA_GPS, ip="localhost", node=NODE_DATA_GPS):
+    def console(self, port=PORT_DATA_BMP, ip="localhost", node=NODE_DATA_BMP):
         """ Send messages to node """
         ctx = zmq.Context(1)
         sock = ctx.socket(zmq.PUB)
@@ -46,20 +47,19 @@ class GpsComInterface:
         while True:
             try:
                 if True:#TODO: check if data is valid
-                    sock.send("%s %4.4f %4.4f %s" % (node, self.gps_handler.fix.latitude, self.gps_handler.fix.longitude, str(self.gps_handler.utc)))
-                    print self.gps_handler.fix.latitude, self.gps_handler.fix.longitude, self.gps_handler.utc
-                self.gps_handler.next()
+                    sock.send("%s %0.2f %0.2f %0.2f" % (node, self.sensor_bmp.read_temperature(), self.sensor_bmp.read_pressure(), self.sensor_bmp.read_altitude()))
+                    print node, self.sensor_bmp.read_temperature(), self.sensor_bmp.read_pressure(), self.sensor_bmp.read_altitude()
             except Exception as e:
                 raise(e)
-            # time.sleep(1) #TODO:check this time
+            time.sleep(1) #TODO:check this time
 
 if __name__ == '__main__':
-    gps = GpsComInterface()
+    bmp = BmpComInterface()
 
     tasks = []
 
     # Create a console socket
-    console_th = Thread(target=gps.console, args=(PORT_DATA_GPS, "*", NODE_DATA_GPS))
+    console_th = Thread(target=bmp.console, args=(PORT_DATA_BMP, "*", NODE_DATA_BMP))
     # console_th.daemon = True
     tasks.append(console_th)
     console_th.start()

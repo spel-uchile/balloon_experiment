@@ -1,0 +1,17 @@
+#install direwolf
+ #install subdep sound:
+ -sudo apt-get install libasound2-dev
+ -sudo apt-get install libgps-dev
+cd ~
+git clone https://www.github.com/wb2osz/direwolf
+cd direwolf
+make
+sudo make install
+make install-conf
+make install-rpi
+#correr programa desde directorio donde esta
+#el archivo "direwolf.conf"
+direwolf -t 0 -p
+#cambiar audio a analogo
+
+(*)en caso de tener que recompilar usar make clean antes

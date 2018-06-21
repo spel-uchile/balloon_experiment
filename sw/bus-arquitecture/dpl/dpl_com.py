@@ -21,6 +21,7 @@ __author__ = 'gdiaz'
 import zmq
 import sys
 import time
+import re
 
 from threading import Thread
 from gpiozero import *
@@ -55,6 +56,8 @@ class DplComInterface:
         #states
         self.lineal_state = 0   #0:meaning1, 1:meaning2
         self.servo_state = 0    #0:meaning1, 1:meaning2
+        #data args
+        self.prompt = "[node({}) port({})] <message>: "
 
     def start(self):
         self.enable_lineal.off()
@@ -117,6 +120,8 @@ class DplComInterface:
             val = False
         strt = self.start()
 
+
+
     def commands(self, port=PORT_CMD_DPL, ip="localhost", node=NODE_CMD_DPL):
         """ Read messages from node(s) """
         # if node != b'':
@@ -134,38 +139,73 @@ class DplComInterface:
             print "command rcv: " + cmd[2]
             self.execute(cmd[2])
 
-    def console(self, port=PORT_DATA_DPL, ip="localhost", node=NODE_DATA_DPL):
+    def console(self, port=PORT_DATA_DPL, ip="localhost", node_dest=NODE_HUB, origin_node=NODE_DATA_DPL):
         """ Send messages to node """
         ctx = zmq.Context(1)
         sock = ctx.socket(zmq.PUB)
         sock.bind('tcp://{}:{}'.format(ip, port))
 
+        # build msg
+        #          Prio   SRC   DST    DP   SP  RES HXRC
+        header = "{:02b}{:05b}{:05b}{:06b}{:06b}00000000"
+
+        prompt = self.prompt.format(node_dest, port)
+        # Get CSP header and data
+        hdr = header.format(1, int(origin_node), node_dest, port, 63)
+
+        # Build CSP message
+        hdr_b = re.findall("........",hdr)[::-1]
+        # print("con:", hdr_b, ["{:02x}".format(int(i, 2)) for i in hdr_b])
+        hdr = bytearray([int(i,2) for i in hdr_b])
+
         while True:
             self.state()
             print("Actuador lineal " + str(int(self.lineal_state)))
             print("Servo " + str(int(self.servo_state)))
+            # join data
+            data = " ".join([self.lineal_state, self.servo_state])
+            msg = bytearray([node_dest,]) + hdr + bytearray(data, "ascii")
             try:
-                sock.send("%s %d %d" % (node, self.lineal_state, self.servo_state))
+                sock.send(msg)
             except Exception as e:
                 pass
             time.sleep(0.25)
 
+
+def get_parameters():
+    """ Parse command line parameters """
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("-n", "--node", default=10, help="Node address")
+    parser.add_argument("-d", "--ip", default="localhost", help="Hub IP address")
+    parser.add_argument("-i", "--in_port", default="8001", help="Input port")
+    parser.add_argument("-o", "--out_port", default="8002", help="Output port")
+    parser.add_argument("--nmon", action="store_false", help="Disable monitor task")
+    parser.add_argument("--ncon", action="store_false", help="Disable console task")
+
+    return parser.parse_args()
+
 if __name__ == '__main__':
+    # Get arguments
+    args = get_parameters()
+
     dpl_com = DplComInterface()
 
     tasks = []
 
-    # Start monitor thread
-    commands_th = Thread(target=dpl_com.commands, args=(PORT_CMD_DPL, "localhost", NODE_CMD_DPL))
-    # commands_th.daemon = True
-    tasks.append(commands_th)
-    commands_th.start()
+    if args.nmon:
+        # Start monitor thread
+        commands_th = Thread(target=dpl_com.commands, args=(args.out_port, args.ip, args.node))
+        # commands_th.daemon = True
+        tasks.append(commands_th)
+        commands_th.start()
 
-    # Create a console socket
-    console_th = Thread(target=dpl_com.console, args=(PORT_DATA_DPL, "*", NODE_DATA_DPL))
-    # console_th.daemon = True
-    tasks.append(console_th)
-    console_th.start()
+    if args.ncon:
+        # Create a console socket
+        console_th = Thread(target=dpl_com.console, args=(args.in_port, args.ip, args.node))
+        # console_th.daemon = True
+        tasks.append(console_th)
+        console_th.start()
 
     for th in tasks:
         th.join()

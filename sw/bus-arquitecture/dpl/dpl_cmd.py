@@ -24,46 +24,86 @@ from threading import Thread
 from time import sleep
 
 #list of commands
-from dpl_com import OPEN_LA, CLOSE_LA, OPEN_SA, CLOSE_SA
+from dpl_com import OPEN_LA, CLOSE_LA, OPEN_SA, CLOSE_SA, GET_DATA
 
 sys.path.append('../')
 
-from nodes.node_list import NODE_CMD_DPL,PORT_CMD_DPL
+from nodes.node_list import NODE_DPL, CSP_PORT_APPS
 
 class DplCmdInterface:
     def __init__(self):
-        # com parameters
-        self.action = "none"
+        # ctrl params
+        self.action = 0
+        #com args
+        self.node = NODE_DPL_CMD
+        self.node_dest = NODE_DPL
+        self.port_csp = CSP_PORT_APPS
+        self.prompt = "[node({}) port({})] <message>: "
+
     def action_list(self):
         print("Seleccion de acciones")
         print(str(OPEN_LA) + ": Cerrar actuador lineal")
         print(str(CLOSE_LA) + ": Abrir actuador lineal")
         print(str(OPEN_SA) + ": Servo en 0")
         print(str(CLOSE_SA) + ": Servo en 180")
+        print(str(GET_DATA) + ": Obtener Datos")
 
-    def console(self, port=PORT_CMD_DPL, ip="*", node=NODE_CMD_DPL):
+    def console(self, ip="localhost", in_port_tcp=8002, out_port_tcp=8001):
         """ Send messages to node """
         ctx = zmq.Context()
-        sock = ctx.socket(zmq.PUB)
-        sock.bind('tcp://{}:{}'.format(ip, port))
+        pub = ctx.socket(zmq.PUB)
+        pub.bind('tcp://{}:{}'.format(ip, out_port_tcp))
 
         while True:
             try:
                 self.action_list()
                 self.action = input("Accion a ejecutar: ")
-                sock.send("%s %s" % (node, self.action))
+                # build msg
+                #          Prio   SRC   DST    DP   SP  RES HXRC
+                header_ = "{:02b}{:05b}{:05b}{:06b}{:06b}00000000"
+
+                prompt = self.prompt.format(self.node_dest, self.port_csp)
+                # Get CSP header_ and data
+                hdr = header_.format(1, int(self.node), self.node_dest, self.port_csp, 63)
+
+                # Build CSP message
+                hdr_b = re.findall("........",hdr)[::-1]
+                # print("con:", hdr_b, ["{:02x}".format(int(i, 2)) for i in hdr_b])
+                hdr = bytearray([int(i,2) for i in hdr_b])
+                # join data
+                data_ = " ".join([self.action])
+                msg = bytearray([self.node_dest,]) + hdr + bytearray(data_, "ascii")
+                # send data to OBC node
+                try:
+                    pub.send(msg)
+                except Exception as e:
+                    pass
             except Exception as e:
                 print("Comando no existe. Ver lista de comandos.")
 
-            time.sleep(0.25)
+def get_parameters():
+    """ Parse command line parameters """
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("-n", "--node", default=10, help="Node address")
+    parser.add_argument("-d", "--ip", default="localhost", help="Hub IP address")
+    parser.add_argument("-i", "--in_port", default="8001", help="Hub Input port")
+    parser.add_argument("-o", "--out_port", default="8002", help="Hub Output port")
+    parser.add_argument("--nmon", action="store_false", help="Disable monitor task")
+    parser.add_argument("--ncon", action="store_false", help="Disable console task")
+
+    return parser.parse_args()
 
 if __name__ == '__main__':
+    # Get arguments
+    args = get_parameters()
+
     dpl_cmd = DplCmdInterface()
 
     tasks = []
 
     # Create a console socket
-    console_th = Thread(target=dpl_cmd.console, args=(PORT_CMD_DPL, "*", NODE_CMD_DPL))
+    console_th = Thread(target=dpl_cmd.console, args=(args.ip, args.out_port, args.in_port))
     console_th.daemon = True
     tasks.append(console_th)
     console_th.start()

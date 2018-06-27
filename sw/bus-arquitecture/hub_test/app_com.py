@@ -50,7 +50,7 @@ class DplComInterface:
         self.prompt = "[node({}) port({})] <message>: "
 
     def execute(self, cmd):
-        print cmd
+        print (cmd)
 
     def console(self, ip="localhost", in_port_tcp=8002, out_port_tcp=8001):
         """ Send messages to node """

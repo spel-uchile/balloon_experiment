@@ -26,7 +26,7 @@ from threading import Thread
 from time import sleep
 
 #list of commands
-from dpl_com import OPEN_LA, CLOSE_LA, OPEN_SA, CLOSE_SA, GET_DATA
+from app_com import OPEN_LA, CLOSE_LA, OPEN_SA, CLOSE_SA, GET_DATA
 
 sys.path.append('../')
 

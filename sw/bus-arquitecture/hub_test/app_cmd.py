@@ -37,7 +37,8 @@ class DplCmdInterface:
         # ctrl params
         self.action = 0
         #com args
-        self.node = NODE_DPL_CMD
+        self.node = chr(int(NODE_DPL_CMD)).encode("ascii", "replace")
+        # self.node_dest = chr(int(NODE_DPL)).encode("ascii", "replace")
         self.node_dest = NODE_DPL
         self.port_csp = CSP_PORT_APPS
         self.prompt = "[node({}) port({})] <message>: "
@@ -58,7 +59,7 @@ class DplCmdInterface:
                 prompt = self.prompt.format(self.node_dest, self.port_csp)
                 # Get CSP header_ and data
                 #hdr = header_.format(1, 3, 2, 14, 63)
-                hdr = header_.format(1, int(self.node), int(self.node_dest), int(self.port_csp), 63)
+                hdr = header_.format(1, int.from_bytes(self.node, byteorder='little'), self.node_dest, self.port_csp, 63)
 
                 # Build CSP message
                 hdr_b = re.findall("........",hdr)[::-1]

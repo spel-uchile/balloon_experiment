@@ -19,6 +19,8 @@ __author__ = 'gdiaz'
 import zmq
 import sys
 import time
+import argparse
+import re
 
 from threading import Thread
 from time import sleep
@@ -28,7 +30,7 @@ from dpl_com import OPEN_LA, CLOSE_LA, OPEN_SA, CLOSE_SA, GET_DATA
 
 sys.path.append('../')
 
-from nodes.node_list import NODE_DPL, CSP_PORT_APPS
+from nodes.node_list import NODE_DPL, NODE_DPL_CMD, CSP_PORT_APPS
 
 class DplCmdInterface:
     def __init__(self):
@@ -52,10 +54,10 @@ class DplCmdInterface:
         """ Send messages to node """
         ctx = zmq.Context()
         pub = ctx.socket(zmq.PUB)
-        pub.bind('tcp://{}:{}'.format(ip, out_port_tcp))
+        pub.connect('tcp://{}:{}'.format(ip, out_port_tcp))
 
         while True:
-            try:
+            #try:
                 self.action_list()
                 self.action = input("Accion a ejecutar: ")
                 # build msg
@@ -64,7 +66,8 @@ class DplCmdInterface:
 
                 prompt = self.prompt.format(self.node_dest, self.port_csp)
                 # Get CSP header_ and data
-                hdr = header_.format(1, int(self.node), self.node_dest, self.port_csp, 63)
+                #hdr = header_.format(1, 3, 2, 14, 63)
+                hdr = header_.format(1, int(self.node), int(self.node_dest), int(self.port_csp), 63)
 
                 # Build CSP message
                 hdr_b = re.findall("........",hdr)[::-1]
@@ -72,14 +75,15 @@ class DplCmdInterface:
                 hdr = bytearray([int(i,2) for i in hdr_b])
                 # join data
                 data_ = " ".join([self.action])
-                msg = bytearray([self.node_dest,]) + hdr + bytearray(data_, "ascii")
+                msg = bytearray([int(self.node_dest),]) + hdr + bytearray(data_, "ascii")
+                pub.send(msg)
                 # send data to OBC node
-                try:
-                    pub.send(msg)
-                except Exception as e:
-                    pass
-            except Exception as e:
-                print("Comando no existe. Ver lista de comandos.")
+            #    try:
+            #        pub.send(msg)
+             #   except Exception as e:
+             #       pass
+            #except Exception as e:
+            #    print("Comando no existe. Ver lista de comandos.")
 
 def get_parameters():
     """ Parse command line parameters """

@@ -22,6 +22,7 @@ import zmq
 import sys
 import time
 import re
+import argparse
 
 from threading import Thread
 from gpiozero import *
@@ -129,8 +130,8 @@ class DplComInterface:
         pub = ctx.socket(zmq.PUB)
         sub = ctx.socket(zmq.SUB)
         sub.setsockopt(zmq.SUBSCRIBE, self.node)
-        pub.bind('tcp://{}:{}'.format(ip, out_port_tcp))
-        sub.bind('tcp://{}:{}'.format(ip, in_port_tcp))
+        pub.connect('tcp://{}:{}'.format(ip, out_port_tcp))
+        sub.connect('tcp://{}:{}'.format(ip, in_port_tcp))
 
         while True:
             frame = sub.recv_multipart()[0]
@@ -157,7 +158,7 @@ class DplComInterface:
 
                 prompt = self.prompt.format(self.node_dest, self.port_csp)
                 # Get CSP header_ and data
-                hdr = header_.format(1, int(self.node), self.node_dest, self.port_csp, 63)
+                hdr = header_.format(1, int(self.node), int(self.node_dest), self.port_csp, 63)
 
                 # Build CSP message
                 hdr_b = re.findall("........",hdr)[::-1]
@@ -165,7 +166,7 @@ class DplComInterface:
                 hdr = bytearray([int(i,2) for i in hdr_b])
                 # join data
                 data_ = " ".join([self.lineal_state, self.servo_state])
-                msg = bytearray([self.node_dest,]) + hdr + bytearray(data_, "ascii")
+                msg = bytearray([int(self.node_dest),]) + hdr + bytearray(data_, "ascii")
                 # send data to OBC node
                 try:
                     pub.send(msg)

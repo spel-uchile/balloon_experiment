@@ -19,6 +19,8 @@ __author__ = 'gdiaz'
 import zmq
 import sys
 import time
+import re
+import argparse
 
 from threading import Thread
 from time import sleep
@@ -27,42 +29,114 @@ import Adafruit_BMP.BMP085 as BMP085
 
 sys.path.append('../')
 
-from nodes.node_list import NODE_DATA_BMP, PORT_DATA_BMP
+from nodes.node_list import NODE_BMP, NODE_OBC, CSP_PORT_APPS
+
+#define commands
+GET_DATA = 5
 
 class BmpComInterface:
     def __init__(self):
-        # arguments stuff
+        # sensor arguments
         self.sensor_bmp = BMP085.BMP085()
+        self.temperature = 0        #float
+        self.pressure = 0           #float
+        self.altitude = 0           #float
+        #com args
+        self.node = chr(int(NODE_BMP)).encode("ascii", "replace")
+        self.node_dest = NODE_OBC
+        self.port_csp = CSP_PORT_APPS
+        self.prompt = "[node({}) port({})] <message>: "
 
-    def test_method(self, cmd):
-        print "rcv from node: "+cmd
+    def update_data(self):
+        self.temperature = self.sensor_bmp.read_temperature()
+        self.pressure = self.sensor_bmp.read_pressure()
+        self.altitude = self.sensor_bmp.read_altitude()
+        time.sleep(0.25)
 
-    def console(self, port=PORT_DATA_BMP, ip="localhost", node=NODE_DATA_BMP):
+    def console(self, ip="localhost", in_port_tcp=8002, out_port_tcp=8001):
         """ Send messages to node """
-        ctx = zmq.Context(1)
-        sock = ctx.socket(zmq.PUB)
-        sock.bind('tcp://{}:{}'.format(ip, port))
-        print "sending data to node:"+str(node)
+        ctx = zmq.Context()
+        pub = ctx.socket(zmq.PUB)
+        sub = ctx.socket(zmq.SUB)
+        sub.setsockopt(zmq.SUBSCRIBE, self.node)
+        pub.connect('tcp://{}:{}'.format(ip, out_port_tcp))
+        sub.connect('tcp://{}:{}'.format(ip, in_port_tcp))
+        print("Start Atmospheric Intreface")
 
         while True:
+            frame = sub.recv_multipart()[0]
+            header_a = ["{:02x}".format(i) for i in frame[1:5]]
+            header = "0x"+"".join(header_a[::-1])
+            data = frame[5:]
             try:
-                if True:#TODO: check if data is valid
-                    sock.send("%s %0.2f %0.2f %0.2f" % (node, self.sensor_bmp.read_temperature(), self.sensor_bmp.read_pressure(), self.sensor_bmp.read_altitude()))
-                    print node, self.sensor_bmp.read_temperature(), self.sensor_bmp.read_pressure(), self.sensor_bmp.read_altitude()
-            except Exception as e:
-                raise(e)
-            time.sleep(1) #TODO:check this time
+                csp_header = parse_csp(header)
+            except:
+                csp_header = ""
+            print('\nMON:', frame)
+            print('\tHeader: {},'.format(csp_header))
+            print('\tData: {}'.format(data))
+            cmd = int(data)
+
+            if cmd == GET_DATA:
+                #update data
+                print('\nMeasurements:')
+                print('\tTemperature: {},'.format(self.temperature))
+                print('\tPressure: {}'.format(self.pressure))
+                print('\tAltitude: {}'.format(self.altitude))
+                # build msg
+                #          Prio   SRC   DST    DP   SP  RES HXRC
+                header_ = "{:02b}{:05b}{:05b}{:06b}{:06b}00000000"
+
+                prompt = self.prompt.format(self.node_dest, self.port_csp)
+                # Get CSP header_ and data
+                hdr = header_.format(1, int.from_bytes(self.node, byteorder='little'), self.node_dest, self.port_csp, 63)
+
+                # Build CSP message
+                hdr_b = re.findall("........",hdr)[::-1]
+                # print("con:", hdr_b, ["{:02x}".format(int(i, 2)) for i in hdr_b])
+                hdr = bytearray([int(i,2) for i in hdr_b])
+                # join data
+                data_ = " ".join([str(self.temperature), str(self.pressure), str(self.altitude)])
+                msg = bytearray([int(self.node_dest),]) + hdr + bytearray(data_, "ascii")
+                # send data to OBC node
+                try:
+                    pub.send(msg)
+                except Exception as e:
+                    pass
+
+def get_parameters():
+    """ Parse command line parameters """
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("-n", "--node", default=10, help="Node address")
+    parser.add_argument("-d", "--ip", default="localhost", help="Hub IP address")
+    parser.add_argument("-i", "--in_port", default="8001", help="Hub Input port")
+    parser.add_argument("-o", "--out_port", default="8002", help="Hub Output port")
+    parser.add_argument("--nmon", action="store_false", help="Disable monitor task")
+    parser.add_argument("--ncon", action="store_false", help="Disable console task")
+
+    return parser.parse_args()
 
 if __name__ == '__main__':
+    # Get arguments
+    args = get_parameters()
+
     bmp = BmpComInterface()
 
     tasks = []
 
-    # Create a console socket
-    console_th = Thread(target=bmp.console, args=(PORT_DATA_BMP, "*", NODE_DATA_BMP))
-    # console_th.daemon = True
-    tasks.append(console_th)
-    console_th.start()
+    # Create a update data thread
+    data_th = Thread(target=bmp.update_data)
+    # data_th.daemon = True
+    tasks.append(data_th)
+    data_th.start()
+
+    if args.ncon:
+        # Create a console socket
+        console_th = Thread(target=bmp.console, args=(args.ip, args.out_port, args.in_port))
+        # console_th.daemon = True
+        tasks.append(console_th)
+        console_th.start()
 
     for th in tasks:
         th.join()

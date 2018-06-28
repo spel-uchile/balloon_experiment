@@ -60,6 +60,8 @@ class GpsComInterface:
                 return -1
         except:
             #print num, id
+            if id==3:#TODO: chech this!!!
+                return -1
             return num
 
     def update_data(self):

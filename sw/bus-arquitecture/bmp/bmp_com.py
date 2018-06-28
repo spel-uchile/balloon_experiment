@@ -48,10 +48,11 @@ class BmpComInterface:
         self.prompt = "[node({}) port({})] <message>: "
 
     def update_data(self):
-        self.temperature = self.sensor_bmp.read_temperature()
-        self.pressure = self.sensor_bmp.read_pressure()
-        self.altitude = self.sensor_bmp.read_altitude()
-        time.sleep(0.25)
+        while True:
+            self.temperature = self.sensor_bmp.read_temperature()
+            self.pressure = self.sensor_bmp.read_pressure()
+            self.altitude = self.sensor_bmp.read_altitude()
+            time.sleep(0.25)
 
     def console(self, ip="localhost", in_port_tcp=8002, out_port_tcp=8001):
         """ Send messages to node """
@@ -61,7 +62,7 @@ class BmpComInterface:
         sub.setsockopt(zmq.SUBSCRIBE, self.node)
         pub.connect('tcp://{}:{}'.format(ip, out_port_tcp))
         sub.connect('tcp://{}:{}'.format(ip, in_port_tcp))
-        print("Start Atmospheric Intreface")
+        print('Start Atmospheric Intreface as node:" {},'.format(int.from_bytes(self.node, byteorder='little')))
 
         while True:
             frame = sub.recv_multipart()[0]
@@ -103,6 +104,7 @@ class BmpComInterface:
                     pub.send(msg)
                 except Exception as e:
                     pass
+            cmd = -1
 
 def get_parameters():
     """ Parse command line parameters """

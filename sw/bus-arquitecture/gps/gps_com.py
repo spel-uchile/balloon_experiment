@@ -21,6 +21,8 @@ import sys
 import time
 import re
 import argparse
+import codecs
+import math
 
 from threading import Thread
 from time import sleep
@@ -51,15 +53,27 @@ class GpsComInterface:
         self.port_csp = CSP_PORT_APPS
         self.prompt = "[node({}) port({})] <message>: "
 
+    def check_nan(self, num, id):
+        #print(type(num))
+        try:
+            if math.isnan(num):
+                return -1
+        except:
+            #print num, id
+            return num
+
     def update_data(self):
-        self.latitude = self.gps_handler.fix.latitude
-        self.longitude = self.gps_handler.fix.longitude
-        self.time_utc = self.gps_handler.utc
-        self.fix_time = self.gps_handler.fix.time
-        self.altitude = self.gps_handler.fix.altitude
-        self.speed_horizontal = self.gps_handler.fix.speed_horizontal
-        self.speed_vertical = self.gps_handler.fix.speed_vertical
-        time.sleep(0.25)
+        while True:
+            self.latitude = self.check_nan(self.gps_handler.fix.latitude, 1)
+            self.longitude = self.check_nan(self.gps_handler.fix.longitude, 2)
+            self.time_utc = self.gps_handler.utc
+            self.fix_time = self.check_nan(self.gps_handler.fix.time, 3)
+            self.altitude = self.check_nan(self.gps_handler.fix.altitude, 4)
+            self.speed_horizontal = self.check_nan(self.gps_handler.fix.speed, 5)
+            self.speed_vertical = self.check_nan(self.gps_handler.fix.climb, 6)
+            #print(self.gps_handler.utc, self.gps_handler.fix.time)
+            time.sleep(0.1)
+            self.gps_handler.next()
 
     def console(self, ip="localhost", in_port_tcp=8002, out_port_tcp=8001):
         """ Send messages to node """
@@ -69,11 +83,17 @@ class GpsComInterface:
         sub.setsockopt(zmq.SUBSCRIBE, self.node)
         pub.connect('tcp://{}:{}'.format(ip, out_port_tcp))
         sub.connect('tcp://{}:{}'.format(ip, in_port_tcp))
-        print('Start GPS Intreface as node: {}'.format(self.node))
+        print('Start GPS Intreface as node: {}'.format(int(codecs.encode(self.node, 'hex'), 16)))
 
         while True:
-            frame = sub.recv_multipart()[0]
-            header_a = ["{:02x}".format(i) for i in frame[1:5]]
+            frame = sub.recv_multipart()[0] 
+            header_a = []
+            for byte in frame[1:5]:
+                byte_int = int(codecs.encode(byte, 'hex'), 16)
+                byte_hex = hex(byte_int)
+                header_a.append(byte_hex[2:])
+
+            #header_a = ["{:02x}".format(int(i)) for i in frame[1:5]]
             header = "0x"+"".join(header_a[::-1])
             data = frame[5:]
             try:
@@ -101,7 +121,7 @@ class GpsComInterface:
 
                 prompt = self.prompt.format(self.node_dest, self.port_csp)
                 # Get CSP header_ and data
-                hdr = header_.format(1, int.from_bytes(self.node, byteorder='little'), self.node_dest, self.port_csp, 63)
+                hdr = header_.format(1, int(codecs.encode(self.node, 'hex'), 16), self.node_dest, self.port_csp, 63)
 
                 # Build CSP message
                 hdr_b = re.findall("........",hdr)[::-1]
@@ -115,6 +135,7 @@ class GpsComInterface:
                     pub.send(msg)
                 except Exception as e:
                     pass
+            cmd = -1
 
 def get_parameters():
     """ Parse command line parameters """

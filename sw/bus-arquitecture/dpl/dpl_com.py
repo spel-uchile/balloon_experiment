@@ -55,7 +55,7 @@ class DplComInterface:
         #Servo magnet
         self.mag_int2 = Button(17)
         #states
-        self.lineal_state = 0   #0:meaning1, 1:meaning2
+        self.lineal_state = 0   #0:cerrado/extendido, 1:abierto/retraido
         self.servo_state = 0    #0:meaning1, 1:meaning2
         #com args
         self.node = chr(int(NODE_DPL)).encode("ascii", "replace")
@@ -106,23 +106,23 @@ class DplComInterface:
 
     def execute(self, cmd):
         strt = self.start()
-        accion = int(cmd)
-        if accion == OPEN_LA:
+        if cmd == OPEN_LA:
             print("Ex: open_lineal")
             val = self.open_lineal()
-        elif accion == CLOSE_LA:
+        elif cmd == CLOSE_LA:
             print("Ex: close_lineal")
             val = self.close_lineal()
-        elif accion == OPEN_SA:
+        elif cmd == OPEN_SA:
             print("Ex: servo_0")
             val = self.servo_0()
-        elif accion == CLOSE_SA:
+        elif cmd == CLOSE_SA:
             print("Ex: servo_180")
             val = self.servo_180()
         else:
             print("Comando no existe. Ver lista de comandos.")
             val = False
         strt = self.start()
+        self.state()
 
     def console(self, ip="localhost", in_port_tcp=8002, out_port_tcp=8001):
         """ Send messages to node """
@@ -132,6 +132,7 @@ class DplComInterface:
         sub.setsockopt(zmq.SUBSCRIBE, self.node)
         pub.connect('tcp://{}:{}'.format(ip, out_port_tcp))
         sub.connect('tcp://{}:{}'.format(ip, in_port_tcp))
+        print("Start Deployment Intreface")
 
         while True:
             frame = sub.recv_multipart()[0]
@@ -145,13 +146,14 @@ class DplComInterface:
             print('\nMON:', frame)
             print('\tHeader: {},'.format(csp_header))
             print('\tData: {}'.format(data))
-            cmd = data[0]
+            cmd = int(data)
 
             if cmd == GET_DATA:
                 #update data
                 self.state()
-                print("Actuador lineal " + str(int(self.lineal_state)))
-                print("Servo " + str(int(self.servo_state)))
+                print('\nStates:')
+                print('\tLinear Actuator: {},'.format(self.lineal_state))
+                print('\tServo Actuator: {}'.format(self.servo_state))
                 # build msg
                 #          Prio   SRC   DST    DP   SP  RES HXRC
                 header_ = "{:02b}{:05b}{:05b}{:06b}{:06b}00000000"
@@ -165,7 +167,7 @@ class DplComInterface:
                 # print("con:", hdr_b, ["{:02x}".format(int(i, 2)) for i in hdr_b])
                 hdr = bytearray([int(i,2) for i in hdr_b])
                 # join data
-                data_ = " ".join([self.lineal_state, self.servo_state])
+                data_ = " ".join([str(int(self.lineal_state)), str(int(self.servo_state))])
                 msg = bytearray([int(self.node_dest),]) + hdr + bytearray(data_, "ascii")
                 # send data to OBC node
                 try:

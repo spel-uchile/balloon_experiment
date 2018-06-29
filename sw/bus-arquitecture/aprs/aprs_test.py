@@ -21,6 +21,7 @@ import sys
 import time
 import argparse
 import re
+import kiss
 
 from threading import Thread
 from time import sleep
@@ -48,23 +49,9 @@ class DplCmdInterface:
 
         while True:
             #try:
-                self.action = input("cmd to App (node 2): ")
-                # build msg
-                #          Prio   SRC   DST    DP   SP  RES HXRC
-                header_ = "{:02b}{:05b}{:05b}{:06b}{:06b}00000000"
-
-                prompt = self.prompt.format(self.node_dest, self.port_csp)
-                # Get CSP header_ and data
-                #hdr = header_.format(1, 3, 2, 14, 63)
-                hdr = header_.format(1, int.from_bytes(self.node, byteorder='little'), self.node_dest, self.port_csp, 63)
-
-                # Build CSP message
-                hdr_b = re.findall("........",hdr)[::-1]
-                # print("con:", hdr_b, ["{:02x}".format(int(i, 2)) for i in hdr_b])
-                hdr = bytearray([int(i,2) for i in hdr_b])
-                # join data
-                data_ = " ".join([self.action])
-                msg = bytearray([int(self.node_dest),]) + hdr + bytearray(data_, "ascii")
+                frame = ["C0", "50", "48", "65", "6C", "6C", "6F", "C0"]
+                msg = bytearray([int(i,16) for hex_num in frame])
+                print msg
                 pub.send(msg)
                 # send data to OBC node
             #    try:

@@ -21,17 +21,18 @@ import sys
 import time
 import argparse
 import re
-import kiss
+import serial
 
 from threading import Thread
 from time import sleep
+from struct import *
 
 sys.path.append('../')
 
 from nodes.node_list import NODE_DPL, NODE_DPL_CMD, CSP_PORT_APPS
 
 class DplCmdInterface:
-    def __init__(self):
+    def __init__(self, kiss_port = '/tmp/kisstnc'):
         # ctrl params
         self.action = 0
         #com args
@@ -40,26 +41,70 @@ class DplCmdInterface:
         self.node_dest = NODE_DPL
         self.port_csp = CSP_PORT_APPS
         self.prompt = "[node({}) port({})] <message>: "
+        # aprs params
+        self.kiss_port = kiss_port
+        self.aprs_kiss = serial.Serial(self.kiss_port, 1200, timeout=5)
+        self.TEST_FRAME = "\xc0\x00\x48\x65\x6c\x6c\x6f\x20\x74\x68\x69\x73\x20\x69\x73\x20\x74\x68\x65\x20\x45\x6e\x74\x65\x72\x70\x72\x69\x73\x65\xc0"
+        self.INFO_MSG = "Hello this is the Enterprise a radiosonde of research and development."
+
+    def test_data(self):
+
+        latitude = -33.5422
+        longitude = -70.6340
+        time_utc = 123.456
+        fix_time = 789.012
+        altitude = 600.123
+        speed_horizontal =  0.123
+        speed_vertical = 0.456
+
+        temperature = 20.45
+        pressure = 900.234
+        altitude = 607.234
+
+        lineal_state = 0
+        servo_state = 1
+
+        info = "Hello this is the Enterprise a radiosonde of research and development."
+
+        data = pack('ffffffffffbb', 
+            latitude, longitude, time_utc, fix_time, altitude, speed_horizontal, speed_vertical,
+            temperature, pressure, altitude,
+            lineal_state, servo_state)
+
+        return data
+
 
     def console(self, ip="localhost", in_port_tcp=8002, out_port_tcp=8001):
         """ Send messages to node """
         ctx = zmq.Context()
-        pub = ctx.socket(zmq.PUB)
-        pub.connect('tcp://{}:{}'.format(ip, out_port_tcp))
+        sub = ctx.socket(zmq.SUB)
+        sub.setsockopt(zmq.SUBSCRIBE, self.node)
+        sub.connect('tcp://{}:{}'.format(ip, in_port_tcp))
+        print("Start APRS Intreface")
 
         while True:
-            #try:
-                frame = ["C0", "50", "48", "65", "6C", "6C", "6F", "C0"]
-                msg = bytearray([int(i,16) for hex_num in frame])
-                print msg
-                pub.send(msg)
-                # send data to OBC node
-            #    try:
-            #        pub.send(msg)
-             #   except Exception as e:
-             #       pass
-            #except Exception as e:
-            #    print("Comando no existe. Ver lista de comandos.")
+            # frame = sub.recv_multipart()[0]
+            # header_a = ["{:02x}".format(i) for i in frame[1:5]]
+            # header = "0x"+"".join(header_a[::-1])
+            # data = frame[5:]
+            # try:
+            #     csp_header = parse_csp(header)
+            # except:
+            #     csp_header = ""
+            # print('\nMON:', frame)
+            # print('\tHeader: {},'.format(csp_header))
+            # print('\tData: {}'.format(data))
+
+            # Test data
+            data = self.test_data()
+            kiss_frame = "\xc0\x00"+data+self.INFO_MSG+"\xc0"
+            
+            # send data to APRS by kiss protocol
+            try:
+                self.aprs_kiss.write(kiss_frame)
+            except Exception as e:
+                pass
+            time.sleep(5)
 
 def get_parameters():
     """ Parse command line parameters """

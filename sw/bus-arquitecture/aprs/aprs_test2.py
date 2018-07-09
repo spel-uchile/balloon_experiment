@@ -72,7 +72,6 @@ class DplCmdInterface:
         # print str(data)
         print("%.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %d %d" % (latitude, longitude, time_utc, fix_time, altitude_gps, speed_horizontal, speed_vertical, temperature, pressure, altitude_atms, lineal_state, servo_state))
 
-
     def console(self, ip="localhost", in_port_tcp=8002, out_port_tcp=8001):
         """ Send messages to node """
         ctx = zmq.Context()

@@ -36,7 +36,7 @@ class APRSTEST:
         self.sensor_bmp = BMP085.BMP085()
         self.temperature = 0        #float
         self.pressure = 0           #float
-        self.altitude = 0           #float
+        self.altitude_atms = 0           #float
         #Linear Actuator Validation Pin
         self.mag_int1 = Button(4)
         #Servo magnet
@@ -51,7 +51,7 @@ class APRSTEST:
         self.longitude = 0          #float
         self.time_utc = 0           #str
         self.fix_time = 0           #float
-        self.altitude = 0           #float
+        self.altitude_gps = 0           #float
         self.speed_horizontal = 0   #float
         self.speed_vertical = 0     #float
 
@@ -66,16 +66,21 @@ class APRSTEST:
 
     def check_nan(self, num, id):
         #print(type(num))
+        #print(num)
         try:
             if math.isnan(num):
                 return -1
+            if num == None:
+                return -1
         except:
             #print num, id
+            if num == None:
+                return -1
             if id==3:#TODO: chech this!!!
                 return -1
             return num
 
-    def update_gps():
+    def update_gps(self):
         self.latitude = self.check_nan(self.gps_handler.fix.latitude, 1)
         self.longitude = self.check_nan(self.gps_handler.fix.longitude, 2)
         self.time_utc = self.gps_handler.utc
@@ -84,8 +89,14 @@ class APRSTEST:
         self.speed_horizontal = self.check_nan(self.gps_handler.fix.speed, 5)
         self.speed_vertical = self.check_nan(self.gps_handler.fix.climb, 6)
         #print(self.gps_handler.utc, self.gps_handler.fix.time)
-        time.sleep(0.1)
+        #time.sleep(0.1)
         self.gps_handler.next()
+        if self.latitude == None:
+            self.latitude = -1
+        if self.longitude == None:
+            self.longitude = -1
+
+        #print self.latitude
 
 if __name__ == '__main__':
     # Get arguments
@@ -96,4 +107,4 @@ if __name__ == '__main__':
     aprs.update_dpl()
     aprs.update_gps()
 
-    print("%.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %d %d" % (aprs.latitude, aprs.longitude, aprs.time_utc, aprs.fix_time, aprs.altitude_gps, aprs.speed_horizontal, aprs.speed_vertical, aprs.temperature, aprs.pressure, aprs.altitude_atms, aprs.lineal_state, aprs.servo_state))
+    print("%.3f %.3f %s %.3f %.3f %.3f %.3f %.3f %.3f %.3f %d %d" % (aprs.latitude, aprs.longitude, aprs.time_utc, aprs.fix_time, aprs.altitude_gps, aprs.speed_horizontal, aprs.speed_vertical, aprs.temperature, aprs.pressure, aprs.altitude_atms, aprs.lineal_state, aprs.servo_state))   

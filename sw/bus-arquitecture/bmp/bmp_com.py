@@ -76,7 +76,7 @@ class BmpComInterface:
             print('\nMON:', frame)
             print('\tHeader: {},'.format(csp_header))
             print('\tData: {}'.format(data))
-            cmd = data
+            cmd = data.decode("ascii")
 
             if cmd == GET_DATA:
                 #update data

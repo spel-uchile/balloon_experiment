@@ -132,7 +132,7 @@ class DplComInterface:
         sub.setsockopt(zmq.SUBSCRIBE, self.node)
         pub.connect('tcp://{}:{}'.format(ip, out_port_tcp))
         sub.connect('tcp://{}:{}'.format(ip, in_port_tcp))
-        print("Start Deployment Intreface")
+        print('Start Deployment Intreface as node:" {},'.format(int.from_bytes(self.node, byteorder='little')))
 
         while True:
             frame = sub.recv_multipart()[0]
@@ -146,7 +146,7 @@ class DplComInterface:
             print('\nMON:', frame)
             print('\tHeader: {},'.format(csp_header))
             print('\tData: {}'.format(data))
-            cmd = int(data)
+            cmd = data.decode("ascii")
 
             if cmd == GET_DATA:
                 #update data

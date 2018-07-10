@@ -33,11 +33,11 @@ sys.path.append('../')
 from nodes.node_list import NODE_DPL, NODE_OBC, CSP_PORT_APPS
 
 #define commands
-OPEN_LA = 1
-CLOSE_LA = 2
-OPEN_SA = 3
-CLOSE_SA = 4
-GET_DATA = 5
+OPEN_LA = "open_dpl_la"
+CLOSE_LA = "close_dpl_la"
+OPEN_SA = "open_dpl_sm"
+CLOSE_SA = "close_dpl_sm"
+GET_DATA = "get_dpl_data"
 
 class DplComInterface:
     def __init__(self):

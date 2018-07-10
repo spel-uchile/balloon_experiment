@@ -32,7 +32,7 @@ sys.path.append('../')
 from nodes.node_list import NODE_BMP, NODE_OBC, CSP_PORT_APPS
 
 #define commands
-GET_DATA = 5
+GET_DATA = "get_prs_data"
 
 class BmpComInterface:
     def __init__(self):
@@ -76,13 +76,13 @@ class BmpComInterface:
             print('\nMON:', frame)
             print('\tHeader: {},'.format(csp_header))
             print('\tData: {}'.format(data))
-            cmd = int(data)
+            cmd = data
 
             if cmd == GET_DATA:
                 #update data
                 print('\nMeasurements:')
-                print('\tTemperature: {},'.format(self.temperature))
                 print('\tPressure: {}'.format(self.pressure))
+                print('\tTemperature: {},'.format(self.temperature))
                 print('\tAltitude: {}'.format(self.altitude))
                 # build msg
                 #          Prio   SRC   DST    DP   SP  RES HXRC
@@ -97,7 +97,7 @@ class BmpComInterface:
                 # print("con:", hdr_b, ["{:02x}".format(int(i, 2)) for i in hdr_b])
                 hdr = bytearray([int(i,2) for i in hdr_b])
                 # join data
-                data_ = " ".join([str(self.temperature), str(self.pressure), str(self.altitude)])
+                data_ = " ".join([str(self.pressure), str(self.temperature), str(self.altitude)])
                 msg = bytearray([int(self.node_dest),]) + hdr + bytearray(data_, "ascii")
                 # send data to OBC node
                 try:

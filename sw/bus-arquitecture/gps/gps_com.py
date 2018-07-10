@@ -27,13 +27,14 @@ import math
 from threading import Thread
 from time import sleep
 from gps import *
+from struct import *
 
 sys.path.append('../')
 
 from nodes.node_list import NODE_GPS, NODE_OBC, CSP_PORT_APPS
 
 #define commands
-GET_DATA = 5
+GET_DATA = "get_gps_data"
 
 class GpsComInterface:
     def __init__(self):
@@ -73,6 +74,8 @@ class GpsComInterface:
             self.altitude = self.check_nan(self.gps_handler.fix.altitude, 4)
             self.speed_horizontal = self.check_nan(self.gps_handler.fix.speed, 5)
             self.speed_vertical = self.check_nan(self.gps_handler.fix.climb, 6)
+            self.mode = self.check_nan(self.gps_handler.fix.mode, 7)
+            self.satellites = self.check_nan(self.gps_handler.satellites, 8)
             #print(self.gps_handler.utc, self.gps_handler.fix.time)
             time.sleep(0.1)
             self.gps_handler.next()
@@ -105,18 +108,19 @@ class GpsComInterface:
             print('\nMON:', frame)
             print('\tHeader: {},'.format(csp_header))
             print('\tData: {}'.format(data))
-            cmd = int(data)
+            cmd = data
 
             if cmd == GET_DATA:
                 #update data
                 print('\nMeasurements:')
-                print('\tLatitude: {},'.format(self.latitude))
-                print('\tLongitude: {}'.format(self.longitude))
                 print('\tTime_utc: {}'.format(self.time_utc))
                 print('\tFix_time: {}'.format(self.fix_time))
+                print('\tLatitude: {},'.format(self.latitude))
+                print('\tLongitude: {}'.format(self.longitude))
                 print('\tAltitude: {}'.format(self.altitude))
                 print('\tSpeed_horizontal: {}'.format(self.speed_horizontal))
-                print('\tSpeed_vertical: {}'.format(self.speed_vertical))
+                print('\tSatellite number: {}'.format(self.satellites))
+                print('\tMode: {}'.format(self.mode))
                 # build msg
                 #          Prio   SRC   DST    DP   SP  RES HXRC
                 header_ = "{:02b}{:05b}{:05b}{:06b}{:06b}00000000"
@@ -130,7 +134,8 @@ class GpsComInterface:
                 # print("con:", hdr_b, ["{:02x}".format(int(i, 2)) for i in hdr_b])
                 hdr = bytearray([int(i,2) for i in hdr_b])
                 # join data
-                data_ = " ".join([str(self.latitude), str(self.longitude), str(self.time_utc), str(self.fix_time), str(self.altitude), str(self.speed_horizontal), str(self.speed_vertical)])
+                # data = self.time_utc+pack('fffffii', self.latitude, self.longitude, self.altitude, self.speed_horizontal, self.speed_vertical, self.satellites, self.mode)
+                data_ = " ".join([self.time_utc, str(self.latitude), str(self.longitude), str(self.altitude), str(self.speed_horizontal), str(self.speed_vertical), str(self.satellites), str(self.mode)])
                 msg = bytearray([int(self.node_dest),]) + hdr + bytearray(data_, "ascii")
                 # send data to OBC node
                 try:

@@ -146,7 +146,7 @@ class DplComInterface:
             print('\nMON:', frame)
             print('\tHeader: {},'.format(csp_header))
             print('\tData: {}'.format(data))
-            cmd = data.decode("ascii")
+            cmd = data.decode("ascii", "replace")
 
             if cmd == GET_DATA:
                 #update data

@@ -57,7 +57,7 @@ class GpsComInterface:
         self.prompt = "[node({}) port({})] <message>: "
 
     def check_nan(self, num, id):
-        print("GPS_DEBUG:"+str(type(num))+"    "+str(num))
+        #print("GPS_DEBUG:"+str(type(num))+"    "+str(num))
         if num == None:
             return "NoTimeStamp"
         try:

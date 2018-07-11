@@ -48,6 +48,8 @@ class GpsComInterface:
         self.altitude = 0           #float
         self.speed_horizontal = 0   #float
         self.speed_vertical = 0     #float
+        self.mode = 0               #int
+        self.satellites = 0         #int
         #com args
         self.node = chr(int(NODE_GPS)).encode("ascii", "replace")
         self.node_dest = NODE_OBC
@@ -55,7 +57,9 @@ class GpsComInterface:
         self.prompt = "[node({}) port({})] <message>: "
 
     def check_nan(self, num, id):
-        #print(type(num))
+        print("GPS_DEBUG:"+str(type(num))+"    "+str(num))
+        if num == None:
+            return "NoTimeStamp"
         try:
             if math.isnan(num):
                 return -1
@@ -64,6 +68,7 @@ class GpsComInterface:
             if id==3:#TODO: chech this!!!
                 return -1
             return num
+        return num
 
     def update_data(self):
         while True:
@@ -75,8 +80,7 @@ class GpsComInterface:
             self.speed_horizontal = self.check_nan(self.gps_handler.fix.speed, 5)
             self.speed_vertical = self.check_nan(self.gps_handler.fix.climb, 6)
             self.mode = self.check_nan(self.gps_handler.fix.mode, 7)
-            self.satellites = self.check_nan(self.gps_handler.satellites, 8)
-            #print(self.gps_handler.utc, self.gps_handler.fix.time)
+            self.satellites = self.check_nan(len(self.gps_handler.satellites), 8)
             time.sleep(0.1)
             self.gps_handler.next()
 

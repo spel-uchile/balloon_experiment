@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 __author__ = 'gdiaz'
 
@@ -21,15 +21,24 @@ import sys
 import time
 import re
 import argparse
+import json
 
 from threading import Thread
 from time import sleep
 
 import Adafruit_BMP.BMP085 as BMP085
 
-sys.path.append('../')
+#sys.path.append('../')
+#print(sys.path)
 
-from nodes.node_list import NODE_BMP, NODE_OBC, CSP_PORT_APPS
+# Get Nodes and Ports Parameters
+#from nodes.node_list import NODE_BMP, NODE_OBC, CSP_PORT_APPS
+with open('node_list.json', encoding='utf-8') as data_file:
+    data = json.load(data_file)
+
+NODE_BMP = data["nodes"]["bmp"]
+NODE_OBC = data["nodes"]["obc"]
+CSP_PORT_APPS = data["ports"]["telemetry"]
 
 #define commands
 GET_DATA = "get_prs_data"
@@ -105,6 +114,7 @@ class BmpComInterface:
                 except Exception as e:
                     pass
             cmd = -1
+            #sys.stdout.flush()
 
 def get_parameters():
     """ Parse command line parameters """

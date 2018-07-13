@@ -23,6 +23,7 @@ import re
 import argparse
 import codecs
 import math
+import json
 
 from threading import Thread
 from time import sleep
@@ -31,7 +32,13 @@ from struct import *
 
 sys.path.append('../')
 
-from nodes.node_list import NODE_GPS, NODE_OBC, CSP_PORT_APPS
+# Get Nodes and Ports Parameters
+with open('node_list.json') as data_file:
+    data = json.load(data_file)
+
+NODE_GPS = data["nodes"]["gps"]
+NODE_OBC = data["nodes"]["obc"]
+CSP_PORT_APPS = data["ports"]["telemetry"]
 
 #define commands
 GET_DATA = "get_gps_data"

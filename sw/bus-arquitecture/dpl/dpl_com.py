@@ -23,6 +23,7 @@ import sys
 import time
 import re
 import argparse
+import json
 
 from threading import Thread
 from gpiozero import *
@@ -30,7 +31,13 @@ from time import sleep
 
 sys.path.append('../')
 
-from nodes.node_list import NODE_DPL, NODE_OBC, CSP_PORT_APPS
+# Get Nodes and Ports Parameters
+with open('node_list.json', encoding='utf-8') as data_file:
+    data = json.load(data_file)
+
+NODE_DPL = data["nodes"]["dpl"]
+NODE_OBC = data["nodes"]["obc"]
+CSP_PORT_APPS = data["ports"]["telemetry"]
 
 #define commands
 OPEN_LA = "open_dpl_la"

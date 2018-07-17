@@ -1,3 +1,4 @@
+import sys
 import sqlite3
 conn = sqlite3.connect('/home/pi/Spel/suchai.db')
 c = conn.cursor()
@@ -52,4 +53,5 @@ for row_dpl in c.execute('SELECT * FROM deploy_table ORDER BY idx DESC LIMIT 1')
 
 print("%s %s %.3f %.3f %.3f %.3f %.3f %.3f %d %d %.3f %.3f %d %d" % (system_time, gps_time, gps_latitude, gps_longitude, gps_height, gps_velocity_x, gps_velocity_y, gps_satellites, gps_mode, bmp_temperature, bmp_pressure, bmp_altitude, dpl_lineal_state, dpl_servo_state))
 
-
+#var = sys.getsizeof(system_time)+ sys.getsizeof(gps_time)+ sys.getsizeof(gps_latitude)+sys.getsizeof(gps_longitude)+sys.getsizeof(gps_height)+sys.getsizeof(gps_velocity_x)+ sys.getsizeof(gps_velocity_y)+sys.getsizeof(gps_satellites)+sys.getsizeof(gps_mode)+sys.getsizeof(bmp_temperature)+sys.getsizeof(bmp_pressure)+sys.getsizeof(bmp_altitude)+sys.getsizeof(dpl_lineal_state)+sys.getsizeof(dpl_servo_state)
+#print(var)

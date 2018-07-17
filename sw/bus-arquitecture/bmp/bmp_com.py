@@ -82,6 +82,7 @@ class BmpComInterface:
                 csp_header = parse_csp(header)
             except:
                 csp_header = ""
+            data = data[:-1]
             print('\nMON:', frame)
             print('\tHeader: {},'.format(csp_header))
             print('\tData: {}'.format(data))

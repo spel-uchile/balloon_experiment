@@ -3,7 +3,8 @@
 	"obc":1,
 	"dpl":2,
 	"bmp":4,
-	"gps":5
+	"gps":5,
+	"ird":6
 	},
 "ports":{
 	"telemetry":9

@@ -9,7 +9,7 @@ from threading import Timer
 
 #The following line is for serial over GPIO
 # port = '/dev/ttyUSB0'
-port = '/dev/ttyS0'
+port = '/dev/ttyAMA0'
 
 class gpsInterface(object):
     def __init__(self, serial, debug = False):

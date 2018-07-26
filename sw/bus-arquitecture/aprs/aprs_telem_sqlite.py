@@ -3,6 +3,24 @@ import sqlite3
 conn = sqlite3.connect('/home/pi/Spel/suchai.db')
 c = conn.cursor()
 
+def get_phase(phase):
+    if phase == 0:
+        return "A0"
+    elif phase == 1:
+        return "A"
+    elif phase == 2:
+        return "B"
+    elif phase == 3:
+        return "B1"
+    elif phase == 4:
+        return "B2"
+    elif phase == 5:
+        return "C"
+    elif phase == 6:
+        return "C1"
+    else:
+        return "X"
+
 for row_gps in c.execute('SELECT * FROM gps_table ORDER BY idx DESC LIMIT 1'):
     #print row_gps
     gps_id = row_gps[0]
@@ -17,6 +35,7 @@ for row_gps in c.execute('SELECT * FROM gps_table ORDER BY idx DESC LIMIT 1'):
     gps_mode = row_gps[9]
     phase = row_gps[10]
 
+phase_str = get_phase(phase)
 #print(type(system_time))
 #print(type(gps_time))
 #print(type(gps_latitude))
@@ -52,7 +71,7 @@ for row_dpl in c.execute('SELECT * FROM deploy_table ORDER BY idx DESC LIMIT 1')
 
 #print("%.3f %.3f %s %s %.3f %.3f %.3f %.3f %.3f %.3f %d %d" % (gps_latitude, gps_longitude, gps_time, system_time, gps_height, gps_velocity_x, gps_velocity_y, bmp_temperature, bmp_pressure, bmp_altitude, dpl_lineal_state, dpl_servo_state))
 
-print("\x21%s %s %.3f %.3f %.3f %.3f %.3f %.3f %d %d %.3f %.3f %d %d %d" % (system_time, gps_time, gps_latitude, gps_longitude, gps_height, gps_velocity_x, gps_velocity_y, gps_satellites, gps_mode, bmp_temperature, bmp_pressure, bmp_altitude, dpl_lineal_state, dpl_servo_state, phase))
+print("\x21%s %s %.3f %.3f %.3f %.3f %.3f %.3f %d %d %.3f %.3f %d %d %s" % (system_time, gps_time, gps_latitude, gps_longitude, gps_height, gps_velocity_x, gps_velocity_y, gps_satellites, gps_mode, bmp_temperature, bmp_pressure, bmp_altitude, dpl_lineal_state, dpl_servo_state, phase_str))
 
 #var = sys.getsizeof(system_time)+ sys.getsizeof(gps_time)+ sys.getsizeof(gps_latitude)+sys.getsizeof(gps_longitude)+sys.getsizeof(gps_height)+sys.getsizeof(gps_velocity_x)+ sys.getsizeof(gps_velocity_y)+sys.getsizeof(gps_satellites)+sys.getsizeof(gps_mode)+sys.getsizeof(bmp_temperature)+sys.getsizeof(bmp_pressure)+sys.getsizeof(bmp_altitude)+sys.getsizeof(dpl_lineal_state)+sys.getsizeof(dpl_servo_state)
 #print(var)

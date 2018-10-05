@@ -1,11 +1,11 @@
 EESchema-LIBRARY Version 2.4
 #encoding utf-8
 #
-# Balloon_bus-eagle-import:PC104_CONN
+# Balloon_bus-eagle-import_PC104_CONN
 #
-DEF ~Balloon_bus-eagle-import:PC104_CONN ~ 0 40 Y Y 2 L N
+DEF ~Balloon_bus-eagle-import_PC104_CONN ~ 0 40 Y Y 2 L N
 F0 "" -2700 -1100 59 V V L BNN
-F1 "Balloon_bus-eagle-import:PC104_CONN" 0 0 50 H I C CNN
+F1 "Balloon_bus-eagle-import_PC104_CONN" 0 0 50 H I C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -130,11 +130,11 @@ X 47-USER6 99 2200 -1300 200 U 50 50 2 0 U
 ENDDRAW
 ENDDEF
 #
-# Balloon_bus-eagle-import:RPI3
+# Balloon_bus-eagle-import_RPI3
 #
-DEF ~Balloon_bus-eagle-import:RPI3 PCB 0 40 Y Y 1 L N
+DEF ~Balloon_bus-eagle-import_RPI3 PCB 0 40 Y Y 1 L N
 F0 "PCB" 0 0 50 H I C CNN
-F1 "Balloon_bus-eagle-import:RPI3" 0 0 50 H I C CNN
+F1 "Balloon_bus-eagle-import_RPI3" 0 0 50 H I C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -223,11 +223,11 @@ X GND@9 P$9 1200 2800 100 U 50 50 1 0 U
 ENDDRAW
 ENDDEF
 #
-# Balloon_bus-eagle-import:SN754410
+# Balloon_bus-eagle-import_SN754410
 #
-DEF Balloon_bus-eagle-import:SN754410 U 0 40 Y Y 1 F N
+DEF Balloon_bus-eagle-import_SN754410 U 0 40 Y Y 1 F N
 F0 "U" 0 500 50 H V C CNN
-F1 "Balloon_bus-eagle-import:SN754410" 0 -500 50 H V C CNN
+F1 "Balloon_bus-eagle-import_SN754410" 0 -500 50 H V C CNN
 F2 "" -150 100 50 H I C CNN
 F3 "" -150 100 50 H I C CNN
 DRAW
@@ -251,11 +251,11 @@ X 3,4EN 9 400 -350 100 L 50 50 1 1 I
 ENDDRAW
 ENDDEF
 #
-# Connector:Screw_Terminal_01x02
+# Connector_Screw_Terminal_01x02
 #
-DEF Connector:Screw_Terminal_01x02 J 0 40 Y N 1 F N
+DEF Connector_Screw_Terminal_01x02 J 0 40 Y N 1 F N
 F0 "J" 0 100 50 H V C CNN
-F1 "Connector:Screw_Terminal_01x02" 0 -200 50 H V C CNN
+F1 "Connector_Screw_Terminal_01x02" 0 -200 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -274,11 +274,11 @@ X Pin_2 2 -200 -100 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# Connector:Screw_Terminal_01x03
+# Connector_Screw_Terminal_01x03
 #
-DEF Connector:Screw_Terminal_01x03 J 0 40 Y N 1 F N
+DEF Connector_Screw_Terminal_01x03 J 0 40 Y N 1 F N
 F0 "J" 0 200 50 H V C CNN
-F1 "Connector:Screw_Terminal_01x03" 0 -200 50 H V C CNN
+F1 "Connector_Screw_Terminal_01x03" 0 -200 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
@@ -301,15 +301,15 @@ X Pin_3 3 -200 -100 150 R 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# Device:R
+# Device_R
 #
-DEF Device:R R 0 0 N Y 1 F N
+DEF Device_R R 0 0 N Y 1 F N
 F0 "R" 80 0 50 V V C CNN
-F1 "Device:R" 0 0 50 V V C CNN
+F1 "Device_R" 0 0 50 V V C CNN
 F2 "" -70 0 50 V I C CNN
 F3 "" 0 0 50 H I C CNN
 $FPLIST
- *:R_*
+ R_*
 $ENDFPLIST
 DRAW
 S -40 -100 40 100 0 1 10 N
@@ -318,11 +318,11 @@ X ~ 2 0 -150 50 U 50 50 1 1 P
 ENDDRAW
 ENDDEF
 #
-# GPS:XA1110
+# GPS_XA1110
 #
-DEF GPS:XA1110 U 0 40 Y Y 1 F N
+DEF GPS_XA1110 U 0 40 Y Y 1 F N
 F0 "U" 0 350 60 H V C CNN
-F1 "GPS:XA1110" 0 -350 60 H V C CNN
+F1 "GPS_XA1110" 0 -350 60 H V C CNN
 F2 "" -300 -50 60 H I C CNN
 F3 "" -300 -50 60 H I C CNN
 DRAW
@@ -340,11 +340,11 @@ X RST 9 500 100 200 L 50 50 1 1 I I
 ENDDRAW
 ENDDEF
 #
-# power:GND
+# power_GND
 #
-DEF power:GND #PWR 0 0 Y Y 1 F P
+DEF power_GND #PWR 0 0 Y Y 1 F P
 F0 "#PWR" 0 -250 50 H I C CNN
-F1 "power:GND" 0 -150 50 H V C CNN
+F1 "power_GND" 0 -150 50 H V C CNN
 F2 "" 0 0 50 H I C CNN
 F3 "" 0 0 50 H I C CNN
 DRAW
@@ -353,11 +353,11 @@ X GND 1 0 0 0 D 50 50 1 1 W N
 ENDDRAW
 ENDDEF
 #
-# sensor:BMP180-V2
+# sensor_BMP180-V2
 #
-DEF sensor:BMP180-V2 U 0 40 Y Y 1 F N
+DEF sensor_BMP180-V2 U 0 40 Y Y 1 F N
 F0 "U" 0 300 50 H V C CNN
-F1 "sensor:BMP180-V2" -50 -300 50 H V C CNN
+F1 "sensor_BMP180-V2" -50 -300 50 H V C CNN
 F2 "" -50 0 50 H I C CNN
 F3 "" -50 0 50 H I C CNN
 DRAW
@@ -369,11 +369,11 @@ X SDA 4 -350 -150 200 R 50 50 1 1 B
 ENDDRAW
 ENDDEF
 #
-# sensor:MPU-9250-BREAKOUT-R
+# sensor_MPU-9250-BREAKOUT-R
 #
-DEF sensor:MPU-9250-BREAKOUT-R U 0 40 Y Y 1 F N
+DEF sensor_MPU-9250-BREAKOUT-R U 0 40 Y Y 1 F N
 F0 "U" 0 300 50 H V C CNN
-F1 "sensor:MPU-9250-BREAKOUT-R" 0 -300 50 H V C CNN
+F1 "sensor_MPU-9250-BREAKOUT-R" 0 -300 50 H V C CNN
 F2 "" -150 -100 50 H I C CNN
 F3 "" -150 -100 50 H I C CNN
 DRAW

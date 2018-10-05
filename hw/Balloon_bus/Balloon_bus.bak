@@ -280,9 +280,9 @@ GND
 Text Label 5650 7300 0    50   ~ 0
 GND
 Text Label 5650 7600 0    50   ~ 0
-3V3
+5V0
 Text Label 7250 6900 2    50   ~ 0
-3V3
+5V0
 Text Label 7250 7200 2    50   ~ 0
 GND
 Text Label 7250 7300 2    50   ~ 0

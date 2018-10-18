@@ -1,4 +1,4 @@
-(kicad_pcb (version 20171130) (host pcbnew 6.0.0-rc1-unknown-2c0fe8f~66~ubuntu18.04.1)
+(kicad_pcb (version 20171130) (host pcbnew 6.0.0-rc1-unknown-94cc1ef~66~ubuntu18.04.1)
 
   (general
     (thickness 1.6)
@@ -627,6 +627,11 @@
       (net 127 GND) (solder_mask_margin 0.1016))
     (pad P$40 thru_hole circle (at 56.6166 53.7718) (size 1.524 1.524) (drill 1.016) (layers *.Cu *.Mask)
       (net 118 /SOLE_SGNL) (solder_mask_margin 0.1016))
+    (model ${KISYS3DMOD}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_2x20_P2.54mm_Vertical.step
+      (offset (xyz 8.300000000000001 51.3 -1.7))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 -180 -90))
+    )
   )
 
   (module Balloon_bus:PC_104 (layer Top) (tedit 0) (tstamp 5B12DE26)
@@ -872,6 +877,16 @@
       (net 104 "Net-(H1H2-Pad2)") (solder_mask_margin 0.1016))
     (pad 1 thru_hole circle (at 83.312 -76.708 90) (size 1.524 1.524) (drill 1.016) (layers *.Cu *.Mask)
       (net 105 "Net-(H1H2-Pad1)") (solder_mask_margin 0.1016))
+    (model ${KISYS3DMOD}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_2x26_P2.54mm_Vertical.step
+      (offset (xyz 88.40000000000001 13.2 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 -180))
+    )
+    (model ${KISYS3DMOD}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_2x26_P2.54mm_Vertical.step
+      (offset (xyz 83.3 13.2 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 180))
+    )
   )
 
   (module TerminalBlock:TerminalBlock_bornier-2_P5.08mm (layer Bottom) (tedit 59FF03AB) (tstamp 5B16B3D4)
@@ -1242,6 +1257,16 @@
       (net 101 "Net-(U1-Pad9)"))
     (pad 10 thru_hole circle (at 11.43 -5.08 90) (size 1.524 1.524) (drill 0.762) (layers *.Cu *.Mask)
       (net 102 "Net-(U1-Pad10)"))
+    (model ${KISYS3DMOD}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_1x05_P2.54mm_Vertical.step
+      (offset (xyz 11.4 5.1 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
+    (model ${KISYS3DMOD}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_1x05_P2.54mm_Vertical.step
+      (offset (xyz -11.4 5.1 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module Sensor:BMP180-V2 (layer Top) (tedit 5B169734) (tstamp 5B2E53FE)
@@ -1265,6 +1290,11 @@
       (net 14 /SCL))
     (pad 4 thru_hole circle (at -5.08 3.81) (size 1.524 1.524) (drill 0.762) (layers *.Cu *.Mask)
       (net 15 /SDA))
+    (model ${KISYS3DMOD}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_1x04_P2.54mm_Vertical.step
+      (offset (xyz -5.1 3.8 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module Sensor:MPU-9250-BREAKOUT-R (layer Top) (tedit 5B169FBD) (tstamp 5B2E564D)
@@ -1289,6 +1319,11 @@
       (net 19 /3V3))
     (pad 4 thru_hole circle (at -7.62 -1.17) (size 1.524 1.524) (drill 0.762) (layers *.Cu *.Mask)
       (net 127 GND))
+    (model ${KISYS3DMOD}/Connector_PinSocket_2.54mm.3dshapes/PinSocket_1x04_P2.54mm_Vertical.step
+      (offset (xyz -7.62 1.15 0))
+      (scale (xyz 1 1 1))
+      (rotate (xyz 0 0 0))
+    )
   )
 
   (module Resistor_THT:R_Axial_DIN0204_L3.6mm_D1.6mm_P5.08mm_Horizontal (layer Top) (tedit 5B1819BA) (tstamp 5B23D091)

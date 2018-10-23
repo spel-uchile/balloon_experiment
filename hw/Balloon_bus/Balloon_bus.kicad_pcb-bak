@@ -1,8 +1,8 @@
-(kicad_pcb (version 20171130) (host pcbnew 6.0.0-rc1-unknown-94cc1ef~66~ubuntu18.04.1)
+(kicad_pcb (version 20171130) (host pcbnew 6.0.0-rc1-unknown-ce496ff~66~ubuntu18.04.1)
 
   (general
     (thickness 1.6)
-    (drawings 33)
+    (drawings 32)
     (tracks 445)
     (zones 0)
     (modules 17)
@@ -69,8 +69,8 @@
     (mod_edge_width 0.15)
     (mod_text_size 1 1)
     (mod_text_width 0.15)
-    (pad_size 2.75 2.75)
-    (pad_drill 2.75)
+    (pad_size 3.6 3.6)
+    (pad_drill 3.6)
     (pad_to_mask_clearance 0.2)
     (solder_mask_min_width 0.25)
     (aux_axis_origin 0 0)
@@ -929,7 +929,7 @@
   )
 
   (module Balloon_bus:3,6 (layer Top) (tedit 0) (tstamp 5B12DEAA)
-    (at 105.5865 67.6098)
+    (at 105.6065 68.1178)
     (descr "<b>MOUNTING HOLE</b> 3.6 mm with drill center")
     (fp_text reference U$11 (at 0 0) (layer F.SilkS) hide
       (effects (font (size 1.27 1.27) (thickness 0.15)))
@@ -951,7 +951,7 @@
   )
 
   (module Balloon_bus:3,6 (layer Top) (tedit 0) (tstamp 5B12DEC6)
-    (at 191.4385 144.8258)
+    (at 191.3365 145.5878)
     (descr "<b>MOUNTING HOLE</b> 3.6 mm with drill center")
     (fp_text reference U$13 (at 0 0) (layer F.SilkS) hide
       (effects (font (size 1.27 1.27) (thickness 0.15)))
@@ -973,7 +973,7 @@
   )
 
   (module Balloon_bus:3,6 (layer Top) (tedit 0) (tstamp 5B12DED4)
-    (at 105.5865 142.2858)
+    (at 105.6065 141.7778)
     (descr "<b>MOUNTING HOLE</b> 3.6 mm with drill center")
     (fp_text reference U$14 (at 0 0) (layer F.SilkS) hide
       (effects (font (size 1.27 1.27) (thickness 0.15)))
@@ -1512,9 +1512,8 @@
   (gr_text 5V0 (at 103.8 106.2178) (layer F.SilkS)
     (effects (font (size 1 1) (thickness 0.15)) (justify right))
   )
-  (gr_line (start 196.4931 149.89) (end 100.4811 149.89) (layer Edge.Cuts) (width 0.15))
-  (gr_line (start 186.5 115) (end 131.5 60.0004) (layer Edge.Cuts) (width 0.15))
-  (gr_line (start 196.5 125) (end 186.5 115) (layer Edge.Cuts) (width 0.15))
+  (gr_line (start 196.4931 149.8804) (end 100.4811 149.8804) (layer Edge.Cuts) (width 0.15))
+  (gr_line (start 196.4931 125) (end 131.5 60.0004) (layer Edge.Cuts) (width 0.15))
   (gr_line (start 100.4811 59.9998) (end 100.4811 60.0004) (layer Edge.Cuts) (width 0.15) (tstamp 559670D5DC00))
   (gr_line (start 100.4811 60.0004) (end 100.4811 149.8804) (layer Edge.Cuts) (width 0.15) (tstamp 559670D5E060))
   (gr_line (start 196.4931 149.8804) (end 196.4931 125) (layer Edge.Cuts) (width 0.15) (tstamp 559670D5ED70))

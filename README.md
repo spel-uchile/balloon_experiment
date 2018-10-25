@@ -4,10 +4,11 @@ This repository contains the software and the PCB designs of a radiosonde. This 
 
 ### Supported hardware ###
 
-* SBCs: Raspberry pi 3 and RAspberry Pi Zero
+* SBCs: Raspberry pi 3 and Raspberry Pi Zero
 * GPS: XA1110
 * IRIDIUM: RockBlock Mk2
 * Sensors: BMP180, MPU-9250
+* H bridge: SN754410
 
 ### How do I get set up? ###
 

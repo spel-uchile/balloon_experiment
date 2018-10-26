@@ -7,27 +7,27 @@
 /*Requiered Libraries*/
 #include "rpycom.h"
 
-void RPYCOM::updateBeacon(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32)
+void RPYCOM::updateBeacon(AtmsData *atmsData, GpsData *gpsData, VectorInt16 *gyroData)
 {   
-    beacon_tx_.Temp1 = (float) dataD[0];
-    beacon_tx_.Pressure = (float) dataD[1];
-    beacon_tx_.Alt = (float) dataD[2];
-    beacon_tx_.Temp2 = dataF[0];
-    beacon_tx_.Humidity = dataF[1];
-    beacon_tx_.Temp3 = dataF[2];
-    beacon_tx_.IMU1 = dataF[3];
-    beacon_tx_.IMU2 = dataF[4];
-    beacon_tx_.IMU3 = dataF[5];
-    beacon_tx_.GPS_Lat = (float) dataD[3];
-    beacon_tx_.GPS_Lng = (float) dataD[4];
-    beacon_tx_.GPS_Alt = (float) dataD[5];
-    beacon_tx_.GPS_Crse = (float) dataD[6];
-    beacon_tx_.GPS_Speed = (float) dataD[7];
-    beacon_tx_.GPS_HH = dataU8[0];
-    beacon_tx_.GPS_MM = dataU8[1];
-    beacon_tx_.GPS_SS = dataU8[2];
-    beacon_tx_.GPS_validity = dataU8[3];
-    beacon_tx_.GPS_Sat = dataU32;
+    beacon_tx_.Temp1 = (float) atmsData->temperature1;
+    beacon_tx_.Pressure = (float) atmsData->pressure;
+    beacon_tx_.Alt = (float) atmsData->altitude;
+    beacon_tx_.Temp2 = atmsData->temperature2;
+    beacon_tx_.Humidity = atmsData->humidity;
+    beacon_tx_.Temp3 = atmsData->temperatureDallas;
+    beacon_tx_.IMU1 = gyroData->x;
+    beacon_tx_.IMU2 = gyroData->y;
+    beacon_tx_.IMU3 = gyroData->z;
+    beacon_tx_.GPS_Lat = (float) gpsData->latitude;
+    beacon_tx_.GPS_Lng = (float) gpsData->longitude;
+    beacon_tx_.GPS_Alt = (float) gpsData->altitude;
+    beacon_tx_.GPS_Crse = (float) gpsData->crse;
+    beacon_tx_.GPS_Speed = (float) gpsData->mps;
+    beacon_tx_.GPS_HH = gpsData->hour;
+    beacon_tx_.GPS_MM = gpsData->minute;
+    beacon_tx_.GPS_SS = gpsData->second;
+    beacon_tx_.GPS_validity = gpsData->validity;
+    beacon_tx_.GPS_Sat = gpsData->satellites;
 }
 
 void RPYCOM::BeaconTest()

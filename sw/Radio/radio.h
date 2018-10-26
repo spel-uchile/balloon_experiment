@@ -10,6 +10,10 @@
 #include <SPI.h>
 #include <RH_RF22.h>
 #include "logger.h"
+#include "atms_data.h"
+#include "gps_data.h"
+#include "imu_data.h"
+#include "helper_3dmath.h"
 
 #define GET_PICTURE 1
 #define GET_BEACON 2
@@ -30,18 +34,15 @@
  */
 
 typedef struct {
-    //uint8_t RTC_HH;
-    //uint8_t RTC_MM;
-    //uint8_t RTC_SS;
     float Temp1;
     float Pressure;
     float Alt;
     float Temp2;
     float Humidity;
     float Temp3;
-    float IMU1;
-    float IMU2;
-    float IMU3;
+    int IMU1;
+    int IMU2;
+    int IMU3;
     float GPS_Lat;
     float GPS_Lng;
     float GPS_Alt;
@@ -58,6 +59,9 @@ class Radio
 {
     /*Private Members*/
     frame_t beacon;
+    frame_t beacon_tx_;
+
+    uint8_t beacon_tx_size_ = sizeof(beacon_tx_);
 
     // Radio Object
     RH_RF22 driver;
@@ -71,16 +75,12 @@ class Radio
     // addr
     uint8_t addr_;
     uint8_t addr2_;
-    
 
     // Debug
     // HardwareSerial *debug_port_;
 
 public:
     /*Public Members*/
-
-    /*constructor de base (null)*/
-    // Radio() {}
 
     // constructror parametrizado
     Radio(uint8_t radio_slaveselectpin, uint8_t radio_interrupt, uint8_t sdn, uint8_t addr, uint8_t addr2):
@@ -97,25 +97,15 @@ public:
 
     // methods
     void init(void);
-    void send_data(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
-    void read_data(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
-    bool send_command(uint8_t cmd);
-    uint8_t read_command(void);
     void sendFrame(uint8_t frame[], int frame_size);
-    void displayData(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
-    void read_frame(void);
+    void sendData();
+    void readData(void);
+    void updateBeacon(AtmsData *atmsData, GpsData *gpsData, ImuData *imuData);
+    bool sendCommand(uint8_t cmd);
+    uint8_t readCommand(uint8_t *cmd);
+    void infoPrint(void);
 
-private:
+// private:
     // methods
-    void encode2byte(float number, uint8_t encode_bytes[]);
-    void encode2byteD(double number, uint8_t encode_bytes[]);
-    void encode3byte(double number, uint8_t encode_bytes[]);
-    void encode4byteD(double number, uint8_t encode_bytes[]);
-    void encode(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32, uint8_t frame[]);
-    float decode2byte(uint8_t byte1, uint8_t byte2);
-    double decode2byteD(uint8_t byte1, uint8_t byte2);
-    double decode3byte(uint8_t byte1, uint8_t byte2, uint8_t byte3);
-    double decode4byteD(uint8_t byte1, uint8_t byte2, uint8_t byte3, uint8_t byte4);
-    void decode(uint8_t frame[], double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32);
-    void displayFrame(void);
+    
 };

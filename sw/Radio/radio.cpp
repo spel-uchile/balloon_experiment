@@ -6,8 +6,6 @@
 
 #include "radio.h"
 
-#define DEBUG_LEVEL 1
-
 //-------------------------- Public Methods --------------------------
 
 void Radio::init(void)
@@ -15,18 +13,18 @@ void Radio::init(void)
 	digitalWrite(sdn_pin_, LOW);
 	delay(1500);
    if (!rf22.init()) {
-        Serial.println(F("Initialization failed"));
+        INFO_PRINTLN_RAW(F("Initialization failed"));
     }
     driver.setCRCPolynomial(driver.CRC_CCITT);
     driver.setHeaderFlags(0x7E); 
     driver.setFrequency(437.225, 0.05); 
     driver.setTxPower(RH_RF22_TXPOW_20DBM);
     if (!driver.setModemConfig(driver.FSK_Rb2Fd5)) {
-        Serial.println(F("Configuration error"));    
+        INFO_PRINTLN_RAW(F("Configuration error"));    
     }
     rf22.setRetries(255);
-    Serial.println(F("Set Tx Power = RH_RF22_TXPOW_20DB"));
-    Serial.println(F("Set configuration = FSK_Rb2Fd5"));  
+    INFO_PRINTLN_RAW(F("Set Tx Power = RH_RF22_TXPOW_20DB"));
+    INFO_PRINTLN_RAW(F("Set configuration = FSK_Rb2Fd5"));  
 }
 
 /**
@@ -38,356 +36,103 @@ void Radio::init(void)
 void Radio::sendFrame(uint8_t frame[], int frame_size)
 {
     if (!rf22.sendtoWait(frame, frame_size, addr2_))
-        Serial.println(F("sendtoWait failed"));
+        INFO_PRINTLN_RAW(F("sendtoWait failed"));
 }
 
-/**
- * The packet is encoded transforming data type from double or float to
- * uint8_t for compatibility with the transceiver. In order to not loose
- * information, the decimal numbers are multiplied with a factor and separated
- * in 2, 3 or 4 different octets.
- */
-
-void Radio::encode2byte(float number, uint8_t encode_bytes[])
+void Radio::sendData()
 {
-    int aux = (int) (number*100);
-    uint8_t HB = aux >> 8;			//Number High Byte
-    uint8_t LB = aux;				//Number Low Byte
-
-    encode_bytes[0] = HB;
-    encode_bytes[1] = LB;
+    sendFrame((uint8_t *)&beacon_tx_, beacon_tx_size_);
 }
 
-float Radio::decode2byte(uint8_t byte1, uint8_t byte2)
-{
-    int aux = byte1;
-    aux = (aux << 8) + byte2;
-    return aux/100.0;
-}
-
-void Radio::encode2byteD(double number, uint8_t encode_bytes[])
-{
-    int aux = (int) (number*100);
-    uint8_t HB = aux >> 8;			//Number High Byte
-    uint8_t LB = aux;				//Number Low Byte
-
-    encode_bytes[0] = HB;
-    encode_bytes[1] = LB;
-}
-
-double Radio::decode2byteD(uint8_t byte1, uint8_t byte2)
-{
-    int aux = byte1;
-    aux = (aux << 8) + byte2;
-    return aux/100.0;
-}
-
-void Radio::encode3byte(double number, uint8_t encode_bytes[])
-{
-    int aux = (int) (number*100);
-    uint8_t HB = aux >> 16;
-    uint8_t MB = aux >> 8;
-    uint8_t LB = aux;
-
-    encode_bytes[0] = HB;
-    encode_bytes[1] = MB;
-    encode_bytes[2] = LB;
-}
-
-double Radio::decode3byte(uint8_t byte1, uint8_t byte2, uint8_t byte3)
-{
-    int aux = byte1;
-    aux = (aux << 8) + byte2;
-    aux = (aux << 8) + byte3;
-    return aux/100.0;
-}
-
-void Radio::encode4byteD(double number, uint8_t encode_bytes[]) {
-    int aux = (int) (number*1000000);
-    uint8_t HB = aux >> 24;
-    uint8_t M1B = aux >> 16;
-    uint8_t M2B = aux >> 8;
-    uint8_t LB = aux;
-
-    encode_bytes[0] = HB;
-    encode_bytes[1] = M1B;
-    encode_bytes[2] = M2B;
-    encode_bytes[3] = LB;
-}
-
-double Radio::decode4byteD(uint8_t byte1, uint8_t byte2, uint8_t byte3, uint8_t byte4) {
-    int aux = byte1;
-    aux = (aux << 8) + byte2;
-    aux = (aux << 8) + byte3;
-    aux = (aux << 8) + byte4;
-    return aux/1000000.0;
-}
-
-void Radio::encode(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32, uint8_t frame[])
-{
-    // Double data
-    uint8_t num1_bytes[2];
-    uint8_t num2_bytes[3];
-    uint8_t num3_bytes[3];
-    uint8_t num4_bytes[4];
-    uint8_t num5_bytes[4];
-    uint8_t num6_bytes[2];
-    uint8_t num7_bytes[2];
-    uint8_t num8_bytes[2];
-    // Float data
-    uint8_t num9_bytes[2];
-    uint8_t num10_bytes[2];
-    uint8_t num11_bytes[2];
-    uint8_t num12_bytes[2];
-    uint8_t num13_bytes[2];
-    uint8_t num14_bytes[2];
-
-    // Double data
-    encode2byteD(dataD[0], num1_bytes);
-    encode3byte(dataD[1], num2_bytes);
-    encode3byte(dataD[2], num3_bytes);
-    encode4byteD(dataD[3], num4_bytes);
-    encode4byteD(dataD[4], num5_bytes);
-    encode2byteD(dataD[5], num6_bytes);
-    encode2byteD(dataD[6], num7_bytes);
-    encode2byteD(dataD[7], num8_bytes);
-    // Float data
-    encode2byte(dataF[0], num9_bytes);
-    encode2byte(dataF[1], num10_bytes);
-    encode2byte(dataF[2], num11_bytes);
-    encode2byte(dataF[3], num12_bytes);
-    encode2byte(dataF[4], num13_bytes);
-    encode2byte(dataF[5], num14_bytes);
-
-    // Generate Frame
-    frame[0] = num1_bytes[0];
-    frame[1] = num1_bytes[1];
-    
-    frame[2] = num2_bytes[0];
-    frame[3] = num2_bytes[1];
-    frame[4] = num2_bytes[2];
-    
-    frame[5] = num3_bytes[0];
-    frame[6] = num3_bytes[1];
-    frame[7] = num3_bytes[2];
-    
-    frame[8] = num4_bytes[0];
-    frame[9] = num4_bytes[1];
-    frame[10] = num4_bytes[2];
-    frame[11] = num4_bytes[3];
-
-    frame[12] = num5_bytes[0];
-    frame[13] = num5_bytes[1];
-    frame[14] = num5_bytes[2];
-    frame[15] = num5_bytes[3];
-
-    frame[16] = num6_bytes[0];
-    frame[17] = num6_bytes[1];
-
-    frame[18] = num7_bytes[0];
-    frame[19] = num7_bytes[1];
-
-    frame[20] = num8_bytes[0];
-    frame[21] = num8_bytes[1];
-
-    frame[22] = num9_bytes[0];
-    frame[23] = num9_bytes[1];
-
-    frame[24] = num10_bytes[0];
-    frame[25] = num10_bytes[1];
-
-    frame[26] = num11_bytes[0];
-    frame[27] = num11_bytes[1];
-
-    frame[28] = num12_bytes[0];
-    frame[29] = num12_bytes[1];
-
-    frame[30] = num13_bytes[0];
-    frame[31] = num13_bytes[1];
-    
-    frame[32] = num14_bytes[0];
-    frame[33] = num14_bytes[1];
-
-    frame[34] = dataU8[0];
-    frame[35] = dataU8[1];
-    frame[36] = dataU8[2];
-    frame[37] = dataU8[3];
-    
-    frame[38] = dataU32 >> 24;
-    frame[39] = dataU32 >> 16;
-    frame[40] = dataU32 >> 8;
-    frame[41] = dataU32;
-}
-
-void Radio::decode(uint8_t frame[], double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32)
-{
-    // Double data
-    dataD[0] = decode2byteD(frame[0], frame[1]);
-    dataD[1] = decode3byte(frame[2], frame[3], frame[4]);
-    dataD[2] = decode3byte(frame[5], frame[6], frame[7]);
-    dataD[3] = decode4byteD(frame[8], frame[9], frame[10], frame[11]);
-    dataD[4] = decode4byteD(frame[12], frame[13], frame[14], frame[15]);
-    dataD[5] = decode2byteD(frame[16], frame[17]);
-    dataD[6] = decode2byteD(frame[18], frame[19]);
-    dataD[7] = decode2byteD(frame[20], frame[21]);
-    // Float data
-    dataF[0] = decode2byte(frame[22], frame[23]);
-    dataF[1] = decode2byte(frame[24], frame[25]);
-    dataF[2] = decode2byte(frame[26], frame[27]);
-    dataF[3] = decode2byte(frame[28], frame[29]);
-    dataF[4] = decode2byte(frame[30], frame[31]);
-    dataF[5] = decode2byte(frame[32], frame[33]);
-    // Uint8_t data
-    dataU8[0] = frame[34];
-    dataU8[1] = frame[35];
-    dataU8[2] = frame[36];
-    dataU8[3] = frame[37];
-    // Uint32_t data
-    dataU32 = (frame[38] << 24) + (frame[39] << 16) + (frame[40] << 8) + (frame[41]);
-}
-
-void Radio::send_data(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32)
-{
-    uint8_t frame[42];
-    encode(dataD, dataF, dataU8, dataU32, frame);
-    sendFrame(frame, sizeof(frame));
-}
-
-void Radio::read_data(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32)
-{
-    uint8_t frame[42];
-    if (rf22.available())
-    {
-        uint8_t len = sizeof(frame);
-        uint8_t from;
-        if (rf22.recvfromAck(frame, &len, &from))
-        {
-            decode(frame, dataD, dataF, dataU8, dataU32);
-            displayData(dataD, dataF, dataU8, dataU32);
-        }
-    }
-    // Serial.println("read_data");
-}
-
-void Radio::read_frame() {
+void Radio::readData() {
     uint8_t frame[100];
     if (rf22.available()) {
         uint8_t len = sizeof(frame);
         uint8_t from;
         if (rf22.recvfromAck(frame, &len, &from)) {
             memcpy(&beacon, frame+2, sizeof(beacon));
-            displayFrame();
+            infoPrint();
         }
     }
 }
 
-void Radio::displayFrame() {
-    /*
-    Serial.print("RTC HH:MM:SS: ");
-    Serial.print(beacon.RTC_HH);
-    Serial.print(":");
-    Serial.print(beacon.RTC_MM);
-    Serial.print(":");
-    Serial.print(beacon.RTC_SS);
-    */
-    Serial.print("    Temp1: ");
-    Serial.print(beacon.Temp1);
-    Serial.print("    Pressure: ");
-    Serial.print(beacon.Pressure);
-    Serial.print("    Altitude: ");
-    Serial.print(beacon.Alt);
-    
-    Serial.print("    Temp2: ");
-    Serial.print(beacon.Temp2);
-    Serial.print("    Humidity: ");
-    Serial.print(beacon.Humidity);
-    Serial.print("    Temp3: ");
-    Serial.print(beacon.Temp3);
-    Serial.print("    IMU1: ");
-    Serial.print(beacon.IMU1);
-    Serial.print("    IMU2: ");
-    Serial.print(beacon.IMU2);
-    Serial.print("    IMU3: ");
-    Serial.println(beacon.IMU3);
-
-    Serial.print("HH:MM:SS: ");
-    Serial.print(beacon.GPS_HH);
-    Serial.print(":");
-    Serial.print(beacon.GPS_MM);
-    Serial.print(":");
-    Serial.print(beacon.GPS_SS);
-    Serial.print("    Validity: ");
-    Serial.print(beacon.GPS_validity, BIN);
-    Serial.print("    Sat: ");
-    Serial.print(beacon.GPS_Sat);
-    Serial.print("    Location: ");
-    Serial.print(beacon.GPS_Lat, 6);
-    Serial.print(",");
-    Serial.print(beacon.GPS_Lng, 6);
-    Serial.print("    Altitude (GPS): ");
-    Serial.print(beacon.GPS_Alt);
-    Serial.print("    Course: ");
-    Serial.print(beacon.GPS_Crse);
-    Serial.print("    Speed: ");
-    Serial.println(beacon.GPS_Speed);
+void Radio::updateBeacon(AtmsData *atmsData, GpsData *gpsData, ImuData *imuData)
+{   
+    beacon_tx_.Temp1 = (float) atmsData->temperature1;
+    beacon_tx_.Pressure = (float) atmsData->pressure;
+    beacon_tx_.Alt = (float) atmsData->altitude;
+    beacon_tx_.Temp2 = atmsData->temperature2;
+    beacon_tx_.Humidity = atmsData->humidity;
+    beacon_tx_.Temp3 = atmsData->temperatureDallas;
+    beacon_tx_.IMU1 = imuData->gx;
+    beacon_tx_.IMU2 = imuData->gy;
+    beacon_tx_.IMU3 = imuData->gz;
+    beacon_tx_.GPS_Lat = (float) gpsData->latitude;
+    beacon_tx_.GPS_Lng = (float) gpsData->longitude;
+    beacon_tx_.GPS_Alt = (float) gpsData->altitude;
+    beacon_tx_.GPS_Crse = (float) gpsData->crse;
+    beacon_tx_.GPS_Speed = (float) gpsData->mps;
+    beacon_tx_.GPS_HH = gpsData->hour;
+    beacon_tx_.GPS_MM = gpsData->minute;
+    beacon_tx_.GPS_SS = gpsData->second;
+    beacon_tx_.GPS_validity = gpsData->validity;
+    beacon_tx_.GPS_Sat = gpsData->satellites;
 }
 
-bool Radio::send_command(uint8_t cmd)
+bool Radio::sendCommand(uint8_t cmd)
 {
     return rf22.sendtoWait((uint8_t *)&cmd, 1, addr2_);
 }
 
-uint8_t Radio::read_command(void)
+uint8_t Radio::readCommand(uint8_t *cmd)
 {
-    uint8_t cmd;
     if (rf22.available())
     {
         uint8_t len;
         uint8_t from;
-        rf22.recvfromAck((uint8_t *)&cmd, &len, &from);
-        return cmd;
+        rf22.recvfromAck(cmd, &len, &from);
     }
 }
 
-void Radio::displayData(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32) {
-    Serial.print("Temp1: ");
-    Serial.print(dataD[0]);
-    Serial.print("    Pressure: ");
-    Serial.print(dataD[1]);
-    Serial.print("    Altitude: ");
-    Serial.print(dataD[2]);
+void Radio::infoPrint(void) {
+    INFO_PRINT_RAW("    Temp1: ");
+    INFO_PRINT_RAW(beacon.Temp1);
+    INFO_PRINT_RAW("    Pressure: ");
+    INFO_PRINT_RAW(beacon.Pressure);
+    INFO_PRINT_RAW("    Altitude: ");
+    INFO_PRINT_RAW(beacon.Alt);
     
-    Serial.print("    Temp2: ");
-    Serial.print(dataF[0]);
-    Serial.print("    Humidity: ");
-    Serial.print(dataF[1]);
-    Serial.print("    Temp3: ");
-    Serial.print(dataF[2]);
-    Serial.print("    IMU1: ");
-    Serial.print(dataF[3]);
-    Serial.print("    IMU2: ");
-    Serial.print(dataF[4]);
-    Serial.print("    IMU3: ");
-    Serial.println(dataF[5]);
+    INFO_PRINT_RAW("    Temp2: ");
+    INFO_PRINT_RAW(beacon.Temp2);
+    INFO_PRINT_RAW("    Humidity: ");
+    INFO_PRINT_RAW(beacon.Humidity);
+    INFO_PRINT_RAW("    Temp3: ");
+    INFO_PRINT_RAW(beacon.Temp3);
+    INFO_PRINT_RAW("    IMU1: ");
+    INFO_PRINT_RAW(beacon.IMU1);
+    INFO_PRINT_RAW("    IMU2: ");
+    INFO_PRINT_RAW(beacon.IMU2);
+    INFO_PRINT_RAW("    IMU3: ");
+    INFO_PRINTLN_RAW(beacon.IMU3);
 
-    Serial.print("HH:MM:SS: ");
-    Serial.print(dataU8[0]);
-    Serial.print(":");
-    Serial.print(dataU8[1]);
-    Serial.print(":");
-    Serial.print(dataU8[2]);
-    Serial.print("    Validity: ");
-    Serial.print(dataU8[3], BIN);
-    Serial.print("    Sat: ");
-    Serial.print(dataU32);
-    Serial.print("    Location: ");
-    Serial.print(dataD[3], 6);
-    Serial.print(",");
-    Serial.print(dataD[4], 6);
-    Serial.print("    Altitude (GPS): ");
-    Serial.print(dataD[5]);
-    Serial.print("    Course: ");
-    Serial.print(dataD[6]);
-    Serial.print("    Speed: ");
-    Serial.println(dataD[7]);
+    INFO_PRINT_RAW("HH:MM:SS: ");
+    INFO_PRINT_RAW(beacon.GPS_HH);
+    INFO_PRINT_RAW(":");
+    INFO_PRINT_RAW(beacon.GPS_MM);
+    INFO_PRINT_RAW(":");
+    INFO_PRINT_RAW(beacon.GPS_SS);
+    INFO_PRINT_RAW("    Validity: ");
+    INFO_PRINT_RAW(beacon.GPS_validity, BIN);
+    INFO_PRINT_RAW("    Sat: ");
+    INFO_PRINT_RAW(beacon.GPS_Sat);
+    INFO_PRINT_RAW("    Location: ");
+    INFO_PRINT_RAW(beacon.GPS_Lat, 6);
+    INFO_PRINT_RAW(",");
+    INFO_PRINT_RAW(beacon.GPS_Lng, 6);
+    INFO_PRINT_RAW("    Altitude (GPS): ");
+    INFO_PRINT_RAW(beacon.GPS_Alt);
+    INFO_PRINT_RAW("    Course: ");
+    INFO_PRINT_RAW(beacon.GPS_Crse);
+    INFO_PRINT_RAW("    Speed: ");
+    INFO_PRINTLN_RAW(beacon.GPS_Speed);
 }

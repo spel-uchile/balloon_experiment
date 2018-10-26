@@ -79,21 +79,24 @@ class IrdComInterface:
             # print('\tHeader: {},'.format(csp_header))
             # print('\tData: {}\n'.format(data))
             cmd = data.decode("ascii", "replace")
-            if(cmd=="StartingMission" or cmd=="EndMission"):
-                print("\nIridium DATA: ", cmd.encode())
-                msg_iridium = b"AT+SBDWT="+cmd.encode()+b"\r"
-            else:
-                msg = cmd[4:].split(" ")
-                msg = self.get_msg(msg[:-1])
-                print("\nIridium DATA: ", msg.encode())
-                msg_iridium = b"AT+SBDWT="+msg.encode()+b"\r"
-            self.last_data = msg_iridium
-            self.serial_port.flush()
-            self.serial_port.write(msg_iridium)
-            self.serial_port.flush()
-            self.serial_port.write(b"AT+SBDIX\r")
-            self.serial_port.write(b"AT+SBDIX\r")
-            self.serial_port.flush()
+            try:
+                if(cmd=="StartingMission" or cmd=="EndMission"):
+                    print("\nIridium DATA: ", cmd.encode())
+                    msg_iridium = b"AT+SBDWT="+cmd.encode()+b"\r"
+                else:
+                    msg = cmd[4:].split(" ")
+                    msg = self.get_msg(msg[:-1])
+                    print("\nIridium DATA: ", msg.encode())
+                    msg_iridium = b"AT+SBDWT="+msg.encode()+b"\r"
+                self.last_data = msg_iridium
+                self.serial_port.flush()
+                self.serial_port.write(msg_iridium)
+                self.serial_port.flush()
+                self.serial_port.write(b"AT+SBDIX\r")
+                self.serial_port.write(b"AT+SBDIX\r")
+                self.serial_port.flush()
+            except:
+                print("iridium disconnected")
             
             #data = self.serial_port.readline()
             #if (len(data)) and (not data == '\r'):

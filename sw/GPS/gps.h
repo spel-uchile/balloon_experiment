@@ -8,6 +8,7 @@
 #include <Arduino.h>
 #include <TinyGPS++.h>
 #include "gps_data.h"
+#include "logger.h"
 
 /**
  * @class GPS
@@ -19,6 +20,8 @@
     
     // GPS object
     TinyGPSPlus gps;
+    // Serial port
+    HardwareSerial *serial_port_;
 
     public:
         /*Public Members*/
@@ -28,7 +31,7 @@
         GPS(void);
         
         // Overload constructor
-        GPS(int);
+        GPS(HardwareSerial *serial_port, int baudrate);
 
         // Mutator functions
         void init(void);
@@ -36,6 +39,5 @@
         void checkValidity(void);
 
     private:
-        int gps_baudrate;
+        int gps_baudrate_;
  };
-

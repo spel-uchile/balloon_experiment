@@ -6,8 +6,6 @@
 
 #include "atms.h"
 
-#define DEBUG_LEVEL 1
-
 //-------------------------- Public Methods --------------------------
 
 void ATMS::init(void)
@@ -29,4 +27,15 @@ void ATMS::updateData(void)
     atmsData.temperature2 = sensor_.getTemp();
     sensorT_.requestTemperatures();
     atmsData.temperatureDallas = sensorT_.getTempCByIndex(0);
+}
+
+void ATMS::infoPrint(void)
+{
+    INFO_PRINTLN_RAW("temp1\tpressure\taltitude\ttemp2\thumidity\ttemperatureDallas");
+    INFO_PRINT_RAW(atmsData.temperature1);INFO_PRINT_RAW("\t");
+    INFO_PRINT_RAW(atmsData.pressure);INFO_PRINT_RAW("\t");
+    INFO_PRINT_RAW(atmsData.altitude);INFO_PRINT_RAW("\t");
+    INFO_PRINT_RAW(atmsData.temperature2);INFO_PRINT_RAW("\t");
+    INFO_PRINT_RAW(atmsData.humidity);INFO_PRINT_RAW("\t");
+    INFO_PRINTLN_RAW(atmsData.temperatureDallas);
 }

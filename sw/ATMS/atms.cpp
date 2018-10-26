@@ -19,14 +19,14 @@ void ATMS::updateData(void)
 {
     status_ = pressure_.startTemperature();
     delay(status_);
-    status_ = pressure_.getTemperature(T);
+    status_ = pressure_.getTemperature(atmsData.temperature1);
     status_ = pressure_.startPressure(3);
     delay(status_);
-    status_ = pressure_.getPressure(P, T);
-    a = pressure_.altitude(P, P0);
+    status_ = pressure_.getPressure(atmsData.pressure, atmsData.temperature1);
+    atmsData.altitude = pressure_.altitude(atmsData.pressure, P0);
     delay(400);
-    humidity = sensor_.getRH();
-    tempC = sensor_.getTemp();
+    atmsData.humidity = sensor_.getRH();
+    atmsData.temperature2 = sensor_.getTemp();
     sensorT_.requestTemperatures();
-    temperature_dallas = sensorT_.getTempCByIndex(0);
+    atmsData.temperatureDallas = sensorT_.getTempCByIndex(0);
 }

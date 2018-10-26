@@ -1,0 +1,26 @@
+#install gpsd
+sudo apt-get install gpsd gpsd-clients python-gps
+
+#edit /boot/cmdline.txt
+#remove console=ttyAMA0,115200 and if there, kgdboc=ttyAMA0,115200
+#Note you might see console=serial0,115200 or console=ttyS0,115200 and should remove those parts of the line if present
+
+#edit the /boot/config.txt
+#add this at the bottom:
+#enable_uart=1
+#check /etc/default/gpsd
+
+#start gpsd (model 3)
+sudo killall gpsd
+sudo gpsd /dev/ttyS0 -F /var/run/gpsd.sock
+#add this to /etc/default/gpsd
+#/dev/ttyAMA0 -F /var/run/gpsd.sock
+
+#si es necesario, reiniciar
+sudo systemctl restart gpsd.socket
+
+#useful link
+#https://learn.adafruit.com/adafruit-ultimate-gps-on-the-raspberry-pi?view=all#using-uart-instead-of-usb
+
+#install zmq
+sudo pip install pyzmq-static

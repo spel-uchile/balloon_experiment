@@ -246,11 +246,32 @@ void Radio::decode(uint8_t frame[], double dataD[], float dataF[], uint8_t dataU
     dataU32 = (frame[38] << 24) + (frame[39] << 16) + (frame[40] << 8) + (frame[41]);
 }
 
-void Radio::send_data(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32)
+void Radio::updateBeacon(AtmsData *atmsData, GpsData *gpsData, VectorInt16 *gyroData)
+{   
+    beacon_tx_.Temp1 = (float) atmsData->temperature1;
+    beacon_tx_.Pressure = (float) atmsData->pressure;
+    beacon_tx_.Alt = (float) atmsData->altitude;
+    beacon_tx_.Temp2 = atmsData->temperature2;
+    beacon_tx_.Humidity = atmsData->humidity;
+    beacon_tx_.Temp3 = atmsData->temperatureDallas;
+    beacon_tx_.IMU1 = gyroData->x;
+    beacon_tx_.IMU2 = gyroData->y;
+    beacon_tx_.IMU3 = gyroData->z;
+    beacon_tx_.GPS_Lat = (float) gpsData->latitude;
+    beacon_tx_.GPS_Lng = (float) gpsData->longitude;
+    beacon_tx_.GPS_Alt = (float) gpsData->altitude;
+    beacon_tx_.GPS_Crse = (float) gpsData->crse;
+    beacon_tx_.GPS_Speed = (float) gpsData->mps;
+    beacon_tx_.GPS_HH = gpsData->hour;
+    beacon_tx_.GPS_MM = gpsData->minute;
+    beacon_tx_.GPS_SS = gpsData->second;
+    beacon_tx_.GPS_validity = gpsData->validity;
+    beacon_tx_.GPS_Sat = gpsData->satellites;
+}
+
+void Radio::send_data()
 {
-    uint8_t frame[42];
-    encode(dataD, dataF, dataU8, dataU32, frame);
-    sendFrame(frame, sizeof(frame));
+    sendFrame((uint8_t *)&beacon_tx_, beacon_tx_size_);
 }
 
 void Radio::read_data(double dataD[], float dataF[], uint8_t dataU8[], uint32_t dataU32)

@@ -13,8 +13,14 @@ sudo apt-get install gpsd gpsd-clients python-gps
 #start gpsd (model 3)
 sudo killall gpsd
 sudo gpsd /dev/ttyS0 -F /var/run/gpsd.sock
+#add this to /etc/default/gpsd
+#/dev/ttyAMA0 -F /var/run/gpsd.sock
+
 #si es necesario, reiniciar
 sudo systemctl restart gpsd.socket
+
+#useful link
+#https://learn.adafruit.com/adafruit-ultimate-gps-on-the-raspberry-pi?view=all#using-uart-instead-of-usb
 
 #install zmq
 sudo pip install pyzmq-static

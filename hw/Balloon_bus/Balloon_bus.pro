@@ -1,4 +1,4 @@
-update=vie 05 oct 2018 16:02:43 -03
+update=mié 31 oct 2018 19:34:43 -03
 version=1
 last_client=kicad
 [general]
@@ -121,6 +121,17 @@ Type=0
 Name=Thin
 Clearance=0.1
 TrackWidth=0.21
+ViaDiameter=1.5
+ViaDrill=0.8
+uViaDiameter=0.3
+uViaDrill=0.1
+dPairWidth=0.2
+dPairGap=0.25
+dPairViaGap=0.25
+[pcbnew/Netclasses/2]
+Name=special
+Clearance=0.4
+TrackWidth=0.4
 ViaDiameter=1.5
 ViaDrill=0.8
 uViaDiameter=0.3

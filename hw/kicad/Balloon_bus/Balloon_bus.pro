@@ -1,10 +1,6 @@
-update=mié 31 oct 2018 19:34:43 -03
+update=jue 01 nov 2018 13:58:51 CLST
 version=1
 last_client=kicad
-[general]
-version=1
-RootSch=
-BoardNm=
 [cvpcb]
 version=1
 NetIExt=net
@@ -139,3 +135,5 @@ uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.25
 dPairViaGap=0.25
+[general]
+version=1

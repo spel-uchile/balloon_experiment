@@ -1,6 +1,6 @@
 EESchema Schematic File Version 4
 LIBS:Balloon_bus-cache
-EELAYER 26 0
+EELAYER 29 0
 EELAYER END
 $Descr User 16821 8268
 encoding utf-8
@@ -14,9 +14,7 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
-Wire Wire Line
-	15050 3150 15350 3150
-Text Label 15250 3150 0    70   ~ 0
+Text Label 15650 3150 2    70   ~ 0
 3V3
 Wire Wire Line
 	12850 3150 12450 3150
@@ -612,4 +610,28 @@ Wire Wire Line
 	1400 2200 1400 1900
 Text Label 1400 1900 1    70   ~ 0
 5V0
+Wire Wire Line
+	12850 3750 12450 3750
+Wire Wire Line
+	12850 3950 12450 3950
+Wire Wire Line
+	15050 3750 15650 3750
+Wire Wire Line
+	15650 3950 15050 3950
+Text Label 15650 3750 2    70   ~ 0
+MOSI
+Text Label 12450 3750 0    70   ~ 0
+MISO
+Text Label 12450 3950 0    70   ~ 0
+SCK
+Wire Wire Line
+	12850 2950 12450 2950
+Wire Wire Line
+	15050 2950 15650 2950
+Text Label 12450 2950 0    70   ~ 0
+5V0
+Text Label 15650 2950 2    70   ~ 0
+5V0
+Wire Wire Line
+	15050 3150 15650 3150
 $EndSCHEMATC

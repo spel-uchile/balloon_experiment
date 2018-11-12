@@ -1,6 +1,6 @@
 EESchema Schematic File Version 4
 LIBS:Balloon_bus-cache
-EELAYER 26 0
+EELAYER 29 0
 EELAYER END
 $Descr User 16821 8268
 encoding utf-8
@@ -72,12 +72,6 @@ VBATT
 Text Label 15500 4950 2    70   ~ 0
 VBATT
 Wire Wire Line
-	8250 1750 7750 1750
-Wire Wire Line
-	10450 1750 10750 1750
-Wire Wire Line
-	8250 1950 7750 1950
-Wire Wire Line
 	8250 4550 7850 4550
 Text Label 7850 4550 0    70   ~ 0
 SDA
@@ -89,7 +83,7 @@ $Comp
 L Balloon_bus-eagle-import:PC104_CONN H1H2
 U 1 0 6C5DF7BA2912052D
 P 9350 3150
-F 0 "H1H2" V 6650 2050 59  0000 L BNN
+F 0 "H1H2" V 6500 2250 59  0000 L BNN
 F 1 "PC104_CONN" H 9350 3150 50  0001 C CNN
 F 2 "Balloon_bus:PC_104" H 9350 3150 50  0001 C CNN
 F 3 "" H 9350 3150 50  0001 C CNN
@@ -193,8 +187,6 @@ Wire Wire Line
 	12850 5350 12450 5350
 Text Label 12450 5350 0    70   ~ 0
 GPIO21
-Wire Wire Line
-	15050 5350 15500 5350
 Wire Wire Line
 	12850 5550 12450 5550
 Wire Wire Line
@@ -616,8 +608,6 @@ Wire Wire Line
 	12850 3950 12450 3950
 Wire Wire Line
 	15050 3750 15650 3750
-Wire Wire Line
-	15650 3950 15050 3950
 Text Label 15650 3750 2    70   ~ 0
 MOSI
 Text Label 12450 3750 0    70   ~ 0

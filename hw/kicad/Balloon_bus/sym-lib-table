@@ -2,4 +2,5 @@
   (lib (name Balloon_bus-eagle-import)(type Legacy)(uri ${KIPRJMOD}/Balloon_bus-eagle-import.lib)(options "")(descr ""))
   (lib (name Balloon_bus-rescue)(type Legacy)(uri ${KIPRJMOD}/Balloon_bus-rescue.lib)(options "")(descr ""))
   (lib (name GPS)(type Legacy)(uri /home/mati/Documents/GitHub/balloon_experiment/hw/kicad/Library/GPS/GPS.lib)(options "")(descr ""))
+  (lib (name sensor)(type Legacy)(uri /home/mati/Documents/GitHub/balloon_experiment/hw/kicad/Library/Sensor/sensor.lib)(options "")(descr ""))
 )

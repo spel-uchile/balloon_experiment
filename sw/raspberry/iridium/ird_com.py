@@ -114,7 +114,7 @@ class IrdComInterface:
         while True:
             try:
                 #self.serial_port.flush()
-                data = self.serial_port.read(100)
+                data = self.serial_port.read(200)
                 if (len(data)):
                     print("\nIridium REPLY: ", data)
                 """if (len(data)) and (not data == '\r'):

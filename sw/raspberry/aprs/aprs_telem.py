@@ -1,110 +1,121 @@
-#!/usr/bin/python
-
-__author__ = 'gdiaz'
-
-# APRS TEST
-
-"""Provides a high level interface over ZMQ for data exchange.
-"""
-
-"""Description
-    BMP comunication: node1
-
-    console:  send data to node1
-
-    data[bmp]-->console[PUB]-> node1
-
-"""
-
 import sys
-import time
-import re
-import argparse
+import sqlite3
+conn = sqlite3.connect('/home/pi/Spel/suchai.db')
+c = conn.cursor()
 
-from threading import Thread
-from time import sleep
+def get_phase(phase):
+    if phase == 0:
+        return "A0"
+    elif phase == 1:
+        return "A"
+    elif phase == 2:
+        return "B"
+    elif phase == 3:
+        return "B1"
+    elif phase == 4:
+        return "B2"
+    elif phase == 5:
+        return "C"
+    elif phase == 6:
+        return "C1"
+    else:
+        return "X"
 
-import Adafruit_BMP.BMP085 as BMP085
-from gpiozero import *
-from gps import *
+#get gps data
+for row_gps in c.execute('SELECT * FROM gps_table ORDER BY idx DESC LIMIT 1'):
+    #print row_gps
+    gps_id = row_gps[0]
+    system_time = row_gps[1]
+    gps_time = row_gps[2]
+    gps_latitude = row_gps[3]
+    gps_longitude = row_gps[4]
+    gps_height = row_gps[5]
+    gps_velocity_x = row_gps[6]
+    gps_velocity_y = row_gps[7]
+    gps_satellites = row_gps[8]
+    gps_mode = row_gps[9]
+    phase = row_gps[10]
+    phase_str = get_phase(phase)
 
-sys.path.append('../')
+#get bmp data
+for row_bmp in c.execute('SELECT * FROM pressure_table ORDER BY idx DESC LIMIT 1'):
+    #print row_bmp
+    bmp_id = row_bmp[0]
+    bmp_pressure = row_bmp[2]
+    bmp_temperature = row_bmp[3]
+    bmp_altitude = row_bmp[4]
 
-class APRSTEST:
-    def __init__(self):
-        # sensor arguments
-        self.sensor_bmp = BMP085.BMP085()
-        self.temperature = 0        #float
-        self.pressure = 0           #float
-        self.altitude_atms = 0           #float
-        #Linear Actuator Validation Pin
-        self.mag_int1 = Button(4)
-        #Servo magnet
-        self.mag_int2 = Button(17)
-        #states
-        self.lineal_state = 0   #0:cerrado/extendido, 1:abierto/retraido
-        self.servo_state = 0    #0:meaning1, 1:meaning2
-        # gps arguments
-        self.gps_handler = gps(mode=WATCH_ENABLE) #starting the stream of info
-        
-        self.latitude = 0           #float
-        self.longitude = 0          #float
-        self.time_utc = 0           #str
-        self.fix_time = 0           #float
-        self.altitude_gps = 0           #float
-        self.speed_horizontal = 0   #float
-        self.speed_vertical = 0     #float
+#get dpl data
+for row_dpl in c.execute('SELECT * FROM deploy_table ORDER BY idx DESC LIMIT 1'):
+    #print row_dpl
+    dpl_id = row_dpl[0]
+    dpl_lineal_state = row_dpl[2]
+    dpl_servo_state = row_dpl[3]
 
-    def update_bmp(self):
-        self.temperature = self.sensor_bmp.read_temperature()
-        self.pressure = self.sensor_bmp.read_pressure()
-        self.altitude = self.sensor_bmp.read_altitude()
+#get system data
+for row in c.execute('SELECT value FROM dat_system WHERE idx="2";'):
+    sys_min_alive = row[0]
 
-    def update_dpl(self):
-        self.lineal_state = self.mag_int1.is_pressed
-        self.servo_state = self.mag_int2.is_pressed
+#get system data
+for row in c.execute('SELECT value FROM dat_system WHERE idx="4";'):
+    sys_reset_counter = row[0]
 
-    def check_nan(self, num, id):
-        #print(type(num))
-        #print(num)
-        try:
-            if math.isnan(num):
-                return -1
-            if num == None:
-                return -1
-        except:
-            #print num, id
-            if num == None:
-                return -1
-            if id==3:#TODO: chech this!!!
-                return -1
-            return num
+#check gps data
+try:
+    type(gps_id)
+    type(system_time)
+    type(gps_time)
+    type(gps_latitude)
+    type(gps_longitude)
+    type(gps_height)
+    type(gps_velocity_x)
+    type(gps_velocity_y)
+    type(gps_satellites)
+    type(gps_mode)
+    type(phase)
+    type(phase_str)
+except:#fill with error value
+    gps_id = -1
+    system_time = "-1"
+    gps_time = "-1"
+    gps_latitude = -1
+    gps_longitude = -1
+    gps_height = -1
+    gps_velocity_x = -1
+    gps_velocity_y = -1
+    gps_satellites = -1
+    gps_mode = -1
+    phase = -1
+    phase_str = "-1"
+#check bmp data
+try:
+    type(bmp_id)
+    type(bmp_pressure)
+    type(bmp_temperature)
+    type(bmp_altitude)
+except:#fill with error value
+    bmp_id = -1
+    bmp_pressure = -1
+    bmp_temperature = -1
+    bmp_altitude = -1
+#check dpl data
+try:
+    type(dpl_id)
+    type(dpl_lineal_state)
+    type(dpl_servo_state)
+except:#fill with error value
+    dpl_id = -1
+    dpl_lineal_state = -1
+    dpl_servo_state = -1
+#check system data
+try:
+    type(sys_min_alive)
+except:#fill with error value
+    sys_min_alive = -1
+#check system data
+try:
+    type(sys_reset_counter)
+except:#fill with error value
+    sys_reset_counter = -1
 
-    def update_gps(self):
-        self.latitude = self.check_nan(self.gps_handler.fix.latitude, 1)
-        self.longitude = self.check_nan(self.gps_handler.fix.longitude, 2)
-        self.time_utc = self.gps_handler.utc
-        self.fix_time = self.check_nan(self.gps_handler.fix.time, 3)
-        self.altitude = self.check_nan(self.gps_handler.fix.altitude, 4)
-        self.speed_horizontal = self.check_nan(self.gps_handler.fix.speed, 5)
-        self.speed_vertical = self.check_nan(self.gps_handler.fix.climb, 6)
-        #print(self.gps_handler.utc, self.gps_handler.fix.time)
-        #time.sleep(0.1)
-        self.gps_handler.next()
-        if self.latitude == None:
-            self.latitude = -1
-        if self.longitude == None:
-            self.longitude = -1
-
-        #print self.latitude
-
-if __name__ == '__main__':
-    # Get arguments
-
-    aprs = APRSTEST()
-
-    aprs.update_bmp()
-    aprs.update_dpl()
-    aprs.update_gps()
-
-    print("%.3f %.3f %s %.3f %.3f %.3f %.3f %.3f %.3f %.3f %d %d" % (aprs.latitude, aprs.longitude, aprs.time_utc, aprs.fix_time, aprs.altitude_gps, aprs.speed_horizontal, aprs.speed_vertical, aprs.temperature, aprs.pressure, aprs.altitude_atms, aprs.lineal_state, aprs.servo_state))   
+print("%s %s %.3f %.3f %.3f %.3f %.3f %.3f %d %d %.3f %.3f %d %d %s %d %d" % (system_time, gps_time, gps_latitude, gps_longitude, gps_height, gps_velocity_x, gps_velocity_y, gps_satellites, gps_mode, bmp_temperature, bmp_pressure, bmp_altitude, dpl_lineal_state, dpl_servo_state, phase_str, sys_reset_counter, sys_min_alive))

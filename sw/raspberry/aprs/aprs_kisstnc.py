@@ -2,7 +2,7 @@
 
 __author__ = 'gdiaz'
 
-# APRS TEST
+# APRS-KISS COM INTERFACE
 
 """Provides a high level interface over ZMQ for dpl data exchange.
 """
@@ -32,7 +32,7 @@ sys.path.append('../')
 from nodes.node_list import NODE_DPL, NODE_DPL_CMD, CSP_PORT_APPS
 
 class DplCmdInterface:
-    def __init__(self):
+    def __init__(self, kiss_port = '/tmp/kisstnc'):
         # ctrl params
         self.action = 0
         #com args
@@ -42,6 +42,8 @@ class DplCmdInterface:
         self.port_csp = CSP_PORT_APPS
         self.prompt = "[node({}) port({})] <message>: "
         # aprs params
+        self.kiss_port = kiss_port
+        self.aprs_kiss = serial.Serial(self.kiss_port, 1200, timeout=5)
         self.TEST_FRAME = "\xc0\x00\x48\x65\x6c\x6c\x6f\x20\x74\x68\x69\x73\x20\x69\x73\x20\x74\x68\x65\x20\x45\x6e\x74\x65\x72\x70\x72\x69\x73\x65\xc0"
         self.INFO_MSG = "Hello this is the Enterprise a radiosonde of research and development."
 
@@ -51,13 +53,13 @@ class DplCmdInterface:
         longitude = -70.6340
         time_utc = 123.456
         fix_time = 789.012
-        altitude_gps = 600.123
+        altitude = 600.123
         speed_horizontal =  0.123
         speed_vertical = 0.456
 
         temperature = 20.45
         pressure = 900.234
-        altitude_atms = 607.234
+        altitude = 607.234
 
         lineal_state = 0
         servo_state = 1
@@ -65,12 +67,12 @@ class DplCmdInterface:
         info = "Hello this is the Enterprise a radiosonde of research and development."
 
         data = pack('ffffffffffbb', 
-            latitude, longitude, time_utc, fix_time, altitude_gps, speed_horizontal, speed_vertical,
-            temperature, pressure, altitude_atms,
+            latitude, longitude, time_utc, fix_time, altitude, speed_horizontal, speed_vertical,
+            temperature, pressure, altitude,
             lineal_state, servo_state)
 
-        # print str(data)
-        print("%.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %.3f %d %d" % (latitude, longitude, time_utc, fix_time, altitude_gps, speed_horizontal, speed_vertical, temperature, pressure, altitude_atms, lineal_state, servo_state))
+        return data
+
 
     def console(self, ip="localhost", in_port_tcp=8002, out_port_tcp=8001):
         """ Send messages to node """
@@ -122,15 +124,14 @@ if __name__ == '__main__':
     args = get_parameters()
 
     dpl_cmd = DplCmdInterface()
-    dpl_cmd.test_data()
 
-    # tasks = []
+    tasks = []
 
     # Create a console socket
-    # console_th = Thread(target=dpl_cmd.console, args=(args.ip, args.out_port, args.in_port))
-    # console_th.daemon = True
-    # tasks.append(console_th)
-    # console_th.start()
+    console_th = Thread(target=dpl_cmd.console, args=(args.ip, args.out_port, args.in_port))
+    console_th.daemon = True
+    tasks.append(console_th)
+    console_th.start()
 
-    # for th in tasks:
-    #     th.join()
+    for th in tasks:
+        th.join()

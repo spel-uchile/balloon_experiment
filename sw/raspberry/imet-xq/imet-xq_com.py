@@ -30,7 +30,7 @@ NODE_OBC = data["nodes"]["obc"]
 CSP_PORT_APPS = data["ports"]["telemetry"]
 
 #define commands
-GET_DATA = "get_imetxq_data"
+GET_DATA = "get_imet_data"
 
 class iMetXQComInterface:
     def __init__(self):
@@ -41,7 +41,7 @@ class iMetXQComInterface:
         self.port_csp = CSP_PORT_APPS
         self.prompt = "[node({}) port({})] <message>: "
         # imet-xq interface
-        self.serial_port = serial.Serial("/dev/ttyUSB0", "57600", timeout=5)
+        self.serial_port = serial.Serial("/dev/imet", "57600", timeout=5)
         self.pressure = 0
         self.temperature = 0
         self.humidity = 0
@@ -61,11 +61,13 @@ class iMetXQComInterface:
                 self.humidity = int(data[19:24])
                 self.date = data[25:35]
                 self.time = data[36:44]
-                self.latitude = data[45:56]
-                self.longitude = data[57:68]
+                self.latitude = int(data[45:56])
+                self.longitude = int(data[57:68])
                 self.altitude = int(data[69:78])
                 self.satellites = int(data[79:81])
+                # print(data)
             except:
+                print("error reading imet")
                 self.serial_port.flush()
 
     def console(self, ip="localhost", in_port_tcp=8002, out_port_tcp=8001):
@@ -87,17 +89,24 @@ class iMetXQComInterface:
                 csp_header = parse_csp(header)
             except:
                 csp_header = ""
-            # data = data[:-1]
+            data = data[:-1]
             print('\nMON:', frame)
             print('\tHeader: {},'.format(csp_header))
             print('\tData: {}\n'.format(data))
             cmd = data.decode("ascii", "replace")
+            print(cmd)
             # try:
             if(cmd==GET_DATA):
                 print('\nMeasurements:')
                 print('\tPressure: {}'.format(self.pressure))
                 print('\tTemperature: {},'.format(self.temperature))
                 print('\tHumidity: {}'.format(self.humidity))
+                print('\tDate: {}'.format(self.date))
+                print('\tTime: {}'.format(self.time))
+                print('\tLatitude: {}'.format(self.latitude))
+                print('\tLongitude: {}'.format(self.longitude))
+                print('\tAltitude: {}'.format(self.altitude))
+                print('\tSatellites: {}'.format(self.satellites))
                 # build msg
                 #          Prio   SRC   DST    DP   SP  RES HXRC
                 header_ = "{:02b}{:05b}{:05b}{:06b}{:06b}00000000"

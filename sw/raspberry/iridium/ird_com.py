@@ -47,7 +47,7 @@ class IrdComInterface:
         self.port_csp = CSP_PORT_APPS
         self.prompt = "[node({}) port({})] <message>: "
         # iridium interface
-        self.serial_port = serial.Serial("/dev/ttyUSB0", "19200", timeout=5)
+        self.serial_port = serial.Serial("/dev/iridium", "19200", timeout=5)
         self.last_data = b"none"
         self.data_succed = False
 

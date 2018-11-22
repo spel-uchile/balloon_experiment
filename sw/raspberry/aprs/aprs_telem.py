@@ -2,6 +2,11 @@ import sys
 import sqlite3
 conn = sqlite3.connect('/home/pi/Spel/suchai.db')
 c = conn.cursor()
+from time import sleep
+import tm1637
+
+# Initialize the display (GND, VCC=3.3V, Example Pins are DIO-20 and CLK21)
+Display = tm1637.TM1637(CLK=27, DIO=17, brightness=1.0)
 
 def get_phase(phase):
     if phase == 0:
@@ -20,6 +25,24 @@ def get_phase(phase):
         return "C1"
     else:
         return "X"
+
+def get_digit(mins):
+    digits = []
+    mins_str = str(mins)
+    for digit in mins_str:
+        digits.append(digit)
+    if len(digits) == 0:
+        return [0, 0, 0, 0]
+    elif len(digits) == 1:
+        return [int(digits[0], 0, 0, 0)]
+    elif len(digits) == 2:
+        return [0, 0, int(digits[0]), int(digits[1])]
+    elif len(digits) == 3:
+        return [0, int(digits[0]), int(digits[1]), int(digits[2])]
+    elif len(digits) == 4:
+        return [int(digits[0]), int(digits[1]), int(digits[2]), int(digits[3])]
+    else:
+        return [9, 9, 9, 9]
 
 #get gps data
 for row_gps in c.execute('SELECT * FROM gps_table ORDER BY idx DESC LIMIT 1'):
@@ -85,7 +108,7 @@ except:#fill with error value
     gps_velocity_y = -1
     gps_satellites = -1
     gps_mode = -1
-    phase = -1
+    phase = 9
     phase_str = "-1"
 #check bmp data
 try:
@@ -117,5 +140,12 @@ try:
     type(sys_reset_counter)
 except:#fill with error value
     sys_reset_counter = -1
+
+Display.Clear()
+if (sys_min_alive%2==0):
+    digits = get_digit(sys_min_alive)
+else:
+    digits = [phase, 0, 0, 0]
+Display.Show(digits)
 
 print("%s %s %.3f %.3f %.3f %.3f %.3f %.3f %d %d %.3f %.3f %d %d %s %d %d" % (system_time, gps_time, gps_latitude, gps_longitude, gps_height, gps_velocity_x, gps_velocity_y, gps_satellites, gps_mode, bmp_temperature, bmp_pressure, bmp_altitude, dpl_lineal_state, dpl_servo_state, phase_str, sys_reset_counter, sys_min_alive))

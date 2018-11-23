@@ -34,7 +34,7 @@ def get_digit(mins):
     if len(digits) == 0:
         return [0, 0, 0, 0]
     elif len(digits) == 1:
-        return [int(digits[0], 0, 0, 0)]
+        return [0, 0, 0, int(digits[0])]
     elif len(digits) == 2:
         return [0, 0, int(digits[0]), int(digits[1])]
     elif len(digits) == 3:
@@ -144,8 +144,9 @@ except:#fill with error value
 Display.Clear()
 if (sys_min_alive%2==0):
     digits = get_digit(sys_min_alive)
+    Display.Show(digits)
 else:
     digits = [phase, 0, 0, 0]
-Display.Show(digits)
+    Display.Show1(phase, 0)
 
 print("%s %s %.3f %.3f %.3f %.3f %.3f %.3f %d %d %.3f %.3f %d %d %s %d %d" % (system_time, gps_time, gps_latitude, gps_longitude, gps_height, gps_velocity_x, gps_velocity_y, gps_satellites, gps_mode, bmp_temperature, bmp_pressure, bmp_altitude, dpl_lineal_state, dpl_servo_state, phase_str, sys_reset_counter, sys_min_alive))

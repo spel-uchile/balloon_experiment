@@ -58,7 +58,7 @@ class DplComInterface:
         self.en_sr_so = LED(24)
         self.srvo_sgnl = LED(23)
         #Servo PWM
-        self.servo = Servo(18, initial_value=0, min_pulse_width=.544/1000, max_pulse_width=2.4/1000, frame_width=20./1000, pin_factory=None)
+        self.servo = Servo(18, initial_value=0, min_pulse_width=.544/1000, max_pulse_width=1.6/1000, frame_width=20./1000, pin_factory=None)
         #Servo magnet
         self.mag_int2 = Button(17)
         #states

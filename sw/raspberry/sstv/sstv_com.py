@@ -88,7 +88,7 @@ class sstvComInterface:
                 file_name = "img"+sys_min_alive+".png"
                 sstv_path = "/home/pi/Spel/sstv/pisstv/"
                 # take picture
-                picture_cmd = "raspistill -t 1 --width 320 --height 256 -e png -o "+file_path+file_name
+                picture_cmd = "raspistill -t 1 -ex auto --width 320 --height 256 -e png -o "+file_path+file_name
                 os.system(picture_cmd)
                 # generate sound file from image
                 gensound_cmd = sstv_path+"pisstv "+file_path+file_name+" 22050"

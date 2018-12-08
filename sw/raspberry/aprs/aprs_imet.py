@@ -7,16 +7,18 @@ def get_phase(phase):
     if phase == 0:
         return "A0"
     elif phase == 1:
-        return "A"
+        return "A1"
     elif phase == 2:
-        return "B"
+        return "A"
     elif phase == 3:
-        return "B1"
+        return "B"
     elif phase == 4:
-        return "B2"
+        return "B1"
     elif phase == 5:
-        return "C"
+        return "B2"
     elif phase == 6:
+        return "C"
+    elif phase == 7:
         return "C1"
     else:
         return "X"
@@ -28,16 +30,29 @@ for row_phase in c.execute('SELECT * FROM gps_table ORDER BY idx DESC LIMIT 1'):
     phase_str = get_phase(phase)
 
 #get imet data
-for row_imet in c.execute('SELECT * FROM imet_table ORDER BY idx DESC LIMIT 1'):
-    imet_pressure = row_imet[2]
-    imet_temperature = row_imet[3]
-    imet_humidity = row_imet[4]
-    imet_date = row_imet[5]
-    imet_time = row_imet[6]
-    imet_latitude = row_imet[7]
-    imet_longitude = row_imet[8]
-    imet_altitude = row_imet[9]
-    imet_satellites = row_imet[10]
+n_frame = 60
+sql_query = 'SELECT * FROM imet_table ORDER BY idx DESC LIMIT ' + str(n_frame)
+imet_dict = {
+    'pressure' : [],
+    'temperature' : [],
+    'humidity' : [],
+    'date' : [],
+    'time' : [],
+    'latitude' : [],
+    'longitude' : [],
+    'altitude' : [],
+    'satellites' : []
+}
+for row_imet in c.execute(sql_query):
+    imet_dict['pressure'].append(row_imet[2])
+    imet_dict['temperature'].append(row_imet[3])
+    imet_dict['humidity'].append(row_imet[4])
+    imet_dict['date'].append(row_imet[5])
+    imet_dict['time'].append(row_imet[6])
+    imet_dict['latitude'].append(row_imet[7])
+    imet_dict['longitude'].append(row_imet[8])
+    imet_dict['altitude'].append(row_imet[9])
+    imet_dict['satellites'].append(row_imet[10])
 
 #get system data
 for row in c.execute('SELECT value FROM dat_system WHERE idx="2";'):
@@ -81,4 +96,15 @@ try:
 except:#fill with error value
     sys_min_alive = -1
 
-print("%d %d %d %s %s %d %d %d %d %s %s %d" % (imet_pressure, imet_temperature, imet_humidity, imet_date, imet_time, imet_latitude, imet_longitude, imet_altitude, imet_satellites, system_time,  phase_str, sys_min_alive))
+res_string = ''
+
+try:
+#print(len(imet_dict['pressure']))
+    for i in range(0, n_frame, 20):
+        res_string +=  "%d %d %d %s %s %d %d %d " % (imet_dict['pressure'][i], imet_dict['temperature'][i], imet_dict['humidity'][i], imet_dict['date'][i], imet_dict['time'][i], imet_dict['latitude'][i], imet_dict['longitude'][i], imet_dict['altitude'][i])
+except:
+    res_string =  "%d %d %d %s %s %d %d %d " % (imet_dict['pressure'][0], imet_dict['temperature'][0], imet_dict['humidity'][0], imet_dict['date'][0], imet_dict['time'][0], imet_dict['latitude'][0], imet_dict['longitude'][0], imet_dict['altitude'][0])
+
+res_string += "%s %d" % (system_time, sys_min_alive)
+#print(len(res_string))
+print(res_string)

@@ -12,16 +12,18 @@ def get_phase(phase):
     if phase == 0:
         return "A0"
     elif phase == 1:
-        return "A"
+        return "A1"
     elif phase == 2:
-        return "B"
+        return "A"
     elif phase == 3:
-        return "B1"
+        return "B"
     elif phase == 4:
-        return "B2"
+        return "B1"
     elif phase == 5:
-        return "C"
+        return "B2"
     elif phase == 6:
+        return "C"
+    elif phase == 7:
         return "C1"
     else:
         return "X"
@@ -149,4 +151,7 @@ else:
     digits = [phase, 0, 0, 0]
     Display.Show1(phase, 0)
 
-print("%s %s %.3f %.3f %.3f %.3f %.3f %.3f %d %d %.3f %.3f %d %d %s %d %d" % (system_time, gps_time, gps_latitude, gps_longitude, gps_height, gps_velocity_x, gps_velocity_y, gps_satellites, gps_mode, bmp_temperature, bmp_pressure, bmp_altitude, dpl_lineal_state, dpl_servo_state, phase_str, sys_reset_counter, sys_min_alive))
+res_str = "%s %.3f %.3f %.3f %.3f %.3f %d %.3f %.3f %d" % (gps_time, gps_latitude, gps_longitude, gps_height, gps_velocity_x, gps_velocity_y, bmp_temperature, bmp_pressure, bmp_altitude, sys_min_alive)
+
+#print(len(res_str))
+print(res_str)

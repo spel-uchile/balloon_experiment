@@ -27,6 +27,9 @@ import os
 # c = conn.cursor()
 from time import gmtime, strftime
 
+from PIL import Image, ImageFont, ImageDraw
+import time
+
 # Get Nodes and Ports Parameters
 with open('node_list.json', encoding='utf-8') as data_file:
     data = json.load(data_file)
@@ -46,6 +49,7 @@ class sstvComInterface:
         self.node_dest = NODE_OBC
         self.port_csp = CSP_PORT_APPS
         self.prompt = "[node({}) port({})] <message>: "
+        self.mycallsign = "CE3BUC-11" # ham radio callsign
 
     def console(self, ip="localhost", in_port_tcp=8002, out_port_tcp=8001):
         """ Send messages to node """
@@ -90,6 +94,14 @@ class sstvComInterface:
                 # take picture
                 picture_cmd = "raspistill -t 1 -ex auto --width 320 --height 256 -e png -o "+file_path+file_name
                 os.system(picture_cmd)
+                # draw some info to the image
+                image = Image.open(file_path+file_name)
+                draw = ImageDraw.Draw(image)
+                localtime = time.strftime("%b %d %Y %H:%M:%S", time.localtime(time.time()))
+                font = ImageFont.truetype("FreeSans.ttf", 20)
+                draw.text((10, 10), self.mycallsign, (255,0,0), font=font)
+                draw.text((10, 220), localtime, (255,0,0), font=font)
+                image.save(file_path+file_name)
                 # generate sound file from image
                 gensound_cmd = sstv_path+"pisstv "+file_path+file_name+" 22050"
                 os.system(gensound_cmd)

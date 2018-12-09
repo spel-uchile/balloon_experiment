@@ -92,7 +92,7 @@ class sstvComInterface:
                 file_name = "img"+sys_min_alive+".png"
                 sstv_path = "/home/pi/Spel/sstv/pisstv/"
                 # take picture
-                picture_cmd = "raspistill -t 1 -ex auto --width 320 --height 256 -e png -o "+file_path+file_name
+                picture_cmd = "raspistill -t 1 --shutter 625 --ISO 100  --width 320 --height 256 -e png -o "+file_path+file_name
                 os.system(picture_cmd)
                 # draw some info to the image
                 image = Image.open(file_path+file_name)

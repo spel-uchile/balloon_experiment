@@ -17,40 +17,233 @@ $EndDescr
 $Comp
 L Payload:Payload U1
 U 1 1 5C059BEE
-P 5950 3250
-F 0 "U1" H 5950 4798 50  0000 C CNN
-F 1 "Payload" H 5950 4707 50  0000 C CNN
-F 2 "" H 4850 4050 50  0001 C CNN
-F 3 "" H 4850 4050 50  0001 C CNN
-	1    5950 3250
+P 7100 3300
+F 0 "U1" H 7100 4848 50  0000 C CNN
+F 1 "Payload" H 7100 4757 50  0000 C CNN
+F 2 "" H 6000 4100 50  0001 C CNN
+F 3 "" H 6000 4100 50  0001 C CNN
+	1    7100 3300
 	1    0    0    -1  
 $EndComp
-Text Label 6200 3450 0    50   ~ 0
+Text Label 7350 3500 0    50   ~ 0
 GND
-Text Label 8150 3450 2    50   ~ 0
+Text Label 9300 3500 2    50   ~ 0
 GND
-Text Label 8150 3550 2    50   ~ 0
+Text Label 9300 3600 2    50   ~ 0
 GND
 Wire Wire Line
-	8150 3450 7950 3450
+	9300 3500 9100 3500
 Wire Wire Line
-	7950 3550 8150 3550
+	9100 3600 9300 3600
 Wire Wire Line
-	6400 3450 6200 3450
-Text Label 6200 3350 0    50   ~ 0
+	7550 3500 7350 3500
+Text Label 7350 3400 0    50   ~ 0
 3V3
-Text Label 8150 3350 2    50   ~ 0
+Text Label 9300 3400 2    50   ~ 0
 3V3
 Wire Wire Line
-	8150 3350 7950 3350
+	9300 3400 9100 3400
 Wire Wire Line
-	6400 3350 6200 3350
-Text Label 3750 4050 0    50   ~ 0
+	7550 3400 7350 3400
+Text Label 4900 4100 0    50   ~ 0
 SDA
-Text Label 3750 4150 0    50   ~ 0
+Text Label 4900 4200 0    50   ~ 0
 SCL
 Wire Wire Line
-	3950 4050 3750 4050
+	5100 4100 4900 4100
 Wire Wire Line
-	3750 4150 3950 4150
+	4900 4200 5100 4200
+$Comp
+L MCU_Microchip_ATmega:ATmega328-PU U?
+U 1 1 5C0EA422
+P 2450 3300
+F 0 "U?" H 1806 3346 50  0000 R CNN
+F 1 "ATmega328-PU" H 1806 3255 50  0000 R CNN
+F 2 "Package_DIP:DIP-28_W7.62mm" H 2450 3300 50  0001 C CIN
+F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 2450 3300 50  0001 C CNN
+	1    2450 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Crystal Y?
+U 1 1 5C0EC2C3
+P 3550 2850
+F 0 "Y?" H 3550 3118 50  0000 C CNN
+F 1 "Crystal" H 3550 3027 50  0000 C CNN
+F 2 "" H 3550 2850 50  0001 C CNN
+F 3 "~" H 3550 2850 50  0001 C CNN
+	1    3550 2850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 5C0EC746
+P 3300 3100
+F 0 "C?" H 3415 3146 50  0000 L CNN
+F 1 "C" H 3415 3055 50  0000 L CNN
+F 2 "" H 3338 2950 50  0001 C CNN
+F 3 "~" H 3300 3100 50  0001 C CNN
+	1    3300 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C?
+U 1 1 5C0EC888
+P 3800 3100
+F 0 "C?" H 3915 3146 50  0000 L CNN
+F 1 "C" H 3915 3055 50  0000 L CNN
+F 2 "" H 3838 2950 50  0001 C CNN
+F 3 "~" H 3800 3100 50  0001 C CNN
+	1    3800 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Screw_Terminal_01x02 J?
+U 1 1 5C0ECC20
+P 2300 5450
+F 0 "J?" H 2380 5442 50  0000 L CNN
+F 1 "DPL1" H 2380 5351 50  0000 L CNN
+F 2 "" H 2300 5450 50  0001 C CNN
+F 3 "~" H 2300 5450 50  0001 C CNN
+	1    2300 5450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Screw_Terminal_01x02 J?
+U 1 1 5C0ED411
+P 2300 5750
+F 0 "J?" H 2380 5742 50  0000 L CNN
+F 1 "DPL2" H 2380 5651 50  0000 L CNN
+F 2 "" H 2300 5750 50  0001 C CNN
+F 3 "~" H 2300 5750 50  0001 C CNN
+	1    2300 5750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Screw_Terminal_01x02 J?
+U 1 1 5C0ED755
+P 2300 6050
+F 0 "J?" H 2380 6042 50  0000 L CNN
+F 1 "DPL3" H 2380 5951 50  0000 L CNN
+F 2 "" H 2300 6050 50  0001 C CNN
+F 3 "~" H 2300 6050 50  0001 C CNN
+	1    2300 6050
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Screw_Terminal_01x02 J?
+U 1 1 5C0ED94F
+P 3450 5450
+F 0 "J?" H 3530 5442 50  0000 L CNN
+F 1 "DPL4" H 3530 5351 50  0000 L CNN
+F 2 "" H 3450 5450 50  0001 C CNN
+F 3 "~" H 3450 5450 50  0001 C CNN
+	1    3450 5450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Screw_Terminal_01x02 J?
+U 1 1 5C0EDB6A
+P 3450 5750
+F 0 "J?" H 3530 5742 50  0000 L CNN
+F 1 "DPL5" H 3530 5651 50  0000 L CNN
+F 2 "" H 3450 5750 50  0001 C CNN
+F 3 "~" H 3450 5750 50  0001 C CNN
+	1    3450 5750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Screw_Terminal_01x02 J?
+U 1 1 5C0EDE0E
+P 3450 6050
+F 0 "J?" H 3530 6042 50  0000 L CNN
+F 1 "DPL6" H 3530 5951 50  0000 L CNN
+F 2 "" H 3450 6050 50  0001 C CNN
+F 3 "~" H 3450 6050 50  0001 C CNN
+	1    3450 6050
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR?
+U 1 1 5C0FD400
+P 2450 4850
+F 0 "#PWR?" H 2450 4600 50  0001 C CNN
+F 1 "GND" H 2455 4677 50  0000 C CNN
+F 2 "" H 2450 4850 50  0001 C CNN
+F 3 "" H 2450 4850 50  0001 C CNN
+	1    2450 4850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2450 4800 2450 4850
+Text Label 2450 4800 0    50   ~ 0
+GND
+Wire Wire Line
+	3300 3250 3300 3300
+Wire Wire Line
+	3300 3300 3550 3300
+Wire Wire Line
+	3800 3300 3800 3250
+Wire Wire Line
+	3550 3300 3550 3350
+Connection ~ 3550 3300
+Wire Wire Line
+	3550 3300 3800 3300
+$Comp
+L power:GND #PWR?
+U 1 1 5C0FDBE2
+P 3550 3350
+F 0 "#PWR?" H 3550 3100 50  0001 C CNN
+F 1 "GND" H 3555 3177 50  0000 C CNN
+F 2 "" H 3550 3350 50  0001 C CNN
+F 3 "" H 3550 3350 50  0001 C CNN
+	1    3550 3350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3800 2950 3800 2850
+Wire Wire Line
+	3800 2850 3700 2850
+Wire Wire Line
+	3400 2850 3300 2850
+Wire Wire Line
+	3300 2850 3300 2950
+Wire Wire Line
+	3050 2800 3300 2800
+Wire Wire Line
+	3300 2800 3300 2850
+Connection ~ 3300 2850
+Wire Wire Line
+	3050 2700 3800 2700
+Wire Wire Line
+	3800 2700 3800 2850
+Connection ~ 3800 2850
+Text Label 3300 2800 2    50   ~ 0
+XTAL2
+Text Label 3300 2700 2    50   ~ 0
+XTAL1
+Wire Wire Line
+	2100 5550 1900 5550
+Text Label 1900 5550 0    50   ~ 0
+GND
+Text Label 1900 5850 0    50   ~ 0
+GND
+Text Label 1900 6150 0    50   ~ 0
+GND
+Text Label 3050 5550 0    50   ~ 0
+GND
+Text Label 3050 5850 0    50   ~ 0
+GND
+Text Label 3050 6150 0    50   ~ 0
+GND
+Wire Wire Line
+	2100 5850 1900 5850
+Wire Wire Line
+	1900 6150 2100 6150
+Wire Wire Line
+	3050 6150 3250 6150
+Wire Wire Line
+	3250 5850 3050 5850
+Wire Wire Line
+	3050 5550 3250 5550
 $EndSCHEMATC

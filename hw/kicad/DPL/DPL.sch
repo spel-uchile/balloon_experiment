@@ -1,10 +1,10 @@
-EESchema Schematic File Version 4
+EESchema Schematic File Version 5
 LIBS:DPL-cache
 EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 1
+Sheet 1 3
 Title ""
 Date ""
 Rev ""
@@ -17,86 +17,34 @@ $EndDescr
 $Comp
 L Payload:Payload U1
 U 1 1 5C059BEE
-P 7100 3300
-F 0 "U1" H 7100 4848 50  0000 C CNN
-F 1 "Payload" H 7100 4757 50  0000 C CNN
-F 2 "" H 6000 4100 50  0001 C CNN
-F 3 "" H 6000 4100 50  0001 C CNN
-	1    7100 3300
+P 8900 3200
+F 0 "U1" H 8900 4748 50  0000 C CNN
+F 1 "Payload" H 8900 4657 50  0000 C CNN
+F 2 "" H 7800 4000 50  0001 C CNN
+F 3 "" H 7800 4000 50  0001 C CNN
+	1    8900 3200
 	1    0    0    -1  
 $EndComp
-Text Label 7350 3500 0    50   ~ 0
+Text Label 9150 3400 0    50   ~ 0
 GND
-Text Label 9300 3500 2    50   ~ 0
+Text Label 11100 3400 2    50   ~ 0
 GND
-Text Label 9300 3600 2    50   ~ 0
+Text Label 11100 3500 2    50   ~ 0
 GND
 Wire Wire Line
-	9300 3500 9100 3500
+	11100 3400 10900 3400
 Wire Wire Line
-	9100 3600 9300 3600
+	10900 3500 11100 3500
 Wire Wire Line
-	7550 3500 7350 3500
-Text Label 7350 3400 0    50   ~ 0
-3V3
-Text Label 9300 3400 2    50   ~ 0
-3V3
-Wire Wire Line
-	9300 3400 9100 3400
-Wire Wire Line
-	7550 3400 7350 3400
-Text Label 4900 4100 0    50   ~ 0
+	9350 3400 9150 3400
+Text Label 6700 4000 0    50   ~ 0
 SDA
-Text Label 4900 4200 0    50   ~ 0
+Text Label 6700 4100 0    50   ~ 0
 SCL
 Wire Wire Line
-	5100 4100 4900 4100
+	6900 4000 6700 4000
 Wire Wire Line
-	4900 4200 5100 4200
-$Comp
-L MCU_Microchip_ATmega:ATmega328-PU U?
-U 1 1 5C0EA422
-P 2450 3300
-F 0 "U?" H 1806 3346 50  0000 R CNN
-F 1 "ATmega328-PU" H 1806 3255 50  0000 R CNN
-F 2 "Package_DIP:DIP-28_W7.62mm" H 2450 3300 50  0001 C CIN
-F 3 "http://ww1.microchip.com/downloads/en/DeviceDoc/ATmega328_P%20AVR%20MCU%20with%20picoPower%20Technology%20Data%20Sheet%2040001984A.pdf" H 2450 3300 50  0001 C CNN
-	1    2450 3300
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:Crystal Y?
-U 1 1 5C0EC2C3
-P 3550 2850
-F 0 "Y?" H 3550 3118 50  0000 C CNN
-F 1 "8MHz" H 3550 3027 50  0000 C CNN
-F 2 "" H 3550 2850 50  0001 C CNN
-F 3 "~" H 3550 2850 50  0001 C CNN
-	1    3550 2850
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C?
-U 1 1 5C0EC746
-P 3300 3100
-F 0 "C?" H 3415 3146 50  0000 L CNN
-F 1 "22pF" H 3415 3055 50  0000 L CNN
-F 2 "" H 3338 2950 50  0001 C CNN
-F 3 "~" H 3300 3100 50  0001 C CNN
-	1    3300 3100
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:C C?
-U 1 1 5C0EC888
-P 3800 3100
-F 0 "C?" H 3915 3146 50  0000 L CNN
-F 1 "22pF" H 3915 3055 50  0000 L CNN
-F 2 "" H 3838 2950 50  0001 C CNN
-F 3 "~" H 3800 3100 50  0001 C CNN
-	1    3800 3100
-	1    0    0    -1  
-$EndComp
+	6700 4100 6900 4100
 $Comp
 L Connector:Screw_Terminal_01x02 J?
 U 1 1 5C0ECC20
@@ -163,65 +111,6 @@ F 3 "~" H 3450 6050 50  0001 C CNN
 	1    3450 6050
 	1    0    0    -1  
 $EndComp
-$Comp
-L power:GND #PWR?
-U 1 1 5C0FD400
-P 2450 4850
-F 0 "#PWR?" H 2450 4600 50  0001 C CNN
-F 1 "GND" H 2455 4677 50  0000 C CNN
-F 2 "" H 2450 4850 50  0001 C CNN
-F 3 "" H 2450 4850 50  0001 C CNN
-	1    2450 4850
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	2450 4800 2450 4850
-Text Label 2450 4800 0    50   ~ 0
-GND
-Wire Wire Line
-	3300 3250 3300 3300
-Wire Wire Line
-	3300 3300 3550 3300
-Wire Wire Line
-	3800 3300 3800 3250
-Wire Wire Line
-	3550 3300 3550 3350
-Connection ~ 3550 3300
-Wire Wire Line
-	3550 3300 3800 3300
-$Comp
-L power:GND #PWR?
-U 1 1 5C0FDBE2
-P 3550 3350
-F 0 "#PWR?" H 3550 3100 50  0001 C CNN
-F 1 "GND" H 3550 3200 50  0000 C CNN
-F 2 "" H 3550 3350 50  0001 C CNN
-F 3 "" H 3550 3350 50  0001 C CNN
-	1    3550 3350
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	3800 2950 3800 2850
-Wire Wire Line
-	3800 2850 3700 2850
-Wire Wire Line
-	3400 2850 3300 2850
-Wire Wire Line
-	3300 2850 3300 2950
-Wire Wire Line
-	3050 2800 3300 2800
-Wire Wire Line
-	3300 2800 3300 2850
-Connection ~ 3300 2850
-Wire Wire Line
-	3050 2700 3800 2700
-Wire Wire Line
-	3800 2700 3800 2850
-Connection ~ 3800 2850
-Text Label 3300 2800 2    50   ~ 0
-XTAL2
-Text Label 3300 2700 2    50   ~ 0
-XTAL1
 Wire Wire Line
 	2100 5550 1900 5550
 Text Label 1900 5550 0    50   ~ 0
@@ -246,65 +135,117 @@ Wire Wire Line
 	3250 5850 3050 5850
 Wire Wire Line
 	3050 5550 3250 5550
-Text Label 3300 2600 2    50   ~ 0
-SCK
-Text Label 3300 2500 2    50   ~ 0
-MISO
-Text Label 3300 2400 2    50   ~ 0
-MOSI
-Wire Wire Line
-	3300 2400 3050 2400
-Wire Wire Line
-	3050 2500 3300 2500
-Wire Wire Line
-	3300 2600 3050 2600
-Text Label 3300 3600 2    50   ~ 0
-RESET
-Wire Wire Line
-	3300 3600 3200 3600
-Wire Wire Line
-	2450 1800 2450 1750
-Wire Wire Line
-	2450 1750 2550 1750
-Wire Wire Line
-	2550 1750 2550 1800
-Text Label 2450 1750 0    50   ~ 0
-3V3
 $Comp
-L Device:R R?
-U 1 1 5C101F27
-P 3450 3600
-F 0 "R?" V 3550 3600 50  0000 C CNN
-F 1 "10k" V 3450 3600 50  0000 C CNN
-F 2 "" V 3380 3600 50  0001 C CNN
-F 3 "~" H 3450 3600 50  0001 C CNN
-	1    3450 3600
-	0    1    1    0   
+L Arduino:SAMD21E U?
+U 1 1 5CF861BC
+P 5250 3200
+F 0 "U?" H 5250 4215 50  0000 C CNN
+F 1 "SAMD21E" H 5250 4124 50  0000 C CNN
+F 2 "" H 5250 3100 50  0001 C CNN
+F 3 "" H 5250 3100 50  0001 C CNN
+	1    5250 3200
+	1    0    0    -1  
 $EndComp
-Text Label 3800 3600 2    50   ~ 0
+$Sheet
+S 2200 1750 800  800 
+U 5CF85FE2
+F0 "usb" 50
+F1 "USB.sch" 50
+F2 "VBUS" I R 3000 1850 50 
+F3 "USB_DP" I R 3000 2000 50 
+F4 "USB_DM" I R 3000 2150 50 
+F5 "USB_ID" I R 3000 2300 50 
+F6 "GND" I R 3000 2450 50 
+$EndSheet
+$Sheet
+S 2250 3350 750  600 
+U 5CF86024
+F0 "power" 50
+F1 "Power.sch" 50
+F2 "3V3" I R 3000 3450 50 
+F3 "VDDANA" I R 3000 3600 50 
+F4 "VDDCORE" I R 3000 3750 50 
+F5 "GND" I L 2250 3750 50 
+F6 "VIN" I L 2250 3450 50 
+$EndSheet
+Text Label 4150 3350 0    50   ~ 0
+GND
+Text Label 6450 2850 2    50   ~ 0
+GND
+Text Label 3400 3750 2    50   ~ 0
+VDDCORE
+Wire Wire Line
+	3400 3750 3000 3750
+Wire Wire Line
+	3400 3600 3000 3600
+Wire Wire Line
+	3400 3450 3000 3450
+Text Label 3400 3450 2    50   ~ 0
 3V3
+Text Label 3400 3600 2    50   ~ 0
+VDDANA
+Text Label 2050 3750 0    50   ~ 0
+GND
+Text Label 2050 3450 0    50   ~ 0
+VIN
 Wire Wire Line
-	3800 3600 3600 3600
+	2050 3750 2250 3750
 Wire Wire Line
-	3200 3850 3300 3850
-Connection ~ 3200 3600
+	2050 3450 2250 3450
+Text Label 3350 2000 2    50   ~ 0
+USB_DP
+Text Label 3350 2150 2    50   ~ 0
+USB_DM
+Text Label 3350 2300 2    50   ~ 0
+USB_ID
+Text Label 3350 2450 2    50   ~ 0
+GND
+Text Label 3350 1850 2    50   ~ 0
+VBUS
 Wire Wire Line
-	3200 3600 3050 3600
-$Comp
-L Device:C C?
-U 1 1 5C103F8A
-P 3450 3850
-F 0 "C?" V 3198 3850 50  0000 C CNN
-F 1 "100nF" V 3289 3850 50  0000 C CNN
-F 2 "" H 3488 3700 50  0001 C CNN
-F 3 "~" H 3450 3850 50  0001 C CNN
-	1    3450 3850
-	0    -1   -1   0   
-$EndComp
+	3350 1850 3000 1850
 Wire Wire Line
-	3600 3850 3800 3850
-Text Label 3800 3850 2    50   ~ 0
-DTR
+	3000 2000 3350 2000
 Wire Wire Line
-	3200 3600 3200 3850
+	3350 2150 3000 2150
+Wire Wire Line
+	3000 2300 3350 2300
+Wire Wire Line
+	3350 2450 3000 2450
+Text Label 6450 2750 2    50   ~ 0
+VDDCORE
+Text Label 4150 3250 0    50   ~ 0
+VDDANA
+Text Label 6450 3250 2    50   ~ 0
+USB_DP
+Text Label 6450 3350 2    50   ~ 0
+USB_DM
+Text Label 6450 2950 2    50   ~ 0
+USB_ID
+Wire Wire Line
+	4150 3250 4450 3250
+Wire Wire Line
+	4150 3350 4450 3350
+Wire Wire Line
+	6450 3350 6050 3350
+Wire Wire Line
+	6050 2850 6450 2850
+Wire Wire Line
+	6450 2750 6050 2750
+Wire Wire Line
+	6050 2950 6450 2950
+Wire Wire Line
+	6050 3250 6450 3250
+Text Label 6450 3450 2    50   ~ 0
+SCL
+Text Label 6450 3550 2    50   ~ 0
+SDA
+Wire Wire Line
+	6450 3450 6050 3450
+Wire Wire Line
+	6050 3550 6450 3550
+Wire Wire Line
+	6450 2650 6050 2650
+Text Label 6450 2650 2    50   ~ 0
+3V3
 $EndSCHEMATC

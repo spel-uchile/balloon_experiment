@@ -1,4 +1,5 @@
 EESchema Schematic File Version 5
+LIBS:DPL-cache
 EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
@@ -14,10 +15,10 @@ Comment3 ""
 Comment4 ""
 $EndDescr
 $Comp
-L Connector:USB_B_Micro J1
+L Connector:USB_B_Micro J7
 U 1 1 5B62635D
 P 5300 3350
-F 0 "J1" H 5355 3817 50  0000 C CNN
+F 0 "J7" H 5355 3817 50  0000 C CNN
 F 1 "USB_B_Micro" H 5355 3726 50  0000 C CNN
 F 2 "Connector_USB:USB_Micro-B_Molex_47346-0001" H 5450 3300 50  0001 C CNN
 F 3 "~" H 5450 3300 50  0001 C CNN
@@ -71,10 +72,10 @@ F 3 "https://assets.nexperia.com/documents/data-sheet/PRTR5V0U2X.pdf" H 7760 355
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:R R2
+L Device:R R0
 U 1 1 5B62BE0D
 P 7900 4300
-F 0 "R2" H 7970 4346 50  0000 L CNN
+F 0 "R0" H 7970 4346 50  0000 L CNN
 F 1 "1M" H 7970 4255 50  0000 L CNN
 F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7830 4300 50  0001 C CNN
 F 3 "~" H 7900 4300 50  0001 C CNN
@@ -82,10 +83,10 @@ F 3 "~" H 7900 4300 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Device:C C6
+L Device:C C0
 U 1 1 5B62BE71
 P 7500 4300
-F 0 "C6" H 7615 4346 50  0000 L CNN
+F 0 "C0" H 7615 4346 50  0000 L CNN
 F 1 "4.7nF" H 7615 4255 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 7538 4150 50  0001 C CNN
 F 3 "~" H 7500 4300 50  0001 C CNN

@@ -1,4 +1,5 @@
 EESchema Schematic File Version 5
+LIBS:DPL-cache
 EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
@@ -36,10 +37,10 @@ F 3 "~" H 4350 3400 50  0001 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L Device:C C5
+L Device:C C4
 U 1 1 5B635301
 P 5100 4800
-F 0 "C5" H 5215 4846 50  0000 L CNN
+F 0 "C4" H 5215 4846 50  0000 L CNN
 F 1 "1uF" H 5215 4755 50  0000 L CNN
 F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 5138 4650 50  0001 C CNN
 F 3 "~" H 5100 4800 50  0001 C CNN

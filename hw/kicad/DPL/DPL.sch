@@ -17,39 +17,39 @@ $EndDescr
 $Comp
 L Payload:Payload U1
 U 1 1 5C059BEE
-P 8900 3200
-F 0 "U1" H 8900 4748 50  0000 C CNN
-F 1 "Payload" H 8900 4657 50  0000 C CNN
-F 2 "" H 7800 4000 50  0001 C CNN
-F 3 "" H 7800 4000 50  0001 C CNN
-	1    8900 3200
+P 9000 3250
+F 0 "U1" H 9000 4798 50  0000 C CNN
+F 1 "Payload" H 9000 4707 50  0000 C CNN
+F 2 "" H 7900 4050 50  0001 C CNN
+F 3 "" H 7900 4050 50  0001 C CNN
+	1    9000 3250
 	1    0    0    -1  
 $EndComp
-Text Label 9150 3400 0    50   ~ 0
+Text Label 9250 3450 0    50   ~ 0
 GND
-Text Label 11100 3400 2    50   ~ 0
+Text Label 11200 3450 2    50   ~ 0
 GND
-Text Label 11100 3500 2    50   ~ 0
+Text Label 11200 3550 2    50   ~ 0
 GND
 Wire Wire Line
-	11100 3400 10900 3400
+	11200 3450 11000 3450
 Wire Wire Line
-	10900 3500 11100 3500
+	11000 3550 11200 3550
 Wire Wire Line
-	9350 3400 9150 3400
-Text Label 6700 4000 0    50   ~ 0
+	9450 3450 9250 3450
+Text Label 6800 4050 0    50   ~ 0
 SDA
-Text Label 6700 4100 0    50   ~ 0
+Text Label 6800 4150 0    50   ~ 0
 SCL
 Wire Wire Line
-	6900 4000 6700 4000
+	7000 4050 6800 4050
 Wire Wire Line
-	6700 4100 6900 4100
+	6800 4150 7000 4150
 $Comp
-L Connector:Screw_Terminal_01x02 J?
+L Connector:Screw_Terminal_01x02 J1
 U 1 1 5C0ECC20
 P 1400 4450
-F 0 "J?" H 1480 4442 50  0000 L CNN
+F 0 "J1" H 1480 4442 50  0000 L CNN
 F 1 "DPL1" H 1480 4351 50  0000 L CNN
 F 2 "" H 1400 4450 50  0001 C CNN
 F 3 "~" H 1400 4450 50  0001 C CNN
@@ -57,10 +57,10 @@ F 3 "~" H 1400 4450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Screw_Terminal_01x02 J?
+L Connector:Screw_Terminal_01x02 J2
 U 1 1 5C0ED411
 P 2550 4450
-F 0 "J?" H 2630 4442 50  0000 L CNN
+F 0 "J2" H 2630 4442 50  0000 L CNN
 F 1 "DPL2" H 2630 4351 50  0000 L CNN
 F 2 "" H 2550 4450 50  0001 C CNN
 F 3 "~" H 2550 4450 50  0001 C CNN
@@ -68,10 +68,10 @@ F 3 "~" H 2550 4450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Screw_Terminal_01x02 J?
+L Connector:Screw_Terminal_01x02 J3
 U 1 1 5C0ED755
 P 3700 4450
-F 0 "J?" H 3780 4442 50  0000 L CNN
+F 0 "J3" H 3780 4442 50  0000 L CNN
 F 1 "DPL3" H 3780 4351 50  0000 L CNN
 F 2 "" H 3700 4450 50  0001 C CNN
 F 3 "~" H 3700 4450 50  0001 C CNN
@@ -79,10 +79,10 @@ F 3 "~" H 3700 4450 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Screw_Terminal_01x02 J?
+L Connector:Screw_Terminal_01x02 J4
 U 1 1 5C0ED94F
 P 1400 5350
-F 0 "J?" H 1480 5342 50  0000 L CNN
+F 0 "J4" H 1480 5342 50  0000 L CNN
 F 1 "DPL4" H 1480 5251 50  0000 L CNN
 F 2 "" H 1400 5350 50  0001 C CNN
 F 3 "~" H 1400 5350 50  0001 C CNN
@@ -90,10 +90,10 @@ F 3 "~" H 1400 5350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Screw_Terminal_01x02 J?
+L Connector:Screw_Terminal_01x02 J5
 U 1 1 5C0EDB6A
 P 2550 5350
-F 0 "J?" H 2630 5342 50  0000 L CNN
+F 0 "J5" H 2630 5342 50  0000 L CNN
 F 1 "DPL5" H 2630 5251 50  0000 L CNN
 F 2 "" H 2550 5350 50  0001 C CNN
 F 3 "~" H 2550 5350 50  0001 C CNN
@@ -101,10 +101,10 @@ F 3 "~" H 2550 5350 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Screw_Terminal_01x02 J?
+L Connector:Screw_Terminal_01x02 J6
 U 1 1 5C0EDE0E
 P 3700 5350
-F 0 "J?" H 3780 5342 50  0000 L CNN
+F 0 "J6" H 3780 5342 50  0000 L CNN
 F 1 "DPL6" H 3780 5251 50  0000 L CNN
 F 2 "" H 3700 5350 50  0001 C CNN
 F 3 "~" H 3700 5350 50  0001 C CNN
@@ -133,9 +133,9 @@ F4 "VDDCORE" I R 1800 3800 50
 F5 "GND" I L 1050 3800 50 
 F6 "VIN" I L 1050 3500 50 
 $EndSheet
-Text Label 4150 3350 0    50   ~ 0
+Text Label 3900 3350 0    50   ~ 0
 GND
-Text Label 6450 2850 2    50   ~ 0
+Text Label 6600 2850 2    50   ~ 0
 GND
 Text Label 2200 3800 2    50   ~ 0
 VDDCORE
@@ -177,41 +177,21 @@ Wire Wire Line
 	1800 2350 2150 2350
 Wire Wire Line
 	2150 2500 1800 2500
-Text Label 6450 2750 2    50   ~ 0
+Text Label 6600 2750 2    50   ~ 0
 VDDCORE
-Text Label 4150 3250 0    50   ~ 0
+Text Label 3900 3250 0    50   ~ 0
 VDDANA
-Text Label 6450 3250 2    50   ~ 0
+Text Label 6600 3250 2    50   ~ 0
 USB_DP
-Text Label 6450 3350 2    50   ~ 0
+Text Label 6600 3350 2    50   ~ 0
 USB_DM
-Text Label 6450 2950 2    50   ~ 0
+Text Label 6600 2950 2    50   ~ 0
 USB_ID
-Wire Wire Line
-	4150 3250 4450 3250
-Wire Wire Line
-	4150 3350 4450 3350
-Wire Wire Line
-	6450 3350 6050 3350
-Wire Wire Line
-	6050 2850 6450 2850
-Wire Wire Line
-	6450 2750 6050 2750
-Wire Wire Line
-	6050 2950 6450 2950
-Wire Wire Line
-	6050 3250 6450 3250
-Text Label 6450 3450 2    50   ~ 0
+Text Label 6600 3450 2    50   ~ 0
 SCL
-Text Label 6450 3550 2    50   ~ 0
+Text Label 6600 3550 2    50   ~ 0
 SDA
-Wire Wire Line
-	6450 3450 6050 3450
-Wire Wire Line
-	6050 3550 6450 3550
-Wire Wire Line
-	6450 2650 6050 2650
-Text Label 6450 2650 2    50   ~ 0
+Text Label 6600 2650 2    50   ~ 0
 3V3
 $Comp
 L Arduino:SAMD21E U0
@@ -225,12 +205,12 @@ F 3 "" H 5250 3100 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	9150 3200 9350 3200
+	9250 3250 9450 3250
 Wire Wire Line
-	11100 3200 10900 3200
-Text Label 11100 3200 2    50   ~ 0
+	11200 3250 11000 3250
+Text Label 11200 3250 2    50   ~ 0
 5V0
-Text Label 9150 3200 0    50   ~ 0
+Text Label 9250 3250 0    50   ~ 0
 5V0
 $Comp
 L Connector:Conn_01x05_Male J0
@@ -263,23 +243,17 @@ Wire Wire Line
 	4150 1400 4450 1400
 Wire Wire Line
 	4450 1500 4150 1500
-Text Label 6450 3050 2    50   ~ 0
+Text Label 6600 3050 2    50   ~ 0
 RESET
-Wire Wire Line
-	6050 3050 6450 3050
-Text Label 6450 2450 2    50   ~ 0
+Text Label 6600 2450 2    50   ~ 0
 SWDIO
-Text Label 6450 2550 2    50   ~ 0
+Text Label 6600 2550 2    50   ~ 0
 SWCLK
-Wire Wire Line
-	6450 2450 6050 2450
-Wire Wire Line
-	6050 2550 6450 2550
 $Comp
-L Transistor_FET:IRF540N Q?
+L Transistor_FET:IRF540N Q1
 U 1 1 5CF98A4C
 P 1150 4800
-F 0 "Q?" H 1356 4846 50  0000 L CNN
+F 0 "Q1" H 1356 4846 50  0000 L CNN
 F 1 "IRF540N" H 1356 4755 50  0000 L CNN
 F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 1400 4725 50  0001 L CIN
 F 3 "http://www.irf.com/product-info/datasheets/data/irf540n.pdf" H 1150 4800 50  0001 L CNN
@@ -287,10 +261,10 @@ F 3 "http://www.irf.com/product-info/datasheets/data/irf540n.pdf" H 1150 4800 50
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Transistor_FET:IRF540N Q?
+L Transistor_FET:IRF540N Q2
 U 1 1 5CF99BAE
 P 2300 4800
-F 0 "Q?" H 2506 4846 50  0000 L CNN
+F 0 "Q2" H 2506 4846 50  0000 L CNN
 F 1 "IRF540N" H 2506 4755 50  0000 L CNN
 F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 2550 4725 50  0001 L CIN
 F 3 "http://www.irf.com/product-info/datasheets/data/irf540n.pdf" H 2300 4800 50  0001 L CNN
@@ -298,10 +272,10 @@ F 3 "http://www.irf.com/product-info/datasheets/data/irf540n.pdf" H 2300 4800 50
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Transistor_FET:IRF540N Q?
+L Transistor_FET:IRF540N Q3
 U 1 1 5CF9A83E
 P 3450 4800
-F 0 "Q?" H 3656 4846 50  0000 L CNN
+F 0 "Q3" H 3656 4846 50  0000 L CNN
 F 1 "IRF540N" H 3656 4755 50  0000 L CNN
 F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 3700 4725 50  0001 L CIN
 F 3 "http://www.irf.com/product-info/datasheets/data/irf540n.pdf" H 3450 4800 50  0001 L CNN
@@ -309,10 +283,10 @@ F 3 "http://www.irf.com/product-info/datasheets/data/irf540n.pdf" H 3450 4800 50
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Transistor_FET:IRF540N Q?
+L Transistor_FET:IRF540N Q4
 U 1 1 5CF9B683
 P 1150 5700
-F 0 "Q?" H 1356 5746 50  0000 L CNN
+F 0 "Q4" H 1356 5746 50  0000 L CNN
 F 1 "IRF540N" H 1356 5655 50  0000 L CNN
 F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 1400 5625 50  0001 L CIN
 F 3 "http://www.irf.com/product-info/datasheets/data/irf540n.pdf" H 1150 5700 50  0001 L CNN
@@ -320,10 +294,10 @@ F 3 "http://www.irf.com/product-info/datasheets/data/irf540n.pdf" H 1150 5700 50
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Transistor_FET:IRF540N Q?
+L Transistor_FET:IRF540N Q5
 U 1 1 5CF9BF48
 P 2300 5700
-F 0 "Q?" H 2506 5746 50  0000 L CNN
+F 0 "Q5" H 2506 5746 50  0000 L CNN
 F 1 "IRF540N" H 2506 5655 50  0000 L CNN
 F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 2550 5625 50  0001 L CIN
 F 3 "http://www.irf.com/product-info/datasheets/data/irf540n.pdf" H 2300 5700 50  0001 L CNN
@@ -331,10 +305,10 @@ F 3 "http://www.irf.com/product-info/datasheets/data/irf540n.pdf" H 2300 5700 50
 	-1   0    0    -1  
 $EndComp
 $Comp
-L Transistor_FET:IRF540N Q?
+L Transistor_FET:IRF540N Q6
 U 1 1 5CF9C64D
 P 3450 5700
-F 0 "Q?" H 3656 5746 50  0000 L CNN
+F 0 "Q6" H 3656 5746 50  0000 L CNN
 F 1 "IRF540N" H 3656 5655 50  0000 L CNN
 F 2 "Package_TO_SOT_THT:TO-220-3_Vertical" H 3700 5625 50  0001 L CIN
 F 3 "http://www.irf.com/product-info/datasheets/data/irf540n.pdf" H 3450 5700 50  0001 L CNN
@@ -566,4 +540,302 @@ F 3 "" H 3400 2800 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	3950 2250 3950 2350
+$Comp
+L Switch:SW_Reed SW1
+U 1 1 5CFAADC7
+P 4850 5450
+F 0 "SW1" H 4850 5672 50  0000 C CNN
+F 1 "SW_Reed" H 4850 5581 50  0000 C CNN
+F 2 "" H 4850 5450 50  0001 C CNN
+F 3 "~" H 4850 5450 50  0001 C CNN
+	1    4850 5450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Reed SW2
+U 1 1 5CFAB4B3
+P 4850 5800
+F 0 "SW2" H 4850 6022 50  0000 C CNN
+F 1 "SW_Reed" H 4850 5931 50  0000 C CNN
+F 2 "" H 4850 5800 50  0001 C CNN
+F 3 "~" H 4850 5800 50  0001 C CNN
+	1    4850 5800
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Reed SW3
+U 1 1 5CFAB742
+P 4850 6150
+F 0 "SW3" H 4850 6372 50  0000 C CNN
+F 1 "SW_Reed" H 4850 6281 50  0000 C CNN
+F 2 "" H 4850 6150 50  0001 C CNN
+F 3 "~" H 4850 6150 50  0001 C CNN
+	1    4850 6150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Reed SW4
+U 1 1 5CFAB865
+P 4850 6500
+F 0 "SW4" H 4850 6722 50  0000 C CNN
+F 1 "SW_Reed" H 4850 6631 50  0000 C CNN
+F 2 "" H 4850 6500 50  0001 C CNN
+F 3 "~" H 4850 6500 50  0001 C CNN
+	1    4850 6500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Reed SW5
+U 1 1 5CFABAC0
+P 4850 6850
+F 0 "SW5" H 4850 7072 50  0000 C CNN
+F 1 "SW_Reed" H 4850 6981 50  0000 C CNN
+F 2 "" H 4850 6850 50  0001 C CNN
+F 3 "~" H 4850 6850 50  0001 C CNN
+	1    4850 6850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Switch:SW_Reed SW6
+U 1 1 5CFABE05
+P 4850 7200
+F 0 "SW6" H 4850 7422 50  0000 C CNN
+F 1 "SW_Reed" H 4850 7331 50  0000 C CNN
+F 2 "" H 4850 7200 50  0001 C CNN
+F 3 "~" H 4850 7200 50  0001 C CNN
+	1    4850 7200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R2
+U 1 1 5CFAC755
+P 5800 5800
+F 0 "R2" H 5870 5846 50  0000 L CNN
+F 1 "1k" H 5870 5755 50  0000 L CNN
+F 2 "" V 5730 5800 50  0001 C CNN
+F 3 "~" H 5800 5800 50  0001 C CNN
+	1    5800 5800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R3
+U 1 1 5CFAC7EA
+P 5800 6150
+F 0 "R3" H 5870 6196 50  0000 L CNN
+F 1 "1k" H 5870 6105 50  0000 L CNN
+F 2 "" V 5730 6150 50  0001 C CNN
+F 3 "~" H 5800 6150 50  0001 C CNN
+	1    5800 6150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R4
+U 1 1 5CFAC8CF
+P 5800 6500
+F 0 "R4" H 5870 6546 50  0000 L CNN
+F 1 "1k" H 5870 6455 50  0000 L CNN
+F 2 "" V 5730 6500 50  0001 C CNN
+F 3 "~" H 5800 6500 50  0001 C CNN
+	1    5800 6500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R5
+U 1 1 5CFACA54
+P 5800 6850
+F 0 "R5" H 5870 6896 50  0000 L CNN
+F 1 "1k" H 5870 6805 50  0000 L CNN
+F 2 "" V 5730 6850 50  0001 C CNN
+F 3 "~" H 5800 6850 50  0001 C CNN
+	1    5800 6850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R R6
+U 1 1 5CFAD116
+P 5800 7200
+F 0 "R6" H 5870 7246 50  0000 L CNN
+F 1 "1k" H 5870 7155 50  0000 L CNN
+F 2 "" V 5730 7200 50  0001 C CNN
+F 3 "~" H 5800 7200 50  0001 C CNN
+	1    5800 7200
+	0    -1   -1   0   
+$EndComp
+Text Label 5600 5450 2    50   ~ 0
+DPL_STATUS1
+Wire Wire Line
+	5050 5450 5650 5450
+Text Label 5600 5800 2    50   ~ 0
+DPL_STATUS2
+Text Label 5600 6150 2    50   ~ 0
+DPL_STATUS3
+Text Label 5600 6500 2    50   ~ 0
+DPL_STATUS4
+Text Label 5600 6850 2    50   ~ 0
+DPL_STATUS5
+Text Label 5600 7200 2    50   ~ 0
+DPL_STATUS6
+Wire Wire Line
+	5650 5800 5050 5800
+Wire Wire Line
+	5100 6150 5650 6150
+Wire Wire Line
+	5650 6500 5050 6500
+Wire Wire Line
+	5050 6850 5650 6850
+Wire Wire Line
+	5950 5450 6000 5450
+Wire Wire Line
+	6000 5450 6000 5800
+Wire Wire Line
+	6000 7200 5950 7200
+Wire Wire Line
+	5950 6850 6000 6850
+Connection ~ 6000 6850
+Wire Wire Line
+	6000 6850 6000 7200
+Wire Wire Line
+	5950 6500 6000 6500
+Connection ~ 6000 6500
+Wire Wire Line
+	6000 6500 6000 6850
+Wire Wire Line
+	5950 6150 6000 6150
+Connection ~ 6000 6150
+Wire Wire Line
+	6000 6150 6000 6500
+Wire Wire Line
+	5950 5800 6000 5800
+Connection ~ 6000 5800
+Wire Wire Line
+	6000 5800 6000 6150
+Wire Wire Line
+	6000 7200 6000 7250
+Connection ~ 6000 7200
+$Comp
+L power:GND #PWR?
+U 1 1 5CFB9A35
+P 6000 7250
+F 0 "#PWR?" H 6000 7000 50  0001 C CNN
+F 1 "GND" H 6005 7077 50  0000 C CNN
+F 2 "" H 6000 7250 50  0001 C CNN
+F 3 "" H 6000 7250 50  0001 C CNN
+	1    6000 7250
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 5CFB9EE2
+P 5800 5450
+F 0 "R1" H 5870 5496 50  0000 L CNN
+F 1 "1k" H 5870 5405 50  0000 L CNN
+F 2 "" V 5730 5450 50  0001 C CNN
+F 3 "~" H 5800 5450 50  0001 C CNN
+	1    5800 5450
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5050 7200 5650 7200
+Text Label 4500 5450 0    50   ~ 0
+3V3
+Wire Wire Line
+	4650 5450 4500 5450
+Wire Wire Line
+	4500 5450 4500 5800
+Wire Wire Line
+	4500 7200 4650 7200
+Wire Wire Line
+	4650 5800 4500 5800
+Connection ~ 4500 5800
+Wire Wire Line
+	4500 5800 4500 6150
+Connection ~ 4500 6150
+Wire Wire Line
+	4500 6150 4500 6500
+Wire Wire Line
+	4500 6150 4650 6150
+Wire Wire Line
+	4650 6500 4500 6500
+Connection ~ 4500 6500
+Wire Wire Line
+	4500 6500 4500 6850
+Connection ~ 4500 6850
+Wire Wire Line
+	4500 6850 4500 7200
+Wire Wire Line
+	4500 6850 4650 6850
+Text Label 3900 3050 0    50   ~ 0
+EN_DPL1
+Text Label 3900 3150 0    50   ~ 0
+DPL_STATUS1
+Wire Wire Line
+	4450 3050 3900 3050
+Wire Wire Line
+	3900 3150 4450 3150
+Wire Wire Line
+	3900 3250 4450 3250
+Wire Wire Line
+	3900 3350 4450 3350
+Text Label 3900 3450 0    50   ~ 0
+EN_DPL2
+Text Label 3900 3650 0    50   ~ 0
+EN_DPL3
+Text Label 3900 3550 0    50   ~ 0
+DPL_STATUS2
+Text Label 3900 3750 0    50   ~ 0
+DPL_STATUS3
+Text Label 3900 3850 0    50   ~ 0
+EN_DPL4
+Text Label 3900 3950 0    50   ~ 0
+DPL_STATUS4
+Wire Wire Line
+	4450 3450 3900 3450
+Wire Wire Line
+	3900 3550 4450 3550
+Wire Wire Line
+	3900 3650 4450 3650
+Wire Wire Line
+	4450 3750 3900 3750
+Wire Wire Line
+	3900 3850 4450 3850
+Wire Wire Line
+	4450 3950 3900 3950
+Text Label 6600 3950 2    50   ~ 0
+EN_DPL5
+Text Label 6600 3850 2    50   ~ 0
+DPL_STATUS5
+Wire Wire Line
+	6600 3950 6050 3950
+Wire Wire Line
+	6050 3850 6600 3850
+Wire Wire Line
+	6050 2450 6600 2450
+Wire Wire Line
+	6050 2550 6600 2550
+Wire Wire Line
+	6050 2650 6600 2650
+Wire Wire Line
+	6050 2750 6600 2750
+Wire Wire Line
+	6050 2850 6600 2850
+Wire Wire Line
+	6050 2950 6600 2950
+Wire Wire Line
+	6050 3050 6600 3050
+Wire Wire Line
+	6050 3350 6600 3350
+Wire Wire Line
+	6050 3450 6600 3450
+Wire Wire Line
+	6050 3550 6600 3550
+Wire Wire Line
+	6050 3250 6600 3250
+Text Label 6600 3750 2    50   ~ 0
+EN_DPL6
+Text Label 6600 3650 2    50   ~ 0
+DPL_STATUS6
+Wire Wire Line
+	6600 3650 6050 3650
+Wire Wire Line
+	6050 3750 6600 3750
 $EndSCHEMATC

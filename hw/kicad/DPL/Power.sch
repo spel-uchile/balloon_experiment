@@ -119,14 +119,11 @@ Wire Wire Line
 	5100 5050 5400 5050
 Text HLabel 5400 5050 2    50   Input ~ 0
 GND
-Wire Wire Line
-	4150 5050 4850 5050
 Connection ~ 5100 5050
 Text Label 5400 3900 2    50   ~ 0
 GND
 Text Label 5400 5050 2    50   ~ 0
 GND
-Connection ~ 4150 4000
 Wire Wire Line
 	4150 4000 4150 3400
 Wire Wire Line
@@ -166,7 +163,6 @@ $EndComp
 Wire Wire Line
 	5400 4000 5050 4000
 Connection ~ 5050 4000
-Connection ~ 4150 5050
 Text HLabel 2850 3400 0    50   Input ~ 0
 VIN
 $Comp
@@ -235,7 +231,5 @@ $EndComp
 Wire Wire Line
 	3450 5050 3450 3750
 Wire Wire Line
-	3450 5050 4150 5050
-Wire Wire Line
-	4150 4000 4150 5050
+	3450 5050 4850 5050
 $EndSCHEMATC

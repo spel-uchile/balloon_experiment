@@ -30,7 +30,7 @@ VBUS
 Text Label 5900 3350 2    50   ~ 0
 USB_DP
 Text Label 5900 3450 2    50   ~ 0
-USB_DM
+USB_DN
 Text Label 6600 3550 2    50   ~ 0
 USB_ID
 Text Label 5200 3800 2    50   ~ 0
@@ -139,7 +139,7 @@ USB_DP
 Wire Wire Line
 	8200 3550 8550 3550
 Text Label 8550 3550 2    50   ~ 0
-USB_DM
+USB_DN
 Wire Wire Line
 	5600 3350 5900 3350
 Wire Wire Line
@@ -151,7 +151,7 @@ VBUS
 Text HLabel 4450 3200 0    50   Input ~ 0
 USB_DP
 Text HLabel 4450 3300 0    50   Input ~ 0
-USB_DM
+USB_DN
 Text HLabel 4450 3400 0    50   Input ~ 0
 USB_ID
 Text HLabel 4450 3500 0    50   Input ~ 0
@@ -171,7 +171,7 @@ VBUS
 Text Label 4750 3200 2    50   ~ 0
 USB_DP
 Text Label 4750 3300 2    50   ~ 0
-USB_DM
+USB_DN
 Text Label 4750 3400 2    50   ~ 0
 USB_ID
 Text Label 4750 3500 2    50   ~ 0

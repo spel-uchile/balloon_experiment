@@ -118,7 +118,7 @@ F0 "usb" 50
 F1 "USB.sch" 50
 F2 "VBUS" I R 1800 1900 50 
 F3 "USB_DP" I R 1800 2050 50 
-F4 "USB_DM" I R 1800 2200 50 
+F4 "USB_DN" I R 1800 2200 50 
 F5 "USB_ID" I R 1800 2350 50 
 F6 "GND" I R 1800 2500 50 
 $EndSheet
@@ -160,7 +160,7 @@ Wire Wire Line
 Text Label 2150 2050 2    50   ~ 0
 USB_DP
 Text Label 2150 2200 2    50   ~ 0
-USB_DM
+USB_DN
 Text Label 2150 2350 2    50   ~ 0
 USB_ID
 Text Label 2150 2500 2    50   ~ 0
@@ -184,7 +184,7 @@ VDDANA
 Text Label 6600 3250 2    50   ~ 0
 USB_DP
 Text Label 6600 3350 2    50   ~ 0
-USB_DM
+USB_DN
 Text Label 6600 2950 2    50   ~ 0
 USB_ID
 Text Label 6600 3450 2    50   ~ 0
@@ -678,8 +678,6 @@ DPL_STATUS6
 Wire Wire Line
 	5650 5800 5050 5800
 Wire Wire Line
-	5100 6150 5650 6150
-Wire Wire Line
 	5650 6500 5050 6500
 Wire Wire Line
 	5050 6850 5650 6850
@@ -878,4 +876,6 @@ Wire Wire Line
 	2600 1450 2800 1450
 Wire Wire Line
 	2850 1300 3050 1300
+Wire Wire Line
+	5050 6150 5650 6150
 $EndSCHEMATC

@@ -1,3 +1,4 @@
 (fp_lib_table
   (lib (name "Payload")(type "KiCad")(uri "${KIPRJMOD}/lib/Payload/Payload.pretty")(options "")(descr ""))
+  (lib (name "Level_shifter")(type "KiCad")(uri "${KIPRJMOD}/lib/Level shifter/Level_shifter.pretty")(options "")(descr ""))
 )

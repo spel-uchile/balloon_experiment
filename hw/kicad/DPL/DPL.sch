@@ -353,37 +353,37 @@ Wire Wire Line
 Wire Wire Line
 	1050 4550 1200 4550
 Text Label 1050 4450 0    50   ~ 0
-5V0
+VBATT
 Wire Wire Line
 	2200 4600 2200 4550
 Wire Wire Line
 	2200 4550 2350 4550
 Text Label 2200 4450 0    50   ~ 0
-5V0
+VBATT
 Wire Wire Line
 	3350 4600 3350 4550
 Wire Wire Line
 	3350 4550 3500 4550
 Text Label 3350 4450 0    50   ~ 0
-5V0
+VBATT
 Wire Wire Line
 	1050 5450 1200 5450
 Wire Wire Line
 	1050 5450 1050 5500
 Text Label 1050 5350 0    50   ~ 0
-5V0
+VBATT
 Wire Wire Line
 	2200 5500 2200 5450
 Wire Wire Line
 	2200 5450 2350 5450
 Text Label 2200 5350 0    50   ~ 0
-5V0
+VBATT
 Wire Wire Line
 	3350 5500 3350 5450
 Wire Wire Line
 	3350 5450 3500 5450
 Text Label 3350 5350 0    50   ~ 0
-5V0
+VBATT
 Wire Wire Line
 	1200 4450 1050 4450
 Wire Wire Line
@@ -878,4 +878,93 @@ Wire Wire Line
 	2850 1300 3050 1300
 Wire Wire Line
 	5050 6150 5650 6150
+$Comp
+L Connector:Screw_Terminal_01x02 J8
+U 1 1 5D028190
+P 2550 4000
+F 0 "J8" H 2630 3992 50  0000 L CNN
+F 1 "BATT" H 2630 3901 50  0000 L CNN
+F 2 "TerminalBlock:TerminalBlock_Altech_AK300-2_P5.00mm" H 2550 4000 50  0001 C CNN
+F 3 "~" H 2550 4000 50  0001 C CNN
+	1    2550 4000
+	-1   0    0    -1  
+$EndComp
+Text Label 3000 4000 2    50   ~ 0
+VBATT
+Wire Wire Line
+	2750 4000 3000 4000
+$Comp
+L power:GND #PWR?
+U 1 1 5D02A6CC
+P 2800 4150
+F 0 "#PWR?" H 2800 3900 50  0001 C CNN
+F 1 "GND" H 2805 3977 50  0000 C CNN
+F 2 "" H 2800 4150 50  0001 C CNN
+F 3 "" H 2800 4150 50  0001 C CNN
+	1    2800 4150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2800 4150 2800 4100
+Wire Wire Line
+	2800 4100 2750 4100
+$Comp
+L Connector_Generic:Conn_02x06_Counter_Clockwise J9
+U 1 1 5D019702
+P 2200 6800
+F 0 "J9" H 2250 7217 50  0000 C CNN
+F 1 "Level shifter" H 2250 7126 50  0000 C CNN
+F 2 "" H 2200 6800 50  0001 C CNN
+F 3 "~" H 2200 6800 50  0001 C CNN
+	1    2200 6800
+	1    0    0    -1  
+$EndComp
+Text Label 1650 6800 0    50   ~ 0
+GND
+Text Label 2700 6800 2    50   ~ 0
+GND
+Text Label 2700 6900 2    50   ~ 0
+3V3
+Text Label 1650 6900 0    50   ~ 0
+VIN
+Text Label 2700 7100 2    50   ~ 0
+LV1
+Text Label 2700 7000 2    50   ~ 0
+LV2
+Text Label 2700 6700 2    50   ~ 0
+LV3
+Text Label 2700 6600 2    50   ~ 0
+LV4
+Text Label 1650 7100 0    50   ~ 0
+EN_DPL1
+Text Label 1650 7000 0    50   ~ 0
+EN_DPL2
+Text Label 1650 6700 0    50   ~ 0
+EN_DPL3
+Text Label 1650 6600 0    50   ~ 0
+EN_DPL4
+Wire Wire Line
+	2700 7100 2500 7100
+Wire Wire Line
+	2500 7000 2700 7000
+Wire Wire Line
+	2700 6900 2500 6900
+Wire Wire Line
+	2500 6800 2700 6800
+Wire Wire Line
+	2700 6700 2500 6700
+Wire Wire Line
+	2500 6600 2700 6600
+Wire Wire Line
+	1650 6700 2000 6700
+Wire Wire Line
+	2000 6800 1650 6800
+Wire Wire Line
+	1650 6900 2000 6900
+Wire Wire Line
+	2000 7000 1650 7000
+Wire Wire Line
+	1650 6600 2000 6600
+Wire Wire Line
+	1650 7100 2000 7100
 $EndSCHEMATC

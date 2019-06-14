@@ -763,7 +763,7 @@ Wire Wire Line
 Wire Wire Line
 	4500 6850 4650 6850
 Text Label 3900 3050 0    50   ~ 0
-EN_DPL1
+LV1
 Text Label 3900 3150 0    50   ~ 0
 DPL_STATUS1
 Wire Wire Line
@@ -775,15 +775,15 @@ Wire Wire Line
 Wire Wire Line
 	3900 3350 4450 3350
 Text Label 3900 3450 0    50   ~ 0
-EN_DPL2
+LV2
 Text Label 3900 3650 0    50   ~ 0
-EN_DPL3
+LV3
 Text Label 3900 3550 0    50   ~ 0
 DPL_STATUS2
 Text Label 3900 3750 0    50   ~ 0
 DPL_STATUS3
 Text Label 3900 3850 0    50   ~ 0
-EN_DPL4
+LV4
 Text Label 3900 3950 0    50   ~ 0
 DPL_STATUS4
 Wire Wire Line
@@ -894,10 +894,10 @@ VBATT
 Wire Wire Line
 	2750 4000 3000 4000
 $Comp
-L power:GND #PWR?
+L power:GND #PWR0113
 U 1 1 5D02A6CC
 P 2800 4150
-F 0 "#PWR?" H 2800 3900 50  0001 C CNN
+F 0 "#PWR0113" H 2800 3900 50  0001 C CNN
 F 1 "GND" H 2805 3977 50  0000 C CNN
 F 2 "" H 2800 4150 50  0001 C CNN
 F 3 "" H 2800 4150 50  0001 C CNN
@@ -914,7 +914,7 @@ U 1 1 5D019702
 P 2200 6800
 F 0 "J9" H 2250 7217 50  0000 C CNN
 F 1 "Level shifter" H 2250 7126 50  0000 C CNN
-F 2 "" H 2200 6800 50  0001 C CNN
+F 2 "level:Level" H 2200 6800 50  0001 C CNN
 F 3 "~" H 2200 6800 50  0001 C CNN
 	1    2200 6800
 	1    0    0    -1  

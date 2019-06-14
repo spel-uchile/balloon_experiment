@@ -1,4 +1,4 @@
-update=mar 11 jun 2019 16:49:46 -04
+update=vie 14 jun 2019 00:14:25 -04
 version=1
 last_client=kicad
 [general]
@@ -240,8 +240,8 @@ dPairViaGap=0.25
 [pcbnew/Netclasses/1]
 Name=Battery
 Clearance=0.2
-TrackWidth=1
-ViaDiameter=1.5
+TrackWidth=1.2
+ViaDiameter=1.6
 ViaDrill=0.8
 uViaDiameter=0.3
 uViaDrill=0.1
@@ -249,6 +249,17 @@ dPairWidth=0.2
 dPairGap=0.25
 dPairViaGap=0.25
 [pcbnew/Netclasses/2]
+Name=PC104
+Clearance=0.2
+TrackWidth=0.5
+ViaDiameter=1.5
+ViaDrill=0.8
+uViaDiameter=0.3
+uViaDrill=0.1
+dPairWidth=0.2
+dPairGap=0.25
+dPairViaGap=0.25
+[pcbnew/Netclasses/3]
 Name=Power
 Clearance=0.2
 TrackWidth=0.6
@@ -259,14 +270,14 @@ uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.25
 dPairViaGap=0.25
-[pcbnew/Netclasses/3]
+[pcbnew/Netclasses/4]
 Name=USB
 Clearance=0.2
-TrackWidth=0.4
+TrackWidth=0.45
 ViaDiameter=1.5
 ViaDrill=0.8
 uViaDiameter=0.3
 uViaDrill=0.1
-dPairWidth=0.4
-dPairGap=0.25
+dPairWidth=0.45
+dPairGap=0.2
 dPairViaGap=0.25

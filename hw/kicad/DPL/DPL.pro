@@ -1,4 +1,4 @@
-update=vie 14 jun 2019 00:14:25 -04
+update=vie 14 jun 2019 11:05:39 -04
 version=1
 last_client=kicad
 [general]
@@ -240,9 +240,9 @@ dPairViaGap=0.25
 [pcbnew/Netclasses/1]
 Name=Battery
 Clearance=0.2
-TrackWidth=1.2
-ViaDiameter=1.6
-ViaDrill=0.8
+TrackWidth=1.5
+ViaDiameter=1.7
+ViaDrill=0.9
 uViaDiameter=0.3
 uViaDrill=0.1
 dPairWidth=0.2

@@ -37,6 +37,7 @@ DPL dpl;
 
 
 void setup() {
+        delay(4000);
         SerialUSB.begin(115200);
         dpl.init();
         functions();
@@ -47,7 +48,8 @@ void setup() {
 // ================================================================
 
 void loop() {
-    if (Serial.available() > 0) {
+    delay(100);
+    if (SerialUSB.available() > 0) {
         // Read the incoming byte:
         char input = SerialUSB.read();
         // say what you got:
@@ -58,9 +60,11 @@ void loop() {
         }
         else if (input == '1' || input == '2' || input == '3' ||
 		 input == '4' || input == '5' || input == '6') {
-            dpl.deploy(input);
+            dpl.deploy(input-49);
+        SerialUSB.print("Status port: ");
+        SerialUSB.println(dpl.status_pins[input-49]);
 	    SerialUSB.print("Deployment status: ");
-	    SerialUSB.println(dpl.status(input));
+	    SerialUSB.println(dpl.status((uint8_t) input-49));
         }
 	else if (input == '7') {
 	    SerialUSB.print("Report: ");

@@ -29,7 +29,7 @@
 
 /*Requiered Libraries*/
 #include <Arduino.h>
-#include  <Servo.h>
+#include <Wire.h>
 #include "pines.h"
 
 class DPL {
@@ -40,12 +40,14 @@ class DPL {
     // Internal Variables
 public:
     /*Public Members*/
+    char func;
     bool deployed;
+    uint8_t port;
     uint8_t rep;
     unsigned long t0, dt;
-    uint8_t ENABLE[6];
-    uint8_t STATUS[6];
-
+    const int OBC = 0;
+    const uint8_t enable_pins[6] = {8, 4, 1, 2, 11, 10};
+    const uint8_t status_pins[6] = {9, 3, 0, 5, 13, 12};
 
     /*Base contructor (null)*/
     DPL() {}
@@ -53,6 +55,7 @@ public:
     // methods
     void init(void);
     void deploy(uint8_t port);
+    void cmdHandler(int numBytes);
     bool status(uint8_t port);
     uint8_t report(void);
 

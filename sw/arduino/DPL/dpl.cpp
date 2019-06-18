@@ -28,13 +28,14 @@
 
 #include "dpl.h"
 
+char func;
 bool deployed;
+uint8_t port;
 uint8_t rep;
 unsigned long t0, dt;
-uint8_t ENABLE[6] = {EN_DPL1, EN_DPL2, EN_DPL3,
-                     EN_DPL4, EN_DPL5, EN_DPL6};
-uint8_t STATUS[6] = {DPL_STATUS1, DPL_STATUS2, DPL_STATUS3,
-                     DPL_STATUS4, DPL_STATUS5, DPL_STATUS6};
+const int OBC = 0;
+const uint8_t enable_pins[6] = {8, 4, 1, 2, 11, 10};
+const uint8_t status_pins[6] = {9, 3, 0, 5, 13, 12};
 
 //-------------------------- Public Methods --------------------------
 /**
@@ -42,6 +43,7 @@ uint8_t STATUS[6] = {DPL_STATUS1, DPL_STATUS2, DPL_STATUS3,
  * system.
  */
 void DPL::init(void) {
+    Wire.begin(6);
     pinMode(EN_DPL1, OUTPUT);
     pinMode(EN_DPL2, OUTPUT);
     pinMode(EN_DPL3, OUTPUT);
@@ -71,14 +73,14 @@ void DPL::init(void) {
 void DPL::deploy(uint8_t port) {
     t0 = millis();
     dt = 0;
-    digitalWrite(ENABLE[port], HIGH);
+    digitalWrite(enable_pins[port], HIGH);
     deployed = status(port);
-    while (!deployed || dt < 3000) {
+    while (!deployed && dt < 3000) {
 	delay(100);
 	deployed = status(port);
 	dt = millis() - t0;
     }	    
-    digitalWrite(ENABLE[port], LOW);
+    digitalWrite(enable_pins[port], LOW);
 }
 
 /**
@@ -91,7 +93,7 @@ void DPL::deploy(uint8_t port) {
  * 	   deployed.
  */
 bool DPL::status(uint8_t port) {
-    return digitalRead(STATUS[port]);
+    return digitalRead(status_pins[port]);
 }
 
 /**
@@ -101,17 +103,42 @@ bool DPL::status(uint8_t port) {
  */
 uint8_t DPL::report(void) {
     rep = 0;
-    if (status(1))
+    if (status(0))
 	rep = rep | 80;
-    if (status(2))
+    if (status(1))
 	rep = rep | 64;
-    if (status(3))
+    if (status(2))
 	rep = rep | 32;
-    if (status(4))
+    if (status(3))
 	rep = rep | 16;
-    if (status(5))
+    if (status(4))
 	rep = rep | 8;
-    if (status(6))
+    if (status(5))
 	rep = rep | 4;
     return rep;
+}
+
+/**
+ * I2C comunication handler between DPL and
+ * OBC.
+ * @param Number of bytes read from the OBC.
+ */
+void DPL::cmdHandler(int numBytes) {
+    while (Wire.available()) {
+        func = Wire.read();
+        port = Wire.read();
+    }
+    if (func == 'A') {
+        deploy(port);
+    }
+    else if (func == 'B') {
+        Wire.beginTransmission(OBC);
+        Wire.write(status(port));
+        Wire.endTransmission();
+    }
+    else {
+        Wire.beginTransmission(OBC);
+        Wire.write(report());
+        Wire.endTransmission();
+    }
 }

@@ -28,14 +28,15 @@
 
 #include "dpl.h"
 
-char func;
+char cmd;
 bool deployed;
 uint8_t port;
 uint8_t rep;
 unsigned long t0, dt;
-const int OBC = 0;
-const uint8_t enable_pins[6] = {8, 4, 1, 2, 11, 10};
-const uint8_t status_pins[6] = {9, 3, 0, 5, 13, 12};
+const uint8_t enable_pins[6] = {EN_DPL1, EN_DPL2, EN_DPL3,
+    				EN_DPL4, EN_DPL5, EN_DPL6};
+const uint8_t status_pins[6] = {DPL_STATUS1, DPL_STATUS2, DPL_STATUS3,
+                                DPL_STATUS4, DPL_STATUS5, DPL_STATUS6};
 
 //-------------------------- Public Methods --------------------------
 /**
@@ -44,24 +45,11 @@ const uint8_t status_pins[6] = {9, 3, 0, 5, 13, 12};
  */
 void DPL::init(void) {
     Wire.begin(6);
-    pinMode(EN_DPL1, OUTPUT);
-    pinMode(EN_DPL2, OUTPUT);
-    pinMode(EN_DPL3, OUTPUT);
-    pinMode(EN_DPL4, OUTPUT);
-    pinMode(EN_DPL5, OUTPUT);
-    pinMode(EN_DPL6, OUTPUT);
-    pinMode(DPL_STATUS1, INPUT);
-    pinMode(DPL_STATUS2, INPUT);
-    pinMode(DPL_STATUS3, INPUT);
-    pinMode(DPL_STATUS4, INPUT);
-    pinMode(DPL_STATUS5, INPUT);
-    pinMode(DPL_STATUS6, INPUT);
-    digitalWrite(EN_DPL1, LOW);
-    digitalWrite(EN_DPL2, LOW);
-    digitalWrite(EN_DPL3, LOW);
-    digitalWrite(EN_DPL4, LOW);
-    digitalWrite(EN_DPL5, LOW);
-    digitalWrite(EN_DPL6, LOW);
+    for (int i=0; i<6; i++) {
+        pinMode(enable_pins[i], OUTPUT);
+        pinMode(status_pins[i], INPUT);
+        digitalWrite(enable_pins[i], LOW);
+    }
 }
 
 /**
@@ -93,7 +81,7 @@ void DPL::deploy(uint8_t port) {
  * 	   deployed.
  */
 bool DPL::status(uint8_t port) {
-    return digitalRead(status_pins[port]);
+    return !digitalRead(status_pins[port]);
 }
 
 /**
@@ -104,7 +92,7 @@ bool DPL::status(uint8_t port) {
 uint8_t DPL::report(void) {
     rep = 0;
     if (status(0))
-	rep = rep | 80;
+	rep = rep | 128;
     if (status(1))
 	rep = rep | 64;
     if (status(2))
@@ -125,20 +113,16 @@ uint8_t DPL::report(void) {
  */
 void DPL::cmdHandler(int numBytes) {
     while (Wire.available()) {
-        func = Wire.read();
+        cmd = Wire.read();
         port = Wire.read();
     }
-    if (func == 'A') {
+    if (cmd == 'D') {
         deploy(port);
     }
-    else if (func == 'B') {
-        Wire.beginTransmission(OBC);
+    else if (cmd == 'S') {
         Wire.write(status(port));
-        Wire.endTransmission();
     }
     else {
-        Wire.beginTransmission(OBC);
         Wire.write(report());
-        Wire.endTransmission();
     }
 }

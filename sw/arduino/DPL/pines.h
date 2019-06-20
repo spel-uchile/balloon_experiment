@@ -26,15 +26,15 @@
  * @author: Matías Vidal
  */
  
-#define  EN_DPL1 8 // Deploy ballon from port number 1
-#define  EN_DPL2 4 // Deploy ballon from port number 2
-#define  EN_DPL3 1 // Deploy ballon from port number 3
-#define  EN_DPL4 2 // Deploy ballon from port number 4
-#define  EN_DPL5 11 // Deploy ballon from port number 5
-#define  EN_DPL6 10 // Deploy ballon from port number 6
-#define  DPL_STATUS1 9 // Deployment status of port number 1
-#define  DPL_STATUS2 3 // Deployment status of port number 2
-#define  DPL_STATUS3 0 // Deployment status of port number 3
-#define  DPL_STATUS4 5 // Deployment status of port number 4
+#define  EN_DPL1 8 	// Deploy ballon from port number 1
+#define  EN_DPL2 4 	// Deploy ballon from port number 2
+#define  EN_DPL3 1 	// Deploy ballon from port number 3
+#define  EN_DPL4 2 	// Deploy ballon from port number 4
+#define  EN_DPL5 11 	// Deploy ballon from port number 5
+#define  EN_DPL6 10     // Deploy ballon from port number 6
+#define  DPL_STATUS1 9  // Deployment status of port number 1
+#define  DPL_STATUS2 3  // Deployment status of port number 2
+#define  DPL_STATUS3 0  // Deployment status of port number 3
+#define  DPL_STATUS4 5  // Deployment status of port number 4
 #define  DPL_STATUS5 13 // Deployment status of port number 5
 #define  DPL_STATUS6 12 // Deployment status of port number 6

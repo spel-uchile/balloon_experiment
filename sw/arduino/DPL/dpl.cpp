@@ -28,9 +28,7 @@
 
 #include "dpl.h"
 
-char cmd;
 bool deployed;
-uint8_t port;
 uint8_t rep;
 unsigned long t0, dt;
 const uint8_t enable_pins[6] = {EN_DPL1, EN_DPL2, EN_DPL3,
@@ -44,7 +42,6 @@ const uint8_t status_pins[6] = {DPL_STATUS1, DPL_STATUS2, DPL_STATUS3,
  * system.
  */
 void DPL::init(void) {
-    Wire.begin(6);
     for (int i=0; i<6; i++) {
         pinMode(enable_pins[i], OUTPUT);
         pinMode(status_pins[i], INPUT);
@@ -53,7 +50,7 @@ void DPL::init(void) {
 }
 
 /**
- * Deploy a ballon attached to one port of the
+ * Deploy a balloon attached to one port of the
  * deployment system.
  * @param port: The port at which the balloon
  * 		to be deployed is attached.
@@ -110,7 +107,7 @@ uint8_t DPL::report(void) {
  * I2C comunication handler between DPL and
  * OBC.
  * @param Number of bytes read from the OBC.
- */
+ 
 void DPL::cmdHandler(int numBytes) {
     while (Wire.available()) {
         cmd = Wire.read();
@@ -126,3 +123,4 @@ void DPL::cmdHandler(int numBytes) {
         Wire.write(report());
     }
 }
+*/

@@ -1,62 +1,61 @@
 /**
- * @brief Simple ATMS Library
+ *                                  DPL
+ *   Balloon deployment system. It can deploy the balloons of a radiosonde.
+ *   It works by cutting the balloon's wire with nichrome. The PCB follows
+ *   the PC104 standard.
+ *   
+ *   Copyright (C) 2019-2019, Matías Vidal Valladares, matvidal.
+ *   Authors: Matías Vidal Valladares <matias.vidal.v@gmail.com>
+ *
+ *   This program is free software: you can redistribute it and/or modify
+ *   it under the terms of the GNU General Public License as published by
+ *   the Free Software Foundation, either version 3 of the License, or
+ *   (at your option) any later version.
+ *
+ *   This program is distributed in the hope that it will be useful,
+ *   but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *   GNU General Public License for more details.
+ *
+ *   You should have received a copy of the GNU General Public License
+ *   along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-/*Author: Gustavo Diaz*/
+/**
+ * @class DPL
+ * @brief Class that manages ballon's deployment
+ * @author: Matías Vidal
+ */
 
 /*Requiered Libraries*/
 #include <Arduino.h>
-#include  <Servo.h>
-#include "pines_balloon.h"
+#include "pines.h"
 
-/*Constants*/
-#define  start_s1 0 // Begin 
-#define  start_s2 180 // Begin
-#define  end_s1 180 // Begin 
-#define  end_s2 0 // Begin
-
-
-
-/**
- * @class ATMS
- * @brief Class for manage Atmospheric sensors
- */
-
-class DPL
-{
+class DPL {
     /*Private Members*/
 
     // DLP Objects
-    Servo myservo1_;
-    Servo myservo2_;
-    //SFE_BMP180 pressure_;
-    //Weather sensor_;
 
     // Internal Variables
-    //char status_;
-
-    // Debug
-    // HardwareSerial *debug_port_;
-
 public:
     /*Public Members*/
-    //double T, P, a;
-    //float tempC, humidity;
+    bool deployed;
+    uint8_t rep;
+    unsigned long t0, dt;
+    const uint8_t enable_pins[6] = {EN_DPL1, EN_DPL2, EN_DPL3,
+                                    EN_DPL4, EN_DPL5, EN_DPL6};
+    const uint8_t status_pins[6] = {DPL_STATUS1, DPL_STATUS2, DPL_STATUS3,
+                                    DPL_STATUS4, DPL_STATUS5, DPL_STATUS6};
 
     /*Base contructor (null)*/
     DPL() {}
 
     // methods
     void init(void);
-    void Rdpl1_start(void);
-    void Rdpl2_start(void);
-    void Rdpl1_end(void);
-    void Rdpl2_end(void);
-    void Act_s1(void);
-    void Act_s2(void);
-    void dem1(void);
-    void dem2(void);
-    void restart(void);
+    void deploy(uint8_t port);
+    //void cmdHandler(int numBytes);
+    bool status(uint8_t port);
+    uint8_t report(void);
 
 // private:
     // methods

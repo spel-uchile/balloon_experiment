@@ -24,6 +24,7 @@ import argparse
 import codecs
 import math
 import json
+import struct
 
 from threading import Thread
 from time import sleep
@@ -66,7 +67,7 @@ class GpsComInterface:
     def check_nan(self, num, id):
         #print("GPS_DEBUG:"+str(type(num))+"    "+str(num))
         if num == None:
-            return "NoTimeStamp"
+            return -1
         try:
             if math.isnan(num):
                 return -1
@@ -102,13 +103,12 @@ class GpsComInterface:
         print('Start GPS Intreface as node: {}'.format(int(codecs.encode(self.node, 'hex'), 16)))
 
         while True:
-            frame = sub.recv_multipart()[0] 
+            frame = sub.recv_multipart()[0]
             header_a = []
             for byte in frame[1:5]:
                 byte_int = int(codecs.encode(byte, 'hex'), 16)
                 byte_hex = hex(byte_int)
                 header_a.append(byte_hex[2:])
-
             #header_a = ["{:02x}".format(int(i)) for i in frame[1:5]]
             header = "0x"+"".join(header_a[::-1])
             data = frame[5:]
@@ -120,7 +120,8 @@ class GpsComInterface:
             print('\nMON:', frame)
             print('\tHeader: {},'.format(csp_header))
             print('\tData: {}'.format(data))
-            cmd = data
+
+            cmd = data.decode("utf-8")
 
             if cmd == GET_DATA:
                 #update data
@@ -145,10 +146,25 @@ class GpsComInterface:
                 hdr_b = re.findall("........",hdr)[::-1]
                 # print("con:", hdr_b, ["{:02x}".format(int(i, 2)) for i in hdr_b])
                 hdr = bytearray([int(i,2) for i in hdr_b])
-                # join data
-                # data = self.time_utc+pack('fffffii', self.latitude, self.longitude, self.altitude, self.speed_horizontal, self.speed_vertical, self.satellites, self.mode)
-                data_ = " ".join([self.time_utc, str(self.latitude), str(self.longitude), str(self.altitude), str(self.speed_horizontal), str(self.speed_vertical), str(self.satellites), str(self.mode)])
-                msg = bytearray([int(self.node_dest),]) + hdr + bytearray(data_, "ascii")
+
+                n_frame = 0
+                # GPS Telemetry Type
+                fr_type = 14
+                n_samples = 1
+                data_ = bytearray(struct.pack('h', n_frame) + struct.pack('h', fr_type) + struct.pack('i', n_samples))
+                # values = [self.time_utc, self.latitude, self.longitude, self.altitude, self.speed_horizontal, self.speed_vertical, self.satellites, self.mode]
+                data_ = data_ + \
+                        struct.pack('I', int(time.time())) + \
+                        struct.pack('f', self.latitude) + \
+                        struct.pack('f', self.longitude) + \
+                        struct.pack('f', self.altitude) + \
+                        struct.pack('f', self.speed_horizontal) + \
+                        struct.pack('f', self.speed_vertical) + \
+                        struct.pack('i', self.satellites) + \
+                        struct.pack('i', self.mode)
+
+                msg = bytearray([int(self.node_dest),]) + hdr + data_
+                print('\nMessage:', msg)
                 # send data to OBC node
                 try:
                     pub.send(msg)
@@ -166,6 +182,7 @@ def get_parameters():
     parser.add_argument("-o", "--out_port", default="8002", help="Hub Output port")
     parser.add_argument("--nmon", action="store_false", help="Disable monitor task")
     parser.add_argument("--ncon", action="store_false", help="Disable console task")
+    parser.add_argument("--sim", action="store_true", help="Make available simulation of gps")
 
     return parser.parse_args()
 

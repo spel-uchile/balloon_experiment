@@ -44,8 +44,8 @@ const uint8_t status_pins[6] = {DPL_STATUS1, DPL_STATUS2, DPL_STATUS3,
 void DPL::init(void) {
     for (int i=0; i<6; i++) {
         pinMode(enable_pins[i], OUTPUT);
+	digitalWrite(enable_pins[i], LOW);
         pinMode(status_pins[i], INPUT);
-        digitalWrite(enable_pins[i], LOW);
     }
 }
 
@@ -102,25 +102,3 @@ uint8_t DPL::report(void) {
 	rep = rep | 4;
     return rep;
 }
-
-/**
- * I2C comunication handler between DPL and
- * OBC.
- * @param Number of bytes read from the OBC.
- 
-void DPL::cmdHandler(int numBytes) {
-    while (Wire.available()) {
-        cmd = Wire.read();
-        port = Wire.read();
-    }
-    if (cmd == 'D') {
-        deploy(port);
-    }
-    else if (cmd == 'S') {
-        Wire.write(status(port));
-    }
-    else {
-        Wire.write(report());
-    }
-}
-*/

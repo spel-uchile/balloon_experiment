@@ -31,8 +31,7 @@
 #include "pines.h"
 
 DPL dpl;
-char cmd;
-uint8_t port;
+char cmd = 0;
 
 // ================================================================
 // ===                      INITIAL SETUP                       ===
@@ -40,13 +39,13 @@ uint8_t port;
 
 
 void setup() {
-  delay(4000);
-  SerialUSB.begin(115200);
-  Wire.begin(6);
-  Wire.onReceive(receiveHandler);
-  Wire.onRequest(requestHandler);
-  dpl.init();
-  functions();
+    dpl.init();
+    delay(4000);
+    SerialUSB.begin(115200);
+    Wire.begin(6);
+    Wire.onReceive(receiveHandler);
+    Wire.onRequest(requestHandler);
+    functions();
 }
 
 // ================================================================
@@ -83,6 +82,11 @@ void loop() {
   }
 }
 
+/**
+ * This function displays all the commands
+ * available for the user to interact via
+ * the serial monitor.
+ */
 void functions() {
   SerialUSB.println(F("Deployment system's functions definition:"));
   SerialUSB.println(F("0) List of commands"));
@@ -95,26 +99,30 @@ void functions() {
   SerialUSB.println(F("7) Report the status of the deployment system"));
 }
 
+/**
+ * I2C comunication handler between DPL and
+ * OBC. This is used when the master writes
+ * a command into the DPL system.
+ * @param Number of bytes read from the OBC.
+ */
 void receiveHandler(int numBytes) {
     while (Wire.available()) {
         cmd = Wire.read();
-        port = Wire.read();
+	if (cmd == 'D') {
+            dpl.deploy(0);
+        }
         SerialUSB.print(cmd);
-        SerialUSB.println(port);
+        cmd = 0;
     } 
 }
 
+/**
+ * I2C request handler. This function is used
+ * When the master asks the DPL system to
+ * send data back to him.
+ */
 void requestHandler() {
-    if (cmd == 'D') {
-        dpl.deploy(port);
-    }
-    else if (cmd == 'S') {
-        Wire.write(dpl.status(port));
-        SerialUSB.println("Sent status");
-    }
-    else {
-        Wire.write(dpl.report());
-        SerialUSB.println("Sent report");
-    }
+    Wire.write(dpl.report());
+    SerialUSB.println("Sent report");
 }
 

@@ -2,7 +2,7 @@
 
 __author__ = 'gdiaz'
 
-# SSTV ZMQ COM INTERFACE
+# iMet-XQ ZMQ COM INTERFACE
 
 """Provides a high level interface over ZMQ for data exchange.
 """
@@ -17,6 +17,7 @@ import re
 import argparse
 import json
 import serial
+import codecs
 
 import os.path
 import glob
@@ -24,28 +25,22 @@ import datetime
 
 from threading import Thread
 from time import sleep
-import os
-# import sys
-# import sqlite3
-# conn = sqlite3.connect('/home/pi/Spel/suchai.db')
-# c = conn.cursor()
-from time import gmtime, strftime
 
-from PIL import Image, ImageFont, ImageDraw
-import time
+from xbee import xBeeHL
 
 # Get Nodes and Ports Parameters
-with open('node_list.json', encoding='utf-8') as data_file:
+with open('node_list.json') as data_file:
     data = json.load(data_file)
 
-NODE_IMET = data["nodes"]["sstv"]
+NODE_IMET = data["nodes"]["xbee"]
 NODE_OBC = data["nodes"]["obc"]
 CSP_PORT_APPS = data["ports"]["telemetry"]
 
 #define commands
-RUN_SSTV = "run_sstv"
+SEND_DATA = "send_xbee_data"
+SEND_SUN_DATA = "send_sun_data"
 
-class sstvComInterface:
+class xbeeComInterface:
     def __init__(self):
         # sensor arguments
         #com args
@@ -53,7 +48,8 @@ class sstvComInterface:
         self.node_dest = NODE_OBC
         self.port_csp = CSP_PORT_APPS
         self.prompt = "[node({}) port({})] <message>: "
-        self.mycallsign = "CE3BUC-11" # ham radio callsign
+        # xbee-xq interface
+        self.xbee_hl =  xBeeHL(port = '/dev/xbee')
 
     def console(self, ip="localhost", in_port_tcp=8002, out_port_tcp=8001):
         """ Send messages to node """
@@ -63,11 +59,16 @@ class sstvComInterface:
         sub.setsockopt(zmq.SUBSCRIBE, self.node)
         pub.connect('tcp://{}:{}'.format(ip, out_port_tcp))
         sub.connect('tcp://{}:{}'.format(ip, in_port_tcp))
-        print('Start iMet-XQ Intreface as node:" {},'.format(int.from_bytes(self.node, byteorder='little')))
+        print('Start Xbee Intreface as node: {}'.format(int(codecs.encode(self.node, 'hex'), 16)))
 
         while True:
             frame = sub.recv_multipart()[0]
-            header_a = ["{:02x}".format(i) for i in frame[1:5]]
+            header_a = []
+            for byte in frame[1:5]:
+                byte_int = int(codecs.encode(byte, 'hex'), 16)
+                byte_hex = hex(byte_int)
+                header_a.append(byte_hex[2:])
+            #header_a = ["{:02x}".format(int(i)) for i in frame[1:5]]
             header = "0x"+"".join(header_a[::-1])
             data = frame[5:]
             try:
@@ -79,44 +80,40 @@ class sstvComInterface:
             print('\tHeader: {},'.format(csp_header))
             print('\tData: {}\n'.format(data))
             cmd = data.decode("ascii", "replace")
-            # print(cmd)
+            #print(cmd)
             # try:
-            if(cmd==RUN_SSTV):
-                print('\nRunning sstv:')
-                # read software minutes alive
-                # for row in c.execute('SELECT value FROM dat_system WHERE idx="2";'):
-                #     sys_min_alive = str(row[0])
-                # #check system data
-                # try:
-                #     type(sys_min_alive)
-                # except:#fill with error value
-                #     sys_min_alive = "U"
-                sys_min_alive = strftime("%Y-%m-%d_%H:%M:%S", gmtime())
-                #file_path = "/home/pi/Spel/sstv_img/"
-                #file_name = "img"+sys_min_alive+".png"
-                #file_name = "img_test.png"
-                sstv_path = "/home/pi/Spel/pisstv/"
-                # take picture
-                #picture_cmd = "raspistill -t 1 --shutter 625 --ISO 100  --width 320 --height 256 -e png -o "+file_path+file_name
-                #os.system(picture_cmd)
-                # draw some info to the image
+            if(cmd==SEND_DATA):
+                print('\nSending Image:')
+                #read file
+                list_of_files = glob.glob('/home/pi/test_pictures/*.jpg')
+                last_file = os.path.split(max(list_of_files,key=os.path.getctime))[1]
+                f_hl = open('/home/pi/test_pictures/'+last_file,"r")
+                self.xbee_hl.xbee_tx('File_transfer\n')
+                f_hl2=f_hl.read()
+                time.sleep(1)
+                for x in f_hl2:
+                    self.xbee_hl.xbee_tx(x)
+                time.sleep(1)
+                self.xbee_hl.xbee_tx('end_file\n')
+                f_hl.close()
+                print('\nImage Sent:')
+            elif(cmd==SEND_SUN_DATA):
+                print('\nSending Image:')
                 #read file
                 list_of_files = glob.glob('/home/pi/sun_pictures/*.jpg')
                 last_file = os.path.split(max(list_of_files,key=os.path.getctime))[1]
-
-                image = Image.open('/home/pi/sun_pictures/'+last_file)
-                draw = ImageDraw.Draw(image)
-                localtime = time.strftime("%b %d %Y %H:%M:%S", time.localtime(time.time()))
-                font = ImageFont.truetype("FreeSans.ttf", 20)
-                draw.text((10, 10), self.mycallsign, (255,0,0), font=font)
-                draw.text((10, 220), localtime, (255,0,0), font=font)
-                image.save('/home/pi/sun_pictures/'+last_file)
-                # generate sound file from image
-                gensound_cmd = sstv_path+"pisstv "+file_path+file_name+" 22050"
-                os.system(gensound_cmd)
-                # play sound file
-                play_cmd = "sudo aplay -c2 "+file_path+file_name+".wav"
-                os.system(play_cmd)
+                f_hl = open('/home/pi/sun_pictures/'+last_file,"r")
+                self.xbee_hl.xbee_tx('File_transfer\n')
+                f_hl2=f_hl.read()
+                time.sleep(1)
+                for x in f_hl2:
+                    self.xbee_hl.xbee_tx(x)
+                time.sleep(1)
+                self.xbee_hl.xbee_tx('end_file\n')
+                f_hl.close()
+                print('\nImage Sent:')
+            else:
+                print("unknown command")
 
 
 def get_parameters():
@@ -136,13 +133,13 @@ if __name__ == '__main__':
     # Get arguments
     args = get_parameters()
 
-    sstv = sstvComInterface()
+    xbee_handler = xbeeComInterface()
 
     tasks = []
 
     if args.ncon:
         # Create a console socket
-        console_th = Thread(target=sstv.console, args=(args.ip, args.out_port, args.in_port))
+        console_th = Thread(target=xbee_handler.console, args=(args.ip, args.out_port, args.in_port))
         # console_th.daemon = True
         tasks.append(console_th)
         console_th.start()

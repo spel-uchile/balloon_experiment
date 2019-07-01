@@ -69,7 +69,10 @@ class DplComInterface:
         return True
 
     def deploy_port(self, port):
-        self.bus.write_byte_data(DPL_I2C_ADDR, ord('D'), port)
+        try:
+            self.bus.write_byte_data(DPL_I2C_ADDR, ord('D'), ord('D'))
+        except:
+            pass
         print("deployed port %d" %(port))
 
     def get_port_status(self, port):
@@ -77,10 +80,13 @@ class DplComInterface:
             self.state = self.bus.write_byte_data(DPL_I2C_ADDR, ord('S'), port)
         except:
             self.state = -1
+        print(type(self.state))
+        if type(self.state) == type(None):
+            self.state = -2
 
     def get_status(self):
         try:
-            self.state = self.bus.read_byte_data(DPL_I2C_ADDR, 0)
+            self.state = self.bus.read_byte_data(DPL_I2C_ADDR, ord('R'))
         except:
             self.state = -1
 
@@ -117,6 +123,7 @@ class DplComInterface:
             if cmd == GET_DATA:
                 #update data
                 self.get_status()
+                #self.get_port_status(0)
                 print('\tPort States: {},'.format(self.state))
                 # build msg
                 #          Prio   SRC   DST    DP   SP  RES HXRC
@@ -137,7 +144,7 @@ class DplComInterface:
                 n_samples = 1
                 data_ = bytearray(struct.pack('hhi', n_frame, fr_type, n_samples))
                 data_ = data_ + \
-                        struct.pack('II', int(time.time()), self.state)
+                        struct.pack('Ii', int(time.time()), self.state)
                 msg = bytearray([int(self.node_dest),]) + hdr + data_
                 # send data to OBC node
                 try:

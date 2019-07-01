@@ -1,11 +1,12 @@
 {
 "nodes":{
-	"obc":1,
+	"obc":10,
 	"dpl":12,
 	"bmp":14,
 	"gps":15,
 	"ird":6,
 	"imet":7,
+	"xbee":16,
 	"sstv":8
 },
 "ports":{

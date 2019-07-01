@@ -18,10 +18,6 @@ import argparse
 import json
 import serial
 
-import os.path
-import glob
-import datetime
-
 from threading import Thread
 from time import sleep
 import os
@@ -34,8 +30,10 @@ from time import gmtime, strftime
 from PIL import Image, ImageFont, ImageDraw
 import time
 
+from eclipse_deps.eclipse_payload import EclipsePayload
+
 # Get Nodes and Ports Parameters
-with open('node_list.json', encoding='utf-8') as data_file:
+with open('node_list.json') as data_file:
     data = json.load(data_file)
 
 NODE_IMET = data["nodes"]["sstv"]
@@ -54,6 +52,7 @@ class sstvComInterface:
         self.port_csp = CSP_PORT_APPS
         self.prompt = "[node({}) port({})] <message>: "
         self.mycallsign = "CE3BUC-11" # ham radio callsign
+        self.task = EclipsePayload()
 
     def console(self, ip="localhost", in_port_tcp=8002, out_port_tcp=8001):
         """ Send messages to node """
@@ -92,30 +91,26 @@ class sstvComInterface:
                 # except:#fill with error value
                 #     sys_min_alive = "U"
                 sys_min_alive = strftime("%Y-%m-%d_%H:%M:%S", gmtime())
-                #file_path = "/home/pi/Spel/sstv_img/"
+                file_path = "/home/pi/Spel/sstv_img/"
                 #file_name = "img"+sys_min_alive+".png"
-                #file_name = "img_test.png"
+                file_name = self.task.last_pic
                 sstv_path = "/home/pi/Spel/pisstv/"
                 # take picture
                 #picture_cmd = "raspistill -t 1 --shutter 625 --ISO 100  --width 320 --height 256 -e png -o "+file_path+file_name
                 #os.system(picture_cmd)
                 # draw some info to the image
-                #read file
-                list_of_files = glob.glob('/home/pi/sun_pictures/*.jpg')
-                last_file = os.path.split(max(list_of_files,key=os.path.getctime))[1]
-
-                image = Image.open('/home/pi/sun_pictures/'+last_file)
+                image = Image.open(self.task.test_last_pic)
                 draw = ImageDraw.Draw(image)
                 localtime = time.strftime("%b %d %Y %H:%M:%S", time.localtime(time.time()))
                 font = ImageFont.truetype("FreeSans.ttf", 20)
                 draw.text((10, 10), self.mycallsign, (255,0,0), font=font)
                 draw.text((10, 220), localtime, (255,0,0), font=font)
-                image.save('/home/pi/sun_pictures/'+last_file)
+                image.save(self.task.test_last_pic)
                 # generate sound file from image
                 gensound_cmd = sstv_path+"pisstv "+file_path+file_name+" 22050"
                 os.system(gensound_cmd)
                 # play sound file
-                play_cmd = "sudo aplay -c2 "+file_path+file_name+".wav"
+                play_cmd = "sudo aplay -c2 "+self.task.test_last_pic+".wav"
                 os.system(play_cmd)
 
 
@@ -139,6 +134,12 @@ if __name__ == '__main__':
     sstv = sstvComInterface()
 
     tasks = []
+
+    # Create a update data thread
+    data_th = Thread(target=sstv.task.start())
+    # data_th.daemon = True
+    tasks.append(data_th)
+    data_th.start()
 
     if args.ncon:
         # Create a console socket

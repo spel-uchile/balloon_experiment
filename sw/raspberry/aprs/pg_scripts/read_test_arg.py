@@ -5,15 +5,7 @@ import time
 #ch_select2 = LED(17)
 #ch_select1.off()
 #ch_select2.off()
-#time.sleep(60)
-
-#import RPi.GPIO as GPIO
-#GPIO.setmode(GPIO.BCM)
-#GPIO.setup(4, GPIO.OUT)
-#GPIO.setup(17, GPIO.OUT)
-#GPIO.cleanup()
 #time.sleep(5)
-
 try:
     connection = psycopg2.connect(user = "pi", password = "pi", database = "fs_db")
     cursor = connection.cursor()
@@ -67,11 +59,9 @@ if(connection):
 
 
 try:
-    #Select 144.390 MHz (chile)
-    #ch_select1.on()
-    #ch_select2.on()
-    #GPIO.setup(4, GPIO.HIGH)
-    #GPIO.setup(17, GPIO.HIGH)
+    #Select 144.930 MHz (argentina)
+    #ch_select1.off()
+    #ch_select2.off()
     res_str = "%s %d %.3f %.3f %.3f %.3f %.3f %d %.3f %.3f %.3f" % (system_time, gps_time, gps_latitude, gps_longitude, gps_height, gps_velocity_x, gps_velocity_y, dpl_port_status, prs_pressure, prs_temperature, prs_height)
     print(res_str)
 except:

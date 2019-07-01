@@ -53,7 +53,6 @@ public:
     // methods
     void init(void);
     void deploy(uint8_t port);
-    //void cmdHandler(int numBytes);
     bool status(uint8_t port);
     uint8_t report(void);
 

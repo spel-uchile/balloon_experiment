@@ -1,3 +1,5 @@
 (sym_lib_table
   (lib (name "Payload")(type "Legacy")(uri "${KIPRJMOD}/lib/Payload/Payload.lib")(options "")(descr ""))
+  (lib (name "Sensor")(type "Legacy")(uri "${KIPRJMOD}/lib/Sensor/sensor.lib")(options "")(descr ""))
+  (lib (name "GPS")(type "Legacy")(uri "${KIPRJMOD}/lib/GPS/GPS.lib")(options "")(descr ""))
 )

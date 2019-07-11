@@ -4,7 +4,7 @@ EELAYER 29 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 1 1
+Sheet 1 2
 Title ""
 Date ""
 Rev ""
@@ -391,17 +391,6 @@ F 3 "~" H 3600 5100 50  0001 C CNN
 	-1   0    0    1   
 $EndComp
 $Comp
-L Connector:Conn_01x04_Male J3
-U 1 1 5D262D74
-P 4350 5100
-F 0 "J3" H 4458 5381 50  0000 C CNN
-F 1 "PB_5V0" H 4458 5290 50  0000 C CNN
-F 2 "Connector_Molex:Molex_PicoBlade_53048-0410_1x04_P1.25mm_Horizontal" H 4350 5100 50  0001 C CNN
-F 3 "~" H 4350 5100 50  0001 C CNN
-	1    4350 5100
-	1    0    0    -1  
-$EndComp
-$Comp
 L Connector:Conn_01x04_Male J6
 U 1 1 5D2667C7
 P 6250 5100
@@ -425,13 +414,13 @@ F 3 "~" H 6250 5850 50  0001 C CNN
 $EndComp
 Text Label 4050 5000 2    50   ~ 0
 5V_PI
-Text Label 4850 5000 2    50   ~ 0
+Text Label 4850 5400 2    50   ~ 0
 5V_PI
-Text Label 4850 5100 2    50   ~ 0
+Text Label 4850 5500 2    50   ~ 0
 5V_PI
-Text Label 4850 5750 2    50   ~ 0
+Text Label 4850 5800 2    50   ~ 0
 3V3
-Text Label 4850 5850 2    50   ~ 0
+Text Label 4850 5900 2    50   ~ 0
 3V3
 Wire Wire Line
 	4050 5000 3800 5000
@@ -455,49 +444,9 @@ Wire Wire Line
 Wire Wire Line
 	4550 5100 4850 5100
 Wire Wire Line
-	4850 5750 4550 5750
+	4850 5800 4550 5800
 Wire Wire Line
-	4550 5850 4850 5850
-Wire Wire Line
-	4550 5300 4750 5300
-Wire Wire Line
-	4750 5300 4750 5350
-Wire Wire Line
-	4550 5200 4750 5200
-Wire Wire Line
-	4750 5200 4750 5300
-Connection ~ 4750 5300
-Wire Wire Line
-	4550 5950 4750 5950
-Wire Wire Line
-	4750 5950 4750 6050
-Wire Wire Line
-	4550 6050 4750 6050
-Connection ~ 4750 6050
-Wire Wire Line
-	4750 6050 4750 6100
-$Comp
-L power:GND #PWR0104
-U 1 1 5D26A2CE
-P 4750 5350
-F 0 "#PWR0104" H 4750 5100 50  0001 C CNN
-F 1 "GND" H 4755 5177 50  0000 C CNN
-F 2 "" H 4750 5350 50  0001 C CNN
-F 3 "" H 4750 5350 50  0001 C CNN
-	1    4750 5350
-	1    0    0    -1  
-$EndComp
-$Comp
-L power:GND #PWR0105
-U 1 1 5D26A590
-P 4750 6100
-F 0 "#PWR0105" H 4750 5850 50  0001 C CNN
-F 1 "GND" H 4755 5927 50  0000 C CNN
-F 2 "" H 4750 6100 50  0001 C CNN
-F 3 "" H 4750 6100 50  0001 C CNN
-	1    4750 6100
-	1    0    0    -1  
-$EndComp
+	4550 5900 4850 5900
 Text Label 6850 6050 2    50   ~ 0
 CSP_SDA
 Text Label 6850 5950 2    50   ~ 0
@@ -522,17 +471,6 @@ Wire Wire Line
 	6450 5850 6850 5850
 Wire Wire Line
 	6850 5950 6450 5950
-$Comp
-L Connector:Conn_01x04_Male J5
-U 1 1 5D266258
-P 4350 5850
-F 0 "J5" H 4458 6131 50  0000 C CNN
-F 1 "PB_3V3" H 4458 6040 50  0000 C CNN
-F 2 "Connector_Molex:Molex_PicoBlade_53048-0410_1x04_P1.25mm_Horizontal" H 4350 5850 50  0001 C CNN
-F 3 "~" H 4350 5850 50  0001 C CNN
-	1    4350 5850
-	1    0    0    -1  
-$EndComp
 Wire Wire Line
 	6450 6050 6850 6050
 Wire Wire Line
@@ -541,17 +479,17 @@ Text Label 6850 5100 2    50   ~ 0
 GND
 Text Label 6850 5850 2    50   ~ 0
 GND
-Text Label 5950 5100 2    50   ~ 0
+Text Label 5950 5000 2    50   ~ 0
 GND
 Wire Wire Line
 	5550 5300 5950 5300
-Text Label 5950 5000 2    50   ~ 0
+Text Label 5950 5100 2    50   ~ 0
 3V3
 $Comp
-L Connector:Conn_01x04_Male J4
+L Connector:Conn_01x04_Male J5
 U 1 1 5D2773BC
 P 5350 5100
-F 0 "J4" H 5458 5381 50  0000 C CNN
+F 0 "J5" H 5458 5381 50  0000 C CNN
 F 1 "I2C" H 5458 5290 50  0000 C CNN
 F 2 "Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Vertical" H 5350 5100 50  0001 C CNN
 F 3 "~" H 5350 5100 50  0001 C CNN
@@ -568,4 +506,179 @@ Wire Wire Line
 	5550 5100 5950 5100
 Wire Wire Line
 	5950 5000 5550 5000
+$Sheet
+S 8050 5100 600  600 
+U 5D2760D4
+F0 "Sensors" 50
+F1 "sensors.sch" 50
+F2 "3V3" I L 8050 5200 50 
+F3 "GND" I L 8050 5600 50 
+F4 "SCL" I L 8050 5300 50 
+F5 "SDA" I L 8050 5400 50 
+F6 "RX" I L 8050 5500 50 
+F7 "TX" I R 8650 5200 50 
+$EndSheet
+Text Label 7700 5200 0    50   ~ 0
+3V3
+Text Label 7700 5300 0    50   ~ 0
+CSP_SCL
+Text Label 7700 5400 0    50   ~ 0
+CSP_SDA
+Text Label 7700 5500 0    50   ~ 0
+TXD
+Text Label 8850 5200 2    50   ~ 0
+RXD
+Wire Wire Line
+	8850 5200 8650 5200
+Wire Wire Line
+	7800 5600 7800 5750
+$Comp
+L power:GND #PWR0103
+U 1 1 5D278E16
+P 7800 5750
+F 0 "#PWR0103" H 7800 5500 50  0001 C CNN
+F 1 "GND" H 7805 5577 50  0000 C CNN
+F 2 "" H 7800 5750 50  0001 C CNN
+F 3 "" H 7800 5750 50  0001 C CNN
+	1    7800 5750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7700 5200 8050 5200
+Wire Wire Line
+	7700 5300 8050 5300
+Wire Wire Line
+	7700 5500 8050 5500
+Wire Wire Line
+	7700 5400 8050 5400
+Wire Wire Line
+	7800 5600 8050 5600
+$Comp
+L Connector:Conn_01x06_Male J3
+U 1 1 5D27C9CC
+P 4350 5200
+F 0 "J3" H 4458 5581 50  0000 C CNN
+F 1 "PICOBLADE1" H 4458 5490 50  0000 C CNN
+F 2 "Connector_Molex:Molex_PicoBlade_53048-0610_1x06_P1.25mm_Horizontal" H 4350 5200 50  0001 C CNN
+F 3 "~" H 4350 5200 50  0001 C CNN
+	1    4350 5200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x06_Male J4
+U 1 1 5D27D485
+P 4350 6000
+F 0 "J4" H 4458 6381 50  0000 C CNN
+F 1 "PICOBLADE2" H 4458 6290 50  0000 C CNN
+F 2 "Connector_Molex:Molex_PicoBlade_53048-0610_1x06_P1.25mm_Horizontal" H 4350 6000 50  0001 C CNN
+F 3 "~" H 4350 6000 50  0001 C CNN
+	1    4350 6000
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4550 5200 4850 5200
+Wire Wire Line
+	4550 5300 4850 5300
+Wire Wire Line
+	4850 5500 4550 5500
+Wire Wire Line
+	4550 5400 4850 5400
+Text Label 4850 5200 2    50   ~ 0
+GND
+Text Label 4850 5300 2    50   ~ 0
+GND
+Text Label 4850 5000 2    50   ~ 0
+3V3
+Text Label 4850 5100 2    50   ~ 0
+3V3
+Wire Wire Line
+	4550 6200 4850 6200
+Wire Wire Line
+	4850 6300 4550 6300
+Wire Wire Line
+	4550 6100 4850 6100
+Wire Wire Line
+	4550 6000 4850 6000
+Text Label 4850 6300 2    50   ~ 0
+5V_PI
+Text Label 4850 6200 2    50   ~ 0
+5V_PI
+Text Label 4850 6000 2    50   ~ 0
+GND
+Text Label 4850 6100 2    50   ~ 0
+GND
+$Comp
+L Connector:Conn_01x01_Male J11
+U 1 1 5D290C4C
+P 2200 2450
+F 0 "J11" H 2308 2631 50  0000 C CNN
+F 1 "RPI_MOUNT1" H 2308 2540 50  0000 C CNN
+F 2 "" H 2200 2450 50  0001 C CNN
+F 3 "~" H 2200 2450 50  0001 C CNN
+	1    2200 2450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J12
+U 1 1 5D291331
+P 2200 2700
+F 0 "J12" H 2308 2881 50  0000 C CNN
+F 1 "RPI_MOUNT2" H 2308 2790 50  0000 C CNN
+F 2 "" H 2200 2700 50  0001 C CNN
+F 3 "~" H 2200 2700 50  0001 C CNN
+	1    2200 2700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J13
+U 1 1 5D29151A
+P 2200 2950
+F 0 "J13" H 2308 3131 50  0000 C CNN
+F 1 "RPI_MOUNT3" H 2308 3040 50  0000 C CNN
+F 2 "" H 2200 2950 50  0001 C CNN
+F 3 "~" H 2200 2950 50  0001 C CNN
+	1    2200 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x01_Male J14
+U 1 1 5D29180F
+P 2200 3200
+F 0 "J14" H 2308 3381 50  0000 C CNN
+F 1 "RPI_MOUNT4" H 2308 3290 50  0000 C CNN
+F 2 "" H 2200 3200 50  0001 C CNN
+F 3 "~" H 2200 3200 50  0001 C CNN
+	1    2200 3200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2450 3200 2400 3200
+Wire Wire Line
+	2400 2450 2450 2450
+Wire Wire Line
+	2450 2450 2450 2700
+Wire Wire Line
+	2400 2700 2450 2700
+Connection ~ 2450 2700
+Wire Wire Line
+	2450 2700 2450 2950
+Wire Wire Line
+	2400 2950 2450 2950
+Connection ~ 2450 2950
+Wire Wire Line
+	2450 2950 2450 3200
+Wire Wire Line
+	2450 3200 2450 3250
+Connection ~ 2450 3200
+$Comp
+L power:GND #PWR?
+U 1 1 5D29519F
+P 2450 3250
+F 0 "#PWR?" H 2450 3000 50  0001 C CNN
+F 1 "GND" H 2455 3077 50  0000 C CNN
+F 2 "" H 2450 3250 50  0001 C CNN
+F 3 "" H 2450 3250 50  0001 C CNN
+	1    2450 3250
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC

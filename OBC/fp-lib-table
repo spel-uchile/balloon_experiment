@@ -1,5 +1,0 @@
-(fp_lib_table
-  (lib (name "Payload")(type "KiCad")(uri "${KIPRJMOD}/lib/Payload/Payload.pretty")(options "")(descr ""))
-  (lib (name "Sensor")(type "KiCad")(uri "${KIPRJMOD}/lib/Sensor/Sensor.pretty")(options "")(descr ""))
-  (lib (name "GPS")(type "KiCad")(uri "${KIPRJMOD}/lib/GPS/GPS.pretty")(options "")(descr ""))
-)

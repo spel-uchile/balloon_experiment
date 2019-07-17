@@ -183,7 +183,7 @@ U 1 1 5D2525F1
 P 4150 3000
 F 0 "J0" H 4150 4481 50  0000 C CNN
 F 1 "Raspberry_Pi_2_3" H 4150 4390 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_2x20_P2.54mm_Vertical" H 4150 3000 50  0001 C CNN
+F 2 "Module:Raspberry_Pi_Zero_Socketed_THT_FaceDown_MountingHoles" H 4150 3000 50  0001 C CNN
 F 3 "https://www.raspberrypi.org/documentation/hardware/raspberrypi/schematics/rpi_SCH_3bplus_1p0_reduced.pdf" H 4150 3000 50  0001 C CNN
 	1    4150 3000
 	1    0    0    -1  
@@ -606,28 +606,6 @@ GND
 Text Label 4850 6100 2    50   ~ 0
 GND
 $Comp
-L Connector:Conn_01x01_Male J11
-U 1 1 5D290C4C
-P 2200 2450
-F 0 "J11" H 2308 2631 50  0000 C CNN
-F 1 "RPI_MOUNT1" H 2308 2540 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 2200 2450 50  0001 C CNN
-F 3 "~" H 2200 2450 50  0001 C CNN
-	1    2200 2450
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:Conn_01x01_Male J12
-U 1 1 5D291331
-P 2200 2700
-F 0 "J12" H 2308 2881 50  0000 C CNN
-F 1 "RPI_MOUNT2" H 2308 2790 50  0000 C CNN
-F 2 "Connector_PinHeader_2.54mm:PinHeader_1x01_P2.54mm_Vertical" H 2200 2700 50  0001 C CNN
-F 3 "~" H 2200 2700 50  0001 C CNN
-	1    2200 2700
-	1    0    0    -1  
-$EndComp
-$Comp
 L Connector:Conn_01x01_Male J13
 U 1 1 5D29151A
 P 2200 2950
@@ -652,17 +630,7 @@ $EndComp
 Wire Wire Line
 	2450 3200 2400 3200
 Wire Wire Line
-	2400 2450 2450 2450
-Wire Wire Line
-	2450 2450 2450 2700
-Wire Wire Line
-	2400 2700 2450 2700
-Connection ~ 2450 2700
-Wire Wire Line
-	2450 2700 2450 2950
-Wire Wire Line
 	2400 2950 2450 2950
-Connection ~ 2450 2950
 Wire Wire Line
 	2450 2950 2450 3200
 Wire Wire Line

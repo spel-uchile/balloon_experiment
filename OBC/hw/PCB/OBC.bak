@@ -183,7 +183,7 @@ U 1 1 5D2525F1
 P 4150 3000
 F 0 "J0" H 4150 4481 50  0000 C CNN
 F 1 "Raspberry_Pi_2_3" H 4150 4390 50  0000 C CNN
-F 2 "Connector_PinSocket_2.54mm:PinSocket_2x20_P2.54mm_Vertical" H 4150 3000 50  0001 C CNN
+F 2 "Module:Raspberry_Pi_Zero_Socketed_THT_FaceDown_MountingHoles" H 4150 3000 50  0001 C CNN
 F 3 "https://www.raspberrypi.org/documentation/hardware/raspberrypi/schematics/rpi_SCH_3bplus_1p0_reduced.pdf" H 4150 3000 50  0001 C CNN
 	1    4150 3000
 	1    0    0    -1  
@@ -685,7 +685,7 @@ U 1 1 5D2A5713
 P 3250 900
 F 0 "J8" H 3358 1081 50  0000 C CNN
 F 1 "Power2" H 3358 990 50  0000 C CNN
-F 2 "" H 3250 900 50  0001 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x02_P2.54mm_Vertical" H 3250 900 50  0001 C CNN
 F 3 "~" H 3250 900 50  0001 C CNN
 	1    3250 900 
 	1    0    0    -1  

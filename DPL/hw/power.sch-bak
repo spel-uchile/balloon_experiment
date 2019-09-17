@@ -1,10 +1,10 @@
 EESchema Schematic File Version 5
 LIBS:DPL-cache
-EELAYER 29 0
+EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 3 3
+Sheet 2 5
 Title ""
 Date ""
 Rev ""
@@ -13,6 +13,11 @@ Comment1 ""
 Comment2 ""
 Comment3 ""
 Comment4 ""
+Comment5 ""
+Comment6 ""
+Comment7 ""
+Comment8 ""
+Comment9 ""
 $EndDescr
 $Comp
 L Device:C C2b1
@@ -163,17 +168,15 @@ $EndComp
 Wire Wire Line
 	5400 4000 5050 4000
 Connection ~ 5050 4000
-Text HLabel 2850 3400 0    50   Input ~ 0
-VIN
 $Comp
 L Device:C Cr1
 U 1 1 5BB30701
-P 3000 3600
-F 0 "Cr1" H 3115 3646 50  0000 L CNN
-F 1 "1uF" H 3115 3555 50  0000 L CNN
-F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 3038 3450 50  0001 C CNN
-F 3 "~" H 3000 3600 50  0001 C CNN
-	1    3000 3600
+P 2950 3600
+F 0 "Cr1" H 3065 3646 50  0000 L CNN
+F 1 "1uF" H 3065 3555 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 2988 3450 50  0001 C CNN
+F 3 "~" H 2950 3600 50  0001 C CNN
+	1    2950 3600
 	-1   0    0    -1  
 $EndComp
 $Comp
@@ -196,25 +199,20 @@ Connection ~ 4000 3400
 Wire Wire Line
 	4000 3400 4150 3400
 Wire Wire Line
-	2850 3400 3000 3400
+	2950 3450 2950 3400
 Wire Wire Line
-	3000 3450 3000 3400
-Connection ~ 3000 3400
-Wire Wire Line
-	3000 3400 3100 3400
-Wire Wire Line
-	3000 3750 3000 3800
+	2950 3750 2950 3800
 Wire Wire Line
 	4000 3750 4000 3800
 $Comp
 L power:GND #PWR0107
 U 1 1 5BB332C0
-P 3000 3800
-F 0 "#PWR0107" H 3000 3550 50  0001 C CNN
-F 1 "GND" H 3005 3627 50  0000 C CNN
-F 2 "" H 3000 3800 50  0001 C CNN
-F 3 "" H 3000 3800 50  0001 C CNN
-	1    3000 3800
+P 2950 3800
+F 0 "#PWR0107" H 2950 3550 50  0001 C CNN
+F 1 "GND" H 2955 3627 50  0000 C CNN
+F 2 "" H 2950 3800 50  0001 C CNN
+F 3 "" H 2950 3800 50  0001 C CNN
+	1    2950 3800
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -230,6 +228,32 @@ F 3 "" H 4000 3800 50  0001 C CNN
 $EndComp
 Wire Wire Line
 	3450 5050 3450 3750
+Text HLabel 2650 3000 0    50   Input ~ 0
+VUSB
+Text Label 2950 3400 0    50   ~ 0
+5V0
+Wire Wire Line
+	2950 3400 3100 3400
+$Comp
+L Device:Jumper_NC_Dual JP1
+U 1 1 5D23AF9C
+P 2950 3000
+F 0 "JP1" H 2950 3239 50  0000 C CNN
+F 1 "Jumper" H 2950 3148 50  0000 C CNN
+F 2 "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical" H 2950 3000 50  0001 C CNN
+F 3 "~" H 2950 3000 50  0001 C CNN
+	1    2950 3000
+	1    0    0    -1  
+$EndComp
+Text HLabel 3250 3000 2    50   Input ~ 0
+VIN
+Wire Wire Line
+	3250 3000 3200 3000
+Wire Wire Line
+	2700 3000 2650 3000
+Wire Wire Line
+	2950 3100 2950 3400
+Connection ~ 2950 3400
 Wire Wire Line
 	3450 5050 4850 5050
 $EndSCHEMATC

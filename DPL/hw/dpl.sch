@@ -1,0 +1,463 @@
+EESchema Schematic File Version 5
+LIBS:DPL-cache
+EELAYER 30 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 5 5
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+Comment5 ""
+Comment6 ""
+Comment7 ""
+Comment8 ""
+Comment9 ""
+$EndDescr
+$Comp
+L power:GND #PWR0112
+U 1 1 5BEA3F1A
+P 5750 3150
+F 0 "#PWR0112" H 5750 2900 50  0001 C CNN
+F 1 "GND" H 5755 2977 50  0000 C CNN
+F 2 "" H 5750 3150 50  0001 C CNN
+F 3 "" H 5750 3150 50  0001 C CNN
+	1    5750 3150
+	1    0    0    -1  
+$EndComp
+Text HLabel 4400 3000 0    50   Input ~ 0
+DPL_EN1
+Text HLabel 4400 2900 0    50   Input ~ 0
+3V3
+Wire Wire Line
+	5750 3150 5750 3100
+$Comp
+L Device:R R5
+U 1 1 5D23EA26
+P 5100 3100
+F 0 "R5" H 5170 3146 50  0000 L CNN
+F 1 "330" H 5170 3055 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5030 3100 50  0001 C CNN
+F 3 "~" H 5100 3100 50  0001 C CNN
+	1    5100 3100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5100 2900 5100 2950
+Wire Wire Line
+	5100 3250 5100 3300
+$Comp
+L power:GND #PWR0118
+U 1 1 5D23F136
+P 5100 3300
+F 0 "#PWR0118" H 5100 3050 50  0001 C CNN
+F 1 "GND" H 5105 3127 50  0000 C CNN
+F 2 "" H 5100 3300 50  0001 C CNN
+F 3 "" H 5100 3300 50  0001 C CNN
+	1    5100 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:2N7002 Q1
+U 1 1 5D257A79
+P 5650 2900
+F 0 "Q1" H 5856 2946 50  0000 L CNN
+F 1 "PMV16XNR" H 5856 2855 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 5850 2825 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/2N/2N7002.pdf" H 5650 2900 50  0001 L CNN
+	1    5650 2900
+	1    0    0    -1  
+$EndComp
+Text Label 5100 2900 0    50   ~ 0
+DPL_EN1
+Wire Wire Line
+	5100 2900 5450 2900
+$Comp
+L power:GND #PWR0109
+U 1 1 5D80980D
+P 7450 3150
+F 0 "#PWR0109" H 7450 2900 50  0001 C CNN
+F 1 "GND" H 7455 2977 50  0000 C CNN
+F 2 "" H 7450 3150 50  0001 C CNN
+F 3 "" H 7450 3150 50  0001 C CNN
+	1    7450 3150
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7450 3150 7450 3100
+$Comp
+L Device:R R7
+U 1 1 5D809830
+P 6800 3100
+F 0 "R7" H 6870 3146 50  0000 L CNN
+F 1 "330" H 6870 3055 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6730 3100 50  0001 C CNN
+F 3 "~" H 6800 3100 50  0001 C CNN
+	1    6800 3100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6800 2900 6800 2950
+Wire Wire Line
+	6800 3250 6800 3300
+$Comp
+L power:GND #PWR0110
+U 1 1 5D809843
+P 6800 3300
+F 0 "#PWR0110" H 6800 3050 50  0001 C CNN
+F 1 "GND" H 6805 3127 50  0000 C CNN
+F 2 "" H 6800 3300 50  0001 C CNN
+F 3 "" H 6800 3300 50  0001 C CNN
+	1    6800 3300
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:2N7002 Q2
+U 1 1 5D809851
+P 7350 2900
+F 0 "Q2" H 7556 2946 50  0000 L CNN
+F 1 "PMV16XNR" H 7556 2855 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 7550 2825 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/2N/2N7002.pdf" H 7350 2900 50  0001 L CNN
+	1    7350 2900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6800 2900 7150 2900
+Text Label 6800 2900 0    50   ~ 0
+DPL_EN2
+$Comp
+L power:GND #PWR0113
+U 1 1 5D817353
+P 5750 4350
+F 0 "#PWR0113" H 5750 4100 50  0001 C CNN
+F 1 "GND" H 5755 4177 50  0000 C CNN
+F 2 "" H 5750 4350 50  0001 C CNN
+F 3 "" H 5750 4350 50  0001 C CNN
+	1    5750 4350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5750 4350 5750 4300
+$Comp
+L Device:R R9
+U 1 1 5D817376
+P 5100 4300
+F 0 "R9" H 5170 4346 50  0000 L CNN
+F 1 "330" H 5170 4255 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5030 4300 50  0001 C CNN
+F 3 "~" H 5100 4300 50  0001 C CNN
+	1    5100 4300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5100 4100 5100 4150
+Wire Wire Line
+	5100 4450 5100 4500
+$Comp
+L power:GND #PWR0115
+U 1 1 5D817389
+P 5100 4500
+F 0 "#PWR0115" H 5100 4250 50  0001 C CNN
+F 1 "GND" H 5105 4327 50  0000 C CNN
+F 2 "" H 5100 4500 50  0001 C CNN
+F 3 "" H 5100 4500 50  0001 C CNN
+	1    5100 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:2N7002 Q3
+U 1 1 5D817397
+P 5650 4100
+F 0 "Q3" H 5856 4146 50  0000 L CNN
+F 1 "PMV16XNR" H 5856 4055 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 5850 4025 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/2N/2N7002.pdf" H 5650 4100 50  0001 L CNN
+	1    5650 4100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5100 4100 5450 4100
+Text Label 5100 4100 0    50   ~ 0
+DPL_EN3
+$Comp
+L power:GND #PWR0116
+U 1 1 5D81CF88
+P 7450 4350
+F 0 "#PWR0116" H 7450 4100 50  0001 C CNN
+F 1 "GND" H 7455 4177 50  0000 C CNN
+F 2 "" H 7450 4350 50  0001 C CNN
+F 3 "" H 7450 4350 50  0001 C CNN
+	1    7450 4350
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7450 4350 7450 4300
+$Comp
+L Device:R R11
+U 1 1 5D81CFAB
+P 6800 4300
+F 0 "R11" H 6870 4346 50  0000 L CNN
+F 1 "330" H 6870 4255 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6730 4300 50  0001 C CNN
+F 3 "~" H 6800 4300 50  0001 C CNN
+	1    6800 4300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6800 4100 6800 4150
+Wire Wire Line
+	6800 4450 6800 4500
+$Comp
+L power:GND #PWR0117
+U 1 1 5D81CFBE
+P 6800 4500
+F 0 "#PWR0117" H 6800 4250 50  0001 C CNN
+F 1 "GND" H 6805 4327 50  0000 C CNN
+F 2 "" H 6800 4500 50  0001 C CNN
+F 3 "" H 6800 4500 50  0001 C CNN
+	1    6800 4500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Transistor_FET:2N7002 Q4
+U 1 1 5D81CFCC
+P 7350 4100
+F 0 "Q4" H 7556 4146 50  0000 L CNN
+F 1 "PMV16XNR" H 7556 4055 50  0000 L CNN
+F 2 "Package_TO_SOT_SMD:SOT-23" H 7550 4025 50  0001 L CIN
+F 3 "https://www.fairchildsemi.com/datasheets/2N/2N7002.pdf" H 7350 4100 50  0001 L CNN
+	1    7350 4100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6800 4100 7150 4100
+Text Label 6800 4100 0    50   ~ 0
+DPL_EN4
+Text HLabel 4400 3100 0    50   Input ~ 0
+DPL_EN2
+Text HLabel 4400 3200 0    50   Input ~ 0
+DPL_EN3
+Text HLabel 4400 3300 0    50   Input ~ 0
+DPL_EN4
+Text Label 4800 3000 2    50   ~ 0
+DPL_EN1
+Text Label 4800 3100 2    50   ~ 0
+DPL_EN2
+Text Label 4800 3200 2    50   ~ 0
+DPL_EN3
+Text Label 4800 3300 2    50   ~ 0
+DPL_EN4
+Wire Wire Line
+	4800 2900 4400 2900
+Wire Wire Line
+	4400 3000 4800 3000
+Wire Wire Line
+	4800 3100 4400 3100
+Wire Wire Line
+	4400 3200 4800 3200
+Wire Wire Line
+	4800 3300 4400 3300
+Text Label 4800 3400 2    50   ~ 0
+DPL_STA1
+Wire Wire Line
+	4800 3400 4400 3400
+Text HLabel 4400 3400 0    50   Input ~ 0
+DPL_STA1
+Text HLabel 4400 3500 0    50   Input ~ 0
+DPL_STA2
+Wire Wire Line
+	4800 3500 4400 3500
+Text Label 4800 3500 2    50   ~ 0
+DPL_STA2
+Text HLabel 4400 3600 0    50   Input ~ 0
+DPL_STA3
+Wire Wire Line
+	4800 3600 4400 3600
+Text Label 4800 3600 2    50   ~ 0
+DPL_STA3
+Text HLabel 4400 3700 0    50   Input ~ 0
+DPL_STA4
+Wire Wire Line
+	4800 3700 4400 3700
+Text Label 4800 3700 2    50   ~ 0
+DPL_STA4
+$Comp
+L Connector:Screw_Terminal_01x03 J3
+U 1 1 5D89639A
+P 6150 2550
+F 0 "J3" H 6230 2592 50  0000 L CNN
+F 1 "Port1" H 6230 2501 50  0000 L CNN
+F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 6150 2550 50  0001 C CNN
+F 3 "~" H 6150 2550 50  0001 C CNN
+	1    6150 2550
+	1    0    0    -1  
+$EndComp
+Text Label 4800 2900 2    50   ~ 0
+3V3
+Wire Wire Line
+	5950 2650 5750 2650
+Wire Wire Line
+	5750 2650 5750 2700
+Text Label 5600 2550 0    50   ~ 0
+V_NiCr
+$Comp
+L Device:R R6
+U 1 1 5D8B1F77
+P 5400 2450
+F 0 "R6" V 5500 2400 50  0000 L CNN
+F 1 "1k" V 5400 2400 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5330 2450 50  0001 C CNN
+F 3 "~" H 5400 2450 50  0001 C CNN
+	1    5400 2450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5250 2450 5100 2450
+Text Label 5100 2450 0    50   ~ 0
+3V3
+Text Label 5600 2450 0    50   ~ 0
+DPL_STA1
+Wire Wire Line
+	5550 2450 5950 2450
+Wire Wire Line
+	5600 2550 5950 2550
+$Comp
+L Device:R R8
+U 1 1 5D8DCF8A
+P 7100 2450
+F 0 "R8" V 7200 2400 50  0000 L CNN
+F 1 "1k" V 7100 2400 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7030 2450 50  0001 C CNN
+F 3 "~" H 7100 2450 50  0001 C CNN
+	1    7100 2450
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7450 2650 7450 2700
+Text Label 6800 2450 0    50   ~ 0
+3V3
+Text Label 7300 2450 0    50   ~ 0
+DPL_STA2
+Wire Wire Line
+	7250 2450 7650 2450
+Wire Wire Line
+	7300 2550 7650 2550
+Wire Wire Line
+	6950 2450 6800 2450
+Wire Wire Line
+	7650 2650 7450 2650
+Text Label 7300 2550 0    50   ~ 0
+V_NiCr
+$Comp
+L Connector:Screw_Terminal_01x03 J4
+U 1 1 5D8DCFA3
+P 7850 2550
+F 0 "J4" H 7930 2592 50  0000 L CNN
+F 1 "Port2" H 7930 2501 50  0000 L CNN
+F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 7850 2550 50  0001 C CNN
+F 3 "~" H 7850 2550 50  0001 C CNN
+	1    7850 2550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R10
+U 1 1 5D8E57D2
+P 5400 3650
+F 0 "R10" V 5500 3600 50  0000 L CNN
+F 1 "1k" V 5400 3600 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5330 3650 50  0001 C CNN
+F 3 "~" H 5400 3650 50  0001 C CNN
+	1    5400 3650
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5750 3850 5750 3900
+Text Label 5100 3650 0    50   ~ 0
+3V3
+Text Label 5600 3650 0    50   ~ 0
+DPL_STA3
+Wire Wire Line
+	5550 3650 5950 3650
+Wire Wire Line
+	5600 3750 5950 3750
+Wire Wire Line
+	5250 3650 5100 3650
+Wire Wire Line
+	5950 3850 5750 3850
+Text Label 5600 3750 0    50   ~ 0
+V_NiCr
+$Comp
+L Connector:Screw_Terminal_01x03 J5
+U 1 1 5D8E57EB
+P 6150 3750
+F 0 "J5" H 6230 3792 50  0000 L CNN
+F 1 "Port3" H 6230 3701 50  0000 L CNN
+F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 6150 3750 50  0001 C CNN
+F 3 "~" H 6150 3750 50  0001 C CNN
+	1    6150 3750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R12
+U 1 1 5D8EF1B9
+P 7100 3650
+F 0 "R12" V 7200 3600 50  0000 L CNN
+F 1 "1k" V 7100 3600 50  0000 L CNN
+F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7030 3650 50  0001 C CNN
+F 3 "~" H 7100 3650 50  0001 C CNN
+	1    7100 3650
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	7450 3850 7450 3900
+Text Label 6800 3650 0    50   ~ 0
+3V3
+Text Label 7300 3650 0    50   ~ 0
+DPL_STA4
+Wire Wire Line
+	7250 3650 7650 3650
+Wire Wire Line
+	7300 3750 7650 3750
+Wire Wire Line
+	6950 3650 6800 3650
+Wire Wire Line
+	7650 3850 7450 3850
+Text Label 7300 3750 0    50   ~ 0
+V_NiCr
+$Comp
+L Connector:Screw_Terminal_01x03 J6
+U 1 1 5D8EF1D2
+P 7850 3750
+F 0 "J6" H 7930 3792 50  0000 L CNN
+F 1 "Port4" H 7930 3701 50  0000 L CNN
+F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 7850 3750 50  0001 C CNN
+F 3 "~" H 7850 3750 50  0001 C CNN
+	1    7850 3750
+	1    0    0    -1  
+$EndComp
+Text HLabel 4400 3800 0    50   Input ~ 0
+GND
+Wire Wire Line
+	4800 3800 4400 3800
+Text Label 4800 3800 2    50   ~ 0
+GND
+$Comp
+L power:GND #PWR0119
+U 1 1 5D937394
+P 4800 3850
+F 0 "#PWR0119" H 4800 3600 50  0001 C CNN
+F 1 "GND" H 4805 3677 50  0000 C CNN
+F 2 "" H 4800 3850 50  0001 C CNN
+F 3 "" H 4800 3850 50  0001 C CNN
+	1    4800 3850
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4800 3850 4800 3800
+$EndSCHEMATC

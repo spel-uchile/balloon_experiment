@@ -377,10 +377,10 @@ F 3 "~" H 2150 2250 50  0001 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L Connector:Conn_01x06_Male J3
+L Connector:Conn_01x06_Male J2
 U 1 1 5E277451
 P 6050 3300
-F 0 "J3" H 6158 3679 50  0000 C CNN
+F 0 "J2" H 6158 3679 50  0000 C CNN
 F 1 "I2C" H 6157 3588 50  0000 C CNN
 F 2 "Connector_Molex:Molex_PicoBlade_53048-0610_1x06_P1.25mm_Horizontal" H 6050 3300 50  0001 C CNN
 F 3 "~" H 6050 3300 50  0001 C CNN

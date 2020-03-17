@@ -1,4 +1,4 @@
-update=vie 13 mar 2020 17:49:04 -03
+update=mar 17 mar 2020 01:51:49 -03
 version=1
 last_client=kicad
 [general]
@@ -12,6 +12,14 @@ NetIExt=net
 version=1
 LibDir=
 [eeschema/libraries]
+[sheetnames]
+1=00000000-0000-0000-0000-00005e6eb998:
+2=00000000-0000-0000-0000-00005b626331:USB
+3=00000000-0000-0000-0000-00005b6351c6:Power
+4=00000000-0000-0000-0000-00005d239b84:Programmer
+5=00000000-0000-0000-0000-00005bef8c81:Deploy
+[ModEditFrame]
+version=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=
@@ -65,7 +73,7 @@ DimensionPrecision=1
 SolderMaskClearance=0.051
 SolderMaskMinWidth=0.25
 SolderPasteClearance=0
-SolderPasteRatio=0
+SolderPasteRatio=-0
 [pcbnew/Layer.F.Cu]
 Name=F.Cu
 Type=0
@@ -245,6 +253,17 @@ dPairWidth=0.2
 dPairGap=0.2
 dPairViaGap=0.25
 [pcbnew/Netclasses/1]
+Name=Inter
+Clearance=0.2
+TrackWidth=0.8
+ViaDiameter=1
+ViaDrill=0.5
+uViaDiameter=0.3
+uViaDrill=0.1
+dPairWidth=0.2
+dPairGap=0.2
+dPairViaGap=0.25
+[pcbnew/Netclasses/2]
 Name=NiCr
 Clearance=0.2
 TrackWidth=2
@@ -255,7 +274,7 @@ uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.2
 dPairViaGap=0.25
-[pcbnew/Netclasses/2]
+[pcbnew/Netclasses/3]
 Name=Power
 Clearance=0.2
 TrackWidth=1.2
@@ -266,7 +285,7 @@ uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.2
 dPairViaGap=0.25
-[pcbnew/Netclasses/3]
+[pcbnew/Netclasses/4]
 Name=Stack
 Clearance=0.2
 TrackWidth=0.5
@@ -277,7 +296,7 @@ uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.2
 dPairViaGap=0.25
-[pcbnew/Netclasses/4]
+[pcbnew/Netclasses/5]
 Name=USB
 Clearance=0.2
 TrackWidth=0.45
@@ -288,7 +307,7 @@ uViaDrill=0.1
 dPairWidth=0.45
 dPairGap=0.2
 dPairViaGap=0.25
-[pcbnew/Netclasses/5]
+[pcbnew/Netclasses/6]
 Name=uC
 Clearance=0.2
 TrackWidth=0.55
@@ -299,9 +318,3 @@ uViaDrill=0.1
 dPairWidth=0.2
 dPairGap=0.2
 dPairViaGap=0.25
-[sheetnames]
-1=00000000-0000-0000-0000-00005e6be4af:
-2=00000000-0000-0000-0000-00005b626331:USB
-3=00000000-0000-0000-0000-00005b6351c6:Power
-4=00000000-0000-0000-0000-00005d239b84:Programmer
-5=00000000-0000-0000-0000-00005bef8c81:Deploy

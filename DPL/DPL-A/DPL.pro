@@ -1,4 +1,4 @@
-update=mié 18 mar 2020 17:59:21 -03
+update=lun 23 mar 2020 15:54:38 -03
 version=1
 last_client=kicad
 [general]
@@ -12,14 +12,16 @@ NetIExt=net
 version=1
 LibDir=
 [eeschema/libraries]
+[ModEditFrame]
+version=1
+[SchematicFrame]
+version=1
 [sheetnames]
-1=00000000-0000-0000-0000-00005e6eb998:
+1=00000000-0000-0000-0000-00005e78fb0f:
 2=00000000-0000-0000-0000-00005b626331:USB
 3=00000000-0000-0000-0000-00005b6351c6:Power
 4=00000000-0000-0000-0000-00005d239b84:Programmer
 5=00000000-0000-0000-0000-00005bef8c81:Deploy
-[ModEditFrame]
-version=1
 [pcbnew]
 version=1
 PageLayoutDescrFile=

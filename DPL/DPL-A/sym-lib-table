@@ -3,4 +3,5 @@
   (lib (name "Payload")(type "Legacy")(uri "${KIPRJMOD}/lib/Payload/Payload.lib")(options "")(descr ""))
   (lib (name "power_regul")(type "Legacy")(uri "${KIPRJMOD}/lib/Power/power_regul.lib")(options "")(descr ""))
   (lib (name "Interrupter")(type "Legacy")(uri "${KIPRJMOD}/lib/Interrupt/Interrupter.lib")(options "")(descr ""))
+  (lib (name "Interstage")(type "Legacy")(uri "${KIPRJMOD}/lib/Interstage/Interstage.lib")(options "")(descr ""))
 )

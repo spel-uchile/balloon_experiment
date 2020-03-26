@@ -85,8 +85,6 @@ Wire Wire Line
 Wire Wire Line
 	5300 4800 5150 4800
 Wire Wire Line
-	5600 2550 5950 2550
-Wire Wire Line
 	5600 4300 6000 4300
 Wire Wire Line
 	5600 4550 6000 4550
@@ -95,9 +93,13 @@ Wire Wire Line
 Wire Wire Line
 	5750 2650 5750 2700
 Wire Wire Line
+	5750 2650 6000 2650
+Wire Wire Line
 	5750 3150 5750 3100
 Wire Wire Line
-	5950 2650 5750 2650
+	5800 2250 6000 2250
+Wire Wire Line
+	5800 2350 6000 2350
 Wire Wire Line
 	6700 4250 7150 4250
 Wire Wire Line
@@ -110,6 +112,10 @@ Wire Wire Line
 	6700 4850 7150 4850
 Wire Wire Line
 	6700 4950 7150 4950
+Wire Wire Line
+	6750 2250 7050 2250
+Wire Wire Line
+	6750 2350 7050 2350
 Wire Wire Line
 	6800 2900 6800 2950
 Wire Wire Line
@@ -135,17 +141,15 @@ Wire Wire Line
 Wire Wire Line
 	6950 1650 7400 1650
 Wire Wire Line
-	7300 2550 7650 2550
-Wire Wire Line
 	7400 1750 6950 1750
 Wire Wire Line
 	7400 1850 6950 1850
 Wire Wire Line
 	7450 2650 7450 2700
 Wire Wire Line
-	7450 3150 7450 3100
+	7450 2650 7700 2650
 Wire Wire Line
-	7650 2650 7450 2650
+	7450 3150 7450 3100
 Text Label 4800 2800 2    50   ~ 0
 3V3
 Text Label 4800 2900 2    50   ~ 0
@@ -180,8 +184,6 @@ Text Label 5150 4550 0    50   ~ 0
 3V3
 Text Label 5150 4800 0    50   ~ 0
 3V3
-Text Label 5600 2550 0    50   ~ 0
-VBAT
 Text Label 5750 950  2    50   ~ 0
 GND
 Text Label 5750 1050 2    50   ~ 0
@@ -202,6 +204,12 @@ Text Label 5750 1750 2    50   ~ 0
 DPL_EN5
 Text Label 5750 1850 2    50   ~ 0
 DPL_STA5
+Text Label 5800 2250 0    50   ~ 0
+VBAT
+Text Label 5800 2350 0    50   ~ 0
+GND
+Text Label 6000 2650 2    50   ~ 0
+PORT1
 Text Label 6000 4300 2    50   ~ 0
 DPL_STA3
 Text Label 6000 4550 2    50   ~ 0
@@ -242,8 +250,12 @@ Text Label 6950 1750 0    50   ~ 0
 DPL_EN5
 Text Label 6950 1850 0    50   ~ 0
 DPL_STA5
-Text Label 7300 2550 0    50   ~ 0
-VBAT
+Text Label 7050 2250 2    50   ~ 0
+PORT1
+Text Label 7050 2350 2    50   ~ 0
+PORT2
+Text Label 7700 2650 2    50   ~ 0
+PORT2
 Text HLabel 4400 2800 0    50   Input ~ 0
 3V3
 Text HLabel 4400 2900 0    50   Input ~ 0
@@ -403,28 +415,6 @@ F 3 "~" H 6800 3450 50  0001 C CNN
 	0    -1   -1   0   
 $EndComp
 $Comp
-L Connector:Screw_Terminal_01x02 J6
-U 1 1 5E276C19
-P 6150 2550
-F 0 "J6" H 6230 2542 50  0000 L CNN
-F 1 "Port1" H 6230 2451 50  0000 L CNN
-F 2 "" H 6150 2550 50  0001 C CNN
-F 3 "~" H 6150 2550 50  0001 C CNN
-	1    6150 2550
-	1    0    0    -1  
-$EndComp
-$Comp
-L Connector:Screw_Terminal_01x02 J7
-U 1 1 5E27724E
-P 7850 2550
-F 0 "J7" H 7930 2542 50  0000 L CNN
-F 1 "Port2" H 7930 2451 50  0000 L CNN
-F 2 "" H 7850 2550 50  0001 C CNN
-F 3 "~" H 7850 2550 50  0001 C CNN
-	1    7850 2550
-	1    0    0    -1  
-$EndComp
-$Comp
 L Transistor_FET:2N7002 Q1
 U 1 1 5D257A79
 P 5650 2900
@@ -466,6 +456,17 @@ F 1 "AV4524" H 7628 4805 50  0000 L CNN
 F 2 "Interrupt:AV4524" H 7300 4850 50  0001 C CNN
 F 3 "" H 7300 4850 50  0001 C CNN
 	1    7350 4850
+	1    0    0    -1  
+$EndComp
+$Comp
+L Interstage:DPL U5
+U 1 1 5E81213E
+P 6350 2300
+F 0 "U5" H 6350 2595 50  0000 C CNN
+F 1 "DPL" H 6350 2507 50  0000 C CNN
+F 2 "Interstage:Type-A" H 6550 2500 50  0001 C CNN
+F 3 "" H 6550 2500 50  0001 C CNN
+	1    6350 2300
 	1    0    0    -1  
 $EndComp
 $Comp

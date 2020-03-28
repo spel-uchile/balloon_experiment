@@ -4,7 +4,7 @@ EELAYER 30 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 5 5
+Sheet 1 5
 Title ""
 Date ""
 Rev ""
@@ -19,445 +19,420 @@ Comment7 ""
 Comment8 ""
 Comment9 ""
 $EndDescr
-$Comp
-L power:GND #PWR0112
-U 1 1 5BEA3F1A
-P 5750 3150
-F 0 "#PWR0112" H 5750 2900 50  0001 C CNN
-F 1 "GND" H 5755 2977 50  0000 C CNN
-F 2 "" H 5750 3150 50  0001 C CNN
-F 3 "" H 5750 3150 50  0001 C CNN
-	1    5750 3150
-	1    0    0    -1  
-$EndComp
-Text HLabel 4400 3000 0    50   Input ~ 0
-DPL_EN1
-Text HLabel 4400 2900 0    50   Input ~ 0
+Text Label 5200 1900 2    50   ~ 0
+SWDIO
+Text Label 5200 2000 2    50   ~ 0
+SWCLK
+Text Label 5200 2100 2    50   ~ 0
 3V3
+Text Label 5200 2200 2    50   ~ 0
+VDDCORE
+Text Label 5200 2500 2    50   ~ 0
+RESET
+Text Label 5200 2700 2    50   ~ 0
+USB_P
+Text Label 5200 2800 2    50   ~ 0
+USB_N
+Text Label 5200 2400 2    50   ~ 0
+USB_ID
+Text Label 2800 2800 0    50   ~ 0
+GND
+Text Label 5200 2900 2    50   ~ 0
+SCL
+Text Label 5200 3000 2    50   ~ 0
+SDA
+Text Label 2800 2700 0    50   ~ 0
+VDDANA
+Text Label 2800 2000 0    50   ~ 0
+XOUT32
+Text Label 2800 1900 0    50   ~ 0
+XIN32
+$Sheet
+S 2600 4800 700  500 
+U 5B6351C6
+F0 "Power" 50
+F1 "power.sch" 50
+F2 "3V3" I R 3300 5000 50 
+F3 "VDDANA" I R 3300 4900 50 
+F4 "VDDCORE" I R 3300 5100 50 
+F5 "GND" I R 3300 5200 50 
+F6 "VIN" I L 2600 4900 50 
+F7 "VUSB" I L 2600 5000 50 
+$EndSheet
+Text Label 3700 5100 2    50   ~ 0
+VDDCORE
+Text Label 3700 4900 2    50   ~ 0
+VDDANA
 Wire Wire Line
-	5750 3150 5750 3100
+	3700 4900 3300 4900
+Wire Wire Line
+	3300 5000 3700 5000
+Wire Wire Line
+	3700 5100 3300 5100
 $Comp
-L Device:R R5
-U 1 1 5D23EA26
-P 5100 3100
-F 0 "R5" H 5170 3146 50  0000 L CNN
-F 1 "330" H 5170 3055 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5030 3100 50  0001 C CNN
-F 3 "~" H 5100 3100 50  0001 C CNN
-	1    5100 3100
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5100 2900 5100 2950
-Wire Wire Line
-	5100 3250 5100 3300
-$Comp
-L power:GND #PWR0118
-U 1 1 5D23F136
-P 5100 3300
-F 0 "#PWR0118" H 5100 3050 50  0001 C CNN
-F 1 "GND" H 5105 3127 50  0000 C CNN
-F 2 "" H 5100 3300 50  0001 C CNN
-F 3 "" H 5100 3300 50  0001 C CNN
-	1    5100 3300
-	1    0    0    -1  
-$EndComp
-$Comp
-L Transistor_FET:2N7002 Q1
-U 1 1 5D257A79
-P 5650 2900
-F 0 "Q1" H 5856 2946 50  0000 L CNN
-F 1 "PMV16XNR" H 5856 2855 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 5850 2825 50  0001 L CIN
-F 3 "https://www.fairchildsemi.com/datasheets/2N/2N7002.pdf" H 5650 2900 50  0001 L CNN
-	1    5650 2900
-	1    0    0    -1  
-$EndComp
-Text Label 5100 2900 0    50   ~ 0
-DPL_EN1
-Wire Wire Line
-	5100 2900 5450 2900
-$Comp
-L power:GND #PWR0109
-U 1 1 5D80980D
-P 7450 3150
-F 0 "#PWR0109" H 7450 2900 50  0001 C CNN
-F 1 "GND" H 7455 2977 50  0000 C CNN
-F 2 "" H 7450 3150 50  0001 C CNN
-F 3 "" H 7450 3150 50  0001 C CNN
-	1    7450 3150
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	7450 3150 7450 3100
-$Comp
-L Device:R R7
-U 1 1 5D809830
-P 6800 3100
-F 0 "R7" H 6870 3146 50  0000 L CNN
-F 1 "330" H 6870 3055 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6730 3100 50  0001 C CNN
-F 3 "~" H 6800 3100 50  0001 C CNN
-	1    6800 3100
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	6800 2900 6800 2950
-Wire Wire Line
-	6800 3250 6800 3300
-$Comp
-L power:GND #PWR0110
-U 1 1 5D809843
-P 6800 3300
-F 0 "#PWR0110" H 6800 3050 50  0001 C CNN
-F 1 "GND" H 6805 3127 50  0000 C CNN
-F 2 "" H 6800 3300 50  0001 C CNN
-F 3 "" H 6800 3300 50  0001 C CNN
-	1    6800 3300
+L Device:C Cc1
+U 1 1 5B653719
+P 1900 2500
+F 0 "Cc1" H 2015 2546 50  0000 L CNN
+F 1 "9pF" H 2015 2455 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 1938 2350 50  0001 C CNN
+F 3 "~" H 1900 2500 50  0001 C CNN
+	1    1900 2500
 	1    0    0    -1  
 $EndComp
 $Comp
-L Transistor_FET:2N7002 Q2
-U 1 1 5D809851
-P 7350 2900
-F 0 "Q2" H 7556 2946 50  0000 L CNN
-F 1 "PMV16XNR" H 7556 2855 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 7550 2825 50  0001 L CIN
-F 3 "https://www.fairchildsemi.com/datasheets/2N/2N7002.pdf" H 7350 2900 50  0001 L CNN
-	1    7350 2900
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	6800 2900 7150 2900
-Text Label 6800 2900 0    50   ~ 0
-DPL_EN2
-$Comp
-L power:GND #PWR0113
-U 1 1 5D817353
-P 5750 4350
-F 0 "#PWR0113" H 5750 4100 50  0001 C CNN
-F 1 "GND" H 5755 4177 50  0000 C CNN
-F 2 "" H 5750 4350 50  0001 C CNN
-F 3 "" H 5750 4350 50  0001 C CNN
-	1    5750 4350
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5750 4350 5750 4300
-$Comp
-L Device:R R9
-U 1 1 5D817376
-P 5100 4300
-F 0 "R9" H 5170 4346 50  0000 L CNN
-F 1 "330" H 5170 4255 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5030 4300 50  0001 C CNN
-F 3 "~" H 5100 4300 50  0001 C CNN
-	1    5100 4300
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	5100 4100 5100 4150
-Wire Wire Line
-	5100 4450 5100 4500
-$Comp
-L power:GND #PWR0115
-U 1 1 5D817389
-P 5100 4500
-F 0 "#PWR0115" H 5100 4250 50  0001 C CNN
-F 1 "GND" H 5105 4327 50  0000 C CNN
-F 2 "" H 5100 4500 50  0001 C CNN
-F 3 "" H 5100 4500 50  0001 C CNN
-	1    5100 4500
+L Device:C Cc2
+U 1 1 5B653749
+P 2400 2500
+F 0 "Cc2" H 2515 2546 50  0000 L CNN
+F 1 "9pF" H 2515 2455 50  0000 L CNN
+F 2 "Capacitor_SMD:C_0603_1608Metric_Pad1.05x0.95mm_HandSolder" H 2438 2350 50  0001 C CNN
+F 3 "~" H 2400 2500 50  0001 C CNN
+	1    2400 2500
 	1    0    0    -1  
 $EndComp
 $Comp
-L Transistor_FET:2N7002 Q3
-U 1 1 5D817397
-P 5650 4100
-F 0 "Q3" H 5856 4146 50  0000 L CNN
-F 1 "PMV16XNR" H 5856 4055 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 5850 4025 50  0001 L CIN
-F 3 "https://www.fairchildsemi.com/datasheets/2N/2N7002.pdf" H 5650 4100 50  0001 L CNN
-	1    5650 4100
+L Device:Crystal Y1
+U 1 1 5B6537AB
+P 2150 2250
+F 0 "Y1" H 2150 2518 50  0000 C CNN
+F 1 "32.768kHz" H 2150 2427 50  0000 C CNN
+F 2 "Crystal:Crystal_SMD_EuroQuartz_EQ161-2Pin_3.2x1.5mm_HandSoldering" H 2150 2250 50  0001 C CNN
+F 3 "~" H 2150 2250 50  0001 C CNN
+	1    2150 2250
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	5100 4100 5450 4100
-Text Label 5100 4100 0    50   ~ 0
-DPL_EN3
+	2300 2250 2400 2250
+Wire Wire Line
+	2000 2250 1900 2250
+Wire Wire Line
+	1900 1900 1900 2250
+Wire Wire Line
+	1900 1900 3200 1900
+Wire Wire Line
+	2400 2000 2400 2250
+Wire Wire Line
+	2400 2000 3200 2000
+Wire Wire Line
+	2400 2250 2400 2350
+Connection ~ 2400 2250
+Wire Wire Line
+	1900 2250 1900 2350
+Connection ~ 1900 2250
+Wire Wire Line
+	1900 2650 1900 2750
+Wire Wire Line
+	1900 2750 2150 2750
+Wire Wire Line
+	2400 2750 2400 2650
+Wire Wire Line
+	2150 2750 2150 2850
+Connection ~ 2150 2750
+Wire Wire Line
+	2150 2750 2400 2750
 $Comp
-L power:GND #PWR0116
-U 1 1 5D81CF88
-P 7450 4350
-F 0 "#PWR0116" H 7450 4100 50  0001 C CNN
-F 1 "GND" H 7455 4177 50  0000 C CNN
-F 2 "" H 7450 4350 50  0001 C CNN
-F 3 "" H 7450 4350 50  0001 C CNN
-	1    7450 4350
+L power:GND #PWR0101
+U 1 1 5B67C424
+P 2150 2850
+F 0 "#PWR0101" H 2150 2600 50  0001 C CNN
+F 1 "GND" H 2155 2677 50  0000 C CNN
+F 2 "" H 2150 2850 50  0001 C CNN
+F 3 "" H 2150 2850 50  0001 C CNN
+	1    2150 2850
 	1    0    0    -1  
 $EndComp
+Text Label 1950 2750 0    50   ~ 0
+GND
+$Sheet
+S 2600 3800 650  500 
+U 5B626331
+F0 "USB" 50
+F1 "USB.sch" 50
+F2 "USB_DP" I R 3250 4000 50 
+F3 "USB_DM" I R 3250 4100 50 
+F4 "USB_ID" I R 3250 4200 50 
+F5 "GND" I L 2600 4200 50 
+F6 "VUSB" I R 3250 3900 50 
+$EndSheet
+Text Label 3600 4000 2    50   ~ 0
+USB_P
 Wire Wire Line
-	7450 4350 7450 4300
+	3600 4000 3250 4000
+Wire Wire Line
+	3250 3900 3600 3900
+Wire Wire Line
+	3600 4100 3250 4100
+Wire Wire Line
+	3250 4200 3600 4200
+Text Label 3600 4100 2    50   ~ 0
+USB_N
+Text Label 3600 4200 2    50   ~ 0
+USB_ID
+Text Label 3600 3900 2    50   ~ 0
+VUSB
+Wire Wire Line
+	2600 4200 2450 4200
+Wire Wire Line
+	2450 4200 2450 4350
 $Comp
-L Device:R R11
-U 1 1 5D81CFAB
-P 6800 4300
-F 0 "R11" H 6870 4346 50  0000 L CNN
-F 1 "330" H 6870 4255 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 6730 4300 50  0001 C CNN
-F 3 "~" H 6800 4300 50  0001 C CNN
-	1    6800 4300
+L power:GND #PWR0104
+U 1 1 5BAA2798
+P 2450 4350
+F 0 "#PWR0104" H 2450 4100 50  0001 C CNN
+F 1 "GND" H 2455 4177 50  0000 C CNN
+F 2 "" H 2450 4350 50  0001 C CNN
+F 3 "" H 2450 4350 50  0001 C CNN
+	1    2450 4350
 	1    0    0    -1  
 $EndComp
-Wire Wire Line
-	6800 4100 6800 4150
-Wire Wire Line
-	6800 4450 6800 4500
-$Comp
-L power:GND #PWR0117
-U 1 1 5D81CFBE
-P 6800 4500
-F 0 "#PWR0117" H 6800 4250 50  0001 C CNN
-F 1 "GND" H 6805 4327 50  0000 C CNN
-F 2 "" H 6800 4500 50  0001 C CNN
-F 3 "" H 6800 4500 50  0001 C CNN
-	1    6800 4500
-	1    0    0    -1  
-$EndComp
-$Comp
-L Transistor_FET:2N7002 Q4
-U 1 1 5D81CFCC
-P 7350 4100
-F 0 "Q4" H 7556 4146 50  0000 L CNN
-F 1 "PMV16XNR" H 7556 4055 50  0000 L CNN
-F 2 "Package_TO_SOT_SMD:SOT-23" H 7550 4025 50  0001 L CIN
-F 3 "https://www.fairchildsemi.com/datasheets/2N/2N7002.pdf" H 7350 4100 50  0001 L CNN
-	1    7350 4100
-	1    0    0    -1  
-$EndComp
-Wire Wire Line
-	6800 4100 7150 4100
-Text Label 6800 4100 0    50   ~ 0
-DPL_EN4
-Text HLabel 4400 3100 0    50   Input ~ 0
-DPL_EN2
-Text HLabel 4400 3200 0    50   Input ~ 0
-DPL_EN3
-Text HLabel 4400 3300 0    50   Input ~ 0
-DPL_EN4
-Text Label 4800 3000 2    50   ~ 0
-DPL_EN1
-Text Label 4800 3100 2    50   ~ 0
-DPL_EN2
-Text Label 4800 3200 2    50   ~ 0
-DPL_EN3
-Text Label 4800 3300 2    50   ~ 0
-DPL_EN4
-Wire Wire Line
-	4800 2900 4400 2900
-Wire Wire Line
-	4400 3000 4800 3000
-Wire Wire Line
-	4800 3100 4400 3100
-Wire Wire Line
-	4400 3200 4800 3200
-Wire Wire Line
-	4800 3300 4400 3300
-Text Label 4800 3400 2    50   ~ 0
-DPL_STA1
-Wire Wire Line
-	4800 3400 4400 3400
-Text HLabel 4400 3400 0    50   Input ~ 0
-DPL_STA1
-Text HLabel 4400 3500 0    50   Input ~ 0
-DPL_STA2
-Wire Wire Line
-	4800 3500 4400 3500
-Text Label 4800 3500 2    50   ~ 0
-DPL_STA2
-Text HLabel 4400 3600 0    50   Input ~ 0
-DPL_STA3
-Wire Wire Line
-	4800 3600 4400 3600
-Text Label 4800 3600 2    50   ~ 0
-DPL_STA3
-Text HLabel 4400 3700 0    50   Input ~ 0
-DPL_STA4
-Wire Wire Line
-	4800 3700 4400 3700
-Text Label 4800 3700 2    50   ~ 0
-DPL_STA4
-$Comp
-L Connector:Screw_Terminal_01x03 J3
-U 1 1 5D89639A
-P 6150 2550
-F 0 "J3" H 6230 2592 50  0000 L CNN
-F 1 "Port1" H 6230 2501 50  0000 L CNN
-F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 6150 2550 50  0001 C CNN
-F 3 "~" H 6150 2550 50  0001 C CNN
-	1    6150 2550
-	1    0    0    -1  
-$EndComp
-Text Label 4800 2900 2    50   ~ 0
+Text Label 2350 5000 0    50   ~ 0
+VUSB
+Text Label 3700 5000 2    50   ~ 0
 3V3
-Wire Wire Line
-	5950 2650 5750 2650
-Wire Wire Line
-	5750 2650 5750 2700
-Text Label 5600 2550 0    50   ~ 0
-V_NiCr
 $Comp
-L Device:R R6
-U 1 1 5D8B1F77
-P 5400 2450
-F 0 "R6" V 5500 2400 50  0000 L CNN
-F 1 "1k" V 5400 2400 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5330 2450 50  0001 C CNN
-F 3 "~" H 5400 2450 50  0001 C CNN
-	1    5400 2450
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	5250 2450 5100 2450
-Text Label 5100 2450 0    50   ~ 0
-3V3
-Text Label 5600 2450 0    50   ~ 0
-DPL_STA1
-Wire Wire Line
-	5550 2450 5950 2450
-Wire Wire Line
-	5600 2550 5950 2550
-$Comp
-L Device:R R8
-U 1 1 5D8DCF8A
-P 7100 2450
-F 0 "R8" V 7200 2400 50  0000 L CNN
-F 1 "1k" V 7100 2400 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7030 2450 50  0001 C CNN
-F 3 "~" H 7100 2450 50  0001 C CNN
-	1    7100 2450
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	7450 2650 7450 2700
-Text Label 6800 2450 0    50   ~ 0
-3V3
-Text Label 7300 2450 0    50   ~ 0
-DPL_STA2
-Wire Wire Line
-	7250 2450 7650 2450
-Wire Wire Line
-	7300 2550 7650 2550
-Wire Wire Line
-	6950 2450 6800 2450
-Wire Wire Line
-	7650 2650 7450 2650
-Text Label 7300 2550 0    50   ~ 0
-V_NiCr
-$Comp
-L Connector:Screw_Terminal_01x03 J4
-U 1 1 5D8DCFA3
-P 7850 2550
-F 0 "J4" H 7930 2592 50  0000 L CNN
-F 1 "Port2" H 7930 2501 50  0000 L CNN
-F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 7850 2550 50  0001 C CNN
-F 3 "~" H 7850 2550 50  0001 C CNN
-	1    7850 2550
+L power:GND #PWR0106
+U 1 1 5BB0EE30
+P 3600 5300
+F 0 "#PWR0106" H 3600 5050 50  0001 C CNN
+F 1 "GND" H 3605 5127 50  0000 C CNN
+F 2 "" H 3600 5300 50  0001 C CNN
+F 3 "" H 3600 5300 50  0001 C CNN
+	1    3600 5300
 	1    0    0    -1  
 $EndComp
-$Comp
-L Device:R R10
-U 1 1 5D8E57D2
-P 5400 3650
-F 0 "R10" V 5500 3600 50  0000 L CNN
-F 1 "1k" V 5400 3600 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 5330 3650 50  0001 C CNN
-F 3 "~" H 5400 3650 50  0001 C CNN
-	1    5400 3650
-	0    1    1    0   
-$EndComp
+Text Label 6400 3850 0    50   ~ 0
+SDA
+Text Label 6400 3950 0    50   ~ 0
+SCL
 Wire Wire Line
-	5750 3850 5750 3900
-Text Label 5100 3650 0    50   ~ 0
-3V3
-Text Label 5600 3650 0    50   ~ 0
-DPL_STA3
+	6600 3850 6400 3850
 Wire Wire Line
-	5550 3650 5950 3650
-Wire Wire Line
-	5600 3750 5950 3750
-Wire Wire Line
-	5250 3650 5100 3650
-Wire Wire Line
-	5950 3850 5750 3850
-Text Label 5600 3750 0    50   ~ 0
-V_NiCr
-$Comp
-L Connector:Screw_Terminal_01x03 J5
-U 1 1 5D8E57EB
-P 6150 3750
-F 0 "J5" H 6230 3792 50  0000 L CNN
-F 1 "Port3" H 6230 3701 50  0000 L CNN
-F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 6150 3750 50  0001 C CNN
-F 3 "~" H 6150 3750 50  0001 C CNN
-	1    6150 3750
-	1    0    0    -1  
-$EndComp
-$Comp
-L Device:R R12
-U 1 1 5D8EF1B9
-P 7100 3650
-F 0 "R12" V 7200 3600 50  0000 L CNN
-F 1 "1k" V 7100 3600 50  0000 L CNN
-F 2 "Resistor_SMD:R_0603_1608Metric_Pad1.05x0.95mm_HandSolder" V 7030 3650 50  0001 C CNN
-F 3 "~" H 7100 3650 50  0001 C CNN
-	1    7100 3650
-	0    1    1    0   
-$EndComp
-Wire Wire Line
-	7450 3850 7450 3900
-Text Label 6800 3650 0    50   ~ 0
-3V3
-Text Label 7300 3650 0    50   ~ 0
-DPL_STA4
-Wire Wire Line
-	7250 3650 7650 3650
-Wire Wire Line
-	7300 3750 7650 3750
-Wire Wire Line
-	6950 3650 6800 3650
-Wire Wire Line
-	7650 3850 7450 3850
-Text Label 7300 3750 0    50   ~ 0
-V_NiCr
-$Comp
-L Connector:Screw_Terminal_01x03 J6
-U 1 1 5D8EF1D2
-P 7850 3750
-F 0 "J6" H 7930 3792 50  0000 L CNN
-F 1 "Port4" H 7930 3701 50  0000 L CNN
-F 2 "TerminalBlock:TerminalBlock_bornier-3_P5.08mm" H 7850 3750 50  0001 C CNN
-F 3 "~" H 7850 3750 50  0001 C CNN
-	1    7850 3750
-	1    0    0    -1  
-$EndComp
-Text HLabel 4400 3800 0    50   Input ~ 0
+	6400 3950 6600 3950
+Text Label 8850 3250 0    50   ~ 0
 GND
 Wire Wire Line
-	4800 3800 4400 3800
-Text Label 4800 3800 2    50   ~ 0
+	8850 3250 9050 3250
+Text Label 10800 3250 2    50   ~ 0
 GND
+Text Label 10800 3350 2    50   ~ 0
+GND
+Wire Wire Line
+	10800 3250 10600 3250
+Wire Wire Line
+	10600 3350 10800 3350
+Text Label 8350 4350 2    50   ~ 0
+VIN
+Text Label 4250 4200 0    50   ~ 0
+DPL_EN2
+Text Label 4250 4100 0    50   ~ 0
+DPL_EN1
+Wire Wire Line
+	4600 4100 4250 4100
+Wire Wire Line
+	4250 4200 4600 4200
+Text Label 2800 3100 0    50   ~ 0
+DPL_STA2
+Text Label 2800 3200 0    50   ~ 0
+DPL_EN2
+$Sheet
+S 4600 5000 800  600 
+U 5D239B84
+F0 "Programmer" 50
+F1 "programmer.sch" 50
+F2 "3V3" I L 4600 5100 50 
+F3 "SWDIO" I L 4600 5200 50 
+F4 "SWCLK" I L 4600 5300 50 
+F5 "RESET" I L 4600 5400 50 
+F6 "GND" I L 4600 5500 50 
+$EndSheet
+Text Label 4300 5400 0    50   ~ 0
+RESET
+Text Label 4300 5100 0    50   ~ 0
+3V3
+Text Label 4300 5200 0    50   ~ 0
+SWDIO
+Text Label 4300 5300 0    50   ~ 0
+SWCLK
 $Comp
-L power:GND #PWR0119
-U 1 1 5D937394
-P 4800 3850
-F 0 "#PWR0119" H 4800 3600 50  0001 C CNN
-F 1 "GND" H 4805 3677 50  0000 C CNN
-F 2 "" H 4800 3850 50  0001 C CNN
-F 3 "" H 4800 3850 50  0001 C CNN
-	1    4800 3850
+L power:GND #PWR0114
+U 1 1 5D23A338
+P 4400 5650
+F 0 "#PWR0114" H 4400 5400 50  0001 C CNN
+F 1 "GND" H 4405 5477 50  0000 C CNN
+F 2 "" H 4400 5650 50  0001 C CNN
+F 3 "" H 4400 5650 50  0001 C CNN
+	1    4400 5650
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	4800 3850 4800 3800
+	4400 5500 4400 5650
+Wire Wire Line
+	4300 5300 4600 5300
+Wire Wire Line
+	4300 5400 4600 5400
+Wire Wire Line
+	4600 5200 4300 5200
+Wire Wire Line
+	4300 5100 4600 5100
+$Comp
+L Payload:Payload U0
+U 1 1 5D23A5F6
+P 8600 3050
+F 0 "U0" H 8600 4598 50  0000 C CNN
+F 1 "Payload" H 8600 4507 50  0000 C CNN
+F 2 "Payload:PC104-Standard" H 7500 3850 50  0001 C CNN
+F 3 "" H 7500 3850 50  0001 C CNN
+	1    8600 3050
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4350 4650 4350 4500
+Wire Wire Line
+	4250 4000 4600 4000
+Wire Wire Line
+	8150 4350 8350 4350
+$Comp
+L Arduino:SAMD21E U1
+U 1 1 5D23A4C1
+P 4000 2650
+F 0 "U1" H 4000 3665 50  0000 C CNN
+F 1 "SAMD21E" H 4000 3574 50  0000 C CNN
+F 2 "Package_QFP:TQFP-32_7x7mm_P0.8mm" H 4000 2550 50  0001 C CNN
+F 3 "" H 4000 2550 50  0001 C CNN
+	1    4000 2650
+	1    0    0    -1  
+$EndComp
+Text Label 5200 2300 2    50   ~ 0
+GND
+NoConn ~ 3200 2100
+NoConn ~ 3200 2200
+NoConn ~ 3200 2300
+NoConn ~ 3200 2400
+NoConn ~ 3200 2500
+NoConn ~ 3200 2600
+NoConn ~ 4800 2600
+Text Label 2350 4900 0    50   ~ 0
+VIN
+Wire Wire Line
+	2350 4900 2600 4900
+Wire Wire Line
+	2600 5000 2350 5000
+Wire Wire Line
+	3600 5200 3600 5300
+Wire Wire Line
+	3300 5200 3600 5200
+$Comp
+L power:GND #PWR0111
+U 1 1 5BEB2B09
+P 4350 4650
+F 0 "#PWR0111" H 4350 4400 50  0001 C CNN
+F 1 "GND" H 4355 4477 50  0000 C CNN
+F 2 "" H 4350 4650 50  0001 C CNN
+F 3 "" H 4350 4650 50  0001 C CNN
+	1    4350 4650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4350 4500 4600 4500
+Wire Wire Line
+	4600 5500 4400 5500
+Text Label 4250 4300 0    50   ~ 0
+DPL_EN3
+Wire Wire Line
+	4250 4300 4600 4300
+Text Label 4250 4400 0    50   ~ 0
+DPL_EN4
+Wire Wire Line
+	4250 4400 4600 4400
+$Sheet
+S 4600 3800 867  800 
+U 5BEF8C81
+F0 "Deploy" 50
+F1 "dpl.sch" 50
+F2 "GND" I L 4600 4500 50 
+F3 "DPL_EN1" I L 4600 4100 50 
+F4 "DPL_EN2" I L 4600 4200 50 
+F5 "DPL_EN3" I L 4600 4300 50 
+F6 "DPL_EN4" I L 4600 4400 50 
+F7 "3V3" I L 4600 4000 50 
+F8 "DPL_STA1" I R 5467 4100 50 
+F9 "DPL_STA2" I R 5467 4200 50 
+F10 "DPL_STA3" I R 5467 4300 50 
+F11 "DPL_STA4" I R 5467 4400 50 
+$EndSheet
+Text Label 4250 4000 0    50   ~ 0
+3V3
+Text Label 5850 4100 2    50   ~ 0
+DPL_STA1
+Text Label 5850 4200 2    50   ~ 0
+DPL_STA2
+Text Label 5850 4300 2    50   ~ 0
+DPL_STA3
+Text Label 5850 4400 2    50   ~ 0
+DPL_STA4
+Wire Wire Line
+	5450 4100 5850 4100
+Wire Wire Line
+	5450 4200 5850 4200
+Wire Wire Line
+	5850 4300 5450 4300
+Wire Wire Line
+	5450 4400 5850 4400
+Text Label 2800 2900 0    50   ~ 0
+DPL_STA1
+Text Label 2800 3000 0    50   ~ 0
+DPL_EN1
+Text Label 2800 3300 0    50   ~ 0
+DPL_STA3
+Text Label 2800 3400 0    50   ~ 0
+DPL_EN3
+Text Label 5200 3300 2    50   ~ 0
+DPL_EN4
+Text Label 5200 3400 2    50   ~ 0
+DPL_STA4
+NoConn ~ 4800 3100
+NoConn ~ 4800 3200
+Wire Wire Line
+	4800 1900 5200 1900
+Wire Wire Line
+	4800 2000 5200 2000
+Wire Wire Line
+	4800 2100 5200 2100
+Wire Wire Line
+	4800 2200 5200 2200
+Wire Wire Line
+	4800 2300 5200 2300
+Wire Wire Line
+	4800 2400 5200 2400
+Wire Wire Line
+	4800 2500 5200 2500
+Wire Wire Line
+	4800 2700 5200 2700
+Wire Wire Line
+	4800 2800 5200 2800
+Wire Wire Line
+	4800 2900 5200 2900
+Wire Wire Line
+	4800 3000 5200 3000
+Wire Wire Line
+	4800 3300 5200 3300
+Wire Wire Line
+	4800 3400 5200 3400
+Wire Wire Line
+	2800 2700 3200 2700
+Wire Wire Line
+	2800 2800 3200 2800
+Wire Wire Line
+	2800 2900 3200 2900
+Wire Wire Line
+	2800 3000 3200 3000
+Wire Wire Line
+	2800 3100 3200 3100
+Wire Wire Line
+	2800 3200 3200 3200
+Wire Wire Line
+	2800 3300 3200 3300
+Wire Wire Line
+	2800 3400 3200 3400
 $EndSCHEMATC

@@ -1,4 +1,4 @@
-16138231681604757
+16140013935690757
 Battery
 BatteryHolder_Bulgin_BX0036_1xC
 Bulgin{space}Battery{space}Holder,{space}BX0036,{space}Battery{space}Type{space}C{space}(https://www.bulgin.com/products/pub/media/bulgin/data/Battery_holders.pdf)
@@ -38843,9 +38843,9 @@ muRata{space}NMAxxxxSC{space}DCDC-Converter
 5
 5
 Converter_DCDC
-Converter_DCDC_muRata_NXE2SxxxxMC_THT
-Isolated{space}2W{space}Single{space}Output{space}SM{space}DC/DC{space}Converters,{space}http://power.murata.com/data/power/ncl/kdc_nxe2.pdf
-Isolated{space}2W{space}Single{space}Output{space}SM{space}DC/DC{space}Converters
+Converter_DCDC_muRata_NXExSxxxxMC_SMD
+Isolated{space}1W{space}or{space}2W{space}Single{space}Output{space}SM{space}DC/DC{space}Converters{space}http://power.murata.com/data/power/ncl/kdc_nxe1.pdf{space}http://power.murata.com/data/power/ncl/kdc_nxe2.pdf
+Isolated{space}1W{space}or{space}2W{space}Single{space}Output{space}SM{space}DC/DC{space}Converters
 0
 5
 5
@@ -49539,7 +49539,7 @@ BGA{space}381{space}0.8
 381
 381
 Package_BGA
-Linear_BGA-133_15.0x15.0_Layout12x12_P1.27mm
+Linear_BGA-133_15.0x15.0mm_Layout12x12_P1.27mm
 Analog{space}Devices{space}(Linear{space}Tech),{space}133-pin{space}BGA{space}uModule,{space}15.0x15.0x4.92mm,{space}https://www.analog.com/media/en/technical-documentation/data-sheets/4637fc.pdf
 133{space}pin{space}bga
 0
@@ -56126,7 +56126,7 @@ LGA{space}28{space}5.2x3.8mm{space}Pitch{space}0.5mm
 28
 28
 Package_LGA
-Linear_LGA-133_15.0x15.0_Layout12x12_P1.27mm
+Linear_LGA-133_15.0x15.0mm_Layout12x12_P1.27mm
 Analog{space}Devices{space}(Linear{space}Tech),{space}133-pin{space}LGA{space}uModule,{space}15.0x15.0x4.32mm,{space}https://www.analog.com/media/en/technical-documentation/data-sheets/4637fc.pdf
 133{space}pin{space}lga
 0

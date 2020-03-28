@@ -153,7 +153,7 @@ Wire Wire Line
 Text Label 4800 2800 2    50   ~ 0
 3V3
 Text Label 4800 2900 2    50   ~ 0
-VBAT
+VAUX
 Text Label 4800 3000 2    50   ~ 0
 DPL_EN1
 Text Label 4800 3100 2    50   ~ 0
@@ -189,9 +189,9 @@ GND
 Text Label 5750 1050 2    50   ~ 0
 GND
 Text Label 5750 1150 2    50   ~ 0
-VBAT
+VAUX
 Text Label 5750 1250 2    50   ~ 0
-VBAT
+VAUX
 Text Label 5750 1350 2    50   ~ 0
 DPL_EN3
 Text Label 5750 1450 2    50   ~ 0
@@ -205,7 +205,7 @@ DPL_EN5
 Text Label 5750 1850 2    50   ~ 0
 DPL_STA5
 Text Label 5800 2250 0    50   ~ 0
-VBAT
+VAUX
 Text Label 5800 2350 0    50   ~ 0
 GND
 Text Label 6000 2650 2    50   ~ 0
@@ -235,9 +235,9 @@ GND
 Text Label 6950 1050 0    50   ~ 0
 GND
 Text Label 6950 1150 0    50   ~ 0
-VBAT
+VAUX
 Text Label 6950 1250 0    50   ~ 0
-VBAT
+VAUX
 Text Label 6950 1350 0    50   ~ 0
 DPL_EN3
 Text Label 6950 1450 0    50   ~ 0
@@ -259,7 +259,7 @@ PORT2
 Text HLabel 4400 2800 0    50   Input ~ 0
 3V3
 Text HLabel 4400 2900 0    50   Input ~ 0
-VBAT
+VAUX
 Text HLabel 4400 3000 0    50   Input ~ 0
 DPL_EN1
 Text HLabel 4400 3100 0    50   Input ~ 0

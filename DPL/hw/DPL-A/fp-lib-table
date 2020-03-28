@@ -1,0 +1,5 @@
+(fp_lib_table
+  (lib (name "Payload")(type "KiCad")(uri "${KIPRJMOD}/lib/Payload/Payload.pretty")(options "")(descr ""))
+  (lib (name "Interrupt")(type "KiCad")(uri "${KIPRJMOD}/lib/Interrupt/Interrupt.pretty")(options "")(descr ""))
+  (lib (name "Interstage")(type "KiCad")(uri "${KIPRJMOD}/lib/Interstage/Interstage.pretty")(options "")(descr ""))
+)

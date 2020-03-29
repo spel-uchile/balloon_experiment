@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name Payload)(type Legacy)(uri "D:/Sonda/Sonda Eclipse V2/Payload-PC104-master/KiCad/Payload/Payload.lib")(options "")(descr ""))
+)

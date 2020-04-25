@@ -4,7 +4,7 @@ This repository contains the software and the PCB designs of a radiosonde. This 
 
 ### OBC design ###
 
-The On Board Computer (OBC) of the radiosonde consists on a PC104 PCB board compatible with the design specification of the SUCHAI CubeSat. The shape of the board considers spaces to improve the cable management inside the radiosonde. The board has some socket pins to connect either a Raspberry pi 3, 4 or Zero. There are also some sockets to connect sensors such as the BMP180 to measure temperature and pressure, the MPU-9250 to measure the attitude of the radiosonde and a XA1110 to obtain GPS and GLONASS data.
+The On Board Computer (OBC) of the radiosonde consists on a PC104 PCB board compatible with the design specification of the SUCHAI CubeSat. The shape of the board considers spaces to improve the cable management inside the radiosonde. The board has some socket pins to connect either a Raspberry Pi 3, 4 or Zero. There are also some sockets to connect sensors such as the BMP180 to measure temperature and pressure, the MPU-9250 to measure the attitude of the radiosonde and a XA1110 to obtain GPS and GLONASS data.
 
 ![](img/OBC_top_bottom.png)
 
@@ -16,15 +16,15 @@ This boards has two independent ports to release balloons. Each one with a LED f
 
 The board is designed with the shape of a type A interstage panel like the one that CubeSats of 2U ore more can have. This saves space inside the structure and enables the compatibility with both radiosondes and CubeSats.
 
-![](img/DPL_inside_outside.png)
+![](img/DPL_in_out.png)
 
 ### Supported hardware ###
 
-* SBCs: Raspberry pi 3 and Raspberry Pi Zero
+* SBCs: Raspberry Pi 3, 4 and Zero
 * GPS: XA1110
 * IRIDIUM: RockBlock Mk2
 * Sensors: BMP180, MPU-9250
-* H bridge: SN754410
+* Mosfet: PMV16XNR
 
 ### How do I get set up? ###
 

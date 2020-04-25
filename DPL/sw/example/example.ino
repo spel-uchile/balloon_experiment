@@ -64,7 +64,7 @@ void loop() {
       functions();
     }
     else if (input == '1' || input == '2' || input == '3' ||
-             input == '4' || input == '5' || input == '6') {
+             input == '4' || input == '5') {
       dpl.deploy(input - 49);
       SerialUSB.print("Status port: ");
       SerialUSB.println(dpl.status_pins[input - 49]);
@@ -95,7 +95,6 @@ void functions() {
   SerialUSB.println(F("3) Deploy the balloon from port number 3"));
   SerialUSB.println(F("4) Deploy the balloon from port number 4"));
   SerialUSB.println(F("5) Deploy the balloon from port number 5"));
-  SerialUSB.println(F("6) Deploy the balloon from port number 6"));
   SerialUSB.println(F("7) Report the status of the deployment system"));
 }
 

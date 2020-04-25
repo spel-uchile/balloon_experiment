@@ -42,10 +42,10 @@ public:
     bool deployed;
     uint8_t rep;
     unsigned long t0, dt;
-    const uint8_t enable_pins[6] = {EN_DPL1, EN_DPL2, EN_DPL3,
-                                    EN_DPL4, EN_DPL5, EN_DPL6};
-    const uint8_t status_pins[6] = {DPL_STATUS1, DPL_STATUS2, DPL_STATUS3,
-                                    DPL_STATUS4, DPL_STATUS5, DPL_STATUS6};
+    const uint8_t enable_pins[5] = {EN_DPL1, EN_DPL2, EN_DPL3,
+                                    EN_DPL4, EN_DPL5};
+    const uint8_t status_pins[5] = {DPL_STATUS1, DPL_STATUS2, DPL_STATUS3,
+                                    DPL_STATUS4, DPL_STATUS5};
 
     /*Base contructor (null)*/
     DPL() {}

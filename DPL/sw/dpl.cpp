@@ -31,10 +31,10 @@
 bool deployed;
 uint8_t rep;
 unsigned long t0, dt;
-const uint8_t enable_pins[6] = {EN_DPL1, EN_DPL2, EN_DPL3,
-    				EN_DPL4, EN_DPL5, EN_DPL6};
-const uint8_t status_pins[6] = {DPL_STATUS1, DPL_STATUS2, DPL_STATUS3,
-                                DPL_STATUS4, DPL_STATUS5, DPL_STATUS6};
+const uint8_t enable_pins[5] = {EN_DPL1, EN_DPL2, EN_DPL3,
+    				EN_DPL4, EN_DPL5};
+const uint8_t status_pins[5] = {DPL_STATUS1, DPL_STATUS2, DPL_STATUS3,
+                                DPL_STATUS4, DPL_STATUS5};
 
 //-------------------------- Public Methods --------------------------
 /**
@@ -42,7 +42,7 @@ const uint8_t status_pins[6] = {DPL_STATUS1, DPL_STATUS2, DPL_STATUS3,
  * system.
  */
 void DPL::init(void) {
-    for (int i=0; i<6; i++) {
+    for (int i=0; i<5; i++) {
         pinMode(enable_pins[i], OUTPUT);
 	digitalWrite(enable_pins[i], LOW);
         pinMode(status_pins[i], INPUT);
@@ -82,7 +82,7 @@ bool DPL::status(uint8_t port) {
 }
 
 /**
- * Returns the status of all six deployment ports.
+ * Returns the status of all five deployment ports.
  * @return A byte with the status on its six most
  * significant bits.
  */
@@ -98,7 +98,5 @@ uint8_t DPL::report(void) {
 	rep = rep | 16;
     if (status(4))
 	rep = rep | 8;
-    if (status(5))
-	rep = rep | 4;
     return rep;
 }
